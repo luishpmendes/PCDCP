@@ -1,0 +1,69 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+
+\title{ Formulação em Programação Linear do PCDCP }
+\date{\today}
+\author{Luis H. P. Mendes}
+
+\begin{document}
+	\maketitle
+	
+	PCDCP:
+	
+	Seja $k$ um número não-negativo e $G = (V, E)$ um grafo onde $V$ representa o conjunto de vértices e $E$ representa o conjunto de arestas.
+	Associado a cada aresta $e \in E$ há um custo não-negativo $c_{e}$ e a cada vértice $v \in V$ uma penalidade não negativa $\pi_{v}$.
+	Um subconjunto de vértices $D \subset V$ é um conjunto $k$-dominante de $G$ se para cada $v \in V \backslash D$ existe um vértice $u \in D$ tal que $d(u, v) \leq k$, onde $d(u, v)$ é a distância (ou custo) de um caminho mínimo entre os vértices $u$ e $v$, enquanto $k$ é o raio de vizinhança.
+	O PCDCP tem por objetivo encontrar um ciclo de custo mínimo que também seja um conjunto $k$-dominante de G.
+	O custo do ciclo é composto pela soma dos custos de suas arestas e pela soma das penalidades dos nós não visitados pelo ciclo.
+	
+	Seja $Z^*$ a solução ótima do PCDCP.
+	
+	É conveniente formular o PCDCP da seguinte maneira: seja $Z*(u)$ a solução ótima do PCDCP quando o vértice $u$ tem de estar no ciclo. Claramente,
+	
+	\begin{equation}
+		Z^* = \min \Bigg\{ \sum_{v  V} \pi_v , \min_{u \in V} \Big\{ Z^*(u) \Big\}  \Bigg\}
+	\end{equation}
+	
+	Nós utilizamos os programa linear inteiro descrito abaixo, cujas soluções são $Z^*(u)$. Seja $y_v$ igual a um se o vértice $v \in V$ estiver no ciclo e zero caso contrário.
+	Seja $x_e$ igual a um se a aresta $e \in E$ estiver no ciclo e zero caso contrário. Para cada subconjunto de vértices $S \subset V$, $\delta(S)$ é o conjunto de arestar com uma ponta em $S$ e outra em $V \backslash S$.
+	Para cada vértice $v \in V$, $N_k(v)$ é a $k$-vizinhança de $v$, ou seja, o conjunto de vértices que estão a uma distância de $v$ menor ou igual a $k$.
+	Então, o PCDCP, quando o vértice $u$ tem de estar no ciclo, pode ser formulado das seguintes maneiras:
+
+	$PCDCP_1(u)$:
+	\begin{equation}
+		Z^*(u) = \min \Bigg\{ \sum_{e \in E} c_e x_e + \sum_{v \in V} \pi_v (1 - y_v) \Bigg\}
+	\end{equation}
+	sujeito a:
+	\begin{equation}
+		y_u = 1
+	\end{equation}
+	\begin{equation}
+		\sum_{w \in N_k(v)} y_w \geq 1 \quad \forall v \in V
+	\end{equation}
+	\begin{equation}
+		\sum_{e \in \delta(\{v\})} x_e = 2y_v \quad \forall v \in V
+	\end{equation}
+	\begin{equation}
+		\sum_{e \in \delta(S)} x_e \leq |S| - 1 \quad \forall S \subset V
+	\end{equation}
+	
+	$PCDCP_2(u)$:
+	\begin{equation}
+		Z^*(u) = \min \Bigg\{ \sum_{e \in E} c_e x_e + \sum_{v \in V} \pi_v (1 - y_v) \Bigg\}
+	\end{equation}
+	sujeito a:
+	\begin{equation}
+		y_u = 1
+	\end{equation}
+	\begin{equation}
+		\sum_{w \in N_k(v)} y_w \geq 1 \quad \forall v \in V
+	\end{equation}
+	\begin{equation}
+		\sum_{e \in \delta(\{v\})} x_e = 2y_v \quad \forall v \in V
+	\end{equation}
+	\begin{equation}
+		\sum_{e \in \delta(S)} x_e \geq 2y_v \quad \forall v \in V, S \subset V \text{ tal que } |S \cap \{u, v\}| = 1
+	\end{equation}
+\end{document}
