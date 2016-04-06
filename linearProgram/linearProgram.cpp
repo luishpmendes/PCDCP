@@ -1,3 +1,4 @@
+#include "gurobi_c++.h"
 #include <iostream>
 #include <vector>
 #include <list>
@@ -12,6 +13,18 @@
 #define NIL - (15 << 25)
 #endif
 
+#ifndef WHITE
+#define WHITE 0
+#endif
+
+#ifndef GRAY
+#define GRAY  1
+#endif
+
+#ifndef BLACK
+#define BLACK 2
+#endif
+
 using namespace std;
 
 class myCompare {
@@ -23,39 +36,28 @@ class myCompare {
 
 set <int> neighbourhood (vector < list < pair <int, int> > > adj, int s, int k) {
     set <int> result;
-    vector <int> color (adj.size(), WHITE);
-    priority_queue < pair <int, int>, vector < pair <int, int> >,  myCompare> Q;
-
     vector <int> d (adj.size(), INFINITE);
+    vector <bool> Q (adj.size(), true);
 
-    for (int u = 0; u < (int) adj.size(); u++) {
-        color[u] = WHITE;
-        d[u] = INFINITE;
-    }
-
-    color[s] = GRAY;
     d[s] = 0;
 
-    Q.push(s);
+    for (int i = 0; i < (int) adj.size(); i++) {
+        int u = -1;
+        for (int j = 0; j < (int) adj.size(); j++) {
+            if (Q[j] && (u < 0 || d[u] > d[j])) {
+                u = j;
+            }
+        }
 
-    while (!Q.empty()) {
-        int u = Q.top();
-        Q.pop();
+        Q[u] = false;
 
         for (list < pair <int, int> >::iterator it = adj[u].begin(); it != adj[u].end(); ++it) {
             int v = (*it).first;
             int w = (*it).second;
-            if (color[v] == WHITE) {
+            if (d[v] > d[u] + w) {
                 d[v] = d[u] + w;
-                if (d[v] <= k) {
-                    color[v] = GRAY;
-                    Q.push(v);
-                } else {
-                    color[v] = BLACK;
-                }
             }
         }
-        color[u] = BLACK;
     }
 
     for (int u = 0; u < (int) adj.size(); u++) {
@@ -125,6 +127,8 @@ int main () {
             model.setObjective(obj, GRB_MINIMIZE);
 
             model.addConstr(y[u] == 1, "c_0");
+
+
             // lazy constraint
         } catch (GRBException e) {
             cout << "Error code = " << e.getErrorCode() << endl;
