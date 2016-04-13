@@ -277,8 +277,8 @@ int main () {
             for (int v = 0; v < n; v++) {
                 // ∑ xe == 2 * yv , e ∈ δ({v})
                 GRBLinExpr constr = 0.0;
-                for (list < pair <int, int> >::iterator it = adj[u].begin(); it != adj[u].end(); it++) {
-                    int w = (*it).first;
+                for (list < pair <int, int> >::iterator it = adj[v].begin(); it != adj[v].end(); it++) {
+                    int w = (*it).first; // destino
                     int e = mE[make_pair(v, w)];
                     constr += x[e];
                 }
