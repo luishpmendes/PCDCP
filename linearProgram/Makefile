@@ -1,12 +1,10 @@
-CPPC = g++
-CFLAGS = -Wall
-DEBUGFLAGS = -g -O0 -fno-inline
-
-COMPILER = $(CPPC)
-CFLAGS += $(DEBUGFLAGS)
+INC = /opt/gurobi651/linux64/include/
+CPP = g++
+CARGS = -Wall -m64 -g -O0 -fno-inline
+CPPLIB = -L/opt/gurobi651/linux64/lib/ -lgurobi_c++ -lgurobi65
 
 clean: 
 	rm -rf linearProgram
 
 linearProgram: linearProgram.cpp
-	$(COMPILER) $(CFLAGS) linearProgram.cpp -o linearProgram
+	$(CPP) $(CARGS) -o linearProgram linearProgram.cpp -I$(INC) $(CPPLIB) -lpthread -lm

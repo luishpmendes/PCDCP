@@ -8,9 +8,6 @@
 
 using namespace std;
 
-// para garantir conexidade, criar arvore escolhendo pontos n visitados aleatoriamente
-// demais arestas, dependem da densidade do grafo
-
 int main () {
     int n, k;
     double d, m;
@@ -29,6 +26,7 @@ int main () {
         d = dMax;
     }
 
+    // m = d*((n*(n-1))/2)
     m = (double) n;
     m *= ((double) n) - 1.0;
     m /= 2.0;
