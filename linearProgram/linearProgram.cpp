@@ -6,6 +6,7 @@
 #include <set>
 #include <sstream>
 #include <map>
+#include <climits>
 
 #ifndef INFINITE
 #define INFINITE 15 << 25
@@ -76,7 +77,7 @@ vector < set <int> > neighbourhoods (matrix W, int k) {
     return result;
 }
 
-void bfs (vector < list < pair <int, int> > > adj, map < pair <int, int>, int> mE, int n, int m, int s, vector <int> * vertex, vector <int> * edge) {
+void bfs (vector < list < pair <int, int> > > adj, map < pair <int, int>, int> mE, int n, int m, int s, vector <int> * vertex, vector <int> * edge, int * cycleID) {
     vector <int> color (adj.size(), WHITE);
     queue <int> Q;
 
@@ -96,7 +97,7 @@ void bfs (vector < list < pair <int, int> > > adj, map < pair <int, int>, int> m
             if (color[v] == WHITE) {
                 color[v] = GRAY;
                 int e = mE[make_pair(u, v)];
-                (*edge)[e] = 1;
+                (*edge)[e] = * cycleID;
                 Q.push(v);
             }
         }
@@ -104,9 +105,10 @@ void bfs (vector < list < pair <int, int> > > adj, map < pair <int, int>, int> m
     }
     for (int v = 0; v < n; v++) {
         if (color[v] == BLACK) {
-            (*vertex)[v] = 1;
+            (*vertex)[v] = * cycleID;
         }
     }
+    (*cycleID) = (*cycleID) + 1;
 }
 
 class subtourelim: public GRBCallback {
@@ -149,28 +151,48 @@ class subtourelim: public GRBCallback {
                     }
 
                     // bfs from u, recording which vertex and edges are visited
-                    vector <int> vertex;
-                    vector <int> edge;
+                    vector <int> vertexCycle (n, -1);
+                    vector <int> edgeCycle (m, -1);
 
-                    bfs (adj, mE, n, m, u, &vertex, &edge);
-
-                    int S = 0;
-                    for (int v = 0; v < n; v++) {
-                        if (getSolution(y[v]) > 0) {
-                            if (vertex[v] == 0) {
-                                S++;
+                    int numCycles = 0;
+                    while (true) {
+                        int v = 0;
+                        for (; v < n; v++) {
+                            if (getSolution(y[v]) > 0) { // v is in solution
+                                if (vertexCycle[v] < 0) { // cycle containing v not discovered yet
+                                    break;
+                                }
                             }
+                        }
+                        if (v >= n) {
+                            break;
+                        }
+                        bfs (adj, mE, n, m, u, &vertexCycle, &edgeCycle, &numCycles);
+                    }
+
+                    vector < set <int> > cyclesVertices (numCycles);
+                    vector < set <int> > cyclesEdges (numCycles);
+
+                    for (int v = 0; v < n; v++) {
+                        if (vertexCycle[v] >= 0) {
+                            cyclesVertices[vertexCycle[v]].insert(v);
                         }
                     }
 
-                    GRBLinExpr expr = 0;
-
                     for (int e = 0; e < m; e++) {
-                        expr += (1 - edge[e]) * x[e];
+                        if (edgeCycle[e] >= 0) {
+                            cyclesEdges[edgeCycle[e]].insert(e);
+                        }
                     }
 
-                    addLazy(expr <= S - 1);
-
+                    for (int c = 0; c < numCycles; c++) {
+                        GRBLinExpr expr = 0;
+                        for (set<int>::iterator it = cyclesEdges[c].begin(); it != cyclesEdges[c].end(); it++) {
+                            int e = *it;
+                            expr += x[e];//???ok?
+                        }
+                        addLazy(expr <= cyclesVertices[c].size() - 1);
+                    }
                 }
             } catch (GRBException e) {
                 cout << "Error number: " << e.getErrorCode() << endl;
@@ -200,19 +222,34 @@ int main () {
     vector < pair < pair <int, int> , int> > E (m); // vector of edges with the format ((u, v), w)
     map < pair <int, int>, int> mE; // map an edge to its ID
 
-    for (int i = 0; i < m; i++) {
+    for (int e = 0; e < m; e++) {
         int u, v, w;
         cin >> u >> v >> w;
         W[u][v] = w;
         W[v][u] = w;
         adj[u].push_back(make_pair(v, w));
         adj[v].push_back(make_pair(u, w));
-        E[i] = make_pair(make_pair(u, v), w);
-        mE[make_pair(u, v)] = i;
-        mE[make_pair(v, u)] = i;
+        E[e] = make_pair(make_pair(u, v), w);
+        cout << "E[" << e << "] = ((" << u << ", " << v << "), " << w << ")" << endl;
+        mE[make_pair(u, v)] = e;
+        mE[make_pair(v, u)] = e;
     }
 
     vector < set <int> > N = neighbourhoods (W, k);
+
+    for (int v = 0; v < n; v++) {
+        cout << "N[" << v << "] = {";
+        for (set <int>::iterator it = N[v].begin(); it != N[v].end(); it++) {
+            int u = *it;
+            cout << u << ", ";
+        }
+        cout << "\b\b}" << endl;
+    }
+
+    bool flag = false;
+    int bestSolutionCost;
+    set <int> bestSolutionVectices;
+    set <int> bestSolutionEdges;
 
     for (int u = 0; u < n; u++) {
         try {
@@ -285,27 +322,30 @@ int main () {
                 model.addConstr(constr == 2.0 * y[v], "c_2_" + itos(v));
             }
 
-            //subtourelim cb = subtourelim(y, x, n, m, E, mE, u);
-            //model.setCallback(&cb);
+            subtourelim cb = subtourelim(y, x, n, m, E, mE, u);
+            model.setCallback(&cb);
 
             model.optimize();
 
             if (model.get(GRB_IntAttr_SolCount) > 0) {
-                cout << "Cost: " << model.get(GRB_DoubleAttr_ObjVal) << endl;
-                cout << "vertex: " << endl;
-                for (int v = 0; v < n; v++) {
-                    if (y[v].get(GRB_DoubleAttr_X) == 1) {
-                        cout << v << endl;
+                if (!flag || model.get(GRB_DoubleAttr_ObjVal) < bestSolutionCost) {
+                    flag = true;
+                    bestSolutionCost = model.get(GRB_DoubleAttr_ObjVal);
+                    bestSolutionVectices.clear();
+                    for (int v = 0; v < n; v++) {
+                        if (y[v].get(GRB_DoubleAttr_X) == 1) {
+                            bestSolutionVectices.insert(v);
+                        }
+                    }
+                    bestSolutionEdges.clear();
+                    for (int e = 0; e < m; e++) {
+                        if (x[e].get(GRB_DoubleAttr_X) == 1) {
+                            bestSolutionEdges.insert(e);
+                        }
                     }
                 }
-                cout << "edges: " << endl;
-                for (int e = 0; e < m; e++) {
-                    if (x[e].get(GRB_DoubleAttr_X) == 1) {
-                        int a = E[e].first.first;
-                        int b = E[e].first.second;
-                        cout << a << " " << b << endl;
-                    }
-                }
+
+
             } else {
                 cout << "Solution not found." << endl;
             }
@@ -316,5 +356,18 @@ int main () {
         } catch (...) {
             cout << "Exception during opstimisation" << endl;
         }
+    }
+    cout << "Cost: " << bestSolutionCost << endl;
+    cout << "vertex: " << endl;
+    for (set <int>::iterator it = bestSolutionVectices.begin(); it != bestSolutionVectices.end(); it++) {
+        int v = *it;
+        cout << v << endl;
+    }
+    cout << "edges: " << endl;
+    for (set <int>::iterator it = bestSolutionEdges.begin(); it != bestSolutionEdges.end(); it++) {
+        int e = *it;
+        int a = E[e].first.first;
+        int b = E[e].first.second;
+        cout << a << " " << b << endl;
     }
 }

@@ -52,7 +52,18 @@ int main () {
         double x = xDistribution(xGenerator);
         double y = yDistribution(yGenerator);
         points.push_back (make_pair(x, y));
-        double d = sqrt((x - 0.5) * (x - 0.5) + (y - 0.5) * (y - 0.5));
+        double dx = x - 0.5;
+        if (dx < 0) {
+            dx = -dx;
+        }
+        double dy = y - 0.5;
+        if (dy < 0) {
+            dy = -dy;
+        }
+        d = dx;
+        if (d > dy) {
+            d = dy;
+        }
         cout << round(100 * d) << endl;
         vAux.push_back(i);
     }
