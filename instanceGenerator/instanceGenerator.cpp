@@ -8,29 +8,54 @@
 
 using namespace std;
 
-int main () {
-    int n, k;
-    double d, m;
-    cin >> n >> d >> k;
+typedef unsigned long int ulint;
 
-    double dMin = 0.0;
+// fazer dois tipos de instancia
+// uma escolhendo o ponto mais perto do centro como referencia
+// o outro escolhendo o ponto mais afastado do centro
+// a penalidade dos nós é a distancia a esse nó referencia -- feito (acho)
+
+// gerar instâncias com densidades {0.3, 0.5, 0.7}
+// k = 0, 2, 4, 6, 8, 10
+
+// fazer graficos das soluções, no estilo do trabalho do lucas
+// colocar também um cículo/disco de raio proporcional à penalidade do nó em volta dos nós
+
+
+// trabalhar com vizinhança com grafo completo -- parte do gerador feita (acho)
+// mas na hora de definir a rota, não utilizar o grafo completo
+
+int main (int argc, char * argv[]) {
+    int n, k, t;
+    double density, m;
+
+    if (argc == 5) {
+        n = atoi(argv[1]);
+        density = atof(argv[2]);
+        k = atoi(argv[3]);
+        t = atoi(argv[4]);
+    } else {
+        cin >> n >> density >> k >> t;
+    }
+
+    double minDensity = 0.0;
     if (n > 1) {
-        dMin = 2.0 / (((double) n) - 1.0);
+        minDensity = 2.0 / (((double) n) - 1.0);
     }
-    double dMax = 1.0;
+    double maxDensity = 1.0;
 
-    if (d < dMin) {
-        d = dMin;
+    if (density < minDensity) {
+        density = minDensity;
     }
-    if (d > dMax) {
-        d = dMax;
+    if (density > maxDensity) {
+        density = maxDensity;
     }
 
-    // m = d*((n*(n-1))/2)
+    // m = density*((n*(n-1))/2)
     m = (double) n;
     m *= ((double) n) - 1.0;
     m /= 2.0;
-    m *= d;
+    m *= density;
     m = round(m);
 
     unsigned xSeed = chrono::system_clock::now().time_since_epoch().count();
@@ -41,32 +66,52 @@ int main () {
     default_random_engine yGenerator (ySeed);
     uniform_real_distribution <double> yDistribution (0.0, 1.0);
 
-    vector < pair <double, double> > points;
-    set < pair <int, int> > allEdges;
-    set < pair <int, int> > chosenEdges;
-    vector <int> vAux;
+    vector < pair <double, double> > points (n);
+    vector <int> vAux (n);
 
-    cout << n << ' ' << m << ' ' << k << endl;
+    cout << n << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << k << endl;
+
+    int closest = 0;
+    int distClosest = 200;
+    int farthest = 0;
+    int distFarthest = 0;
 
     for (int i = 0; i < n; i++) {
         double x = xDistribution(xGenerator);
         double y = yDistribution(yGenerator);
-        points.push_back (make_pair(x, y));
+        points[i] = (make_pair(x, y));
         double dx = x - 0.5;
-        if (dx < 0) {
-            dx = -dx;
-        }
         double dy = y - 0.5;
-        if (dy < 0) {
-            dy = -dy;
+        int dist = round(100 * sqrt(dx * dx + dy * dy));
+        if (distClosest > dist) {
+            closest = i;
+            distClosest = dist;
         }
-        d = dx;
-        if (d > dy) {
-            d = dy;
+        if (distFarthest < dist) {
+            farthest = i;
+            distFarthest = dist;
         }
-        cout << round(100 * d) << endl;
-        vAux.push_back(i);
+        vAux[i] = i;
     }
+
+    int referencePoint = closest;
+    if (t == 1) {
+        referencePoint = farthest;
+    }
+
+    for (int i = 0; i < n; i++) {
+        double x = points[i].first;
+        double y = points[i].second;
+        double x0 = points[referencePoint].first;
+        double y0 = points[referencePoint].second;
+        double dx = x - x0;
+        double dy = y - y0;
+        int dist = round(100 * sqrt(dx * dx + dy * dy));
+        cout << x << ' ' << y << ' ' << dist << endl;
+    }
+
+    set < pair <int, int> > allEdges;
+    set < pair <int, int> > chosenEdges;
 
     shuffle(vAux.begin(), vAux.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
 
@@ -82,10 +127,14 @@ int main () {
     }
     chosenEdges.insert(make_pair(vAux[vAux.size() - 1], vAux[0]));
 
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (chosenEdges.find(make_pair(i, j)) == chosenEdges.end()) {
-                allEdges.insert(make_pair(i, j));
+    for (int u = 0; u < n; u++) {
+        for (int v = u + 1; v < n; v++) {
+            double dx = points[u].first - points[v].first;
+            double dy = points[u].second - points[v].second;
+            int dist = round(100 * sqrt(dx * dx + dy * dy));
+            cout << u << ' ' << v << ' ' << dist << endl;
+            if (chosenEdges.find(make_pair(u, v)) == chosenEdges.end()) {
+                allEdges.insert(make_pair(u, v));
             }
         }
     }
@@ -105,7 +154,9 @@ int main () {
         int v = vChosenEdges[i].second;
         double dx = points[u].first - points[v].first;
         double dy = points[u].second - points[v].second;
-        double d = sqrt(dx*dx+dy*dy);
-        cout << u << ' ' << v << ' ' << round(100 * d) << endl;
+        int dist = round(100 * sqrt(dx * dx + dy * dy));
+        cout << u << ' ' << v << ' ' << dist << endl;
     }
+
+    return 0;
 }
