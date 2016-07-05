@@ -1,4 +1,4 @@
-x#!/bin/bash
+#!/bin/bash
 make clean;
 rm -rf output;
 mkdir -p output;

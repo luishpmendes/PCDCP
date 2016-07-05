@@ -1,5 +1,8 @@
 #!/bin/bash
-mkdir -p ../input
+make clean;
+rm -rf ../input;
+mkdir -p ../input;
+make instanceGenerator;
 for n in 50 100 250 500
 do
     for d in 0.3 0.5 0.7
