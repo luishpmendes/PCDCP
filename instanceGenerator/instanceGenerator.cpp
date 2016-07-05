@@ -69,6 +69,7 @@ int main (int argc, char * argv[]) {
     vector < pair <double, double> > points (n);
     vector <int> vAux (n);
 
+    // number of vertices, number of edges in the complete graph, number of 'chosen' edges and neighborhood radio
     cout << n << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << k << endl;
 
     int closest = 0;
@@ -99,6 +100,7 @@ int main (int argc, char * argv[]) {
         referencePoint = farthest;
     }
 
+    // printing vertices' coordinates and its penalty
     for (int i = 0; i < n; i++) {
         double x = points[i].first;
         double y = points[i].second;
@@ -110,11 +112,21 @@ int main (int argc, char * argv[]) {
         cout << x << ' ' << y << ' ' << dist << endl;
     }
 
+    // generating and printing the edges of the complete graph and its weights
     set < pair <int, int> > allEdges;
+    for (int u = 0; u < n; u++) {
+        for (int v = u + 1; v < n; v++) {
+            double dx = points[u].first - points[v].first;
+            double dy = points[u].second - points[v].second;
+            int dist = round(100 * sqrt(dx * dx + dy * dy));
+            cout << u << ' ' << v << ' ' << dist << endl;
+            allEdges.insert(make_pair(u, v));
+        }
+    }
+
+    // choosing the edges to form the basic euclidean tour in the graph
     set < pair <int, int> > chosenEdges;
-
     shuffle(vAux.begin(), vAux.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
-
     for (int i = 0; i < (int) vAux.size() - 1; i++) {
         int u = vAux[i];
         int v = vAux[i + 1];
@@ -127,28 +139,18 @@ int main (int argc, char * argv[]) {
     }
     chosenEdges.insert(make_pair(vAux[vAux.size() - 1], vAux[0]));
 
-    for (int u = 0; u < n; u++) {
-        for (int v = u + 1; v < n; v++) {
-            double dx = points[u].first - points[v].first;
-            double dy = points[u].second - points[v].second;
-            int dist = round(100 * sqrt(dx * dx + dy * dy));
-            cout << u << ' ' << v << ' ' << dist << endl;
-            if (chosenEdges.find(make_pair(u, v)) == chosenEdges.end()) {
-                allEdges.insert(make_pair(u, v));
-            }
-        }
-    }
-
     vector < pair <int, int> > vAllEdges (allEdges.begin(), allEdges.end());
 
     shuffle(vAllEdges.begin(), vAllEdges.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
 
+    // inserting random edges in the graph until it reaches the desired density
     for (int i = 0; (int) chosenEdges.size() < m; i++) {
         chosenEdges.insert(vAllEdges[i]);
     }
 
     vector < pair <int, int> > vChosenEdges (chosenEdges.begin(), chosenEdges.end());
 
+    // printing the graph edges and its weigths
     for (int i = 0; i < m; i++) {
         int u = vChosenEdges[i].first;
         int v = vChosenEdges[i].second;
