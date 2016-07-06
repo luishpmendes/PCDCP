@@ -101,9 +101,9 @@ int main (int argc, char * argv[]) {
         for (ulint i = 0; i < nSolution; i++) {
             int v;
             resultFile >> v;
-            domSetFile << vertices[i].first.first << ' ';
-            domSetFile << vertices[i].first.second << ' ';
-            domSetFile << ((double) k)/100.0 << endl;
+            solutionVerticesFile << vertices[i].first.first << ' ';
+            solutionVerticesFile << vertices[i].first.second << ' ';
+            solutionVerticesFile << ((double) k)/100.0 << endl;
         }
         solutionVerticesFile.close();
 
