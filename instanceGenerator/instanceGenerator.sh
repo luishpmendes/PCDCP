@@ -1,5 +1,4 @@
 #!/bin/bash
-make clean;
 rm -rf ../input;
 mkdir -p ../input;
 make instanceGenerator;
@@ -16,3 +15,4 @@ do
         done
     done
 done
+make clean;

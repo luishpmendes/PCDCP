@@ -1,5 +1,4 @@
 #!/bin/bash
-make clean;
 rm -rf output;
 mkdir -p output;
 make linearProgram;
@@ -17,3 +16,4 @@ do
         done
     done
 done
+make clean;

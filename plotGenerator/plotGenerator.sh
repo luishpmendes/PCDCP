@@ -1,4 +1,4 @@
-make clean;
+#!/bin/bash
 make plotGenerator;
 path="linearProgram";
 for n in 50 100 250 500
@@ -14,3 +14,4 @@ do
         done
     done
 done
+make clean;
