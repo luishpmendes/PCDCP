@@ -10,7 +10,6 @@ do
             for t in 0 1
             do
                 ./plotGenerator $path $n ${d//.} $k $t;
-                gnuplot -e "path='"$path"';n='"$n"';d='"${d//.}"';t='"$t"'"
             done
         done
     done

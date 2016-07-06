@@ -78,14 +78,14 @@ int main (int argc, char * argv[]) {
         // reading (and ignoring) the complete graph's edges
         for (int j = 0; j < mComplete; j++) {
             int u, v, w;
-            cin >> u >> v >> w;
+            inputFile >> u >> v >> w;
         }
 
         // reading the graph's edges and printing its coordinates
         ofstream edgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "/edges.txt");
         for (int e = 0; e < m; e++) {
             int u, v, w;
-            cin >> u >> v >> w;
+            inputFile >> u >> v >> w;
             edgesFile << vertices[u].first.first << ' ';
             edgesFile << vertices[u].first.second << endl;
             edgesFile << vertices[v].first.first << ' ';
