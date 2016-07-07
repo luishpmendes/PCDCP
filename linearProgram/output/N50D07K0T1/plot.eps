@@ -1,0 +1,2687 @@
+%!PS-Adobe-2.0 EPSF-2.0
+%%Title: ../linearProgram/output/N50D07K0T1/plot.eps
+%%Creator: gnuplot 4.6 patchlevel 4
+%%CreationDate: Thu Jul  7 17:47:56 2016
+%%DocumentFonts: (atend)
+%%BoundingBox: 50 50 410 302
+%%EndComments
+%%BeginProlog
+/gnudict 256 dict def
+gnudict begin
+%
+% The following true/false flags may be edited by hand if desired.
+% The unit line width and grayscale image gamma correction may also be changed.
+%
+/Color true def
+/Blacktext false def
+/Solid false def
+/Dashlength 1 def
+/Landscape false def
+/Level1 false def
+/Rounded false def
+/ClipToBoundingBox false def
+/SuppressPDFMark false def
+/TransparentPatterns false def
+/gnulinewidth 5.000 def
+/userlinewidth gnulinewidth def
+/Gamma 1.0 def
+/BackgroundColor {-1.000 -1.000 -1.000} def
+%
+/vshift -46 def
+/dl1 {
+  10.0 Dashlength mul mul
+  Rounded { currentlinewidth 0.75 mul sub dup 0 le { pop 0.01 } if } if
+} def
+/dl2 {
+  10.0 Dashlength mul mul
+  Rounded { currentlinewidth 0.75 mul add } if
+} def
+/hpt_ 31.5 def
+/vpt_ 31.5 def
+/hpt hpt_ def
+/vpt vpt_ def
+/doclip {
+  ClipToBoundingBox {
+    newpath 50 50 moveto 410 50 lineto 410 302 lineto 50 302 lineto closepath
+    clip
+  } if
+} def
+%
+% Gnuplot Prolog Version 4.6 (September 2012)
+%
+%/SuppressPDFMark true def
+%
+/M {moveto} bind def
+/L {lineto} bind def
+/R {rmoveto} bind def
+/V {rlineto} bind def
+/N {newpath moveto} bind def
+/Z {closepath} bind def
+/C {setrgbcolor} bind def
+/f {rlineto fill} bind def
+/g {setgray} bind def
+/Gshow {show} def   % May be redefined later in the file to support UTF-8
+/vpt2 vpt 2 mul def
+/hpt2 hpt 2 mul def
+/Lshow {currentpoint stroke M 0 vshift R 
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+/Rshow {currentpoint stroke M dup stringwidth pop neg vshift R
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+/Cshow {currentpoint stroke M dup stringwidth pop -2 div vshift R 
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+/UP {dup vpt_ mul /vpt exch def hpt_ mul /hpt exch def
+  /hpt2 hpt 2 mul def /vpt2 vpt 2 mul def} def
+/DL {Color {setrgbcolor Solid {pop []} if 0 setdash}
+ {pop pop pop 0 setgray Solid {pop []} if 0 setdash} ifelse} def
+/BL {stroke userlinewidth 2 mul setlinewidth
+	Rounded {1 setlinejoin 1 setlinecap} if} def
+/AL {stroke userlinewidth 2 div setlinewidth
+	Rounded {1 setlinejoin 1 setlinecap} if} def
+/UL {dup gnulinewidth mul /userlinewidth exch def
+	dup 1 lt {pop 1} if 10 mul /udl exch def} def
+/PL {stroke userlinewidth setlinewidth
+	Rounded {1 setlinejoin 1 setlinecap} if} def
+3.8 setmiterlimit
+% Default Line colors
+/LCw {1 1 1} def
+/LCb {0 0 0} def
+/LCa {0 0 0} def
+/LC0 {1 0 0} def
+/LC1 {0 1 0} def
+/LC2 {0 0 1} def
+/LC3 {1 0 1} def
+/LC4 {0 1 1} def
+/LC5 {1 1 0} def
+/LC6 {0 0 0} def
+/LC7 {1 0.3 0} def
+/LC8 {0.5 0.5 0.5} def
+% Default Line Types
+/LTw {PL [] 1 setgray} def
+/LTb {BL [] LCb DL} def
+/LTa {AL [1 udl mul 2 udl mul] 0 setdash LCa setrgbcolor} def
+/LT0 {PL [] LC0 DL} def
+/LT1 {PL [4 dl1 2 dl2] LC1 DL} def
+/LT2 {PL [2 dl1 3 dl2] LC2 DL} def
+/LT3 {PL [1 dl1 1.5 dl2] LC3 DL} def
+/LT4 {PL [6 dl1 2 dl2 1 dl1 2 dl2] LC4 DL} def
+/LT5 {PL [3 dl1 3 dl2 1 dl1 3 dl2] LC5 DL} def
+/LT6 {PL [2 dl1 2 dl2 2 dl1 6 dl2] LC6 DL} def
+/LT7 {PL [1 dl1 2 dl2 6 dl1 2 dl2 1 dl1 2 dl2] LC7 DL} def
+/LT8 {PL [2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 4 dl2] LC8 DL} def
+/Pnt {stroke [] 0 setdash gsave 1 setlinecap M 0 0 V stroke grestore} def
+/Dia {stroke [] 0 setdash 2 copy vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V closepath stroke
+  Pnt} def
+/Pls {stroke [] 0 setdash vpt sub M 0 vpt2 V
+  currentpoint stroke M
+  hpt neg vpt neg R hpt2 0 V stroke
+ } def
+/Box {stroke [] 0 setdash 2 copy exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V closepath stroke
+  Pnt} def
+/Crs {stroke [] 0 setdash exch hpt sub exch vpt add M
+  hpt2 vpt2 neg V currentpoint stroke M
+  hpt2 neg 0 R hpt2 vpt2 V stroke} def
+/TriU {stroke [] 0 setdash 2 copy vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V closepath stroke
+  Pnt} def
+/Star {2 copy Pls Crs} def
+/BoxF {stroke [] 0 setdash exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V closepath fill} def
+/TriUF {stroke [] 0 setdash vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V closepath fill} def
+/TriD {stroke [] 0 setdash 2 copy vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V closepath stroke
+  Pnt} def
+/TriDF {stroke [] 0 setdash vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V closepath fill} def
+/DiaF {stroke [] 0 setdash vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V closepath fill} def
+/Pent {stroke [] 0 setdash 2 copy gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  closepath stroke grestore Pnt} def
+/PentF {stroke [] 0 setdash gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  closepath fill grestore} def
+/Circle {stroke [] 0 setdash 2 copy
+  hpt 0 360 arc stroke Pnt} def
+/CircleF {stroke [] 0 setdash hpt 0 360 arc fill} def
+/C0 {BL [] 0 setdash 2 copy moveto vpt 90 450 arc} bind def
+/C1 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 90 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C2 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 90 180 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C3 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 180 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C4 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 180 270 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C5 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 90 arc
+	2 copy moveto
+	2 copy vpt 180 270 arc closepath fill
+	vpt 0 360 arc} bind def
+/C6 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 90 270 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C7 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 270 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C8 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 270 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C9 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 270 450 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C10 {BL [] 0 setdash 2 copy 2 copy moveto vpt 270 360 arc closepath fill
+	2 copy moveto
+	2 copy vpt 90 180 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C11 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 180 arc closepath fill
+	2 copy moveto
+	2 copy vpt 270 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C12 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 180 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C13 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 90 arc closepath fill
+	2 copy moveto
+	2 copy vpt 180 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C14 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 90 360 arc closepath fill
+	vpt 0 360 arc} bind def
+/C15 {BL [] 0 setdash 2 copy vpt 0 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/Rec {newpath 4 2 roll moveto 1 index 0 rlineto 0 exch rlineto
+	neg 0 rlineto closepath} bind def
+/Square {dup Rec} bind def
+/Bsquare {vpt sub exch vpt sub exch vpt2 Square} bind def
+/S0 {BL [] 0 setdash 2 copy moveto 0 vpt rlineto BL Bsquare} bind def
+/S1 {BL [] 0 setdash 2 copy vpt Square fill Bsquare} bind def
+/S2 {BL [] 0 setdash 2 copy exch vpt sub exch vpt Square fill Bsquare} bind def
+/S3 {BL [] 0 setdash 2 copy exch vpt sub exch vpt2 vpt Rec fill Bsquare} bind def
+/S4 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt Square fill Bsquare} bind def
+/S5 {BL [] 0 setdash 2 copy 2 copy vpt Square fill
+	exch vpt sub exch vpt sub vpt Square fill Bsquare} bind def
+/S6 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt vpt2 Rec fill Bsquare} bind def
+/S7 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt vpt2 Rec fill
+	2 copy vpt Square fill Bsquare} bind def
+/S8 {BL [] 0 setdash 2 copy vpt sub vpt Square fill Bsquare} bind def
+/S9 {BL [] 0 setdash 2 copy vpt sub vpt vpt2 Rec fill Bsquare} bind def
+/S10 {BL [] 0 setdash 2 copy vpt sub vpt Square fill 2 copy exch vpt sub exch vpt Square fill
+	Bsquare} bind def
+/S11 {BL [] 0 setdash 2 copy vpt sub vpt Square fill 2 copy exch vpt sub exch vpt2 vpt Rec fill
+	Bsquare} bind def
+/S12 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill Bsquare} bind def
+/S13 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill
+	2 copy vpt Square fill Bsquare} bind def
+/S14 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill
+	2 copy exch vpt sub exch vpt Square fill Bsquare} bind def
+/S15 {BL [] 0 setdash 2 copy Bsquare fill Bsquare} bind def
+/D0 {gsave translate 45 rotate 0 0 S0 stroke grestore} bind def
+/D1 {gsave translate 45 rotate 0 0 S1 stroke grestore} bind def
+/D2 {gsave translate 45 rotate 0 0 S2 stroke grestore} bind def
+/D3 {gsave translate 45 rotate 0 0 S3 stroke grestore} bind def
+/D4 {gsave translate 45 rotate 0 0 S4 stroke grestore} bind def
+/D5 {gsave translate 45 rotate 0 0 S5 stroke grestore} bind def
+/D6 {gsave translate 45 rotate 0 0 S6 stroke grestore} bind def
+/D7 {gsave translate 45 rotate 0 0 S7 stroke grestore} bind def
+/D8 {gsave translate 45 rotate 0 0 S8 stroke grestore} bind def
+/D9 {gsave translate 45 rotate 0 0 S9 stroke grestore} bind def
+/D10 {gsave translate 45 rotate 0 0 S10 stroke grestore} bind def
+/D11 {gsave translate 45 rotate 0 0 S11 stroke grestore} bind def
+/D12 {gsave translate 45 rotate 0 0 S12 stroke grestore} bind def
+/D13 {gsave translate 45 rotate 0 0 S13 stroke grestore} bind def
+/D14 {gsave translate 45 rotate 0 0 S14 stroke grestore} bind def
+/D15 {gsave translate 45 rotate 0 0 S15 stroke grestore} bind def
+/DiaE {stroke [] 0 setdash vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V closepath stroke} def
+/BoxE {stroke [] 0 setdash exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V closepath stroke} def
+/TriUE {stroke [] 0 setdash vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V closepath stroke} def
+/TriDE {stroke [] 0 setdash vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V closepath stroke} def
+/PentE {stroke [] 0 setdash gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  closepath stroke grestore} def
+/CircE {stroke [] 0 setdash 
+  hpt 0 360 arc stroke} def
+/Opaque {gsave closepath 1 setgray fill grestore 0 setgray closepath} def
+/DiaW {stroke [] 0 setdash vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V Opaque stroke} def
+/BoxW {stroke [] 0 setdash exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V Opaque stroke} def
+/TriUW {stroke [] 0 setdash vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V Opaque stroke} def
+/TriDW {stroke [] 0 setdash vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V Opaque stroke} def
+/PentW {stroke [] 0 setdash gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  Opaque stroke grestore} def
+/CircW {stroke [] 0 setdash 
+  hpt 0 360 arc Opaque stroke} def
+/BoxFill {gsave Rec 1 setgray fill grestore} def
+/Density {
+  /Fillden exch def
+  currentrgbcolor
+  /ColB exch def /ColG exch def /ColR exch def
+  /ColR ColR Fillden mul Fillden sub 1 add def
+  /ColG ColG Fillden mul Fillden sub 1 add def
+  /ColB ColB Fillden mul Fillden sub 1 add def
+  ColR ColG ColB setrgbcolor} def
+/BoxColFill {gsave Rec PolyFill} def
+/PolyFill {gsave Density fill grestore grestore} def
+/h {rlineto rlineto rlineto gsave closepath fill grestore} bind def
+%
+% PostScript Level 1 Pattern Fill routine for rectangles
+% Usage: x y w h s a XX PatternFill
+%	x,y = lower left corner of box to be filled
+%	w,h = width and height of box
+%	  a = angle in degrees between lines and x-axis
+%	 XX = 0/1 for no/yes cross-hatch
+%
+/PatternFill {gsave /PFa [ 9 2 roll ] def
+  PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
+  PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+  clip
+  currentlinewidth 0.5 mul setlinewidth
+  /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
+  0 0 M PFa 5 get rotate PFs -2 div dup translate
+  0 1 PFs PFa 4 get div 1 add floor cvi
+	{PFa 4 get mul 0 M 0 PFs V} for
+  0 PFa 6 get ne {
+	0 1 PFs PFa 4 get div 1 add floor cvi
+	{PFa 4 get mul 0 2 1 roll M PFs 0 V} for
+ } if
+  stroke grestore} def
+%
+/languagelevel where
+ {pop languagelevel} {1} ifelse
+ 2 lt
+	{/InterpretLevel1 true def}
+	{/InterpretLevel1 Level1 def}
+ ifelse
+%
+% PostScript level 2 pattern fill definitions
+%
+/Level2PatternFill {
+/Tile8x8 {/PaintType 2 /PatternType 1 /TilingType 1 /BBox [0 0 8 8] /XStep 8 /YStep 8}
+	bind def
+/KeepColor {currentrgbcolor [/Pattern /DeviceRGB] setcolorspace} bind def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 0 M 8 8 L 0 8 M 8 0 L stroke} 
+>> matrix makepattern
+/Pat1 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 0 M 8 8 L 0 8 M 8 0 L stroke
+	0 4 M 4 8 L 8 4 L 4 0 L 0 4 L stroke}
+>> matrix makepattern
+/Pat2 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 0 M 0 8 L
+	8 8 L 8 0 L 0 0 L fill}
+>> matrix makepattern
+/Pat3 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -4 8 M 8 -4 L
+	0 12 M 12 0 L stroke}
+>> matrix makepattern
+/Pat4 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -4 0 M 8 12 L
+	0 -4 M 12 8 L stroke}
+>> matrix makepattern
+/Pat5 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -2 8 M 4 -4 L
+	0 12 M 8 -4 L 4 12 M 10 0 L stroke}
+>> matrix makepattern
+/Pat6 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -2 0 M 4 12 L
+	0 -4 M 8 12 L 4 -4 M 10 8 L stroke}
+>> matrix makepattern
+/Pat7 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 8 -2 M -4 4 L
+	12 0 M -4 8 L 12 4 M 0 10 L stroke}
+>> matrix makepattern
+/Pat8 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 -2 M 12 4 L
+	-4 0 M 12 8 L -4 4 M 8 10 L stroke}
+>> matrix makepattern
+/Pat9 exch def
+/Pattern1 {PatternBgnd KeepColor Pat1 setpattern} bind def
+/Pattern2 {PatternBgnd KeepColor Pat2 setpattern} bind def
+/Pattern3 {PatternBgnd KeepColor Pat3 setpattern} bind def
+/Pattern4 {PatternBgnd KeepColor Landscape {Pat5} {Pat4} ifelse setpattern} bind def
+/Pattern5 {PatternBgnd KeepColor Landscape {Pat4} {Pat5} ifelse setpattern} bind def
+/Pattern6 {PatternBgnd KeepColor Landscape {Pat9} {Pat6} ifelse setpattern} bind def
+/Pattern7 {PatternBgnd KeepColor Landscape {Pat8} {Pat7} ifelse setpattern} bind def
+} def
+%
+%
+%End of PostScript Level 2 code
+%
+/PatternBgnd {
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+} def
+%
+% Substitute for Level 2 pattern fill codes with
+% grayscale if Level 2 support is not selected.
+%
+/Level1PatternFill {
+/Pattern1 {0.250 Density} bind def
+/Pattern2 {0.500 Density} bind def
+/Pattern3 {0.750 Density} bind def
+/Pattern4 {0.125 Density} bind def
+/Pattern5 {0.375 Density} bind def
+/Pattern6 {0.625 Density} bind def
+/Pattern7 {0.875 Density} bind def
+} def
+%
+% Now test for support of Level 2 code
+%
+Level1 {Level1PatternFill} {Level2PatternFill} ifelse
+%
+/Symbol-Oblique /Symbol findfont [1 0 .167 1 0 0] makefont
+dup length dict begin {1 index /FID eq {pop pop} {def} ifelse} forall
+currentdict end definefont pop
+Level1 SuppressPDFMark or 
+{} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (../linearProgram/output/N50D07K0T1/plot.eps)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.6 patchlevel 4)
+  /Author (luishpmendes)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Thu Jul  7 17:47:56 2016)
+  /DOCINFO pdfmark
+end
+} ifelse
+end
+%%EndProlog
+%%Page: 1 1
+gnudict begin
+gsave
+doclip
+50 50 translate
+0.050 0.050 scale
+0 setgray
+newpath
+(times) findfont 140 scalefont setfont
+BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {BackgroundColor C 1.000 0 0 7200.00 5040.00 BoxColFill} if
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 280 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 0) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 1148 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 0.2) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 2016 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 0.4) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 2883 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 0.6) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 3751 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 0.8) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 4619 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 1) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 0) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+2445 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 0.2) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+3313 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 0.4) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+4180 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 0.6) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+5048 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 0.8) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+5916 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 1) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 4619 N
+0 -4339 V
+4339 0 V
+0 4339 V
+-4339 0 V
+Z stroke
+LTb
+3746 4829 M
+(Instancia do PCDCP \(N = 50;D = 07;K = 0;T = 1\)) Cshow
+1.000 UP
+1.000 UL
+LTb
+LCb setrgbcolor
+% Begin plot #1
+0.500 UL
+LT0
+0.50 0.50 0.50 C /times findfont 140 scalefont setfont
+/vshift -46 def
+3338 1028 M
+2018 2660 L
+3338 1028 M
+246 189 V
+3338 1028 M
+4419 2972 L
+3338 1028 M
+503 159 V
+3338 1028 M
+2690 3751 L
+3338 1028 M
+2661 3920 L
+3338 1028 M
+2044 4462 L
+3338 1028 M
+4859 473 L
+3338 1028 M
+1604 925 L
+1734 103 R
+540 1206 V
+3338 1028 M
+2093 904 V
+3338 1028 M
+22 721 V
+-22 -721 R
+1791 3083 L
+3338 1028 M
+1640 882 L
+1698 146 R
+1876 887 L
+1462 141 R
+1796 1709 L
+3338 1028 M
+-75 1113 V
+75 -1113 R
+5892 4127 L
+3338 1028 M
+2812 2891 L
+3338 1028 M
+1980 2042 L
+3338 1028 M
+2194 528 V
+3338 1028 M
+2052 447 L
+1286 581 R
+4710 2402 L
+3338 1028 M
+2743 3836 L
+3338 1028 M
+-814 430 V
+814 -430 R
+693 -45 V
+-693 45 R
+2033 972 L
+1305 56 R
+2649 4112 L
+3338 1028 M
+195 1645 V
+3338 1028 M
+5491 705 L
+3338 1028 M
+610 1708 V
+3338 1028 M
+56 2792 V
+3338 1028 M
+-461 180 V
+461 -180 R
+1179 875 V
+599 1912 R
+2018 2660 L
+5116 3815 M
+3584 1217 L
+5116 3815 M
+3841 1187 L
+5116 3815 M
+2690 3751 L
+2426 64 R
+2044 4462 L
+5116 3815 M
+3513 4364 L
+5116 3815 M
+3878 2234 L
+5116 3815 M
+2612 2355 L
+5116 3815 M
+5631 1273 L
+5116 3815 M
+2864 2792 L
+5116 3815 M
+5431 1932 L
+5116 3815 M
+3360 1749 L
+5116 3815 M
+-2859 44 V
+2859 -44 R
+1791 3083 L
+3325 732 R
+1640 882 L
+5116 3815 M
+1876 887 L
+5116 3815 M
+1796 1709 L
+5116 3815 M
+3263 2141 L
+5116 3815 M
+776 312 V
+5116 3815 M
+2812 2891 L
+2304 924 R
+1980 2042 L
+5116 3815 M
+5532 1556 L
+5116 3815 M
+2052 447 L
+5116 3815 M
+4710 2402 L
+406 1413 R
+-2373 21 V
+2373 -21 R
+2033 972 L
+5116 3815 M
+2649 4112 L
+5116 3815 M
+4473 667 L
+643 3148 R
+3658 4013 L
+5116 3815 M
+5491 705 L
+5116 3815 M
+3948 2736 L
+5116 3815 M
+-1722 5 V
+1722 -5 R
+4517 1903 L
+599 1912 R
+4709 1222 L
+2018 2660 M
+3584 1217 L
+2018 2660 M
+672 1091 V
+2018 2660 M
+795 -497 V
+-795 497 R
+26 1802 V
+2018 2660 M
+4859 473 L
+2018 2660 M
+1604 925 L
+414 1735 R
+3513 4364 L
+2018 2660 M
+4674 2459 L
+2018 2660 M
+3878 2234 L
+2018 2660 M
+5631 1273 L
+2018 2660 M
+5431 1932 L
+2018 2660 M
+4598 3699 L
+2018 2660 M
+1640 882 L
+378 1778 R
+1876 887 L
+142 1773 R
+1796 1709 L
+222 951 R
+3263 2141 L
+2018 2660 M
+5892 4127 L
+2018 2660 M
+-38 -618 V
+38 618 R
+5532 1556 L
+2018 2660 M
+4710 2402 L
+2018 2660 M
+725 1176 V
+2018 2660 M
+2524 1458 L
+2018 2660 M
+400 1287 V
+2018 2660 M
+2033 972 L
+-15 1688 R
+631 1452 V
+2018 2660 M
+4473 667 L
+2018 2660 M
+1515 13 V
+2018 2660 M
+5491 705 L
+2018 2660 M
+1930 76 V
+2018 2660 M
+3394 3820 L
+2018 2660 M
+2877 1208 L
+2018 2660 M
+4517 1903 L
+2018 2660 M
+4709 1222 L
+-1125 -5 R
+2690 3751 L
+3584 1217 M
+2661 3920 L
+3584 1217 M
+-771 946 V
+771 -946 R
+2044 4462 L
+3584 1217 M
+4859 473 L
+3584 1217 M
+-71 3147 V
+71 -3147 R
+4840 3122 L
+3584 1217 M
+4674 2459 L
+3584 1217 M
+294 1017 V
+3584 1217 M
+2612 2355 L
+3584 1217 M
+2864 2792 L
+3584 1217 M
+-224 532 V
+224 -532 R
+2257 3859 L
+3584 1217 M
+1791 3083 L
+3584 1217 M
+4598 3699 L
+3584 1217 M
+1876 887 L
+1708 330 R
+-321 924 V
+321 -924 R
+5892 4127 L
+3584 1217 M
+1980 2042 L
+3584 1217 M
+1948 339 V
+3584 1217 M
+4710 2402 L
+3584 1217 M
+2524 1458 L
+3584 1217 M
+2418 3947 L
+3584 1217 M
+2649 4112 L
+3584 1217 M
+4473 667 L
+-889 550 R
+74 2796 V
+3584 1217 M
+-51 1456 V
+51 -1456 R
+5491 705 L
+3584 1217 M
+364 1519 V
+471 236 R
+2813 2163 L
+1606 809 R
+2044 4462 L
+4419 2972 M
+4859 473 L
+4419 2972 M
+255 -513 V
+-255 513 R
+2612 2355 L
+1807 617 R
+5631 1273 L
+4419 2972 M
+2864 2792 L
+1555 180 R
+2257 3859 L
+4419 2972 M
+1791 3083 L
+4419 2972 M
+179 727 V
+4419 2972 M
+1640 882 L
+4419 2972 M
+1876 887 L
+4419 2972 M
+1796 1709 L
+4419 2972 M
+3263 2141 L
+1156 831 R
+5892 4127 L
+4419 2972 M
+2812 2891 L
+1607 81 R
+1980 2042 L
+2439 930 R
+5532 1556 L
+4419 2972 M
+2052 447 L
+4419 2972 M
+4031 983 L
+388 1989 R
+2418 3947 L
+4419 2972 M
+2033 972 L
+4419 2972 M
+2649 4112 L
+4419 2972 M
+4473 667 L
+-54 2305 R
+3658 4013 L
+4419 2972 M
+3533 2673 L
+886 299 R
+2162 2198 L
+2257 774 R
+5491 705 L
+4419 2972 M
+3948 2736 L
+471 236 R
+3394 3820 L
+4419 2972 M
+4709 1222 L
+-868 -35 R
+2813 2163 L
+3841 1187 M
+2044 4462 L
+3841 1187 M
+833 1272 V
+3841 1187 M
+37 1047 V
+3841 1187 M
+2612 2355 L
+3841 1187 M
+1790 86 V
+3841 1187 M
+1590 745 V
+3841 1187 M
+-481 562 V
+481 -562 R
+2257 3859 L
+3841 1187 M
+757 2512 V
+3841 1187 M
+1640 882 L
+2201 305 R
+1876 887 L
+1965 300 R
+5892 4127 L
+3841 1187 M
+2812 2891 L
+3841 1187 M
+1980 2042 L
+3841 1187 M
+1691 369 V
+3841 1187 M
+2052 447 L
+1789 740 R
+2743 3836 L
+3841 1187 M
+2524 1458 L
+3841 1187 M
+4031 983 L
+-190 204 R
+2418 3947 L
+3841 1187 M
+2033 972 L
+1808 215 R
+2649 4112 L
+3841 1187 M
+3658 4013 L
+3841 1187 M
+2162 2198 L
+3841 1187 M
+5491 705 L
+3841 1187 M
+3394 3820 L
+3841 1187 M
+-964 21 V
+964 -21 R
+676 716 V
+3841 1187 M
+868 35 V
+2690 3751 M
+-29 169 V
+29 -169 R
+2813 2163 L
+2690 3751 M
+-646 711 V
+646 -711 R
+4859 473 L
+2690 3751 M
+1604 925 L
+2690 3751 M
+4840 3122 L
+2690 3751 M
+2612 2355 L
+78 1396 R
+174 -959 V
+-174 959 R
+5431 1932 L
+2690 3751 M
+3360 1749 L
+2690 3751 M
+3202 376 V
+2690 3751 M
+122 -860 V
+-122 860 R
+1980 2042 L
+710 1709 R
+5532 1556 L
+2690 3751 M
+2052 447 L
+638 3304 R
+4710 2402 L
+2690 3751 M
+53 85 V
+-53 -85 R
+2524 1458 L
+166 2293 R
+-272 196 V
+272 -196 R
+2033 972 L
+657 2779 R
+-41 361 V
+41 -361 R
+4473 667 L
+2690 3751 M
+5491 705 L
+2690 3751 M
+704 69 V
+-704 -69 R
+2877 1208 L
+2690 3751 M
+4517 1903 L
+2690 3751 M
+4709 1222 L
+2661 3920 M
+2813 2163 L
+2661 3920 M
+-617 542 V
+617 -542 R
+4859 473 L
+2661 3920 M
+1604 925 L
+2661 3920 M
+852 444 V
+2661 3920 M
+2612 2355 L
+49 1565 R
+5631 1273 L
+2661 3920 M
+5431 1932 L
+2661 3920 M
+3360 1749 L
+2661 3920 M
+-404 -61 V
+404 61 R
+1791 3083 L
+870 837 R
+4598 3699 L
+2661 3920 M
+1640 882 L
+2661 3920 M
+1876 887 L
+785 3033 R
+1796 1709 L
+865 2211 R
+3263 2141 L
+2661 3920 M
+2812 2891 L
+2661 3920 M
+1980 2042 L
+681 1878 R
+2052 447 L
+609 3473 R
+82 -84 V
+-82 84 R
+2524 1458 L
+137 2462 R
+-243 27 V
+243 -27 R
+-12 192 V
+12 -192 R
+4473 667 L
+2661 3920 M
+997 93 V
+-997 -93 R
+3533 2673 L
+2661 3920 M
+2162 2198 L
+499 1722 R
+5491 705 L
+2661 3920 M
+3948 2736 L
+2661 3920 M
+733 -100 V
+-733 100 R
+4517 1903 L
+2813 2163 M
+2044 4462 L
+2813 2163 M
+1604 925 L
+2813 2163 M
+1861 296 V
+2813 2163 M
+-201 192 V
+201 -192 R
+5631 1273 L
+2813 2163 M
+5431 1932 L
+2813 2163 M
+547 -414 V
+-547 414 R
+2257 3859 L
+2813 2163 M
+1791 3083 L
+2813 2163 M
+4598 3699 L
+2813 2163 M
+1876 887 L
+937 1276 R
+1796 1709 L
+1017 454 R
+450 -22 V
+-450 22 R
+5892 4127 L
+2813 2163 M
+-1 728 V
+1 -728 R
+1980 2042 L
+833 121 R
+5532 1556 L
+2813 2163 M
+1897 239 V
+2813 2163 M
+-70 1673 V
+70 -1673 R
+2524 1458 L
+289 705 R
+4031 983 L
+2813 2163 M
+2418 3947 L
+2813 2163 M
+2033 972 L
+780 1191 R
+2649 4112 L
+2813 2163 M
+4473 667 L
+2813 2163 M
+720 510 V
+2813 2163 M
+-651 35 V
+651 -35 R
+5491 705 L
+2813 2163 M
+1135 573 V
+2813 2163 M
+64 -955 V
+-64 955 R
+4517 1903 L
+2044 4462 M
+1604 925 L
+440 3537 R
+1469 -98 V
+-1469 98 R
+3878 2234 L
+2044 4462 M
+5631 1273 L
+2044 4462 M
+2864 2792 L
+2044 4462 M
+5431 1932 L
+2044 4462 M
+3360 1749 L
+2044 4462 M
+213 -603 V
+-213 603 R
+1791 3083 L
+253 1379 R
+4598 3699 L
+2044 4462 M
+1640 882 L
+404 3580 R
+1876 887 L
+168 3575 R
+5892 4127 L
+2044 4462 M
+1980 2042 L
+64 2420 R
+5532 1556 L
+2044 4462 M
+2524 1458 L
+2044 4462 M
+4031 983 L
+2044 4462 M
+374 -515 V
+-374 515 R
+2033 972 L
+11 3490 R
+3533 2673 L
+2044 4462 M
+2877 1208 L
+2044 4462 M
+4517 1903 L
+4859 473 M
+1604 925 L
+4859 473 M
+3513 4364 L
+4859 473 M
+4674 2459 L
+4859 473 M
+3878 2234 L
+4859 473 M
+2612 2355 L
+4859 473 M
+772 800 V
+4859 473 M
+2864 2792 L
+4859 473 M
+3360 1749 L
+4859 473 M
+2257 3859 L
+4859 473 M
+1791 3083 L
+4859 473 M
+4598 3699 L
+4859 473 M
+1640 882 L
+4859 473 M
+1876 887 L
+4859 473 M
+3263 2141 L
+4859 473 M
+5892 4127 L
+4859 473 M
+2812 2891 L
+4859 473 M
+1980 2042 L
+4859 473 M
+673 1083 V
+4859 473 M
+2052 447 L
+2807 26 R
+2743 3836 L
+4859 473 M
+2524 1458 L
+4859 473 M
+4031 983 L
+4859 473 M
+2418 3947 L
+4859 473 M
+2033 972 L
+4859 473 M
+2649 4112 L
+4859 473 M
+4473 667 L
+4859 473 M
+3658 4013 L
+4859 473 M
+3533 2673 L
+4859 473 M
+2162 2198 L
+4859 473 M
+632 232 V
+4859 473 M
+3948 2736 L
+4859 473 M
+3394 3820 L
+4859 473 M
+2877 1208 L
+4859 473 M
+4517 1903 L
+4859 473 M
+-150 749 V
+1604 925 M
+3513 4364 L
+1604 925 M
+4840 3122 L
+1604 925 M
+4674 2459 L
+1604 925 M
+2612 2355 L
+1604 925 M
+4027 348 V
+1604 925 M
+2864 2792 L
+1604 925 M
+5431 1932 L
+1604 925 M
+1756 824 V
+1604 925 M
+653 2934 V
+1604 925 M
+187 2158 V
+1604 925 M
+4598 3699 L
+1604 925 M
+36 -43 V
+-36 43 R
+272 -38 V
+-272 38 R
+3263 2141 L
+1604 925 M
+2812 2891 L
+1604 925 M
+2052 447 L
+1604 925 M
+2743 3836 L
+1604 925 M
+920 533 V
+1604 925 M
+2649 4112 L
+1604 925 M
+4473 667 L
+1604 925 M
+3658 4013 L
+1604 925 M
+3533 2673 L
+1604 925 M
+3948 2736 L
+1604 925 M
+3394 3820 L
+1604 925 M
+2913 978 V
+1604 925 M
+3105 297 V
+3513 4364 M
+4674 2459 L
+3513 4364 M
+2612 2355 L
+901 2009 R
+5631 1273 L
+3513 4364 M
+2864 2792 L
+649 1572 R
+3360 1749 L
+153 2615 R
+2257 3859 L
+1256 505 R
+4598 3699 L
+3513 4364 M
+3263 2141 L
+250 2223 R
+5892 4127 L
+3513 4364 M
+5532 1556 L
+3513 4364 M
+4710 2402 L
+3513 4364 M
+2743 3836 L
+770 528 R
+2524 1458 L
+989 2906 R
+2418 3947 L
+1095 417 R
+2033 972 L
+3513 4364 M
+2649 4112 L
+864 252 R
+4473 667 L
+3513 4364 M
+20 -1691 V
+-20 1691 R
+2162 2198 L
+3513 4364 M
+5491 705 L
+3513 4364 M
+4517 1903 L
+3513 4364 M
+4709 1222 L
+131 1900 R
+4674 2459 L
+166 663 R
+3878 2234 L
+962 888 R
+2612 2355 L
+2228 767 R
+2864 2792 L
+1976 330 R
+5431 1932 L
+4840 3122 M
+3360 1749 L
+4840 3122 M
+1791 3083 L
+3049 39 R
+1876 887 L
+4840 3122 M
+1796 1709 L
+4840 3122 M
+3263 2141 L
+1577 981 R
+5892 4127 L
+4840 3122 M
+2812 2891 L
+2028 231 R
+5532 1556 L
+4840 3122 M
+2052 447 L
+4840 3122 M
+4710 2402 L
+130 720 R
+2743 3836 L
+4840 3122 M
+2524 1458 L
+4840 3122 M
+4031 983 L
+809 2139 R
+2033 972 L
+4840 3122 M
+2649 4112 L
+4840 3122 M
+4473 667 L
+367 2455 R
+3658 4013 L
+4840 3122 M
+3533 2673 L
+1307 449 R
+2162 2198 L
+2678 924 R
+5491 705 L
+4840 3122 M
+3948 2736 L
+892 386 R
+3394 3820 L
+4840 3122 M
+2877 1208 L
+4840 3122 M
+4709 1222 L
+-35 1237 R
+3878 2234 L
+796 225 R
+2612 2355 L
+2062 104 R
+5631 1273 L
+4674 2459 M
+2864 2792 L
+4674 2459 M
+757 -527 V
+-757 527 R
+3360 1749 L
+1314 710 R
+2257 3859 L
+4674 2459 M
+1876 887 L
+4674 2459 M
+2812 2891 L
+4674 2459 M
+1980 2042 L
+2694 417 R
+36 -57 V
+-36 57 R
+2743 3836 L
+4674 2459 M
+2524 1458 L
+4674 2459 M
+4031 983 L
+643 1476 R
+2033 972 L
+4674 2459 M
+2649 4112 L
+4674 2459 M
+3658 4013 L
+4674 2459 M
+3533 2673 L
+4674 2459 M
+2162 2198 L
+2512 261 R
+5491 705 L
+4674 2459 M
+3394 3820 L
+4674 2459 M
+2877 1208 L
+3878 2234 M
+2612 2355 L
+3878 2234 M
+2864 2792 L
+3878 2234 M
+5431 1932 L
+3878 2234 M
+3360 1749 L
+518 485 R
+2257 3859 L
+3878 2234 M
+1791 3083 L
+3878 2234 M
+720 1465 V
+3878 2234 M
+1640 882 L
+3878 2234 M
+1796 1709 L
+2082 525 R
+-615 -93 V
+615 93 R
+5892 4127 L
+3878 2234 M
+2812 2891 L
+3878 2234 M
+5532 1556 L
+3878 2234 M
+2052 447 L
+3878 2234 M
+832 168 V
+3878 2234 M
+2524 1458 L
+1354 776 R
+4031 983 L
+3878 2234 M
+2418 3947 L
+3878 2234 M
+2033 972 L
+3878 2234 M
+2649 4112 L
+3878 2234 M
+4473 667 L
+3878 2234 M
+-345 439 V
+345 -439 R
+5491 705 L
+3878 2234 M
+70 502 V
+-70 -502 R
+3394 3820 L
+3878 2234 M
+2877 1208 L
+3878 2234 M
+4709 1222 L
+2612 2355 M
+5631 1273 L
+2612 2355 M
+252 437 V
+2612 2355 M
+5431 1932 L
+2612 2355 M
+748 -606 V
+-748 606 R
+2257 3859 L
+2612 2355 M
+-821 728 V
+821 -728 R
+1640 882 L
+972 1473 R
+1876 887 L
+736 1468 R
+5892 4127 L
+2612 2355 M
+200 536 V
+2612 2355 M
+1980 2042 L
+632 313 R
+5532 1556 L
+2612 2355 M
+2052 447 L
+560 1908 R
+2098 47 V
+2612 2355 M
+131 1481 V
+2612 2355 M
+-88 -897 V
+88 897 R
+2418 3947 L
+2612 2355 M
+2033 972 L
+579 1383 R
+37 1757 V
+2612 2355 M
+4473 667 L
+2612 2355 M
+3658 4013 L
+2612 2355 M
+921 318 V
+2612 2355 M
+2162 2198 L
+450 157 R
+5491 705 L
+2612 2355 M
+1336 381 V
+2612 2355 M
+4517 1903 L
+2612 2355 M
+4709 1222 L
+922 51 R
+-200 659 V
+200 -659 R
+2257 3859 L
+5631 1273 M
+1791 3083 L
+5631 1273 M
+1640 882 L
+3991 391 R
+1876 887 L
+3755 386 R
+1796 1709 L
+5631 1273 M
+3263 2141 L
+5631 1273 M
+261 2854 V
+5631 1273 M
+1980 2042 L
+5631 1273 M
+-99 283 V
+99 -283 R
+2052 447 L
+3579 826 R
+2524 1458 L
+5631 1273 M
+2418 3947 L
+5631 1273 M
+2033 972 L
+3598 301 R
+2649 4112 L
+5631 1273 M
+4473 667 L
+1158 606 R
+3658 4013 L
+5631 1273 M
+3533 2673 L
+5631 1273 M
+2162 2198 L
+5631 1273 M
+5491 705 L
+140 568 R
+3394 3820 L
+5631 1273 M
+2877 1208 L
+2754 65 R
+4517 1903 L
+2864 2792 M
+5431 1932 L
+2864 2792 M
+3360 1749 L
+2864 2792 M
+1791 3083 L
+2864 2792 M
+1640 882 L
+2864 2792 M
+399 -651 V
+-399 651 R
+5892 4127 L
+2864 2792 M
+-52 99 V
+52 -99 R
+1980 2042 L
+884 750 R
+5532 1556 L
+2864 2792 M
+2052 447 L
+812 2345 R
+2743 3836 L
+2864 2792 M
+2524 1458 L
+340 1334 R
+4031 983 L
+2864 2792 M
+2418 3947 L
+2864 2792 M
+2033 972 L
+831 1820 R
+2649 4112 L
+2864 2792 M
+4473 667 L
+2864 2792 M
+794 1221 V
+2864 2792 M
+669 -119 V
+-669 119 R
+2162 2198 L
+702 594 R
+1084 -56 V
+-1084 56 R
+13 -1584 V
+-13 1584 R
+4517 1903 L
+2864 2792 M
+4709 1222 L
+722 710 R
+3360 1749 L
+2071 183 R
+4598 3699 L
+5431 1932 M
+1876 887 L
+5431 1932 M
+1796 1709 L
+3635 223 R
+2812 2891 L
+5431 1932 M
+1980 2042 L
+5431 1932 M
+2052 447 L
+5431 1932 M
+2524 1458 L
+2907 474 R
+4031 983 L
+1400 949 R
+2418 3947 L
+5431 1932 M
+2033 972 L
+3398 960 R
+2649 4112 L
+5431 1932 M
+4473 667 L
+958 1265 R
+3658 4013 L
+5431 1932 M
+3533 2673 L
+5431 1932 M
+2162 2198 L
+5431 1932 M
+5491 705 L
+-60 1227 R
+3394 3820 L
+5431 1932 M
+2877 1208 L
+2554 724 R
+-914 -29 V
+914 29 R
+4709 1222 L
+3360 1749 M
+2257 3859 L
+3360 1749 M
+1791 3083 L
+3360 1749 M
+4598 3699 L
+3360 1749 M
+1640 882 L
+1720 867 R
+1876 887 L
+1484 862 R
+1796 1709 L
+1564 40 R
+-97 392 V
+97 -392 R
+5892 4127 L
+3360 1749 M
+2812 2891 L
+3360 1749 M
+2052 447 L
+3360 1749 M
+1350 653 V
+3360 1749 M
+2743 3836 L
+3360 1749 M
+2524 1458 L
+836 291 R
+2418 3947 L
+3360 1749 M
+2033 972 L
+1327 777 R
+2649 4112 L
+3360 1749 M
+4473 667 L
+3360 1749 M
+298 2264 V
+3360 1749 M
+173 924 V
+3360 1749 M
+2162 2198 L
+3360 1749 M
+588 987 V
+3360 1749 M
+34 2071 V
+3360 1749 M
+2877 1208 L
+483 541 R
+4709 1222 L
+2257 3859 M
+1791 3083 L
+466 776 R
+1640 882 L
+617 2977 R
+1876 887 L
+381 2972 R
+1796 1709 L
+461 2150 R
+3263 2141 L
+2257 3859 M
+3635 268 V
+2257 3859 M
+5532 1556 L
+2257 3859 M
+2052 447 L
+205 3412 R
+4710 2402 L
+2257 3859 M
+486 -23 V
+-486 23 R
+2524 1458 L
+2257 3859 M
+4031 983 L
+2257 3859 M
+161 88 V
+-161 -88 R
+3533 2673 L
+2257 3859 M
+2162 2198 L
+95 1661 R
+3948 2736 L
+2257 3859 M
+2877 1208 L
+2257 3859 M
+4517 1903 L
+1791 3083 M
+2807 616 V
+1791 3083 M
+1640 882 L
+151 2201 R
+5 -1374 V
+-5 1374 R
+3263 2141 L
+1791 3083 M
+2812 2891 L
+1791 3083 M
+5532 1556 L
+1791 3083 M
+2052 447 L
+1791 3083 M
+4710 2402 L
+1791 3083 M
+2524 1458 L
+1791 3083 M
+4031 983 L
+1791 3083 M
+2033 972 L
+1791 3083 M
+4473 667 L
+1791 3083 M
+1867 930 V
+1791 3083 M
+3533 2673 L
+1791 3083 M
+3948 2736 L
+1791 3083 M
+1603 737 V
+1791 3083 M
+2877 1208 L
+1791 3083 M
+4517 1903 L
+1791 3083 M
+4709 1222 L
+4598 3699 M
+1640 882 L
+4598 3699 M
+1876 887 L
+4598 3699 M
+1796 1709 L
+4598 3699 M
+3263 2141 L
+4598 3699 M
+1980 2042 L
+4598 3699 M
+5532 1556 L
+4598 3699 M
+4710 2402 L
+4598 3699 M
+2743 3836 L
+4598 3699 M
+2418 3947 L
+4598 3699 M
+3533 2673 L
+4598 3699 M
+2162 2198 L
+4598 3699 M
+5491 705 L
+4598 3699 M
+2877 1208 L
+4598 3699 M
+4709 1222 L
+1640 882 M
+236 5 V
+-236 -5 R
+156 827 V
+1640 882 M
+340 1160 V
+1640 882 M
+4710 2402 L
+1640 882 M
+2743 3836 L
+1640 882 M
+4031 983 L
+1640 882 M
+2649 4112 L
+1640 882 M
+4473 667 L
+1640 882 M
+3658 4013 L
+1640 882 M
+3533 2673 L
+1640 882 M
+522 1316 V
+1640 882 M
+5491 705 L
+1640 882 M
+1237 326 V
+1640 882 M
+4517 1903 L
+1640 882 M
+3069 340 V
+1876 887 M
+5892 4127 L
+1876 887 M
+104 1155 V
+1876 887 M
+3656 669 V
+1876 887 M
+2052 447 L
+1876 887 M
+867 2949 V
+1876 887 M
+2155 96 V
+1876 887 M
+157 85 V
+1876 887 M
+773 3225 V
+1876 887 M
+4473 667 L
+1876 887 M
+3658 4013 L
+1876 887 M
+3533 2673 L
+1876 887 M
+286 1311 V
+1876 887 M
+5491 705 L
+1876 887 M
+3948 2736 L
+1876 887 M
+3394 3820 L
+1876 887 M
+1001 321 V
+1796 1709 M
+1467 432 V
+1796 1709 M
+5892 4127 L
+1796 1709 M
+2812 2891 L
+1796 1709 M
+184 333 V
+1796 1709 M
+5532 1556 L
+1796 1709 M
+2052 447 L
+1796 1709 M
+2914 693 V
+1796 1709 M
+947 2127 V
+1796 1709 M
+728 -251 V
+-728 251 R
+4031 983 L
+1796 1709 M
+2033 972 L
+-237 737 R
+1737 964 V
+1796 1709 M
+366 489 V
+1796 1709 M
+5491 705 L
+1796 1709 M
+3948 2736 L
+1796 1709 M
+3394 3820 L
+1796 1709 M
+2877 1208 L
+1796 1709 M
+2721 194 V
+1796 1709 M
+4709 1222 L
+3263 2141 M
+5892 4127 L
+3263 2141 M
+1980 2042 L
+1283 99 R
+5532 1556 L
+3263 2141 M
+2052 447 L
+3263 2141 M
+1447 261 V
+3263 2141 M
+2743 3836 L
+3263 2141 M
+2524 1458 L
+739 683 R
+4031 983 L
+3263 2141 M
+2418 3947 L
+3263 2141 M
+2033 972 L
+3263 2141 M
+2649 4112 L
+3263 2141 M
+4473 667 L
+3263 2141 M
+270 532 V
+3263 2141 M
+-1101 57 V
+1101 -57 R
+5491 705 L
+3263 2141 M
+131 1679 V
+3263 2141 M
+4517 1903 L
+3263 2141 M
+4709 1222 L
+5892 4127 M
+2812 2891 L
+5892 4127 M
+1980 2042 L
+5892 4127 M
+5532 1556 L
+360 2571 R
+2052 447 L
+5892 4127 M
+4710 2402 L
+5892 4127 M
+2743 3836 L
+3149 291 R
+4031 983 L
+5892 4127 M
+2418 3947 L
+3474 180 R
+4473 667 L
+5892 4127 M
+3658 4013 L
+2234 114 R
+5491 705 L
+401 3422 R
+3394 3820 L
+2498 307 R
+2877 1208 L
+5892 4127 M
+4709 1222 L
+2812 2891 M
+1980 2042 L
+832 849 R
+2052 447 L
+760 2444 R
+4710 2402 L
+2812 2891 M
+-69 945 V
+69 -945 R
+2524 1458 L
+288 1433 R
+4031 983 L
+2812 2891 M
+2418 3947 L
+2812 2891 M
+2649 4112 L
+2812 2891 M
+4473 667 L
+2812 2891 M
+721 -218 V
+-721 218 R
+5491 705 L
+2812 2891 M
+582 929 V
+2812 2891 M
+4517 1903 L
+2812 2891 M
+4709 1222 L
+1980 2042 M
+5532 1556 L
+1980 2042 M
+2052 447 L
+-72 1595 R
+2730 360 V
+1980 2042 M
+544 -584 V
+-544 584 R
+438 1905 V
+1980 2042 M
+2033 972 L
+-53 1070 R
+4473 667 L
+1980 2042 M
+3658 4013 L
+1980 2042 M
+182 156 V
+1980 2042 M
+1968 694 V
+1980 2042 M
+3394 3820 L
+1980 2042 M
+4517 1903 L
+1980 2042 M
+4709 1222 L
+823 334 R
+2052 447 L
+5532 1556 M
+-822 846 V
+822 -846 R
+2743 3836 L
+5532 1556 M
+4031 983 L
+1501 573 R
+2033 972 L
+3499 584 R
+4473 667 L
+1059 889 R
+3658 4013 L
+5532 1556 M
+2162 2198 L
+5532 1556 M
+5491 705 L
+41 851 R
+3948 2736 L
+5532 1556 M
+3394 3820 L
+5532 1556 M
+2877 1208 L
+2655 348 R
+4517 1903 L
+2052 447 M
+4710 2402 L
+2052 447 M
+472 1011 V
+2052 447 M
+4031 983 L
+2052 447 M
+366 3500 V
+2052 447 M
+597 3665 V
+2052 447 M
+4473 667 L
+2052 447 M
+3658 4013 L
+2052 447 M
+3533 2673 L
+2052 447 M
+5491 705 L
+2052 447 M
+3948 2736 L
+2052 447 M
+3394 3820 L
+2052 447 M
+825 761 V
+2052 447 M
+2657 775 V
+1 1180 R
+2743 3836 L
+4710 2402 M
+2524 1458 L
+2186 944 R
+4031 983 L
+679 1419 R
+2418 3947 L
+4710 2402 M
+2033 972 L
+4710 2402 M
+4473 667 L
+237 1735 R
+3658 4013 L
+4710 2402 M
+3533 2673 L
+4710 2402 M
+2162 2198 L
+2548 204 R
+5491 705 L
+4710 2402 M
+-762 334 V
+762 -334 R
+3394 3820 L
+4710 2402 M
+2877 1208 L
+4710 2402 M
+4517 1903 L
+2743 3836 M
+-325 111 V
+325 -111 R
+2033 972 L
+710 2864 R
+-94 276 V
+94 -276 R
+4473 667 L
+2743 3836 M
+2162 2198 L
+581 1638 R
+5491 705 L
+2743 3836 M
+3948 2736 L
+2743 3836 M
+2877 1208 L
+2743 3836 M
+4709 1222 L
+2524 1458 M
+4031 983 L
+2524 1458 M
+125 2654 V
+2524 1458 M
+4473 667 L
+2524 1458 M
+3658 4013 L
+2524 1458 M
+3533 2673 L
+2524 1458 M
+5491 705 L
+2524 1458 M
+870 2362 V
+2524 1458 M
+353 -250 V
+-353 250 R
+1993 445 V
+2524 1458 M
+4709 1222 L
+4031 983 M
+2418 3947 L
+4031 983 M
+2033 972 L
+1998 11 R
+2649 4112 L
+4031 983 M
+4473 667 L
+4031 983 M
+3658 4013 L
+4031 983 M
+2162 2198 L
+4031 983 M
+3394 3820 L
+-976 127 R
+2033 972 L
+385 2975 R
+231 165 V
+2418 3947 M
+4473 667 L
+2418 3947 M
+1240 66 V
+2418 3947 M
+2162 2198 L
+256 1749 R
+5491 705 L
+2418 3947 M
+976 -127 V
+-976 127 R
+4517 1903 L
+2418 3947 M
+4709 1222 L
+2033 972 M
+3658 4013 L
+2033 972 M
+129 1226 V
+2033 972 M
+5491 705 L
+2033 972 M
+3948 2736 L
+2033 972 M
+3394 3820 L
+2033 972 M
+844 236 V
+2033 972 M
+2676 250 V
+2649 4112 M
+4473 667 L
+2649 4112 M
+1009 -99 V
+-1009 99 R
+3533 2673 L
+2649 4112 M
+2162 2198 L
+487 1914 R
+745 -292 V
+-745 292 R
+2877 1208 L
+2649 4112 M
+4517 1903 L
+4473 667 M
+3658 4013 L
+4473 667 M
+1018 38 V
+4473 667 M
+2877 1208 L
+781 2805 R
+3533 2673 L
+125 1340 R
+2162 2198 L
+3658 4013 M
+5491 705 L
+3658 4013 M
+3948 2736 L
+3658 4013 M
+4517 1903 L
+3658 4013 M
+4709 1222 L
+3533 2673 M
+2162 2198 L
+1371 475 R
+5491 705 L
+3533 2673 M
+415 63 V
+-415 -63 R
+3394 3820 L
+3533 2673 M
+2877 1208 L
+656 1465 R
+984 -770 V
+-984 770 R
+4709 1222 L
+2162 2198 M
+5491 705 L
+2162 2198 M
+1786 538 V
+2162 2198 M
+715 -990 V
+5491 705 M
+3948 2736 L
+5491 705 M
+4517 1903 L
+-569 833 R
+3394 3820 L
+3948 2736 M
+2877 1208 L
+517 2612 R
+2877 1208 L
+517 2612 R
+4517 1903 L
+3394 3820 M
+4709 1222 L
+2877 1208 M
+1640 695 V
+% End plot #1
+% Begin plot #2
+1.000 UP
+stroke
+1.000 UL
+LT1
+0.00 0.00 0.00 C /times findfont 140 scalefont setfont
+0.817 UP
+3338 1028 CircleF
+0.366 UP
+5116 3815 CircleF
+0.829 UP
+2018 2660 CircleF
+0.774 UP
+3584 1217 CircleF
+0.512 UP
+4419 2972 CircleF
+0.756 UP
+3841 1187 CircleF
+0.701 UP
+2690 3751 CircleF
+0.707 UP
+2661 3920 CircleF
+0.762 UP
+2813 2163 CircleF
+0.793 UP
+2044 4462 CircleF
+0.787 UP
+4859 473 CircleF
+1.000 UP
+1604 925 CircleF
+0.585 UP
+3513 4364 CircleF
+0.457 UP
+4840 3122 CircleF
+0.543 UP
+4674 2459 CircleF
+0.640 UP
+3878 2234 CircleF
+0.774 UP
+2612 2355 CircleF
+0.652 UP
+5631 1273 CircleF
+0.713 UP
+2864 2792 CircleF
+0.567 UP
+5431 1932 CircleF
+0.738 UP
+3360 1749 CircleF
+0.762 UP
+2257 3859 CircleF
+0.848 UP
+1791 3083 CircleF
+0.439 UP
+4598 3699 CircleF
+1.000 UP
+1640 882 CircleF
+0.976 UP
+1876 887 CircleF
+0.921 UP
+1796 1709 CircleF
+0.713 UP
+3263 2141 CircleF
+0.250 UP
+5892 4127 CircleF
+0.713 UP
+2812 2891 CircleF
+0.872 UP
+1980 2042 CircleF
+0.616 UP
+5532 1556 CircleF
+1.000 UP
+2052 447 CircleF
+0.543 UP
+4710 2402 CircleF
+0.695 UP
+2743 3836 CircleF
+0.854 UP
+2524 1458 CircleF
+0.762 UP
+4031 983 CircleF
+0.738 UP
+2418 3947 CircleF
+0.951 UP
+2033 972 CircleF
+0.707 UP
+2649 4112 CircleF
+0.774 UP
+4473 667 CircleF
+0.567 UP
+3658 4013 CircleF
+0.640 UP
+3533 2673 CircleF
+0.841 UP
+2162 2198 CircleF
+0.732 UP
+5491 705 CircleF
+0.585 UP
+3948 2736 CircleF
+0.604 UP
+3394 3820 CircleF
+0.841 UP
+2877 1208 CircleF
+0.616 UP
+4517 1903 CircleF
+0.689 UP
+4709 1222 CircleF
+% End plot #2
+% Begin plot #3
+1.000 UL
+LT0
+0.13 0.55 0.13 C /times findfont 140 scalefont setfont
+3338 1028 M
+246 189 V
+3338 1028 M
+503 159 V
+5116 3815 M
+776 312 V
+5116 3815 M
+3658 4013 L
+2018 2660 M
+795 -497 V
+-795 497 R
+-38 -618 V
+3584 1217 M
+-224 532 V
+4419 2972 M
+179 727 V
+4419 2972 M
+3948 2736 L
+3841 1187 M
+4031 983 L
+2690 3751 M
+53 85 V
+-53 -85 R
+704 69 V
+-733 100 R
+82 -84 V
+-82 84 R
+733 -100 V
+2813 2163 M
+-201 192 V
+2044 4462 M
+213 -603 V
+-213 603 R
+374 -515 V
+4859 473 M
+4473 667 L
+4859 473 M
+-150 749 V
+1604 925 M
+36 -43 V
+-36 43 R
+2052 447 L
+3513 4364 M
+4598 3699 L
+3513 4364 M
+2649 4112 L
+4840 3122 M
+4674 2459 L
+166 663 R
+5892 4127 L
+4674 2459 M
+36 -57 V
+3878 2234 M
+-615 -93 V
+615 93 R
+-345 439 V
+2612 2355 M
+2162 2198 L
+5631 1273 M
+-99 283 V
+99 -283 R
+5491 705 L
+2864 2792 M
+1791 3083 L
+2864 2792 M
+-52 99 V
+5431 1932 M
+-914 -29 V
+914 29 R
+4709 1222 L
+3360 1749 M
+-97 392 V
+2257 3859 M
+161 88 V
+1791 3083 M
+2812 2891 L
+1640 882 M
+236 5 V
+157 85 V
+-237 737 R
+728 -251 V
+-728 251 R
+2033 972 L
+-53 1070 R
+182 156 V
+5532 1556 M
+5491 705 L
+2052 447 M
+825 761 V
+4710 2402 M
+4517 1903 L
+2524 1458 M
+353 -250 V
+4031 983 M
+4473 667 L
+2649 4112 M
+1009 -99 V
+3533 2673 M
+415 63 V
+% End plot #3
+% Begin plot #4
+stroke
+0.500 UL
+LT0
+1.00 0.00 0.00 C /times findfont 140 scalefont setfont
+0.500 UL
+LT0
+1.00 0.00 0.00 C 3338 1028 M
+stroke
+LT0
+1.00 0.00 0.00 C 5116 3815 M
+stroke
+LT0
+1.00 0.00 0.00 C 2018 2660 M
+stroke
+LT0
+1.00 0.00 0.00 C 3584 1217 M
+stroke
+LT0
+1.00 0.00 0.00 C 4419 2972 M
+stroke
+LT0
+1.00 0.00 0.00 C 3841 1187 M
+stroke
+LT0
+1.00 0.00 0.00 C 2690 3751 M
+stroke
+LT0
+1.00 0.00 0.00 C 2661 3920 M
+stroke
+LT0
+1.00 0.00 0.00 C 2813 2163 M
+stroke
+LT0
+1.00 0.00 0.00 C 2044 4462 M
+stroke
+LT0
+1.00 0.00 0.00 C 4859 473 M
+stroke
+LT0
+1.00 0.00 0.00 C 1604 925 M
+stroke
+LT0
+1.00 0.00 0.00 C 3513 4364 M
+stroke
+LT0
+1.00 0.00 0.00 C 4840 3122 M
+stroke
+LT0
+1.00 0.00 0.00 C 4674 2459 M
+stroke
+LT0
+1.00 0.00 0.00 C 3878 2234 M
+stroke
+LT0
+1.00 0.00 0.00 C 2612 2355 M
+stroke
+LT0
+1.00 0.00 0.00 C 5631 1273 M
+stroke
+LT0
+1.00 0.00 0.00 C 2864 2792 M
+stroke
+LT0
+1.00 0.00 0.00 C 5431 1932 M
+stroke
+LT0
+1.00 0.00 0.00 C 3360 1749 M
+stroke
+LT0
+1.00 0.00 0.00 C 2257 3859 M
+stroke
+LT0
+1.00 0.00 0.00 C 1791 3083 M
+stroke
+LT0
+1.00 0.00 0.00 C 4598 3699 M
+stroke
+LT0
+1.00 0.00 0.00 C 1640 882 M
+stroke
+LT0
+1.00 0.00 0.00 C 1876 887 M
+stroke
+LT0
+1.00 0.00 0.00 C 1796 1709 M
+stroke
+LT0
+1.00 0.00 0.00 C 3263 2141 M
+stroke
+LT0
+1.00 0.00 0.00 C 5892 4127 M
+stroke
+LT0
+1.00 0.00 0.00 C 2812 2891 M
+stroke
+LT0
+1.00 0.00 0.00 C 1980 2042 M
+stroke
+LT0
+1.00 0.00 0.00 C 5532 1556 M
+stroke
+LT0
+1.00 0.00 0.00 C 2052 447 M
+stroke
+LT0
+1.00 0.00 0.00 C 4710 2402 M
+stroke
+LT0
+1.00 0.00 0.00 C 2743 3836 M
+stroke
+LT0
+1.00 0.00 0.00 C 2524 1458 M
+stroke
+LT0
+1.00 0.00 0.00 C 4031 983 M
+stroke
+LT0
+1.00 0.00 0.00 C 2418 3947 M
+stroke
+LT0
+1.00 0.00 0.00 C 2033 972 M
+stroke
+LT0
+1.00 0.00 0.00 C 2649 4112 M
+stroke
+LT0
+1.00 0.00 0.00 C 4473 667 M
+stroke
+LT0
+1.00 0.00 0.00 C 3658 4013 M
+stroke
+LT0
+1.00 0.00 0.00 C 3533 2673 M
+stroke
+LT0
+1.00 0.00 0.00 C 2162 2198 M
+stroke
+LT0
+1.00 0.00 0.00 C 5491 705 M
+stroke
+LT0
+1.00 0.00 0.00 C 3948 2736 M
+stroke
+LT0
+1.00 0.00 0.00 C 3394 3820 M
+stroke
+LT0
+1.00 0.00 0.00 C 2877 1208 M
+stroke
+LT0
+1.00 0.00 0.00 C 4517 1903 M
+stroke
+LT0
+1.00 0.00 0.00 C 4709 1222 M
+% End plot #4
+stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 4619 N
+0 -4339 V
+4339 0 V
+0 4339 V
+-4339 0 V
+Z stroke
+1.000 UP
+1.000 UL
+LTb
+LCb setrgbcolor
+stroke
+grestore
+end
+showpage
+%%Trailer
+%%DocumentFonts: times

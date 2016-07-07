@@ -1,8 +1,23 @@
 set terminal postscript eps color font "times"
-set output 'plot.eps'
 unset key
 set size ratio -1 1,1
-set title "Instancia do PCDCP"
 set xrange [0:1]
 set yrange [0:1]
-plot 'vertices.txt' u ($1):($2):($3) with points pt 7 ps variable lc rgb "black", 'edges.txt' with lines lt 0.5 lw 0.5 lc rgb "light-gray", 'solutionEdges.txt' with lines lt 1 lw 1 lc rgb "forest-green", 'solutionVertices.txt' with circles lt 1 lw 0.5 rgb "red";
+do for [n in "10 20 50 100 200"] {
+	do for [d in "03 05 07"] {
+		do for [k in "0 2 4 6 8 10"] {
+			do for [t in "0 1"] {
+				set output "../linearProgram/output/N".n."D".d."K".k."T".t."/plot.eps"
+				set title "Instancia do PCDCP (N = ".n.";D = ".d.";K = ".k.";T = ".t.")"
+				vertices = "../linearProgram/output/N".n."D".d."K".k."T".t."/vertices.txt"
+				edges = "../linearProgram/output/N".n."D".d."K".k."T".t."/edges.txt"
+				solutionEdges = "../linearProgram/output/N".n."D".d."K".k."T".t."/solutionEdges.txt"
+				solutionVertices = "../linearProgram/output/N".n."D".d."K".k."T".t."/solutionVertices.txt"
+				plot edges with lines linetype 1 linewidth 0.5 linecolor rgb "#80808080", \
+				     vertices using ($1):($2):($3) with points pointtype 7 pointsize variable linecolor rgb "black", \
+                     solutionEdges with lines linetype 1 linewidth 1 linecolor rgb "forest-green", \
+                     solutionVertices with circles linetype 1 linewidth 0.5 linecolor rgb "red"
+			}
+		}
+	}
+}
