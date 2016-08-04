@@ -10,21 +10,6 @@ using namespace std;
 
 typedef unsigned long int ulint;
 
-// fazer dois tipos de instancia
-// uma escolhendo o ponto mais perto do centro como referencia
-// o outro escolhendo o ponto mais afastado do centro
-// a penalidade dos nós é a distancia a esse nó referencia -- feito (acho)
-
-// gerar instâncias com densidades {0.3, 0.5, 0.7}
-// k = 0, 2, 4, 6, 8, 10
-
-// fazer graficos das soluções, no estilo do trabalho do lucas
-// colocar também um cículo/disco de raio proporcional à penalidade do nó em volta dos nós
-
-
-// trabalhar com vizinhança com grafo completo -- parte do gerador feita (acho)
-// mas na hora de definir a rota, não utilizar o grafo completo
-
 int main (int argc, char * argv[]) {
     int n, k, t;
     double density, m;

@@ -81,6 +81,7 @@ int main (int argc, char * argv[]) {
             inputFile >> u >> v >> w;
         }
 
+        /*
         // reading the graph's edges and printing its coordinates
         ofstream edgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "/edges.txt");
         for (int e = 0; e < m; e++) {
@@ -92,6 +93,7 @@ int main (int argc, char * argv[]) {
             edgesFile << vertices[v].first.second << endl << endl;
         }
         edgesFile.close();
+        */
 
         ulint nSolution, mSolution;
         double costSolution;
