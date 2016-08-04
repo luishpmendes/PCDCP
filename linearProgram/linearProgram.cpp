@@ -120,7 +120,7 @@ void bfs (vector < list < pair <ulint, ulint> > > adj, map < pair <ulint, ulint>
 }
 
 class subtourelim: public GRBCallback {
-    public:
+    public :
         vector <GRBVar> y;
         vector <GRBVar> x;
         ulint n;
@@ -138,7 +138,7 @@ class subtourelim: public GRBCallback {
             mE = _mE;
             u = _u;
         }
-    protected:
+    protected :
         // let C be the cycle that contains u, with n1 vertices
         // let S = n - n1
         // the sum of the edges that are not in C must be less than S-1
@@ -192,12 +192,11 @@ class subtourelim: public GRBCallback {
                             cyclesEdges[edgeCycle[e]].insert(e);
                         }
                     }
-
                     for (ulint c = 1; c < numCycles; c++) {
                         GRBLinExpr expr = 0;
                         for (set <ulint> ::iterator it = cyclesEdges[c].begin(); it != cyclesEdges[c].end(); it++) {
                             ulint e = *it;
-                            expr += x[e];//???ok?
+                            expr += x[e];
                         }
                         addLazy(expr <= cyclesVertices[c].size() - 1);
                     }
@@ -249,16 +248,7 @@ int main () {
     }
 
     vector < set <ulint> > N = neighbourhoods (W, k);
-/*
-    for (ulint v = 0; v < n; v++) {
-        cout << "N[" << v << "] = {";
-        for (set <ulint> :: iterator it = N[v].begin(); it != N[v].end(); it++) {
-            ulint u = *it;
-            cout << u << ", ";
-        }
-        cout << "\b\b}" << endl;
-    }
-*/
+
     bool flag = false;
     ulint bestSolutionCost;
     set <ulint> bestSolutionVectices;
