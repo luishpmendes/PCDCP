@@ -211,11 +211,11 @@ class subtourelim: public GRBCallback {
 };
 
 int main () {
-    ulint n, mComplete, m, k;
-    cin >> n >> mComplete >> m >> k;
+    ulint n, mComplete, m, k, r;
+    cin >> n >> mComplete >> m >> k >> r;
 
     vector <ulint> penalty (n); // vector with de penalties of each vectex
-    matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complet graph
+    matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complete graph
     vector < list < pair <ulint, ulint> > > adj (n); // adjacency lists for the graph
 
     for (ulint i = 0; i < n; i++) {
@@ -230,6 +230,7 @@ int main () {
     vector < pair < pair <ulint, ulint> , ulint> > E (m); // vector of edges with the format ((u, v), w)
     map < pair <ulint, ulint>, ulint> mE; // map an edge to its ID
 
+    // reading complete graph
     for (ulint e = 0; e < mComplete; e++) {
         ulint u, v, w;
         cin >> u >> v >> w;
@@ -237,6 +238,7 @@ int main () {
         W[v][u] = w;
     }
 
+    // reading graph
     for (ulint e = 0; e < m; e++) {
         ulint u, v, w;
         cin >> u >> v >> w;
@@ -254,111 +256,109 @@ int main () {
     set <ulint> bestSolutionVectices;
     set <ulint> bestSolutionEdges;
 
-    for (ulint u = 0; u < n; u++) {
-        try {
-            GRBEnv env = GRBEnv();
+    try {
+        GRBEnv env = GRBEnv();
 
-            env.set(GRB_IntParam_OutputFlag, 0);
+        env.set(GRB_IntParam_OutputFlag, 0);
 
-            GRBModel model = GRBModel(env);
+        GRBModel model = GRBModel(env);
 
-            vector <GRBVar> y (n);
+        vector <GRBVar> y (n);
 
-            // ∀ v ∈ V
-            for (ulint v = 0; v < n; v++) {
-                // y_v ∈ {0.0, 1.0}
-                y[v] = model.addVar(0.0, 1.0, 0.0, GRB_BINARY, "y_" + itos(v));
-            }
-
-            vector <GRBVar> x (m);
-
-            // ∀ (u, v) ∈ E
-            for (ulint e = 0; e < m; e++) {
-                ulint u, v;
-                u = E[e].first.first;
-                v = E[e].first.second;
-                // y_u_v ∈ {0.0, 1.0}
-                x[e] = model.addVar(0.0, 1.0, 0.0, GRB_BINARY, "x_" + itos(u) + "_" + itos(v));
-            }
-
-            model.update();
-
-            GRBLinExpr obj = 0.0;
-
-            // obj = ∑ ce * ye
-            for (ulint e = 0; e < m; e++) {
-                ulint w;
-                w = E[e].second;
-                obj += w * x[e];
-            }
-
-            // obj += ∑ πv * xv
-            for (ulint v = 0; v < n; v++) {
-                obj += penalty[v] * (1.0 - y[v]);
-            }
-
-            model.setObjective(obj, GRB_MINIMIZE);
-
-            // yu == 1
-            model.addConstr(y[u] == 1.0, "c_0");
-
-            // dominance
-            // ∀ v ∈ V
-            for (ulint v = 0; v < n; v++) {
-                // ∑ yw >= 1 , w ∈ Nk(v)
-                GRBLinExpr constr = 0.0;
-                for (set <ulint> :: iterator it = N[v].begin(); it != N[v].end(); it++) {
-                    ulint w = *it;
-                    constr += y[w];
-                }
-                model.addConstr(constr >= 1.0, "c_1_" + itos(v));
-            }
-
-            // each vertex must have exactly two edges adjacent to itself
-            // ∀ v ∈ V
-            for (ulint v = 0; v < n; v++) {
-                // ∑ xe == 2 * yv , e ∈ δ({v})
-                GRBLinExpr constr = 0.0;
-                for (list < pair <ulint, ulint> >::iterator it = adj[v].begin(); it != adj[v].end(); it++) {
-                    ulint w = (*it).first; // destination
-                    ulint e = mE[make_pair(v, w)];
-                    constr += x[e];
-                }
-                model.addConstr(constr == 2.0 * y[v], "c_2_" + itos(v));
-            }
-
-            subtourelim cb = subtourelim(y, x, n, m, E, mE, u);
-            model.setCallback(&cb);
-
-            model.optimize();
-
-            if (model.get(GRB_IntAttr_SolCount) > 0) {
-                if (!flag || model.get(GRB_DoubleAttr_ObjVal) < bestSolutionCost) {
-                    flag = true;
-                    bestSolutionCost = model.get(GRB_DoubleAttr_ObjVal);
-                    bestSolutionVectices.clear();
-                    for (ulint v = 0; v < n; v++) {
-                        if (y[v].get(GRB_DoubleAttr_X) == 1) {
-                            bestSolutionVectices.insert(v);
-                        }
-                    }
-                    bestSolutionEdges.clear();
-                    for (ulint e = 0; e < m; e++) {
-                        if (x[e].get(GRB_DoubleAttr_X) == 1) {
-                            bestSolutionEdges.insert(e);
-                        }
-                    }
-                }
-            } else {
-                cout << "Solution not found." << endl;
-            }
-
-        } catch (GRBException e) {
-            cout << "Error code = " << e.getErrorCode() << endl;
-            cout << e.getMessage() << endl;
-        } catch (...) {
-            cout << "Exception during opstimisation" << endl;
+        // ∀ v ∈ V
+        for (ulint v = 0; v < n; v++) {
+            // y_v ∈ {0.0, 1.0}
+            y[v] = model.addVar(0.0, 1.0, 0.0, GRB_BINARY, "y_" + itos(v));
         }
+
+        vector <GRBVar> x (m);
+
+        // ∀ (u, v) ∈ E
+        for (ulint e = 0; e < m; e++) {
+            ulint u, v;
+            u = E[e].first.first;
+            v = E[e].first.second;
+            // y_u_v ∈ {0.0, 1.0}
+            x[e] = model.addVar(0.0, 1.0, 0.0, GRB_BINARY, "x_" + itos(u) + "_" + itos(v));
+        }
+
+        model.update();
+
+        GRBLinExpr obj = 0.0;
+
+        // obj = ∑ ce * ye
+        for (ulint e = 0; e < m; e++) {
+            ulint w;
+            w = E[e].second;
+            obj += w * x[e];
+        }
+
+        // obj += ∑ πv * xv
+        for (ulint v = 0; v < n; v++) {
+            obj += penalty[v] * (1.0 - y[v]);
+        }
+
+        model.setObjective(obj, GRB_MINIMIZE);
+
+        // yu == 1
+        model.addConstr(y[r] == 1.0, "c_0");
+
+        // dominance
+        // ∀ v ∈ V
+        for (ulint v = 0; v < n; v++) {
+            // ∑ yw >= 1 , w ∈ Nk(v)
+            GRBLinExpr constr = 0.0;
+            for (set <ulint> :: iterator it = N[v].begin(); it != N[v].end(); it++) {
+                ulint w = *it;
+                constr += y[w];
+            }
+            model.addConstr(constr >= 1.0, "c_1_" + itos(v));
+        }
+
+        // each vertex must have exactly two edges adjacent to itself
+        // ∀ v ∈ V
+        for (ulint v = 0; v < n; v++) {
+            // ∑ xe == 2 * yv , e ∈ δ({v})
+            GRBLinExpr constr = 0.0;
+            for (list < pair <ulint, ulint> >::iterator it = adj[v].begin(); it != adj[v].end(); it++) {
+                ulint w = (*it).first; // destination
+                ulint e = mE[make_pair(v, w)];
+                constr += x[e];
+            }
+            model.addConstr(constr == 2.0 * y[v], "c_2_" + itos(v));
+        }
+
+        subtourelim cb = subtourelim(y, x, n, m, E, mE, r);
+        model.setCallback(&cb);
+
+        model.optimize();
+
+        if (model.get(GRB_IntAttr_SolCount) > 0) {
+            if (!flag || model.get(GRB_DoubleAttr_ObjVal) < bestSolutionCost) {
+                flag = true;
+                bestSolutionCost = model.get(GRB_DoubleAttr_ObjVal);
+                bestSolutionVectices.clear();
+                for (ulint v = 0; v < n; v++) {
+                    if (y[v].get(GRB_DoubleAttr_X) == 1) {
+                        bestSolutionVectices.insert(v);
+                    }
+                }
+                bestSolutionEdges.clear();
+                for (ulint e = 0; e < m; e++) {
+                    if (x[e].get(GRB_DoubleAttr_X) == 1) {
+                        bestSolutionEdges.insert(e);
+                    }
+                }
+            }
+        } else {
+            cout << "Solution not found." << endl;
+        }
+
+    } catch (GRBException e) {
+        cout << "Error code = " << e.getErrorCode() << endl;
+        cout << e.getMessage() << endl;
+    } catch (...) {
+        cout << "Exception during opstimisation" << endl;
     }
 
     cout << bestSolutionVectices.size() << ' ' << bestSolutionEdges.size() << ' ' << bestSolutionCost << endl;
