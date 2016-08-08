@@ -96,7 +96,7 @@ int main (int argc, char * argv[]) {
     } else {
         unsigned rootSeed = chrono::system_clock::now().time_since_epoch().count();
         default_random_engine rootGenerator (rootSeed);
-        uniform_int_distribution <double> rootDistribution (0, n-1);
+        uniform_int_distribution <int> rootDistribution (0, n-1);
         root = rootDistribution(rootGenerator);
     }
 
