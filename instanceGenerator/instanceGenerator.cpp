@@ -11,16 +11,17 @@ using namespace std;
 typedef unsigned long int ulint;
 
 int main (int argc, char * argv[]) {
-    int n, k, t;
+    int n, k, t, r;
     double density, m;
 
-    if (argc == 5) {
+    if (argc == 6) {
         n = atoi(argv[1]);
         density = atof(argv[2]);
         k = atoi(argv[3]);
         t = atoi(argv[4]);
+        r = atoi(argv[5]);
     } else {
-        cin >> n >> density >> k >> t;
+        cin >> n >> density >> k >> t >> r;
     }
 
     double minDensity = 0.0;
@@ -29,6 +30,7 @@ int main (int argc, char * argv[]) {
     }
     double maxDensity = 1.0;
 
+    // validate density value
     if (density < minDensity) {
         density = minDensity;
     }
@@ -54,14 +56,14 @@ int main (int argc, char * argv[]) {
     vector < pair <double, double> > points (n);
     vector <int> vAux (n);
 
-    // number of vertices, number of edges in the complete graph, number of 'chosen' edges and neighborhood radio
-    cout << n << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << k << endl;
-
     int closest = 0;
     int distClosest = 200;
     int farthest = 0;
     int distFarthest = 0;
+    int root;
 
+    // creating points array
+    // calculating the vertices that are closest and farthest from the middle (0.5, 0.5)
     for (int i = 0; i < n; i++) {
         double x = xDistribution(xGenerator);
         double y = yDistribution(yGenerator);
@@ -80,10 +82,26 @@ int main (int argc, char * argv[]) {
         vAux[i] = i;
     }
 
+    // setting reference point for vertices penalty
     int referencePoint = closest;
     if (t == 1) {
         referencePoint = farthest;
     }
+
+    // setting root vertex
+    if (r == 0) {
+        root = closest;
+    } else if (r == 0) {
+        root = farthest;
+    } else {
+        unsigned rootSeed = chrono::system_clock::now().time_since_epoch().count();
+        default_random_engine rootGenerator (rootSeed);
+        uniform_int_distribution <double> rootDistribution (0, n-1);
+        root = rootDistribution(rootGenerator);
+    }
+
+    // number of vertices, number of edges in the complete graph, number of 'chosen' edges and neighborhood radio
+    cout << n << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << k << ' ' << root << endl;
 
     // printing vertices' coordinates and its penalty
     for (int i = 0; i < n; i++) {
@@ -124,8 +142,8 @@ int main (int argc, char * argv[]) {
     }
     chosenEdges.insert(make_pair(vAux[vAux.size() - 1], vAux[0]));
 
+    // put all edges in a array and shuffle its
     vector < pair <int, int> > vAllEdges (allEdges.begin(), allEdges.end());
-
     shuffle(vAllEdges.begin(), vAllEdges.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
 
     // inserting random edges in the graph until it reaches the desired density
