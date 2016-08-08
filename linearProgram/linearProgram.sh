@@ -10,8 +10,11 @@ do
         do
             for t in 0 1
             do
-                mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t;
-                ./linearProgram < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"/result.out";
+                for r in 0 1 2
+                do
+                    mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"R"$r;
+                    ./linearProgram < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"R"$r".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"/result.out";
+                done
             done
         done
     done

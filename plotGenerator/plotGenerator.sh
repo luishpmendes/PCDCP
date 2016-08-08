@@ -9,12 +9,15 @@ do
         do
             for t in 0 1
             do
-                rm "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"/vertices.txt";
-                rm "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"/edges.txt";
-                rm "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"/solutionVertices.txt";
-                rm "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"/solutionEdges.txt";
-                rm "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"/plot.eps";
-                ./plotGenerator $path $n ${d//.} $k $t;
+                for r in 0 1 2
+                do
+                    rm "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"/vertices.txt";
+                    rm "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"/edges.txt";
+                    rm "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"/solutionVertices.txt";
+                    rm "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"/solutionEdges.txt";
+                    rm "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"/plot.eps";
+                    ./plotGenerator $path $n ${d//.} $k $t $r;
+                done
             done
         done
     done
