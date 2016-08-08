@@ -10,7 +10,10 @@ do
         do
             for t in 0 1
             do
-                ./instanceGenerator $n $d $k $t > "../input/instanceN"$n"D"${d//.}"K"$k"T"$t".in";
+                for r in 0 1 2
+                do
+                    ./instanceGenerator $n $d $k $t > "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"R"$r".in";
+                done
             done
         done
     done
