@@ -1,7 +1,7 @@
-INC = /opt/gurobi651/linux64/include/
+INC = /opt/gurobi652/linux64/include/
 CPP = g++
 CARGS = -Wall -m64 -g -O0 -fno-inline
-CPPLIB = -L/opt/gurobi651/linux64/lib/ -lgurobi_c++ -lgurobi65
+CPPLIB = -L/opt/gurobi652/linux64/lib/ -lgurobi_c++ -lgurobi65
 
 clean: 
 	rm -rf linearProgram

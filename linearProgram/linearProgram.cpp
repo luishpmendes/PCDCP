@@ -251,10 +251,9 @@ int main () {
 
     vector < set <ulint> > N = neighbourhoods (W, k);
 
-    bool flag = false;
-    ulint bestSolutionCost;
-    set <ulint> bestSolutionVectices;
-    set <ulint> bestSolutionEdges;
+    ulint solutionCost;
+    set <ulint> solutionVectices;
+    set <ulint> solutionEdges;
 
     try {
         GRBEnv env = GRBEnv();
@@ -334,26 +333,22 @@ int main () {
         model.optimize();
 
         if (model.get(GRB_IntAttr_SolCount) > 0) {
-            if (!flag || model.get(GRB_DoubleAttr_ObjVal) < bestSolutionCost) {
-                flag = true;
-                bestSolutionCost = model.get(GRB_DoubleAttr_ObjVal);
-                bestSolutionVectices.clear();
-                for (ulint v = 0; v < n; v++) {
-                    if (y[v].get(GRB_DoubleAttr_X) == 1) {
-                        bestSolutionVectices.insert(v);
-                    }
+            solutionCost = model.get(GRB_DoubleAttr_ObjVal);
+            solutionVectices.clear();
+            for (ulint v = 0; v < n; v++) {
+                if (y[v].get(GRB_DoubleAttr_X) == 1) {
+                    solutionVectices.insert(v);
                 }
-                bestSolutionEdges.clear();
-                for (ulint e = 0; e < m; e++) {
-                    if (x[e].get(GRB_DoubleAttr_X) == 1) {
-                        bestSolutionEdges.insert(e);
-                    }
+            }
+            solutionEdges.clear();
+            for (ulint e = 0; e < m; e++) {
+                if (x[e].get(GRB_DoubleAttr_X) == 1) {
+                    solutionEdges.insert(e);
                 }
             }
         } else {
             cout << "Solution not found." << endl;
         }
-
     } catch (GRBException e) {
         cout << "Error code = " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;
@@ -361,12 +356,12 @@ int main () {
         cout << "Exception during opstimisation" << endl;
     }
 
-    cout << bestSolutionVectices.size() << ' ' << bestSolutionEdges.size() << ' ' << bestSolutionCost << endl;
-    for (set <ulint> :: iterator it = bestSolutionVectices.begin(); it != bestSolutionVectices.end(); it++) {
+    cout << solutionVectices.size() << ' ' << solutionEdges.size() << ' ' << solutionCost << endl;
+    for (set <ulint> :: iterator it = solutionVectices.begin(); it != solutionVectices.end(); it++) {
         ulint v = *it;
         cout << v << endl;
     }
-    for (set <ulint> :: iterator it = bestSolutionEdges.begin(); it != bestSolutionEdges.end(); it++) {
+    for (set <ulint> :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
         ulint e = *it;
         ulint a = E[e].first.first;
         ulint b = E[e].first.second;
