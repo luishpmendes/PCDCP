@@ -370,7 +370,7 @@ int main () {
         P.erase(remove(P.begin(), P.end(), '.'), P.end());
 
         // exporting model
-        model.write("output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/model.pl");
+        model.write("output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/model.lp");
     } catch (GRBException e) {
         cout << "Error code = " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;
