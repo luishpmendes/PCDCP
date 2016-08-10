@@ -364,7 +364,7 @@ int main () {
         string K = itos(k);
         string T = itos(t);
         string R = itos(r);
-        string p = itos(p);
+        string P = ftos(p);
 
         D.erase(remove(D.begin(), D.end(), '.'), D.end());
         P.erase(remove(P.begin(), P.end(), '.'), P.end());
