@@ -106,8 +106,8 @@ int main (int argc, char * argv[]) {
         for (ulint i = 0; i < nSolution; i++) {
             int v;
             resultFile >> v;
-            solutionVerticesFile << vertices[i].first.first << ' ';
-            solutionVerticesFile << vertices[i].first.second << ' ';
+            solutionVerticesFile << vertices[v].first.first << ' ';
+            solutionVerticesFile << vertices[v].first.second << ' ';
             solutionVerticesFile << ((double) k)/100.0 << endl;
         }
         solutionVerticesFile.close();
