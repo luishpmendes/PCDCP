@@ -219,9 +219,10 @@ class subtourelim: public GRBCallback {
 };
 
 int main () {
-    ulint n, mComplete, m, k, t, r;
+    ulint n, mComplete, m, k, t, r, root;
     double d, p;
-    cin >> n >> d >> mComplete >> m >> k >> t >> r >> p;
+
+    cin >> n >> d >> k >> t >> r >> p >> mComplete >> m >> root;
 
     vector <ulint> penalty (n); // vector with de penalties of each vectex
     matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complete graph
@@ -370,7 +371,7 @@ int main () {
         P.erase(remove(P.begin(), P.end(), '.'), P.end());
 
         // exporting model
-        model.write("output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/model.lp");
+        model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/model.lp");
     } catch (GRBException e) {
         cout << "Error code = " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;
