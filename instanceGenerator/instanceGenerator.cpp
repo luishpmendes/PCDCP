@@ -12,16 +12,17 @@ typedef unsigned long int ulint;
 
 int main (int argc, char * argv[]) {
     int n, k, t, r;
-    double density, m;
+    double density, m, p;
 
-    if (argc == 6) {
+    if (argc == 7) {
         n = atoi(argv[1]);
         density = atof(argv[2]);
         k = atoi(argv[3]);
         t = atoi(argv[4]);
         r = atoi(argv[5]);
+        p = atof(argv[6]);
     } else {
-        cin >> n >> density >> k >> t >> r;
+        cin >> n >> density >> k >> t >> r >> p;
     }
 
     double minDensity = 0.0;
@@ -101,7 +102,7 @@ int main (int argc, char * argv[]) {
     }
 
     // number of vertices, number of edges in the complete graph, number of 'chosen' edges and neighborhood radio
-    cout << n << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << k << ' ' << root << endl;
+    cout << n << ' ' << density << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << k << ' ' << t << ' ' << root << ' ' << p << endl;
 
     // printing vertices' coordinates and its penalty
     for (int i = 0; i < n; i++) {
@@ -111,7 +112,7 @@ int main (int argc, char * argv[]) {
         double y0 = points[referencePoint].second;
         double dx = x - x0;
         double dy = y - y0;
-        int dist = round(100 * sqrt(dx * dx + dy * dy));
+        int dist = round(100 * sqrt(dx * dx + dy * dy) * p);
         cout << x << ' ' << y << ' ' << dist << endl;
     }
 

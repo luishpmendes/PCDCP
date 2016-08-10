@@ -12,7 +12,10 @@ do
             do
                 for r in 0 1 2
                 do
-                    ./instanceGenerator $n $d $k $t $r > "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"R"$r".in";
+                    for p in 0.25 0.5
+                    do
+                        ./instanceGenerator $n $d $k $t $r > "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}".in";
+                    done
                 done
             done
         done

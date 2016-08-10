@@ -7,6 +7,8 @@
 #include <sstream>
 #include <map>
 #include <climits>
+#include <string>
+#include <algorithm>
 
 #ifndef INFINITE
 #define INFINITE 15 << 25
@@ -34,6 +36,12 @@ typedef long int ulint;
 typedef vector < vector <ulint> > matrix;
 
 string itos(long int i) {
+    stringstream s;
+    s << i;
+    return s.str();
+}
+
+string ftos(double i) {
     stringstream s;
     s << i;
     return s.str();
@@ -211,8 +219,9 @@ class subtourelim: public GRBCallback {
 };
 
 int main () {
-    ulint n, mComplete, m, k, r;
-    cin >> n >> mComplete >> m >> k >> r;
+    ulint n, mComplete, m, k, t, r;
+    double d, p;
+    cin >> n >> d >> mComplete >> m >> k >> t >> r >> p;
 
     vector <ulint> penalty (n); // vector with de penalties of each vectex
     matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complete graph
@@ -349,6 +358,19 @@ int main () {
         } else {
             cout << "Solution not found." << endl;
         }
+
+        string N = itos(n);
+        string D = ftos(d);
+        string K = itos(k);
+        string T = itos(t);
+        string R = itos(r);
+        string p = itos(p);
+
+        D.erase(remove(D.begin(), D.end(), '.'), D.end());
+        P.erase(remove(P.begin(), P.end(), '.'), P.end());
+
+        // exporting model
+        model.write("output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/model.pl");
     } catch (GRBException e) {
         cout << "Error code = " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;
