@@ -16,13 +16,15 @@ bool pointComp (pair < pair <double, double>, double > lhs, pair < pair <double,
 int main (int argc, char * argv[]) {
     string path, N, D, K, T, R;
 
-    if (argc == 6) {
+    cout << argc << endl;
+
+    if (argc == 7) {
         path = string(argv[1]);
         N = string(argv[2]);
         D = string(argv[3]);
         K = string(argv[4]);
         T = string(argv[5]);
-        R = string(argv[5]);
+        R = string(argv[6]);
     } else {
         cin >> path >> N >> D >> K >> T >> R;
     }
@@ -31,8 +33,8 @@ int main (int argc, char * argv[]) {
     ifstream resultFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "/result.out");
 
     if (inputFile.is_open() && resultFile.is_open()) {
-        ulint n, mComplete, m, k;
-        inputFile >> n >> mComplete >> m >> k;
+        ulint n, mComplete, m, k, r;
+        inputFile >> n >> mComplete >> m >> k >> r;
         vector < pair < pair <double, double>, double > > vertices (n, make_pair(make_pair(0, 0), 0));
         cout << "Vertices: " << endl;
         // reading vertices' coordinates and penalty
