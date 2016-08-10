@@ -1,0 +1,2016 @@
+%!PS-Adobe-2.0 EPSF-2.0
+%%Title: ../linearProgram/output/N200D07K0T0R1/plot.eps
+%%Creator: gnuplot 4.6 patchlevel 6
+%%CreationDate: Tue Aug  9 17:03:09 2016
+%%DocumentFonts: (atend)
+%%BoundingBox: 50 50 410 302
+%%EndComments
+%%BeginProlog
+/gnudict 256 dict def
+gnudict begin
+%
+% The following true/false flags may be edited by hand if desired.
+% The unit line width and grayscale image gamma correction may also be changed.
+%
+/Color true def
+/Blacktext false def
+/Solid false def
+/Dashlength 1 def
+/Landscape false def
+/Level1 false def
+/Rounded false def
+/ClipToBoundingBox false def
+/SuppressPDFMark false def
+/TransparentPatterns false def
+/gnulinewidth 5.000 def
+/userlinewidth gnulinewidth def
+/Gamma 1.0 def
+/BackgroundColor {-1.000 -1.000 -1.000} def
+%
+/vshift -46 def
+/dl1 {
+  10.0 Dashlength mul mul
+  Rounded { currentlinewidth 0.75 mul sub dup 0 le { pop 0.01 } if } if
+} def
+/dl2 {
+  10.0 Dashlength mul mul
+  Rounded { currentlinewidth 0.75 mul add } if
+} def
+/hpt_ 31.5 def
+/vpt_ 31.5 def
+/hpt hpt_ def
+/vpt vpt_ def
+/doclip {
+  ClipToBoundingBox {
+    newpath 50 50 moveto 410 50 lineto 410 302 lineto 50 302 lineto closepath
+    clip
+  } if
+} def
+%
+% Gnuplot Prolog Version 4.6 (September 2012)
+%
+%/SuppressPDFMark true def
+%
+/M {moveto} bind def
+/L {lineto} bind def
+/R {rmoveto} bind def
+/V {rlineto} bind def
+/N {newpath moveto} bind def
+/Z {closepath} bind def
+/C {setrgbcolor} bind def
+/f {rlineto fill} bind def
+/g {setgray} bind def
+/Gshow {show} def   % May be redefined later in the file to support UTF-8
+/vpt2 vpt 2 mul def
+/hpt2 hpt 2 mul def
+/Lshow {currentpoint stroke M 0 vshift R 
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+/Rshow {currentpoint stroke M dup stringwidth pop neg vshift R
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+/Cshow {currentpoint stroke M dup stringwidth pop -2 div vshift R 
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+/UP {dup vpt_ mul /vpt exch def hpt_ mul /hpt exch def
+  /hpt2 hpt 2 mul def /vpt2 vpt 2 mul def} def
+/DL {Color {setrgbcolor Solid {pop []} if 0 setdash}
+ {pop pop pop 0 setgray Solid {pop []} if 0 setdash} ifelse} def
+/BL {stroke userlinewidth 2 mul setlinewidth
+	Rounded {1 setlinejoin 1 setlinecap} if} def
+/AL {stroke userlinewidth 2 div setlinewidth
+	Rounded {1 setlinejoin 1 setlinecap} if} def
+/UL {dup gnulinewidth mul /userlinewidth exch def
+	dup 1 lt {pop 1} if 10 mul /udl exch def} def
+/PL {stroke userlinewidth setlinewidth
+	Rounded {1 setlinejoin 1 setlinecap} if} def
+3.8 setmiterlimit
+% Default Line colors
+/LCw {1 1 1} def
+/LCb {0 0 0} def
+/LCa {0 0 0} def
+/LC0 {1 0 0} def
+/LC1 {0 1 0} def
+/LC2 {0 0 1} def
+/LC3 {1 0 1} def
+/LC4 {0 1 1} def
+/LC5 {1 1 0} def
+/LC6 {0 0 0} def
+/LC7 {1 0.3 0} def
+/LC8 {0.5 0.5 0.5} def
+% Default Line Types
+/LTw {PL [] 1 setgray} def
+/LTb {BL [] LCb DL} def
+/LTa {AL [1 udl mul 2 udl mul] 0 setdash LCa setrgbcolor} def
+/LT0 {PL [] LC0 DL} def
+/LT1 {PL [4 dl1 2 dl2] LC1 DL} def
+/LT2 {PL [2 dl1 3 dl2] LC2 DL} def
+/LT3 {PL [1 dl1 1.5 dl2] LC3 DL} def
+/LT4 {PL [6 dl1 2 dl2 1 dl1 2 dl2] LC4 DL} def
+/LT5 {PL [3 dl1 3 dl2 1 dl1 3 dl2] LC5 DL} def
+/LT6 {PL [2 dl1 2 dl2 2 dl1 6 dl2] LC6 DL} def
+/LT7 {PL [1 dl1 2 dl2 6 dl1 2 dl2 1 dl1 2 dl2] LC7 DL} def
+/LT8 {PL [2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 4 dl2] LC8 DL} def
+/Pnt {stroke [] 0 setdash gsave 1 setlinecap M 0 0 V stroke grestore} def
+/Dia {stroke [] 0 setdash 2 copy vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V closepath stroke
+  Pnt} def
+/Pls {stroke [] 0 setdash vpt sub M 0 vpt2 V
+  currentpoint stroke M
+  hpt neg vpt neg R hpt2 0 V stroke
+ } def
+/Box {stroke [] 0 setdash 2 copy exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V closepath stroke
+  Pnt} def
+/Crs {stroke [] 0 setdash exch hpt sub exch vpt add M
+  hpt2 vpt2 neg V currentpoint stroke M
+  hpt2 neg 0 R hpt2 vpt2 V stroke} def
+/TriU {stroke [] 0 setdash 2 copy vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V closepath stroke
+  Pnt} def
+/Star {2 copy Pls Crs} def
+/BoxF {stroke [] 0 setdash exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V closepath fill} def
+/TriUF {stroke [] 0 setdash vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V closepath fill} def
+/TriD {stroke [] 0 setdash 2 copy vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V closepath stroke
+  Pnt} def
+/TriDF {stroke [] 0 setdash vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V closepath fill} def
+/DiaF {stroke [] 0 setdash vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V closepath fill} def
+/Pent {stroke [] 0 setdash 2 copy gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  closepath stroke grestore Pnt} def
+/PentF {stroke [] 0 setdash gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  closepath fill grestore} def
+/Circle {stroke [] 0 setdash 2 copy
+  hpt 0 360 arc stroke Pnt} def
+/CircleF {stroke [] 0 setdash hpt 0 360 arc fill} def
+/C0 {BL [] 0 setdash 2 copy moveto vpt 90 450 arc} bind def
+/C1 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 90 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C2 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 90 180 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C3 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 180 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C4 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 180 270 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C5 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 90 arc
+	2 copy moveto
+	2 copy vpt 180 270 arc closepath fill
+	vpt 0 360 arc} bind def
+/C6 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 90 270 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C7 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 270 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C8 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 270 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C9 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 270 450 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C10 {BL [] 0 setdash 2 copy 2 copy moveto vpt 270 360 arc closepath fill
+	2 copy moveto
+	2 copy vpt 90 180 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C11 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 180 arc closepath fill
+	2 copy moveto
+	2 copy vpt 270 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C12 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 180 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C13 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 90 arc closepath fill
+	2 copy moveto
+	2 copy vpt 180 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C14 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 90 360 arc closepath fill
+	vpt 0 360 arc} bind def
+/C15 {BL [] 0 setdash 2 copy vpt 0 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/Rec {newpath 4 2 roll moveto 1 index 0 rlineto 0 exch rlineto
+	neg 0 rlineto closepath} bind def
+/Square {dup Rec} bind def
+/Bsquare {vpt sub exch vpt sub exch vpt2 Square} bind def
+/S0 {BL [] 0 setdash 2 copy moveto 0 vpt rlineto BL Bsquare} bind def
+/S1 {BL [] 0 setdash 2 copy vpt Square fill Bsquare} bind def
+/S2 {BL [] 0 setdash 2 copy exch vpt sub exch vpt Square fill Bsquare} bind def
+/S3 {BL [] 0 setdash 2 copy exch vpt sub exch vpt2 vpt Rec fill Bsquare} bind def
+/S4 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt Square fill Bsquare} bind def
+/S5 {BL [] 0 setdash 2 copy 2 copy vpt Square fill
+	exch vpt sub exch vpt sub vpt Square fill Bsquare} bind def
+/S6 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt vpt2 Rec fill Bsquare} bind def
+/S7 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt vpt2 Rec fill
+	2 copy vpt Square fill Bsquare} bind def
+/S8 {BL [] 0 setdash 2 copy vpt sub vpt Square fill Bsquare} bind def
+/S9 {BL [] 0 setdash 2 copy vpt sub vpt vpt2 Rec fill Bsquare} bind def
+/S10 {BL [] 0 setdash 2 copy vpt sub vpt Square fill 2 copy exch vpt sub exch vpt Square fill
+	Bsquare} bind def
+/S11 {BL [] 0 setdash 2 copy vpt sub vpt Square fill 2 copy exch vpt sub exch vpt2 vpt Rec fill
+	Bsquare} bind def
+/S12 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill Bsquare} bind def
+/S13 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill
+	2 copy vpt Square fill Bsquare} bind def
+/S14 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill
+	2 copy exch vpt sub exch vpt Square fill Bsquare} bind def
+/S15 {BL [] 0 setdash 2 copy Bsquare fill Bsquare} bind def
+/D0 {gsave translate 45 rotate 0 0 S0 stroke grestore} bind def
+/D1 {gsave translate 45 rotate 0 0 S1 stroke grestore} bind def
+/D2 {gsave translate 45 rotate 0 0 S2 stroke grestore} bind def
+/D3 {gsave translate 45 rotate 0 0 S3 stroke grestore} bind def
+/D4 {gsave translate 45 rotate 0 0 S4 stroke grestore} bind def
+/D5 {gsave translate 45 rotate 0 0 S5 stroke grestore} bind def
+/D6 {gsave translate 45 rotate 0 0 S6 stroke grestore} bind def
+/D7 {gsave translate 45 rotate 0 0 S7 stroke grestore} bind def
+/D8 {gsave translate 45 rotate 0 0 S8 stroke grestore} bind def
+/D9 {gsave translate 45 rotate 0 0 S9 stroke grestore} bind def
+/D10 {gsave translate 45 rotate 0 0 S10 stroke grestore} bind def
+/D11 {gsave translate 45 rotate 0 0 S11 stroke grestore} bind def
+/D12 {gsave translate 45 rotate 0 0 S12 stroke grestore} bind def
+/D13 {gsave translate 45 rotate 0 0 S13 stroke grestore} bind def
+/D14 {gsave translate 45 rotate 0 0 S14 stroke grestore} bind def
+/D15 {gsave translate 45 rotate 0 0 S15 stroke grestore} bind def
+/DiaE {stroke [] 0 setdash vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V closepath stroke} def
+/BoxE {stroke [] 0 setdash exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V closepath stroke} def
+/TriUE {stroke [] 0 setdash vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V closepath stroke} def
+/TriDE {stroke [] 0 setdash vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V closepath stroke} def
+/PentE {stroke [] 0 setdash gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  closepath stroke grestore} def
+/CircE {stroke [] 0 setdash 
+  hpt 0 360 arc stroke} def
+/Opaque {gsave closepath 1 setgray fill grestore 0 setgray closepath} def
+/DiaW {stroke [] 0 setdash vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V Opaque stroke} def
+/BoxW {stroke [] 0 setdash exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V Opaque stroke} def
+/TriUW {stroke [] 0 setdash vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V Opaque stroke} def
+/TriDW {stroke [] 0 setdash vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V Opaque stroke} def
+/PentW {stroke [] 0 setdash gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  Opaque stroke grestore} def
+/CircW {stroke [] 0 setdash 
+  hpt 0 360 arc Opaque stroke} def
+/BoxFill {gsave Rec 1 setgray fill grestore} def
+/Density {
+  /Fillden exch def
+  currentrgbcolor
+  /ColB exch def /ColG exch def /ColR exch def
+  /ColR ColR Fillden mul Fillden sub 1 add def
+  /ColG ColG Fillden mul Fillden sub 1 add def
+  /ColB ColB Fillden mul Fillden sub 1 add def
+  ColR ColG ColB setrgbcolor} def
+/BoxColFill {gsave Rec PolyFill} def
+/PolyFill {gsave Density fill grestore grestore} def
+/h {rlineto rlineto rlineto gsave closepath fill grestore} bind def
+%
+% PostScript Level 1 Pattern Fill routine for rectangles
+% Usage: x y w h s a XX PatternFill
+%	x,y = lower left corner of box to be filled
+%	w,h = width and height of box
+%	  a = angle in degrees between lines and x-axis
+%	 XX = 0/1 for no/yes cross-hatch
+%
+/PatternFill {gsave /PFa [ 9 2 roll ] def
+  PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
+  PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+  clip
+  currentlinewidth 0.5 mul setlinewidth
+  /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
+  0 0 M PFa 5 get rotate PFs -2 div dup translate
+  0 1 PFs PFa 4 get div 1 add floor cvi
+	{PFa 4 get mul 0 M 0 PFs V} for
+  0 PFa 6 get ne {
+	0 1 PFs PFa 4 get div 1 add floor cvi
+	{PFa 4 get mul 0 2 1 roll M PFs 0 V} for
+ } if
+  stroke grestore} def
+%
+/languagelevel where
+ {pop languagelevel} {1} ifelse
+ 2 lt
+	{/InterpretLevel1 true def}
+	{/InterpretLevel1 Level1 def}
+ ifelse
+%
+% PostScript level 2 pattern fill definitions
+%
+/Level2PatternFill {
+/Tile8x8 {/PaintType 2 /PatternType 1 /TilingType 1 /BBox [0 0 8 8] /XStep 8 /YStep 8}
+	bind def
+/KeepColor {currentrgbcolor [/Pattern /DeviceRGB] setcolorspace} bind def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 0 M 8 8 L 0 8 M 8 0 L stroke} 
+>> matrix makepattern
+/Pat1 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 0 M 8 8 L 0 8 M 8 0 L stroke
+	0 4 M 4 8 L 8 4 L 4 0 L 0 4 L stroke}
+>> matrix makepattern
+/Pat2 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 0 M 0 8 L
+	8 8 L 8 0 L 0 0 L fill}
+>> matrix makepattern
+/Pat3 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -4 8 M 8 -4 L
+	0 12 M 12 0 L stroke}
+>> matrix makepattern
+/Pat4 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -4 0 M 8 12 L
+	0 -4 M 12 8 L stroke}
+>> matrix makepattern
+/Pat5 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -2 8 M 4 -4 L
+	0 12 M 8 -4 L 4 12 M 10 0 L stroke}
+>> matrix makepattern
+/Pat6 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -2 0 M 4 12 L
+	0 -4 M 8 12 L 4 -4 M 10 8 L stroke}
+>> matrix makepattern
+/Pat7 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 8 -2 M -4 4 L
+	12 0 M -4 8 L 12 4 M 0 10 L stroke}
+>> matrix makepattern
+/Pat8 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 -2 M 12 4 L
+	-4 0 M 12 8 L -4 4 M 8 10 L stroke}
+>> matrix makepattern
+/Pat9 exch def
+/Pattern1 {PatternBgnd KeepColor Pat1 setpattern} bind def
+/Pattern2 {PatternBgnd KeepColor Pat2 setpattern} bind def
+/Pattern3 {PatternBgnd KeepColor Pat3 setpattern} bind def
+/Pattern4 {PatternBgnd KeepColor Landscape {Pat5} {Pat4} ifelse setpattern} bind def
+/Pattern5 {PatternBgnd KeepColor Landscape {Pat4} {Pat5} ifelse setpattern} bind def
+/Pattern6 {PatternBgnd KeepColor Landscape {Pat9} {Pat6} ifelse setpattern} bind def
+/Pattern7 {PatternBgnd KeepColor Landscape {Pat8} {Pat7} ifelse setpattern} bind def
+} def
+%
+%
+%End of PostScript Level 2 code
+%
+/PatternBgnd {
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+} def
+%
+% Substitute for Level 2 pattern fill codes with
+% grayscale if Level 2 support is not selected.
+%
+/Level1PatternFill {
+/Pattern1 {0.250 Density} bind def
+/Pattern2 {0.500 Density} bind def
+/Pattern3 {0.750 Density} bind def
+/Pattern4 {0.125 Density} bind def
+/Pattern5 {0.375 Density} bind def
+/Pattern6 {0.625 Density} bind def
+/Pattern7 {0.875 Density} bind def
+} def
+%
+% Now test for support of Level 2 code
+%
+Level1 {Level1PatternFill} {Level2PatternFill} ifelse
+%
+/Symbol-Oblique /Symbol findfont [1 0 .167 1 0 0] makefont
+dup length dict begin {1 index /FID eq {pop pop} {def} ifelse} forall
+currentdict end definefont pop
+Level1 SuppressPDFMark or 
+{} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (../linearProgram/output/N200D07K0T0R1/plot.eps)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.6 patchlevel 6)
+  /Author (luishpmendes)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Tue Aug  9 17:03:09 2016)
+  /DOCINFO pdfmark
+end
+} ifelse
+end
+%%EndProlog
+%%Page: 1 1
+gnudict begin
+gsave
+doclip
+50 50 translate
+0.050 0.050 scale
+0 setgray
+newpath
+(times) findfont 140 scalefont setfont
+BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {BackgroundColor C 1.000 0 0 7200.00 5040.00 BoxColFill} if
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 280 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 0) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 1148 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 0.2) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 2016 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 0.4) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 2883 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 0.6) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 3751 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 0.8) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 4619 M
+63 0 V
+4276 0 R
+-63 0 V
+-4360 0 R
+( 1) Rshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 0) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+2445 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 0.2) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+3313 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 0.4) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+4180 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 0.6) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+5048 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 0.8) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+5916 280 M
+0 63 V
+0 4276 R
+0 -63 V
+0 -4416 R
+( 1) Cshow
+1.000 UL
+LTb
+LCb setrgbcolor
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 4619 N
+0 -4339 V
+4339 0 V
+0 4339 V
+-4339 0 V
+Z stroke
+LTb
+3746 4829 M
+(Instancia do PCDCP \(N = 200;D = 07;K = 0;T = 0; R = 1\)) Cshow
+1.000 UP
+1.000 UL
+LTb
+LCb setrgbcolor
+% Begin plot #1
+1.000 UP
+1.000 UL
+LT0
+0.00 0.00 0.00 C /times findfont 140 scalefont setfont
+/vshift -46 def
+0.533 UP
+3400 3514 CircleF
+0.620 UP
+2354 2890 CircleF
+0.587 UP
+2649 3219 CircleF
+0.685 UP
+2049 2363 CircleF
+0.826 UP
+2093 919 CircleF
+0.630 UP
+4562 1177 CircleF
+0.533 UP
+2661 2572 CircleF
+0.848 UP
+2249 4276 CircleF
+0.620 UP
+2433 1914 CircleF
+0.576 UP
+4220 1212 CircleF
+0.761 UP
+5793 2922 CircleF
+0.533 UP
+2677 2553 CircleF
+0.772 UP
+2992 4392 CircleF
+0.848 UP
+5294 4294 CircleF
+0.685 UP
+3804 735 CircleF
+0.859 UP
+2160 4281 CircleF
+0.587 UP
+5034 2014 CircleF
+0.674 UP
+5454 2251 CircleF
+0.630 UP
+2310 2738 CircleF
+0.717 UP
+5324 3528 CircleF
+0.880 UP
+1616 3761 CircleF
+0.728 UP
+4793 4086 CircleF
+0.772 UP
+2274 1060 CircleF
+0.761 UP
+4505 536 CircleF
+0.587 UP
+2475 2210 CircleF
+0.793 UP
+4913 593 CircleF
+0.685 UP
+2239 3269 CircleF
+0.717 UP
+5518 3212 CircleF
+0.630 UP
+3443 984 CircleF
+0.946 UP
+1781 540 CircleF
+0.728 UP
+5174 1135 CircleF
+0.739 UP
+3016 681 CircleF
+0.283 UP
+3818 2575 CircleF
+0.739 UP
+3658 4412 CircleF
+0.641 UP
+2349 3041 CircleF
+0.728 UP
+3405 593 CircleF
+0.707 UP
+5205 1333 CircleF
+0.565 UP
+4962 2868 CircleF
+0.663 UP
+3502 837 CircleF
+0.576 UP
+2661 1774 CircleF
+0.848 UP
+1976 4046 CircleF
+0.815 UP
+4543 348 CircleF
+0.815 UP
+2167 876 CircleF
+0.761 UP
+1878 3163 CircleF
+0.576 UP
+2890 1507 CircleF
+0.728 UP
+3399 4319 CircleF
+0.293 UP
+3920 2545 CircleF
+0.565 UP
+2716 3113 CircleF
+0.609 UP
+4484 1208 CircleF
+0.587 UP
+4608 1393 CircleF
+0.620 UP
+2343 2130 CircleF
+0.652 UP
+3682 863 CircleF
+0.402 UP
+3936 3044 CircleF
+0.522 UP
+4385 1574 CircleF
+0.924 UP
+1712 4200 CircleF
+0.978 UP
+1615 513 CircleF
+0.750 UP
+5448 3607 CircleF
+0.848 UP
+1852 3863 CircleF
+0.489 UP
+4692 2815 CircleF
+0.467 UP
+4596 2719 CircleF
+0.739 UP
+5570 1691 CircleF
+0.533 UP
+4323 3473 CircleF
+0.859 UP
+5106 4484 CircleF
+0.880 UP
+1829 893 CircleF
+0.902 UP
+5530 518 CircleF
+0.826 UP
+4640 306 CircleF
+0.565 UP
+2855 3276 CircleF
+0.489 UP
+2900 2169 CircleF
+0.913 UP
+2071 475 CircleF
+0.435 UP
+3167 2837 CircleF
+0.609 UP
+4164 1061 CircleF
+0.783 UP
+1927 1440 CircleF
+0.380 UP
+4203 2128 CircleF
+0.609 UP
+3890 3908 CircleF
+0.750 UP
+5623 3269 CircleF
+0.424 UP
+3443 1852 CircleF
+0.750 UP
+3571 4442 CircleF
+0.739 UP
+2653 870 CircleF
+0.870 UP
+5597 4160 CircleF
+0.783 UP
+2637 4243 CircleF
+0.848 UP
+2102 4130 CircleF
+0.859 UP
+5598 4051 CircleF
+0.783 UP
+1703 2104 CircleF
+0.772 UP
+2067 3610 CircleF
+0.728 UP
+4254 610 CircleF
+0.630 UP
+5217 2934 CircleF
+0.957 UP
+1807 458 CircleF
+0.707 UP
+2769 973 CircleF
+0.870 UP
+2118 4293 CircleF
+0.304 UP
+3568 2453 CircleF
+0.891 UP
+2452 287 CircleF
+0.663 UP
+3172 927 CircleF
+0.543 UP
+4797 3056 CircleF
+0.728 UP
+4811 844 CircleF
+0.707 UP
+3125 4150 CircleF
+0.870 UP
+5609 4137 CircleF
+0.793 UP
+1798 3334 CircleF
+0.478 UP
+3357 1657 CircleF
+0.750 UP
+1844 1941 CircleF
+0.739 UP
+2922 4229 CircleF
+0.467 UP
+3142 1894 CircleF
+0.533 UP
+2717 2172 CircleF
+0.652 UP
+5206 1686 CircleF
+0.696 UP
+4447 814 CircleF
+0.250 UP
+3787 2463 CircleF
+0.848 UP
+5406 4203 CircleF
+0.565 UP
+3244 3621 CircleF
+0.750 UP
+3223 4357 CircleF
+0.880 UP
+1759 3930 CircleF
+0.424 UP
+4449 2654 CircleF
+0.380 UP
+4119 2040 CircleF
+0.967 UP
+1903 281 CircleF
+0.511 UP
+3204 1618 CircleF
+0.489 UP
+4472 1814 CircleF
+0.587 UP
+4953 1790 CircleF
+0.576 UP
+4801 1672 CircleF
+0.728 UP
+3521 4340 CircleF
+0.576 UP
+4982 1979 CircleF
+0.685 UP
+4453 4057 CircleF
+0.641 UP
+4211 980 CircleF
+0.576 UP
+5008 2004 CircleF
+0.391 UP
+3681 3019 CircleF
+0.739 UP
+5153 1068 CircleF
+0.804 UP
+1603 2209 CircleF
+0.630 UP
+5233 1995 CircleF
+0.761 UP
+1798 2076 CircleF
+0.772 UP
+5768 1821 CircleF
+0.674 UP
+5399 2018 CircleF
+0.533 UP
+4387 3402 CircleF
+0.620 UP
+3236 3854 CircleF
+0.467 UP
+3414 3229 CircleF
+0.630 UP
+3348 1000 CircleF
+0.391 UP
+4127 2887 CircleF
+0.576 UP
+4161 3710 CircleF
+0.609 UP
+4208 1106 CircleF
+0.663 UP
+2139 2300 CircleF
+0.402 UP
+3325 2834 CircleF
+0.598 UP
+3825 3858 CircleF
+0.728 UP
+3102 661 CircleF
+0.728 UP
+1926 2930 CircleF
+0.500 UP
+4623 1910 CircleF
+0.739 UP
+2229 1263 CircleF
+0.728 UP
+5676 2413 CircleF
+0.620 UP
+2379 2962 CircleF
+0.359 UP
+3956 2882 CircleF
+0.859 UP
+1777 1100 CircleF
+0.815 UP
+1783 1400 CircleF
+0.674 UP
+2633 1233 CircleF
+0.913 UP
+5397 362 CircleF
+0.587 UP
+4042 3786 CircleF
+0.304 UP
+3708 2256 CircleF
+0.554 UP
+4785 1781 CircleF
+0.565 UP
+2753 1732 CircleF
+0.533 UP
+4247 1454 CircleF
+0.783 UP
+3780 320 CircleF
+0.826 UP
+4630 4587 CircleF
+0.457 UP
+4596 2602 CircleF
+0.511 UP
+2969 3124 CircleF
+0.413 UP
+4308 2044 CircleF
+0.467 UP
+3329 3218 CircleF
+0.793 UP
+2304 891 CircleF
+0.630 UP
+4587 1168 CircleF
+0.489 UP
+3392 3355 CircleF
+0.326 UP
+4070 2309 CircleF
+0.359 UP
+3615 2059 CircleF
+0.946 UP
+1728 4351 CircleF
+0.739 UP
+3746 521 CircleF
+0.652 UP
+2319 1778 CircleF
+0.522 UP
+3342 3445 CircleF
+0.804 UP
+5585 3724 CircleF
+0.533 UP
+2647 2591 CircleF
+0.446 UP
+3436 1772 CircleF
+0.880 UP
+5367 525 CircleF
+0.804 UP
+1723 1673 CircleF
+0.620 UP
+2453 1847 CircleF
+0.674 UP
+4633 3943 CircleF
+0.913 UP
+5640 565 CircleF
+0.413 UP
+3906 3098 CircleF
+0.576 UP
+4712 3400 CircleF
+0.489 UP
+4598 2952 CircleF
+0.837 UP
+1781 1241 CircleF
+0.609 UP
+5079 1831 CircleF
+0.663 UP
+2472 1483 CircleF
+0.793 UP
+2946 4451 CircleF
+0.587 UP
+4564 1366 CircleF
+0.630 UP
+2323 2004 CircleF
+0.870 UP
+1786 1013 CircleF
+1.000 UP
+1695 4608 CircleF
+0.674 UP
+2119 2261 CircleF
+0.685 UP
+3502 4184 CircleF
+0.815 UP
+5904 1637 CircleF
+0.783 UP
+4636 498 CircleF
+0.543 UP
+3669 1317 CircleF
+0.402 UP
+4193 2921 CircleF
+0.304 UP
+3629 2607 CircleF
+0.772 UP
+4506 512 CircleF
+0.750 UP
+5752 2803 CircleF
+0.359 UP
+3511 2784 CircleF
+0.674 UP
+5444 2765 CircleF
+0.707 UP
+2228 1522 CircleF
+% End plot #1
+% Begin plot #2
+1.000 UL
+LT0
+0.13 0.55 0.13 C /times findfont 140 scalefont setfont
+3400 3514 M
+-164 340 V
+164 -340 R
+-58 -69 V
+2354 2890 M
+-44 -152 V
+44 152 R
+25 72 V
+270 257 R
+2349 3041 L
+300 178 R
+320 -95 V
+2049 2363 M
+1798 2076 L
+251 287 R
+90 -63 V
+2093 919 M
+74 -43 V
+-74 43 R
+1829 893 L
+2733 284 R
+46 216 V
+-46 -216 R
+25 -9 V
+2661 2572 M
+16 -19 V
+-16 19 R
+-14 19 V
+2249 4276 M
+2102 4130 L
+147 146 R
+-131 17 V
+2433 1914 M
+2319 1778 L
+114 136 R
+20 -67 V
+4220 1212 M
+-12 -106 V
+12 106 R
+27 242 V
+5793 2922 M
+-170 347 V
+170 -347 R
+5444 2765 L
+2677 2553 M
+-30 38 V
+345 1801 R
+2637 4243 L
+355 149 R
+231 -35 V
+2071 -63 R
+-188 190 V
+188 -190 R
+112 -91 V
+3804 735 M
+3682 863 L
+3804 735 M
+3780 320 L
+2160 4281 M
+-58 -151 V
+58 151 R
+-42 12 V
+5034 2014 M
+-52 -35 V
+52 35 R
+-26 -10 V
+446 247 R
+5233 1995 L
+221 256 R
+-55 -233 V
+2310 2738 M
+69 224 V
+2945 566 R
+124 79 V
+-124 -79 R
+5217 2934 L
+1616 3761 M
+451 -151 V
+-451 151 R
+143 169 V
+3034 156 R
+313 398 V
+4793 4086 M
+-163 501 V
+2274 1060 M
+-45 203 V
+45 -203 R
+30 -169 V
+4505 536 M
+38 -188 V
+-38 188 R
+1 -24 V
+2475 2210 M
+-132 -80 V
+132 80 R
+242 -38 V
+4913 593 M
+261 542 V
+4913 593 M
+4811 844 L
+2239 3269 M
+1878 3163 L
+361 106 R
+-441 65 V
+5518 3212 M
+105 57 V
+-105 -57 R
+234 -409 V
+3443 984 M
+-95 16 V
+95 -16 R
+226 333 V
+1781 540 M
+1615 513 L
+166 27 R
+26 -82 V
+3367 677 R
+-21 -67 V
+3016 681 M
+2653 870 L
+3016 681 M
+86 -20 V
+716 1914 R
+3708 2256 L
+110 319 R
+-189 32 V
+29 1805 R
+-259 -93 V
+259 93 R
+-87 30 V
+2349 3041 M
+367 72 V
+3405 593 M
+-303 68 V
+303 -68 R
+341 -72 V
+1459 812 R
+1 353 V
+-1 -353 R
+-52 -265 V
+4962 2868 M
+255 66 V
+-255 -66 R
+-165 188 V
+3502 837 M
+180 26 V
+3502 837 M
+167 480 V
+2661 1774 M
+229 -267 V
+-229 267 R
+92 -42 V
+1976 4046 M
+-264 154 V
+264 -154 R
+-281 562 V
+4543 348 M
+97 -42 V
+2167 876 M
+137 15 V
+1878 3163 M
+48 -233 V
+2890 1507 M
+2769 973 L
+630 3346 R
+103 -135 V
+3920 2545 M
+-133 -82 V
+133 82 R
+150 -236 V
+2716 3113 M
+139 163 V
+4484 1208 M
+4164 1061 L
+320 147 R
+80 158 V
+44 27 R
+-44 -27 V
+2343 2130 M
+557 39 V
+1036 875 R
+-255 -25 V
+255 25 R
+-30 54 V
+4385 1574 M
+87 240 V
+-87 -240 R
+4247 1454 L
+1712 4200 M
+16 151 V
+1615 513 M
+192 -55 V
+5448 3607 M
+137 117 V
+1852 3863 M
+215 -253 V
+-215 253 R
+-93 67 V
+4692 2815 M
+4449 2654 L
+243 161 R
+-96 -213 V
+0 117 R
+-147 -65 V
+147 65 R
+0 -117 V
+974 -911 R
+198 130 V
+5570 1691 M
+334 -54 V
+4323 3473 M
+64 -71 V
+-64 71 R
+-162 237 V
+1829 893 M
+-48 348 V
+5530 518 M
+5397 362 L
+133 156 R
+-163 7 V
+4640 306 M
+-4 192 V
+2855 3276 M
+114 -152 V
+-69 -955 R
+-183 3 V
+2071 475 M
+2452 287 L
+2071 475 M
+1903 281 L
+3167 2837 M
+158 -3 V
+-158 3 R
+344 -53 V
+4164 1061 M
+44 45 V
+1927 1440 M
+-144 -40 V
+144 40 R
+301 82 V
+1975 606 R
+-84 -88 V
+84 88 R
+105 -84 V
+3890 3908 M
+-65 -50 V
+65 50 R
+152 -122 V
+3443 1852 M
+-301 42 V
+301 -42 R
+-7 -80 V
+135 2670 R
+-50 -102 V
+2653 870 M
+-20 363 V
+5597 4160 M
+12 -23 V
+-12 23 R
+-191 43 V
+-2769 40 R
+285 -14 V
+5598 4051 M
+11 86 V
+-11 -86 R
+-13 -327 V
+1703 2104 M
+-100 105 V
+100 -105 R
+20 -431 V
+4254 610 M
+193 204 V
+4254 610 M
+-43 370 V
+2769 973 M
+403 -46 V
+396 1526 R
+47 -394 V
+-47 394 R
+61 154 V
+2452 287 M
+-549 -6 V
+3172 927 M
+176 73 V
+4797 3056 M
+4598 2952 L
+4811 844 M
+-224 324 V
+3125 4150 M
+-203 79 V
+203 -79 R
+-179 301 V
+1798 3334 M
+128 -404 V
+3357 1657 M
+-153 -39 V
+153 39 R
+79 115 V
+1844 1941 M
+1723 1673 L
+121 268 R
+275 320 V
+3142 1894 M
+62 -276 V
+2002 68 R
+-127 145 V
+4447 814 M
+4211 980 L
+3787 2463 M
+3615 2059 L
+3244 3621 M
+-8 233 V
+8 -233 R
+148 -266 V
+3223 4357 M
+-277 94 V
+4119 2040 M
+189 4 V
+164 -230 R
+151 96 V
+330 -120 R
+-168 -9 V
+168 9 R
+126 41 V
+4801 1672 M
+-178 238 V
+178 -238 R
+-16 109 V
+3521 4340 M
+-19 -156 V
+4982 1979 M
+26 25 V
+4453 4057 M
+177 530 V
+4453 4057 M
+180 -114 V
+3681 3019 M
+225 79 V
+1603 2209 M
+195 -133 V
+3435 -81 R
+443 418 V
+92 -592 R
+136 -184 V
+-505 381 R
+277 395 V
+4387 3402 M
+246 541 V
+3414 3229 M
+-85 -11 V
+85 11 R
+-72 216 V
+785 -558 R
+-171 -5 V
+171 5 R
+66 34 V
+-32 789 R
+551 -310 V
+2139 2300 M
+-20 -39 V
+1206 573 R
+186 -50 V
+314 1074 R
+217 -72 V
+2229 1263 M
+-1 259 V
+3956 2882 M
+237 39 V
+1777 1100 M
+6 300 V
+-6 -300 R
+9 -87 V
+847 220 R
+-161 250 V
+5397 362 M
+243 203 V
+3708 2256 M
+362 53 V
+2753 1732 M
+2472 1483 L
+3780 320 M
+-34 201 V
+3329 3218 M
+63 137 V
+1728 4351 M
+-33 257 V
+2319 1778 M
+4 226 V
+5367 525 M
+273 40 V
+2453 1847 M
+-130 157 V
+4712 3400 M
+4598 2952 L
+1781 1241 M
+5 -228 V
+4636 498 M
+-130 14 V
+5752 2803 M
+-308 -38 V
+% End plot #2
+% Begin plot #3
+stroke
+0.500 UL
+LT0
+1.00 0.00 0.00 C /times findfont 140 scalefont setfont
+0.500 UL
+LT0
+1.00 0.00 0.00 C 3400 3514 M
+stroke
+LT0
+1.00 0.00 0.00 C 2354 2890 M
+stroke
+LT0
+1.00 0.00 0.00 C 2649 3219 M
+stroke
+LT0
+1.00 0.00 0.00 C 2049 2363 M
+stroke
+LT0
+1.00 0.00 0.00 C 2093 919 M
+stroke
+LT0
+1.00 0.00 0.00 C 4562 1177 M
+stroke
+LT0
+1.00 0.00 0.00 C 2661 2572 M
+stroke
+LT0
+1.00 0.00 0.00 C 2249 4276 M
+stroke
+LT0
+1.00 0.00 0.00 C 2433 1914 M
+stroke
+LT0
+1.00 0.00 0.00 C 4220 1212 M
+stroke
+LT0
+1.00 0.00 0.00 C 5793 2922 M
+stroke
+LT0
+1.00 0.00 0.00 C 2677 2553 M
+stroke
+LT0
+1.00 0.00 0.00 C 2992 4392 M
+stroke
+LT0
+1.00 0.00 0.00 C 5294 4294 M
+stroke
+LT0
+1.00 0.00 0.00 C 3804 735 M
+stroke
+LT0
+1.00 0.00 0.00 C 2160 4281 M
+stroke
+LT0
+1.00 0.00 0.00 C 5034 2014 M
+stroke
+LT0
+1.00 0.00 0.00 C 5454 2251 M
+stroke
+LT0
+1.00 0.00 0.00 C 2310 2738 M
+stroke
+LT0
+1.00 0.00 0.00 C 5324 3528 M
+stroke
+LT0
+1.00 0.00 0.00 C 1616 3761 M
+stroke
+LT0
+1.00 0.00 0.00 C 4793 4086 M
+stroke
+LT0
+1.00 0.00 0.00 C 2274 1060 M
+stroke
+LT0
+1.00 0.00 0.00 C 4505 536 M
+stroke
+LT0
+1.00 0.00 0.00 C 2475 2210 M
+stroke
+LT0
+1.00 0.00 0.00 C 4913 593 M
+stroke
+LT0
+1.00 0.00 0.00 C 2239 3269 M
+stroke
+LT0
+1.00 0.00 0.00 C 5518 3212 M
+stroke
+LT0
+1.00 0.00 0.00 C 3443 984 M
+stroke
+LT0
+1.00 0.00 0.00 C 1781 540 M
+stroke
+LT0
+1.00 0.00 0.00 C 5174 1135 M
+stroke
+LT0
+1.00 0.00 0.00 C 3016 681 M
+stroke
+LT0
+1.00 0.00 0.00 C 3818 2575 M
+stroke
+LT0
+1.00 0.00 0.00 C 3658 4412 M
+stroke
+LT0
+1.00 0.00 0.00 C 2349 3041 M
+stroke
+LT0
+1.00 0.00 0.00 C 3405 593 M
+stroke
+LT0
+1.00 0.00 0.00 C 5205 1333 M
+stroke
+LT0
+1.00 0.00 0.00 C 4962 2868 M
+stroke
+LT0
+1.00 0.00 0.00 C 3502 837 M
+stroke
+LT0
+1.00 0.00 0.00 C 2661 1774 M
+stroke
+LT0
+1.00 0.00 0.00 C 1976 4046 M
+stroke
+LT0
+1.00 0.00 0.00 C 4543 348 M
+stroke
+LT0
+1.00 0.00 0.00 C 2167 876 M
+stroke
+LT0
+1.00 0.00 0.00 C 1878 3163 M
+stroke
+LT0
+1.00 0.00 0.00 C 2890 1507 M
+stroke
+LT0
+1.00 0.00 0.00 C 3399 4319 M
+stroke
+LT0
+1.00 0.00 0.00 C 3920 2545 M
+stroke
+LT0
+1.00 0.00 0.00 C 2716 3113 M
+stroke
+LT0
+1.00 0.00 0.00 C 4484 1208 M
+stroke
+LT0
+1.00 0.00 0.00 C 4608 1393 M
+stroke
+LT0
+1.00 0.00 0.00 C 2343 2130 M
+stroke
+LT0
+1.00 0.00 0.00 C 3682 863 M
+stroke
+LT0
+1.00 0.00 0.00 C 3936 3044 M
+stroke
+LT0
+1.00 0.00 0.00 C 4385 1574 M
+stroke
+LT0
+1.00 0.00 0.00 C 1712 4200 M
+stroke
+LT0
+1.00 0.00 0.00 C 1615 513 M
+stroke
+LT0
+1.00 0.00 0.00 C 5448 3607 M
+stroke
+LT0
+1.00 0.00 0.00 C 1852 3863 M
+stroke
+LT0
+1.00 0.00 0.00 C 4692 2815 M
+stroke
+LT0
+1.00 0.00 0.00 C 4596 2719 M
+stroke
+LT0
+1.00 0.00 0.00 C 5570 1691 M
+stroke
+LT0
+1.00 0.00 0.00 C 4323 3473 M
+stroke
+LT0
+1.00 0.00 0.00 C 5106 4484 M
+stroke
+LT0
+1.00 0.00 0.00 C 1829 893 M
+stroke
+LT0
+1.00 0.00 0.00 C 5530 518 M
+stroke
+LT0
+1.00 0.00 0.00 C 4640 306 M
+stroke
+LT0
+1.00 0.00 0.00 C 2855 3276 M
+stroke
+LT0
+1.00 0.00 0.00 C 2900 2169 M
+stroke
+LT0
+1.00 0.00 0.00 C 2071 475 M
+stroke
+LT0
+1.00 0.00 0.00 C 3167 2837 M
+stroke
+LT0
+1.00 0.00 0.00 C 4164 1061 M
+stroke
+LT0
+1.00 0.00 0.00 C 1927 1440 M
+stroke
+LT0
+1.00 0.00 0.00 C 4203 2128 M
+stroke
+LT0
+1.00 0.00 0.00 C 3890 3908 M
+stroke
+LT0
+1.00 0.00 0.00 C 5623 3269 M
+stroke
+LT0
+1.00 0.00 0.00 C 3443 1852 M
+stroke
+LT0
+1.00 0.00 0.00 C 3571 4442 M
+stroke
+LT0
+1.00 0.00 0.00 C 2653 870 M
+stroke
+LT0
+1.00 0.00 0.00 C 5597 4160 M
+stroke
+LT0
+1.00 0.00 0.00 C 2637 4243 M
+stroke
+LT0
+1.00 0.00 0.00 C 2102 4130 M
+stroke
+LT0
+1.00 0.00 0.00 C 5598 4051 M
+stroke
+LT0
+1.00 0.00 0.00 C 1703 2104 M
+stroke
+LT0
+1.00 0.00 0.00 C 2067 3610 M
+stroke
+LT0
+1.00 0.00 0.00 C 4254 610 M
+stroke
+LT0
+1.00 0.00 0.00 C 5217 2934 M
+stroke
+LT0
+1.00 0.00 0.00 C 1807 458 M
+stroke
+LT0
+1.00 0.00 0.00 C 2769 973 M
+stroke
+LT0
+1.00 0.00 0.00 C 2118 4293 M
+stroke
+LT0
+1.00 0.00 0.00 C 3568 2453 M
+stroke
+LT0
+1.00 0.00 0.00 C 2452 287 M
+stroke
+LT0
+1.00 0.00 0.00 C 3172 927 M
+stroke
+LT0
+1.00 0.00 0.00 C 4797 3056 M
+stroke
+LT0
+1.00 0.00 0.00 C 4811 844 M
+stroke
+LT0
+1.00 0.00 0.00 C 3125 4150 M
+stroke
+LT0
+1.00 0.00 0.00 C 5609 4137 M
+stroke
+LT0
+1.00 0.00 0.00 C 1798 3334 M
+stroke
+LT0
+1.00 0.00 0.00 C 3357 1657 M
+stroke
+LT0
+1.00 0.00 0.00 C 1844 1941 M
+stroke
+LT0
+1.00 0.00 0.00 C 2922 4229 M
+stroke
+LT0
+1.00 0.00 0.00 C 3142 1894 M
+stroke
+LT0
+1.00 0.00 0.00 C 2717 2172 M
+stroke
+LT0
+1.00 0.00 0.00 C 5206 1686 M
+stroke
+LT0
+1.00 0.00 0.00 C 4447 814 M
+stroke
+LT0
+1.00 0.00 0.00 C 3787 2463 M
+stroke
+LT0
+1.00 0.00 0.00 C 5406 4203 M
+stroke
+LT0
+1.00 0.00 0.00 C 3244 3621 M
+stroke
+LT0
+1.00 0.00 0.00 C 3223 4357 M
+stroke
+LT0
+1.00 0.00 0.00 C 1759 3930 M
+stroke
+LT0
+1.00 0.00 0.00 C 4449 2654 M
+stroke
+LT0
+1.00 0.00 0.00 C 4119 2040 M
+stroke
+LT0
+1.00 0.00 0.00 C 1903 281 M
+stroke
+LT0
+1.00 0.00 0.00 C 3204 1618 M
+stroke
+LT0
+1.00 0.00 0.00 C 4472 1814 M
+stroke
+LT0
+1.00 0.00 0.00 C 4953 1790 M
+stroke
+LT0
+1.00 0.00 0.00 C 4801 1672 M
+stroke
+LT0
+1.00 0.00 0.00 C 3521 4340 M
+stroke
+LT0
+1.00 0.00 0.00 C 4982 1979 M
+stroke
+LT0
+1.00 0.00 0.00 C 4453 4057 M
+stroke
+LT0
+1.00 0.00 0.00 C 4211 980 M
+stroke
+LT0
+1.00 0.00 0.00 C 5008 2004 M
+stroke
+LT0
+1.00 0.00 0.00 C 3681 3019 M
+stroke
+LT0
+1.00 0.00 0.00 C 5153 1068 M
+stroke
+LT0
+1.00 0.00 0.00 C 1603 2209 M
+stroke
+LT0
+1.00 0.00 0.00 C 5233 1995 M
+stroke
+LT0
+1.00 0.00 0.00 C 1798 2076 M
+stroke
+LT0
+1.00 0.00 0.00 C 5768 1821 M
+stroke
+LT0
+1.00 0.00 0.00 C 5399 2018 M
+stroke
+LT0
+1.00 0.00 0.00 C 4387 3402 M
+stroke
+LT0
+1.00 0.00 0.00 C 3236 3854 M
+stroke
+LT0
+1.00 0.00 0.00 C 3414 3229 M
+stroke
+LT0
+1.00 0.00 0.00 C 3348 1000 M
+stroke
+LT0
+1.00 0.00 0.00 C 4127 2887 M
+stroke
+LT0
+1.00 0.00 0.00 C 4161 3710 M
+stroke
+LT0
+1.00 0.00 0.00 C 4208 1106 M
+stroke
+LT0
+1.00 0.00 0.00 C 2139 2300 M
+stroke
+LT0
+1.00 0.00 0.00 C 3325 2834 M
+stroke
+LT0
+1.00 0.00 0.00 C 3825 3858 M
+stroke
+LT0
+1.00 0.00 0.00 C 3102 661 M
+stroke
+LT0
+1.00 0.00 0.00 C 1926 2930 M
+stroke
+LT0
+1.00 0.00 0.00 C 4623 1910 M
+stroke
+LT0
+1.00 0.00 0.00 C 2229 1263 M
+stroke
+LT0
+1.00 0.00 0.00 C 5676 2413 M
+stroke
+LT0
+1.00 0.00 0.00 C 2379 2962 M
+stroke
+LT0
+1.00 0.00 0.00 C 3956 2882 M
+stroke
+LT0
+1.00 0.00 0.00 C 1777 1100 M
+stroke
+LT0
+1.00 0.00 0.00 C 1783 1400 M
+stroke
+LT0
+1.00 0.00 0.00 C 2633 1233 M
+stroke
+LT0
+1.00 0.00 0.00 C 5397 362 M
+stroke
+LT0
+1.00 0.00 0.00 C 4042 3786 M
+stroke
+LT0
+1.00 0.00 0.00 C 3708 2256 M
+stroke
+LT0
+1.00 0.00 0.00 C 4785 1781 M
+stroke
+LT0
+1.00 0.00 0.00 C 2753 1732 M
+stroke
+LT0
+1.00 0.00 0.00 C 4247 1454 M
+stroke
+LT0
+1.00 0.00 0.00 C 3780 320 M
+stroke
+LT0
+1.00 0.00 0.00 C 4630 4587 M
+stroke
+LT0
+1.00 0.00 0.00 C 4596 2602 M
+stroke
+LT0
+1.00 0.00 0.00 C 2969 3124 M
+stroke
+LT0
+1.00 0.00 0.00 C 4308 2044 M
+stroke
+LT0
+1.00 0.00 0.00 C 3329 3218 M
+stroke
+LT0
+1.00 0.00 0.00 C 2304 891 M
+stroke
+LT0
+1.00 0.00 0.00 C 4587 1168 M
+stroke
+LT0
+1.00 0.00 0.00 C 3392 3355 M
+stroke
+LT0
+1.00 0.00 0.00 C 4070 2309 M
+stroke
+LT0
+1.00 0.00 0.00 C 3615 2059 M
+stroke
+LT0
+1.00 0.00 0.00 C 1728 4351 M
+stroke
+LT0
+1.00 0.00 0.00 C 3746 521 M
+stroke
+LT0
+1.00 0.00 0.00 C 2319 1778 M
+stroke
+LT0
+1.00 0.00 0.00 C 3342 3445 M
+stroke
+LT0
+1.00 0.00 0.00 C 5585 3724 M
+stroke
+LT0
+1.00 0.00 0.00 C 2647 2591 M
+stroke
+LT0
+1.00 0.00 0.00 C 3436 1772 M
+stroke
+LT0
+1.00 0.00 0.00 C 5367 525 M
+stroke
+LT0
+1.00 0.00 0.00 C 1723 1673 M
+stroke
+LT0
+1.00 0.00 0.00 C 2453 1847 M
+stroke
+LT0
+1.00 0.00 0.00 C 4633 3943 M
+stroke
+LT0
+1.00 0.00 0.00 C 5640 565 M
+stroke
+LT0
+1.00 0.00 0.00 C 3906 3098 M
+stroke
+LT0
+1.00 0.00 0.00 C 4712 3400 M
+stroke
+LT0
+1.00 0.00 0.00 C 4598 2952 M
+stroke
+LT0
+1.00 0.00 0.00 C 1781 1241 M
+stroke
+LT0
+1.00 0.00 0.00 C 5079 1831 M
+stroke
+LT0
+1.00 0.00 0.00 C 2472 1483 M
+stroke
+LT0
+1.00 0.00 0.00 C 2946 4451 M
+stroke
+LT0
+1.00 0.00 0.00 C 4564 1366 M
+stroke
+LT0
+1.00 0.00 0.00 C 2323 2004 M
+stroke
+LT0
+1.00 0.00 0.00 C 1786 1013 M
+stroke
+LT0
+1.00 0.00 0.00 C 1695 4608 M
+stroke
+LT0
+1.00 0.00 0.00 C 2119 2261 M
+stroke
+LT0
+1.00 0.00 0.00 C 3502 4184 M
+stroke
+LT0
+1.00 0.00 0.00 C 5904 1637 M
+stroke
+LT0
+1.00 0.00 0.00 C 4636 498 M
+stroke
+LT0
+1.00 0.00 0.00 C 3669 1317 M
+stroke
+LT0
+1.00 0.00 0.00 C 4193 2921 M
+stroke
+LT0
+1.00 0.00 0.00 C 3629 2607 M
+stroke
+LT0
+1.00 0.00 0.00 C 4506 512 M
+stroke
+LT0
+1.00 0.00 0.00 C 5752 2803 M
+stroke
+LT0
+1.00 0.00 0.00 C 3511 2784 M
+stroke
+LT0
+1.00 0.00 0.00 C 5444 2765 M
+stroke
+LT0
+1.00 0.00 0.00 C 2228 1522 M
+% End plot #3
+stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+1577 4619 N
+0 -4339 V
+4339 0 V
+0 4339 V
+-4339 0 V
+Z stroke
+1.000 UP
+1.000 UL
+LTb
+LCb setrgbcolor
+stroke
+grestore
+end
+showpage
+%%Trailer
+%%DocumentFonts: times
