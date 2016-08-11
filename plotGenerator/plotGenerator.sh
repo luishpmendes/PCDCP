@@ -13,6 +13,7 @@ do
                 do
                     for p in 0.25 0.5
                     do
+                        echo "N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.};
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/vertices.txt";
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/edges.txt";
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/solutionVertices.txt";
