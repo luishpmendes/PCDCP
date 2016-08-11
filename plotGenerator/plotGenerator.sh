@@ -19,7 +19,7 @@ do
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/solutionVertices.txt";
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/solutionEdges.txt";
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/plot.eps";
-                        ./plotGenerator $path $n ${d//.} $k $t $r;
+                        ./plotGenerator $path $n ${d//.} $k $t $r ${p//.};
                     done
                 done
             done

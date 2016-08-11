@@ -25,7 +25,7 @@ int main (int argc, char * argv[]) {
         K = string(argv[4]);
         T = string(argv[5]);
         R = string(argv[6]);
-        R = string(argv[7]);
+        P = string(argv[7]);
     } else {
         cin >> path >> N >> D >> K >> T >> R >> P;
     }
