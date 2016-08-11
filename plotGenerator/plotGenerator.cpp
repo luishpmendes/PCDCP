@@ -14,23 +14,24 @@ bool pointComp (pair < pair <double, double>, double > lhs, pair < pair <double,
 }
 
 int main (int argc, char * argv[]) {
-    string path, N, D, K, T, R;
+    string path, N, D, K, T, R, P;
 
     cout << argc << endl;
 
-    if (argc == 7) {
+    if (argc == 8) {
         path = string(argv[1]);
         N = string(argv[2]);
         D = string(argv[3]);
         K = string(argv[4]);
         T = string(argv[5]);
         R = string(argv[6]);
+        R = string(argv[7]);
     } else {
-        cin >> path >> N >> D >> K >> T >> R;
+        cin >> path >> N >> D >> K >> T >> R >> P;
     }
 
-    ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "R" + R + ".in");
-    ifstream resultFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "/result.out");
+    ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + ".in");
+    ifstream resultFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/result.out");
 
     if (inputFile.is_open() && resultFile.is_open()) {
         ulint n, mComplete, m, k, r;
@@ -70,7 +71,7 @@ int main (int argc, char * argv[]) {
         }
 
         // printing vertices' coordinates and penalty
-        ofstream pointsFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "/vertices.txt");
+        ofstream pointsFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/vertices.txt");
         for (ulint v = 0; v < n; v++) {
             pointsFile << vertices[v].first.first << ' ';
             pointsFile << vertices[v].first.second << ' ';
@@ -86,7 +87,7 @@ int main (int argc, char * argv[]) {
 
         /*
         // reading the graph's edges and printing its coordinates
-        ofstream edgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "/edges.txt");
+        ofstream edgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/edges.txt");
         for (int e = 0; e < m; e++) {
             int u, v, w;
             inputFile >> u >> v >> w;
@@ -102,7 +103,7 @@ int main (int argc, char * argv[]) {
         double costSolution;
         resultFile >> nSolution >> mSolution >> costSolution;
         // reading the solution's vertices and printing its coordinates and neighborhood radio
-        ofstream solutionVerticesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R +"/solutionVertices.txt");
+        ofstream solutionVerticesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R +"P" + P + "/solutionVertices.txt");
         for (ulint i = 0; i < nSolution; i++) {
             int v;
             resultFile >> v;
@@ -114,7 +115,7 @@ int main (int argc, char * argv[]) {
 
         cout << "Edges:" << endl;
         // reading the solution's edges and printing its coordinates
-        ofstream solutionEdgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "/solutionEdges.txt");
+        ofstream solutionEdgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/solutionEdges.txt");
         for (ulint e = 0; e < mSolution; e++) {
             ulint u, v;
             resultFile >> u >> v;
