@@ -71,11 +71,11 @@ int main (int argc, char * argv[]) {
         }
 
         // printing vertices' coordinates and penalty
-        ofstream pointsFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/vertices.txt");
+        ofstream verticesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/vertices.txt");
         for (ulint v = 0; v < n; v++) {
-            pointsFile << vertices[v].first.first << ' ';
-            pointsFile << vertices[v].first.second << ' ';
-            pointsFile << vertices[v].second << endl;
+            verticesFile << vertices[v].first.first << ' ';
+            verticesFile << vertices[v].first.second << ' ';
+            verticesFile << vertices[v].second << endl;
         }
         pointsFile.close();
         
