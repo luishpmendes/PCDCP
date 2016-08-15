@@ -310,7 +310,7 @@ int main () {
         model.setObjective(obj, GRB_MINIMIZE);
 
         // yu == 1
-        model.addConstr(y[r] == 1.0, "c_0");
+        model.addConstr(y[root] == 1.0, "c_0");
 
         // dominance
         // ∀ v ∈ V
