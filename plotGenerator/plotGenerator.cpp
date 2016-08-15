@@ -34,8 +34,9 @@ int main (int argc, char * argv[]) {
     ifstream resultFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/result.out");
 
     if (inputFile.is_open() && resultFile.is_open()) {
-        ulint n, mComplete, m, k, r;
-        inputFile >> n >> mComplete >> m >> k >> r;
+        ulint n, mComplete, m, k, t, r, root;
+        double d, p;
+        inputFile >> n >> d >> k >> t >> r >> p >> mComplete >> m >> root;
         vector < pair < pair <double, double>, double > > vertices (n, make_pair(make_pair(0, 0), 0));
         cout << "Vertices: " << endl;
         // reading vertices' coordinates and penalty
@@ -77,7 +78,7 @@ int main (int argc, char * argv[]) {
             verticesFile << vertices[v].first.second << ' ';
             verticesFile << vertices[v].second << endl;
         }
-        pointsFile.close();
+        verticesFile.close();
         
         // reading (and ignoring) the complete graph's edges
         for (int j = 0; j < mComplete; j++) {
