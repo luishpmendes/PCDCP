@@ -102,7 +102,7 @@ int main (int argc, char * argv[]) {
     }
 
     // number of vertices, number of edges in the complete graph, number of 'chosen' edges and neighborhood radio
-    cout << n << ' ' << density << ' ' << k << ' ' << t << ' ' << r << ' ' << p << ' ' << (n * (n - 1)) / 2 << ' ' << m << root << endl;
+    cout << n << ' ' << density << ' ' << k << ' ' << t << ' ' << r << ' ' << p << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << root << endl;
 
     // printing vertices' coordinates and its penalty
     for (int i = 0; i < n; i++) {
