@@ -261,7 +261,7 @@ int main () {
 
     vector < set <ulint> > N = neighbourhoods (W, k);
 
-    ulint solutionCost;
+    ulint solutionCost = 0;
     set <ulint> solutionVectices;
     set <ulint> solutionEdges;
 
