@@ -1,6 +1,6 @@
 INC = /opt/gurobi652/linux64/include/
 CPP = g++
-CARGS = -Wall -m64 -g -O0 -fno-inline
+CARGS = -Wall -m64 -O3 -fno-inline
 CPPLIB = -L/opt/gurobi652/linux64/lib/ -lgurobi_c++ -lgurobi65
 
 clean: 
