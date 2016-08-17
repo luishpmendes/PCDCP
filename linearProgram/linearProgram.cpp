@@ -35,7 +35,7 @@ using namespace std;
 typedef long int ulint;
 typedef vector < vector <ulint> > matrix;
 
-string itos(long int i) {
+string itos(ulint i) {
     stringstream s;
     s << i;
     return s.str();
