@@ -1,6 +1,6 @@
 CPPC = g++
 CFLAGS = -Wall
-DEBUGFLAGS = -g -O0 -fno-inline -std=c++11
+DEBUGFLAGS = -O3 -fno-inline -std=c++11
 
 COMPILER = $(CPPC)
 CFLAGS += $(DEBUGFLAGS)
