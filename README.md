@@ -16,6 +16,6 @@ cirar um validador de solucões
 - se o valor otimo está correto
 - se os vertices que n estao na rota são vizinho de algum outro que esta
 
-multiplicar penalidade por um parametro, testar 0.5 e 0.25
+multiplicar penalidade por um parametro, testar 0.5 e 0.25 -- feito
 
 N10D05K4T0R1
