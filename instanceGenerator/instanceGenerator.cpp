@@ -11,7 +11,7 @@ using namespace std;
 typedef unsigned long int ulint;
 
 int main (int argc, char * argv[]) {
-    int n, k, t, r;
+    ulint n, k, t, r;
     double density, m, p;
 
     if (argc == 7) {
@@ -57,21 +57,21 @@ int main (int argc, char * argv[]) {
     vector < pair <double, double> > points (n);
     vector <int> vAux (n);
 
-    int closest = 0;
-    int distClosest = 200;
-    int farthest = 0;
-    int distFarthest = 0;
-    int root;
+    ulint closest = 0;
+    ulint distClosest = 200;
+    ulint farthest = 0;
+    ulint distFarthest = 0;
+    ulint root;
 
     // creating points array
     // calculating the vertices that are closest and farthest from the middle (0.5, 0.5)
-    for (int i = 0; i < n; i++) {
+    for (ulint i = 0; i < n; i++) {
         double x = xDistribution(xGenerator);
         double y = yDistribution(yGenerator);
         points[i] = (make_pair(x, y));
         double dx = x - 0.5;
         double dy = y - 0.5;
-        int dist = round(100 * sqrt(dx * dx + dy * dy));
+        ulint dist = round(100 * sqrt(dx * dx + dy * dy));
         if (distClosest > dist) {
             closest = i;
             distClosest = dist;
@@ -84,7 +84,7 @@ int main (int argc, char * argv[]) {
     }
 
     // setting reference point for vertices penalty
-    int referencePoint = closest;
+    ulint referencePoint = closest;
     if (t == 1) {
         referencePoint = farthest;
     }
@@ -97,7 +97,7 @@ int main (int argc, char * argv[]) {
     } else {
         unsigned rootSeed = chrono::system_clock::now().time_since_epoch().count();
         default_random_engine rootGenerator (rootSeed);
-        uniform_int_distribution <int> rootDistribution (0, n-1);
+        uniform_int_distribution <ulint> rootDistribution (0, n-1);
         root = rootDistribution(rootGenerator);
     }
 
@@ -105,37 +105,37 @@ int main (int argc, char * argv[]) {
     cout << n << ' ' << density << ' ' << k << ' ' << t << ' ' << r << ' ' << p << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << root << endl;
 
     // printing vertices' coordinates and its penalty
-    for (int i = 0; i < n; i++) {
+    for (ulint i = 0; i < n; i++) {
         double x = points[i].first;
         double y = points[i].second;
         double x0 = points[referencePoint].first;
         double y0 = points[referencePoint].second;
         double dx = x - x0;
         double dy = y - y0;
-        int dist = round(100 * sqrt(dx * dx + dy * dy) * p);
+        ulint dist = round(100 * sqrt(dx * dx + dy * dy) * p);
         cout << x << ' ' << y << ' ' << dist << endl;
     }
 
     // generating and printing the edges of the complete graph and its weights
-    set < pair <int, int> > allEdges;
-    for (int u = 0; u < n; u++) {
-        for (int v = u + 1; v < n; v++) {
+    set < pair <ulint, ulint> > allEdges;
+    for (ulint u = 0; u < n; u++) {
+        for (ulint v = u + 1; v < n; v++) {
             double dx = points[u].first - points[v].first;
             double dy = points[u].second - points[v].second;
-            int dist = round(100 * sqrt(dx * dx + dy * dy));
+            ulint dist = round(100 * sqrt(dx * dx + dy * dy));
             cout << u << ' ' << v << ' ' << dist << endl;
             allEdges.insert(make_pair(u, v));
         }
     }
 
     // choosing the edges to form the basic euclidean tour in the graph
-    set < pair <int, int> > chosenEdges;
+    set < pair <ulint, ulint> > chosenEdges;
     shuffle(vAux.begin(), vAux.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
-    for (int i = 0; i < (int) vAux.size() - 1; i++) {
-        int u = vAux[i];
-        int v = vAux[i + 1];
+    for (ulint i = 0; i < (ulint) vAux.size() - 1; i++) {
+        ulint u = vAux[i];
+        ulint v = vAux[i + 1];
         if (u > v) {
-            int aux = u;
+            ulint aux = u;
             u = v;
             v = aux;
         }
@@ -144,23 +144,23 @@ int main (int argc, char * argv[]) {
     chosenEdges.insert(make_pair(vAux[vAux.size() - 1], vAux[0]));
 
     // put all edges in a array and shuffle its
-    vector < pair <int, int> > vAllEdges (allEdges.begin(), allEdges.end());
+    vector < pair <ulint, ulint> > vAllEdges (allEdges.begin(), allEdges.end());
     shuffle(vAllEdges.begin(), vAllEdges.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
 
     // inserting random edges in the graph until it reaches the desired density
-    for (int i = 0; (int) chosenEdges.size() < m; i++) {
+    for (ulint i = 0; (ulint) chosenEdges.size() < m; i++) {
         chosenEdges.insert(vAllEdges[i]);
     }
 
-    vector < pair <int, int> > vChosenEdges (chosenEdges.begin(), chosenEdges.end());
+    vector < pair <ulint, ulint> > vChosenEdges (chosenEdges.begin(), chosenEdges.end());
 
     // printing the graph edges and its weigths
-    for (int i = 0; i < m; i++) {
-        int u = vChosenEdges[i].first;
-        int v = vChosenEdges[i].second;
+    for (ulint i = 0; i < m; i++) {
+        ulint u = vChosenEdges[i].first;
+        ulint v = vChosenEdges[i].second;
         double dx = points[u].first - points[v].first;
         double dy = points[u].second - points[v].second;
-        int dist = round(100 * sqrt(dx * dx + dy * dy));
+        ulint dist = round(100 * sqrt(dx * dx + dy * dy));
         cout << u << ' ' << v << ' ' << dist << endl;
     }
 
