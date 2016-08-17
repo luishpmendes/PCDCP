@@ -4,10 +4,19 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <sstream>
+#include <set>
+#include <map>
 
 using namespace std;
 
 typedef long int ulint;
+
+string itos(ulint i) {
+    stringstream s;
+    s << i;
+    return s.str();
+}
 
 int main (int argc, char * argv[]) {
     string path, N, D, K, T, R, P;
@@ -34,30 +43,30 @@ int main (int argc, char * argv[]) {
         double d, p;
         inputFile >> n >> d >> k >> t >> r >> p >> mComplete >> m >> root;
 
-        if (N == n) {
+        if (N == itos(n)) {
             cout << "N == n : OK" << endl;
         } else {
             cout << "N == n : ERROR" << endl;
         }
 
-        if (K == k) {
+        if (K == itos(k)) {
             cout << "K == k : OK" << endl;
         } else {
             cout << "K == k : ERROR" << endl;
         }
 
-        if (R == r) {
+        if (R == itos(r)) {
             cout << "R == r : OK" << endl;
         } else {
             cout << "R == r : ERROR" << endl;
         }
 
         vector < pair <double, double> > verticesCoordinates (n, make_pair(0, 0));
-        vector <double> penalties (n, 0);
+        vector <ulint> penalties (n, 0);
         // reading vertices' coordinates and penalty
         for (ulint v = 0; v < n; v++) {
-            inputFile >> vertices[v].first;
-            inputFile >> vertices[v].second;
+            inputFile >> verticesCoordinates[v].first;
+            inputFile >> verticesCoordinates[v].second;
             inputFile >> penalties[v];
         }
 
@@ -67,18 +76,18 @@ int main (int argc, char * argv[]) {
             inputFile >> u >> v >> w;
         }
 
-        vector < pair <double, double> > edges (m, make_pair(0, 0));
-        vector <double> weights (m, 0);
+        vector < pair <ulint, ulint> > edges (m, make_pair(0, 0));
+        map < pair <ulint, ulint>, ulint > weights;
         // reading the graph's edges and printing its coordinates
         for (ulint e = 0; e < m; e++) {
-            int u, v, w;
             inputFile >> edges[e].first;
             inputFile >> edges[e].second;
-            inputFile >> weights[e];
+            ulint w;
+            inputFile >> w;
+            weights[edges[e]] = w;
         }
 
-        ulint nSolution, mSolution;
-        double costSolution;
+        ulint nSolution, mSolution, costSolution;
         resultFile >> nSolution >> mSolution >> costSolution;
 
         if (nSolution <= n) {
@@ -94,16 +103,67 @@ int main (int argc, char * argv[]) {
         }
 
         vector <ulint> solutionVertices (nSolution, 0);
+        vector <ulint> solutionVerticesInvalid;
         // reading the solution's vertices
         for (ulint v = 0; v < nSolution; v++) {
             resultFile >> solutionVertices[v];
+            if (solutionVertices[v] < 0 || solutionVertices[v] >= n) {
+                solutionVerticesInvalid.push_back(solutionVertices[v]);
+            }
+        }
+        if (solutionVerticesInvalid.size() <= 0) {
+            cout << "Solution Vertices : OK" << endl;
+        } else {
+            cout << "Solution Vertices : ERROR - ";
+            for (ulint i = 0; i < (ulint) solutionVerticesInvalid.size(); i++) {
+                cout << solutionVerticesInvalid[i] << " ";
+            }
+            cout << endl;
         }
 
+        set <ulint> setSolutionVertices (solutionVertices.begin(), solutionVertices.end());
         vector < pair <ulint, ulint> > solutionEdges (mSolution, make_pair(0, 0));
+        vector < pair <ulint, ulint> > solutionEdgesInvalid;
         // reading the solution's edges
         for (ulint e = 0; e < mSolution; e++) {
             resultFile >> solutionEdges[e].first;
             resultFile >> solutionEdges[e].second;
+            if (setSolutionVertices.find(solutionEdges[e].first) == setSolutionVertices.end() 
+            || setSolutionVertices.find(solutionEdges[e].second) == setSolutionVertices.end()) {
+                solutionEdgesInvalid.push_back(solutionEdges[e]);
+            }
+        }
+        if (solutionEdgesInvalid.size() <= 0) {
+            cout << "Solution Edges : OK" << endl;            
+        } else {
+            cout << "Solution Edges : ERROR - ";
+            for (ulint i = 0; i < (ulint) solutionEdgesInvalid.size(); i++) {
+                cout << "(" << solutionEdgesInvalid[i].first << ", " << solutionEdgesInvalid[i].second << ") ";
+            }
+            cout << endl;
+        }
+
+        ulint cost = 0;
+        for (ulint e = 0; e < mSolution; e++) {
+            cost += weights[solutionEdges[e]];
+        }
+
+        ulint allPenalties = 0;
+        for (ulint v = 0; v < n; v++) {
+            allPenalties += penalties[v];
+        }
+
+        ulint chosenPenalties = 0;
+        for (ulint v = 0; v < nSolution; v++) {
+            chosenPenalties += penalties[solutionVertices[v]];
+        }
+
+        cost += (allPenalties - chosenPenalties);
+
+        if (costSolution == cost) {
+            cout << "Solution Cost : OK" << endl;
+        } else {
+            cout << "Solution Cost : ERROR" << endl;
         }
     }
     return 0;
