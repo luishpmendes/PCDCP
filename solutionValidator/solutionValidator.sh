@@ -11,8 +11,12 @@ do
             do
                 for r in 0 1 2
                 do
-                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"/validation.txt";
-                    ./solutionValidator $path $n ${d//.} $k $t $r > "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"/validation.txt";
+                    for p in 0.25 0.5
+                    do
+                        echo "N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.};
+                        rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/validation.txt";
+                        ./solutionValidator $path $n ${d//.} $k $t $r ${p//.} > "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/validation.txt";
+                    done
                 done
             done
         done
