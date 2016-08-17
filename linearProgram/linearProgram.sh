@@ -10,14 +10,11 @@ do
         do
             for t in 0 1
             do
-                for r in 0 1 2
+                for p in 0.1 0.5 1.0
                 do
-                    for p in 0.1 0.5 1.0
-                    do
-                        echo "N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.};
-                        mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.};
-                        ./linearProgram < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/result.out";
-                    done
+                    echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
+                    mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
+                    ./linearProgram < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"P"${p//.}".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/result.out";
                 done
             done
         done

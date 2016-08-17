@@ -219,10 +219,10 @@ class subtourelim: public GRBCallback {
 };
 
 int main () {
-    ulint n, mComplete, m, k, t, r, root;
+    ulint n, mComplete, m, k, t, root;
     double d, p;
 
-    cin >> n >> d >> k >> t >> r >> p >> mComplete >> m >> root;
+    cin >> n >> d >> k >> t >> p >> mComplete >> m >> root;
 
     vector <ulint> penalty (n); // vector with de penalties of each vectex
     matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complete graph
@@ -337,7 +337,7 @@ int main () {
             model.addConstr(constr == 2.0 * y[v], "c_2_" + itos(v));
         }
 
-        subtourelim cb = subtourelim(y, x, n, m, E, mE, r);
+        subtourelim cb = subtourelim(y, x, n, m, E, mE, root);
         model.setCallback(&cb);
 
         model.optimize();
@@ -364,14 +364,13 @@ int main () {
         string D = ftos(d);
         string K = itos(k);
         string T = itos(t);
-        string R = itos(r);
         string P = ftos(p);
 
         D.erase(remove(D.begin(), D.end(), '.'), D.end());
         P.erase(remove(P.begin(), P.end(), '.'), P.end());
 
         // exporting model
-        model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/model.lp");
+        model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/model.lp");
     } catch (GRBException e) {
         cout << "Error code = " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;
