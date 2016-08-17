@@ -47,7 +47,7 @@ int main (int argc, char * argv[]) {
         // limiting penalities to the interval [0.25, 1]
         double minPenalty = vertices[0].second;
         double maxPenalty = vertices[0].second;
-        for (int v = 1; v < n; v++) {
+        for (ulint v = 1; v < n; v++) {
             if (minPenalty > vertices[v].second) {
                 minPenalty = vertices[v].second;
             }
@@ -55,17 +55,17 @@ int main (int argc, char * argv[]) {
                 maxPenalty = vertices[v].second;
             }
         }
-        for (int v = 0; v < n; v++) {
+        for (ulint v = 0; v < n; v++) {
             vertices[v].second -= minPenalty;
         }
         minPenalty -= minPenalty;
         maxPenalty -= minPenalty;
-        for (int v = 0; v < n; v++) {
+        for (ulint v = 0; v < n; v++) {
             vertices[v].second *= (1-0.25)/maxPenalty;
         }
         minPenalty *= (1-0.25)/maxPenalty;
         maxPenalty *= (1-0.25)/maxPenalty;
-        for (int v = 0; v < n; v++) {
+        for (ulint v = 0; v < n; v++) {
             vertices[v].second += 0.25;
         }
 
@@ -79,15 +79,15 @@ int main (int argc, char * argv[]) {
         verticesFile.close();
         
         // reading (and ignoring) the complete graph's edges
-        for (int j = 0; j < mComplete; j++) {
-            int u, v, w;
+        for (ulint j = 0; j < mComplete; j++) {
+            ulint u, v, w;
             inputFile >> u >> v >> w;
         }
 
         // reading the graph's edges and printing its coordinates
         ofstream edgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R + "P" + P + "/edges.txt");
-        for (int e = 0; e < m; e++) {
-            int u, v, w;
+        for (ulint e = 0; e < m; e++) {
+            ulint u, v, w;
             inputFile >> u >> v >> w;
             edgesFile << vertices[u].first.first << ' ';
             edgesFile << vertices[u].first.second << endl;
@@ -102,7 +102,7 @@ int main (int argc, char * argv[]) {
         // reading the solution's vertices and printing its coordinates and neighborhood radio
         ofstream solutionVerticesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "R" + R +"P" + P + "/solutionVertices.txt");
         for (ulint i = 0; i < nSolution; i++) {
-            int v;
+            ulint v;
             resultFile >> v;
             solutionVerticesFile << vertices[v].first.first << ' ';
             solutionVerticesFile << vertices[v].first.second << ' ';
