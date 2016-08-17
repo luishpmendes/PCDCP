@@ -22,3 +22,7 @@ multiplicar penalidade por um parametro, testar 0.5 e 0.25 -- feito
 erro encontrado:
 estão sendo criadas instancias com arestas repetidas
 este provavelmente é o motivo do erro na instancia n10d03k0t0r1p025
+
+mudar k para 0, 5, 10 e 20
+raiz só aleatório
+p: 1, 0.5, 0.1
