@@ -11,18 +11,17 @@ using namespace std;
 typedef unsigned long int ulint;
 
 int main (int argc, char * argv[]) {
-    ulint n, k, t, r;
+    ulint n, k, t;
     double density, m, p;
 
-    if (argc == 7) {
+    if (argc == 6) {
         n = atoi(argv[1]);
         density = atof(argv[2]);
         k = atoi(argv[3]);
         t = atoi(argv[4]);
-        r = atoi(argv[5]);
-        p = atof(argv[6]);
+        p = atof(argv[5]);
     } else {
-        cin >> n >> density >> k >> t >> r >> p;
+        cin >> n >> density >> k >> t >> p;
     }
 
     double minDensity = 0.0;
@@ -89,20 +88,13 @@ int main (int argc, char * argv[]) {
         referencePoint = farthest;
     }
 
-    // setting root vertex
-    if (r == 0) {
-        root = closest;
-    } else if (r == 0) {
-        root = farthest;
-    } else {
-        unsigned rootSeed = chrono::system_clock::now().time_since_epoch().count();
-        default_random_engine rootGenerator (rootSeed);
-        uniform_int_distribution <ulint> rootDistribution (0, n-1);
-        root = rootDistribution(rootGenerator);
-    }
+    unsigned rootSeed = chrono::system_clock::now().time_since_epoch().count();
+    default_random_engine rootGenerator (rootSeed);
+    uniform_int_distribution <ulint> rootDistribution (0, n-1);
+    root = rootDistribution(rootGenerator);
 
     // number of vertices, number of edges in the complete graph, number of 'chosen' edges and neighborhood radio
-    cout << n << ' ' << density << ' ' << k << ' ' << t << ' ' << r << ' ' << p << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << root << endl;
+    cout << n << ' ' << density << ' ' << k << ' ' << t << ' ' << p << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << root << endl;
 
     // printing vertices' coordinates and its penalty
     for (ulint i = 0; i < n; i++) {
