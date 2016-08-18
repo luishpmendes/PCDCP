@@ -12,13 +12,13 @@ do
                 for p in 0.1 0.5 1.0
                 do
                     echo "N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.};
-                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/vertices.txt";
-                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/edges.txt";
-                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/solutionVertices.txt";
-                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/solutionEdges.txt";
-                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"R"$r"P"${p//.}"/graph.pdf";
-                    ./plotGenerator $path $n ${d//.} $k $t $r ${p//.};
-                    gnuplot -e "path = '${path}'; n='${n}'; d='${d}'; k='${k}'; t='${t}'; r='${r}'; p='${p}'; D='${d//.}'; P='${p//.}';" generator2.plt;
+                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/vertices.txt";
+                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/edges.txt";
+                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/solutionVertices.txt";
+                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/solutionEdges.txt";
+                    rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/graph.pdf";
+                    ./plotGenerator $path $n ${d//.} $k $t ${p//.};
+                    gnuplot -e "path = '${path}'; n='${n}'; d='${d}'; k='${k}'; t='${t}'; p='${p}'; D='${d//.}'; P='${p//.}';" generator2.plt;
                 done
             done
         done
