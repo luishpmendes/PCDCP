@@ -365,11 +365,13 @@ int main () {
         stringstream ssD;
         ssD << fixed << setprecision(1) << d;
         string D = ssD.str();
+        D.erase(remove(D.begin(), D.end(), '.'), D.end());
         string K = itos(k);
         string T = itos(t);
         stringstream ssP;
         ssP << fixed << setprecision(1) << p;
         string P = ssP.str();
+        P.erase(remove(P.begin(), P.end(), '.'), P.end());
 
         // exporting model
         model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/model.lp");
