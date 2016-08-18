@@ -361,13 +361,14 @@ int main () {
         }
 
         string N = itos(n);
-        string D = ftos(d);
+        stringstream ssD;
+        ssD << fixed << setprecision(1) << d;
+        string D = ssD.str();
         string K = itos(k);
         string T = itos(t);
-        string P = ftos(p);
-
-        D.erase(remove(D.begin(), D.end(), '.'), D.end());
-        P.erase(remove(P.begin(), P.end(), '.'), P.end());
+        stringstream ssP;
+        ssP << fixed << setprecision(1) << p;
+        string P = ssP.str();
 
         // exporting model
         model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/model.lp");
