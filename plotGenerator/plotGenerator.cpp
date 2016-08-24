@@ -31,17 +31,15 @@ int main (int argc, char * argv[]) {
     ifstream resultFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/result.out");
 
     if (inputFile.is_open() && resultFile.is_open()) {
-        ulint n, mComplete, m, k, t, r, root;
+        ulint n, mComplete, m, k, t, root;
         double d, p;
-        inputFile >> n >> d >> k >> t >> r >> p >> mComplete >> m >> root;
+        inputFile >> n >> d >> k >> t >> p >> mComplete >> m >> root;
         vector < pair < pair <double, double>, double > > vertices (n, make_pair(make_pair(0, 0), 0));
-        //cout << "Vertices: " << endl;
         // reading vertices' coordinates and penalty
         for (ulint v = 0; v < n; v++) {
             inputFile >> vertices[v].first.first;
             inputFile >> vertices[v].first.second;
             inputFile >> vertices[v].second;
-            //cout << v << " : (" << vertices[v].first.first << ", " << vertices[v].first.second << ")" << endl;
         }
         // limiting penalities to the interval [0.25, 1]
         double minPenalty = vertices[0].second;

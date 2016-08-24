@@ -93,7 +93,6 @@ int main (int argc, char * argv[]) {
     uniform_int_distribution <ulint> rootDistribution (0, n-1);
     root = rootDistribution(rootGenerator);
 
-    // number of vertices, number of edges in the complete graph, number of 'chosen' edges and neighborhood radio
     cout << n << ' ' << density << ' ' << k << ' ' << t << ' ' << p << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << root << endl;
 
     // printing vertices' coordinates and its penalty
