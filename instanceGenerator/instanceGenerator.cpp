@@ -116,7 +116,7 @@ int main (int argc, char * argv[]) {
             double dy = points[u].second - points[v].second;
             ulint dist = round(100 * sqrt(dx * dx + dy * dy));
             cout << u << ' ' << v << ' ' << dist << endl;
-            allEdges.insert(make_pair(u, v));
+            allEdges.insert(minmax(u, v));
         }
     }
 
@@ -126,14 +126,9 @@ int main (int argc, char * argv[]) {
     for (ulint i = 0; i < (ulint) vAux.size() - 1; i++) {
         ulint u = vAux[i];
         ulint v = vAux[i + 1];
-        if (u > v) {
-            ulint aux = u;
-            u = v;
-            v = aux;
-        }
-        chosenEdges.insert(make_pair(u, v));
+        chosenEdges.insert(minmax(u, v));
     }
-    chosenEdges.insert(make_pair(vAux[vAux.size() - 1], vAux[0]));
+    chosenEdges.insert(minmax(vAux[vAux.size() - 1], vAux[0]));
 
     // put all edges in a array and shuffle its
     vector < pair <ulint, ulint> > vAllEdges (allEdges.begin(), allEdges.end());
