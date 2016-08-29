@@ -260,16 +260,29 @@ int main () {
         mE[make_pair(v, u)] = e;
     }
 
-    vector < set <ulint> > N = neighbourhoods (W, k);
+    vector < set <ulint> > Ns = neighbourhoods (W, k);
 
     ulint solutionCost = 0;
     set <ulint> solutionVectices;
     set <ulint> solutionEdges;
 
     try {
+        string N = itos(n);
+        stringstream ssD;
+        ssD << fixed << setprecision(1) << d;
+        string D = ssD.str();
+        D.erase(remove(D.begin(), D.end(), '.'), D.end());
+        string K = itos(k);
+        string T = itos(t);
+        stringstream ssP;
+        ssP << fixed << setprecision(1) << p;
+        string P = ssP.str();
+        P.erase(remove(P.begin(), P.end(), '.'), P.end());
+
         GRBEnv env = GRBEnv();
 
-        env.set(GRB_IntParam_OutputFlag, 0);
+        env.set(GRB_IntParam_LogToConsole, 0);
+        env.set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/log.txt");
 
         GRBModel model = GRBModel(env);
 
@@ -318,7 +331,7 @@ int main () {
         for (ulint v = 0; v < n; v++) {
             // ∑ yw >= 1 , w ∈ Nk(v)
             GRBLinExpr constr = 0.0;
-            for (set <ulint> :: iterator it = N[v].begin(); it != N[v].end(); it++) {
+            for (set <ulint> :: iterator it = Ns[v].begin(); it != Ns[v].end(); it++) {
                 ulint w = *it;
                 constr += y[w];
             }
@@ -360,18 +373,6 @@ int main () {
         } else {
             cout << "Solution not found." << endl;
         }
-
-        string N = itos(n);
-        stringstream ssD;
-        ssD << fixed << setprecision(1) << d;
-        string D = ssD.str();
-        D.erase(remove(D.begin(), D.end(), '.'), D.end());
-        string K = itos(k);
-        string T = itos(t);
-        stringstream ssP;
-        ssP << fixed << setprecision(1) << p;
-        string P = ssP.str();
-        P.erase(remove(P.begin(), P.end(), '.'), P.end());
 
         // exporting model
         model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/model.lp");

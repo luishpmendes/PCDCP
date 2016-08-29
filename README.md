@@ -26,3 +26,5 @@ este provavelmente é o motivo do erro na instancia n10d03k0t0r1p025
 mudar k para 0, 5, 10 e 20
 raiz só aleatório
 p: 1, 0.5, 0.1
+
+instancia com mais de um ciclo: N20D05K5T0P05
