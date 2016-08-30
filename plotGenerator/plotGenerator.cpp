@@ -34,7 +34,7 @@ int main (int argc, char * argv[]) {
         ulint n, mComplete, m, k, t, root;
         double d, p;
         inputFile >> n >> d >> k >> t >> p >> mComplete >> m >> root;
-        vector < pair < pair <double, double>, double > > vertices (n, make_pair(make_pair(0, 0), 0));
+        vector < pair < pair <double, double>, ulint > > vertices (n, make_pair(make_pair(0, 0), 0));
         // reading vertices' coordinates and penalty
         for (ulint v = 0; v < n; v++) {
             inputFile >> vertices[v].first.first;
