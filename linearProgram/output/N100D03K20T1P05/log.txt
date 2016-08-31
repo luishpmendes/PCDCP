@@ -1,0 +1,50 @@
+
+Gurobi 6.5.2 (linux64) logging started Wed Aug 31 10:35:36 2016
+
+Optimize a model with 201 rows, 1585 columns and 4299 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [2e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 3748
+Presolve removed 64 rows and 1 columns
+Presolve time: 0.01s
+Presolved: 137 rows, 1584 columns, 3504 nonzeros
+Variable types: 0 continuous, 1584 integer (1584 binary)
+
+Root relaxation: objective 1.326000e+03, 116 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1326.00000    0   16 3748.00000 1326.00000  64.6%     -    0s
+H    0     0                    1577.0000000 1326.00000  15.9%     -    0s
+H    0     0                    1372.0000000 1326.00000  3.35%     -    0s
+     0     0 1354.00000    0    6 1372.00000 1354.00000  1.31%     -    0s
+     0     0 1354.00000    0   16 1372.00000 1354.00000  1.31%     -    0s
+     0     0 1354.50000    0    6 1372.00000 1354.50000  1.28%     -    0s
+     0     0 1360.00000    0    2 1372.00000 1360.00000  0.87%     -    0s
+     0     0 1360.00000    0   14 1372.00000 1360.00000  0.87%     -    0s
+     0     0 1360.00000    0    6 1372.00000 1360.00000  0.87%     -    0s
+     0     0 1360.00000    0    6 1372.00000 1360.00000  0.87%     -    0s
+H    0     0                    1368.0000000 1360.00000  0.58%     -    0s
+H    0     0                    1367.0000000 1360.00000  0.51%     -    0s
+     0     0 1361.50000    0    2 1367.00000 1361.50000  0.40%     -    0s
+     0     0 1361.50000    0   10 1367.00000 1361.50000  0.40%     -    0s
+     0     0 1361.50000    0    6 1367.00000 1361.50000  0.40%     -    0s
+     0     0 1362.00000    0   23 1367.00000 1362.00000  0.37%     -    0s
+*    0     0               0    1366.0000000 1366.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 16
+  Cover: 21
+  Clique: 9
+  MIR: 1
+  Zero half: 1
+
+Explored 0 nodes (600 simplex iterations) in 0.09 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.366000000000e+03, best bound 1.366000000000e+03, gap 0.0%
