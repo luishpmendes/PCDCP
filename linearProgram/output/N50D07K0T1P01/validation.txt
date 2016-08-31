@@ -1,0 +1,11 @@
+7
+N == n : OK
+K == k : OK
+nSolution <= n : OK
+mSolution <= m : OK
+Solution Vertices : OK
+Solution Edges : OK
+Solution Cost : OK
+Cover : OK
+Solution Vertice Not in Main Cycle: Error - 1 2 4 8 15 17 20 25 27 28 30 31 36 40 46 47 48
+Non Solution Vertice in Main Cycle: OK

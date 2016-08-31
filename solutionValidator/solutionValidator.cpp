@@ -301,7 +301,7 @@ int main (int argc, char * argv[]) {
             cout << "Solution Vertice Not in Main Cycle: OK" << endl;
         } else {
             cout << "Solution Vertice Not in Main Cycle: Error - ";
-            for (int i = 0; i < solutionVerticesNotInMainCycle.size() - 1; i++) {
+            for (int i = 0; i < (int) solutionVerticesNotInMainCycle.size() - 1; i++) {
                 cout << solutionVerticesNotInMainCycle[i] << " ";
             }
             cout << solutionVerticesNotInMainCycle[solutionVerticesNotInMainCycle.size() - 1] << endl;
@@ -311,7 +311,7 @@ int main (int argc, char * argv[]) {
             cout << "Non Solution Vertice in Main Cycle: OK" << endl;
         } else {
             cout << "Non Solution Vertice in Main Cycle: Error - ";
-            for (int i = 0; i < nonSolutionVerticesInMainCycle.size() - 1; i++) {
+            for (int i = 0; i < (int) nonSolutionVerticesInMainCycle.size() - 1; i++) {
                 cout << nonSolutionVerticesInMainCycle[i] << " ";
             }
             cout << nonSolutionVerticesInMainCycle[nonSolutionVerticesInMainCycle.size() - 1] << endl;
