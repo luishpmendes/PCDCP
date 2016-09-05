@@ -14,12 +14,12 @@ cirar um validador de solucões
 - se as arestas dominantes pertencem ao grafo -- feito
 - se os vertices dominantes pertecem ao grafo -- feito
 - se o valor otimo está correto -- feito
-- se os vertices que não estao na rota são vizinho de algum outro que esta
-- se a solução é um ciclo
+- se os vertices que não estao na rota são vizinho de algum outro que esta -- feito
+- se a solução é um unico ciclo -- meio feito 
 
 multiplicar penalidade por um parametro, testar 0.5 e 0.25 -- feito
 
-erro encontrado:
+erro encontrado: -- corrigido
 estão sendo criadas instancias com arestas repetidas
 este provavelmente é o motivo do erro na instancia n10d03k0t0r1p025
 
