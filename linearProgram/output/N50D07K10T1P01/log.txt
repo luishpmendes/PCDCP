@@ -1,0 +1,45 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep  6 10:06:46 2016
+
+Optimize a model with 101 rows, 908 columns and 1903 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 35 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 66 rows, 894 columns, 1801 nonzeros
+Variable types: 0 continuous, 894 integer (894 binary)
+
+Root relaxation: objective 5.173000e+02, 72 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  517.30000    0   28          -  517.30000      -     -    0s
+H    0     0                    1543.0000000  517.30000  66.5%     -    0s
+     0     0  534.20323    0   43 1543.00000  534.20323  65.4%     -    0s
+     0     0  537.45556    0   56 1543.00000  537.45556  65.2%     -    0s
+     0     0  537.50000    0   46 1543.00000  537.50000  65.2%     -    0s
+     0     0  538.12500    0   48 1543.00000  538.12500  65.1%     -    0s
+     0     0  538.12500    0   47 1543.00000  538.12500  65.1%     -    0s
+     0     2  538.12500    0   45 1543.00000  538.12500  65.1%     -    0s
+*  567   429              55     687.0000000  539.77778  21.4%   3.8    0s
+*  941   312              30     575.0000000  542.36111  5.68%   4.0    0s
+* 1295   416              41     562.0000000  550.25000  2.09%   4.8    0s
+* 3080   181              37     561.0000000  555.50000  0.98%   4.9    1s
+* 3441    14              45     560.0000000  557.00000  0.54%   4.9    1s
+
+Cutting planes:
+  Gomory: 16
+  Cover: 33
+  Flow cover: 6
+  Zero half: 16
+  Lazy constraints: 202
+
+Explored 3590 nodes (17302 simplex iterations) in 1.10 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.600000000000e+02, best bound 5.600000000000e+02, gap 0.0%

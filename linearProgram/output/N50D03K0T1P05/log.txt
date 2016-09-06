@@ -1,0 +1,46 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep  6 10:06:19 2016
+
+Optimize a model with 101 rows, 418 columns and 837 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [2e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 2630
+Presolve removed 51 rows and 50 columns
+Presolve time: 0.00s
+Presolved: 50 rows, 368 columns, 736 nonzeros
+Variable types: 0 continuous, 368 integer (368 binary)
+
+Root relaxation: objective 1.138000e+03, 76 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1138.83333    0   18 2630.00000 1138.83333  56.7%     -    0s
+     0     0 1141.00000    0   14 2630.00000 1141.00000  56.6%     -    0s
+     0     0 1147.66667    0   20 2630.00000 1147.66667  56.4%     -    0s
+H    0     0                    1392.0000000 1147.66667  17.6%     -    0s
+     0     0 1151.50000    0   18 1392.00000 1151.50000  17.3%     -    0s
+     0     0 1152.00000    0   22 1392.00000 1152.00000  17.2%     -    0s
+     0     0 1152.00000    0    8 1392.00000 1152.00000  17.2%     -    0s
+H    0     0                    1262.0000000 1152.00000  8.72%     -    0s
+     0     2 1154.00000    0   12 1262.00000 1154.00000  8.56%     -    0s
+*   42     9              33    1173.0000000 1164.00000  0.77%   2.5    0s
+*   52    15               4    1169.0000000 1164.00000  0.43%   2.4    0s
+H   99     1                    1168.0000000 1164.00000  0.34%   3.0    0s
+H  118     4                    1167.0000000 1164.00000  0.26%   2.9    0s
+*  147     1               5    1166.0000000 1166.00000  0.00%   2.8    0s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 1
+  Zero half: 2
+  Lazy constraints: 32
+
+Explored 149 nodes (513 simplex iterations) in 0.06 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.166000000000e+03, best bound 1.166000000000e+03, gap 0.0%
