@@ -458,13 +458,13 @@ int main () {
             solutionCost = model.get(GRB_DoubleAttr_ObjVal);
             solutionVectices.clear();
             for (ulint v = 0; v < n; v++) {
-                if (y[v].get(GRB_DoubleAttr_X) == 1) {
+                if (y[v].get(GRB_DoubleAttr_X) > 0.5) {
                     solutionVectices.insert(v);
                 }
             }
             solutionEdges.clear();
             for (ulint e = 0; e < m; e++) {
-                if (x[e].get(GRB_DoubleAttr_X) == 1) {
+                if (x[e].get(GRB_DoubleAttr_X) > 0.5) {
                     solutionEdges.insert(e);
                 }
             }
