@@ -94,133 +94,6 @@ vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
     return result;
 }
 /*
-void bfs (vector < list < pair <ulint, ulint> > > adj, map < pair <ulint, ulint>, ulint> mE, ulint n, ulint m, ulint s, vector <ulint> * vertex, vector <ulint> * edge, ulint * cycleID) {
-    vector <int> color (adj.size(), WHITE);
-    queue <ulint> Q;
-
-    *vertex = vector <ulint> (n, 0);
-    *edge = vector <ulint> (m, 0);
-
-    color[s] = GRAY;
-
-    Q.push(s);
-
-    while (!Q.empty()) {
-        ulint u = Q.front();
-        Q.pop();
-
-        for (list < pair <ulint, ulint> >::iterator it = adj[u].begin(); it != adj[u].end(); ++it) {
-            ulint v = (*it).first;
-            if (color[v] == WHITE) {
-                color[v] = GRAY;
-                ulint e = mE[make_pair(u, v)];
-                (*edge)[e] = * cycleID;
-                Q.push(v);
-            }
-        }
-        color[u] = BLACK;
-    }
-    for (ulint v = 0; v < n; v++) {
-        if (color[v] == BLACK) {
-            (*vertex)[v] = * cycleID;
-        }
-    }
-    (*cycleID) = (*cycleID) + 1;
-}
-
-class subtourelim: public GRBCallback {
-    public :
-        vector <GRBVar> y;
-        vector <GRBVar> x;
-        ulint n;
-        ulint m;
-        vector < pair < pair <ulint, ulint> , ulint> > E;
-        map < pair <ulint, ulint>, ulint> mE;
-        ulint u;
-
-        subtourelim (vector <GRBVar> _y, vector <GRBVar> _x, ulint _n, ulint _m, vector < pair < pair <ulint, ulint>, ulint> > _E, map < pair <ulint, ulint>, ulint> _mE, ulint _u) {
-            y = _y;
-            x = _x;
-            n = _n;
-            m = _m;
-            E = _E;
-            mE = _mE;
-            u = _u;
-        }
-    protected :
-        // let C be the cycle that contains u, with n1 vertices
-        // let S = n - n1
-        // the sum of the edges that are not in C must be less than S-1
-        void callback () {
-            try {
-                if (where == GRB_CB_MIPSOL) {
-                    // find subtour containing vertex u, and add constraint to edges not in the tour
-                    vector < list < pair <ulint, ulint> > > adj (n);
-
-                    // build graph from solution vertices
-                    for (ulint e = 0; e < m; e++) {
-                        if (getSolution(x[e]) > 0) {
-                            ulint a = E[e].first.first;
-                            ulint b = E[e].first.second;
-                            ulint c = E[e].second;
-                            adj[a].push_back(make_pair(b, c));
-                            adj[b].push_back(make_pair(a, c));
-                        }
-                    }
-
-                    // bfs from u, recording which vertex and edges are visited
-                    vector <ulint> vertexCycle (n, -1);
-                    vector <ulint> edgeCycle (m, -1);
-
-                    ulint numCycles = 0;
-                    while (true) {
-                        ulint v = 0;
-                        for (; v < n; v++) {
-                            if (getSolution(y[v]) > 0) { // v is in solution
-                                if (vertexCycle[v] < 0) { // cycle containing v not discovered yet
-                                    break;
-                                }
-                            }
-                        }
-                        if (v >= n) {
-                            break;
-                        }
-                        bfs (adj, mE, n, m, u, &vertexCycle, &edgeCycle, &numCycles);
-                    }
-
-                    vector < set <ulint> > cyclesVertices (numCycles);
-                    vector < set <ulint> > cyclesEdges (numCycles);
-
-                    for (ulint v = 0; v < n; v++) {
-                        if (vertexCycle[v] >= 0) {
-                            cyclesVertices[vertexCycle[v]].insert(v);
-                        }
-                    }
-
-                    for (ulint e = 0; e < m; e++) {
-                        if (edgeCycle[e] >= 0) {
-                            cyclesEdges[edgeCycle[e]].insert(e);
-                        }
-                    }
-                    for (ulint c = 1; c < numCycles; c++) {
-                        GRBLinExpr expr = 0;
-                        for (set <ulint> ::iterator it = cyclesEdges[c].begin(); it != cyclesEdges[c].end(); it++) {
-                            ulint e = *it;
-                            expr += x[e];
-                        }
-                        addLazy(expr <= cyclesVertices[c].size() - 1);
-                    }
-                }
-            } catch (GRBException e) {
-                cout << "Error number: " << e.getErrorCode() << endl;
-                cout << "Error message: " << e.getMessage() << endl;
-            } catch (...) {
-                cout << "Error during callback" << endl;
-            }
-        }
-};
-*/
-
 class subtourelim: public GRBCallback {
     public :
         vector <GRBVar> y;
@@ -311,6 +184,121 @@ class subtourelim: public GRBCallback {
             }
         }
 };
+*/
+
+void bfs (vector < list < pair <ulint, ulint> > > adj, map < pair <ulint, ulint>, ulint> mE, ulint s, ulint cycleNumber, vector <ulint> * vertexCycle, vector <ulint> * edgeCycle) {
+    vector <ulint> color (adj.size(), WHITE);
+    queue <ulint> Q;
+
+    color[s] = GRAY;
+
+    Q.push(s);
+
+    while (!Q.empty()) {
+        ulint u = Q.front();
+        Q.pop();
+
+        for (list < pair <ulint, ulint> > :: iterator it = adj[u].begin(); it != adj[u].end(); ++it) {
+            ulint v = (*it).first;
+            if (color[v] == WHITE) {
+                color[v] = GRAY;
+                (*vertexCycle)[v] = cycleNumber;
+                ulint e = mE[make_pair(u, v)];
+                (*edgeCycle)[e] = cycleNumber;
+                Q.push(v);
+            }
+        }
+        color[u] = BLACK;
+    }
+}
+
+class subtourelim: public GRBCallback {
+    public :
+        vector <GRBVar> y;
+        vector <GRBVar> x;
+        ulint n;
+        ulint m;
+        vector < pair < pair <ulint, ulint> , ulint> > E;
+        map < pair <ulint, ulint>, ulint> mE;
+        ulint root;
+
+        subtourelim (vector <GRBVar> _y, vector <GRBVar> _x, ulint _n, ulint _m, vector < pair < pair <ulint, ulint>, ulint> > _E, map < pair <ulint, ulint>, ulint> _mE, ulint _root) {
+            y = _y;
+            x = _x;
+            n = _n;
+            m = _m;
+            E = _E;
+            mE = _mE;
+            root = _root;
+        }
+    protected :
+        // let C be the cycle that contains u, with n1 vertices
+        // let S = n - n1
+        // the sum of the edges that are not in C must be less than S-1
+        void callback () {
+            try {
+                if (where == GRB_CB_MIPSOL) {
+                    // find subtour containing vertex u, and add constraint to edges not in the tour
+                    vector < list < pair <ulint, ulint> > > adj (n);
+
+                    // build graph from solution vertices
+                    for (ulint e = 0; e < m; e++) {
+                        if (getSolution(x[e]) > 0) {
+                            ulint a = E[e].first.first;
+                            ulint b = E[e].first.second;
+                            ulint c = E[e].second;
+                            adj[a].push_back(make_pair(b, c));
+                            adj[b].push_back(make_pair(a, c));
+                        }
+                    }
+
+                    vector <ulint> vertexCycle (n, 0);
+                    vector <ulint> edgeCycle (m, 0);
+
+                    ulint cycleNumber = 1;
+                    bfs (adj, mE, root, cycleNumber++, &vertexCycle, &edgeCycle);
+
+                    for (ulint i = 0; i < n; i++) {
+                        ulint v = root;
+                        for (ulint u = 0; u < n; u++) {
+                            if (vertexCycle[u] == 0) {
+                                v = u;
+                                break;
+                            }
+                        }
+                        if (v == root) {
+                            break;
+                        } else {
+                            bfs (adj, mE, v, cycleNumber++, &vertexCycle, &edgeCycle);
+                        }
+                    }
+
+                    for (ulint c = 2; c <= cycleNumber; c++) {
+                        ulint cycleSize = 0;
+                        for (int v = 0; v < n; v++) {
+                            if (vertexCycle[v] == c && getSolution(y[v]) > 0.5) {
+                                cycleSize++;
+                            }
+                        }
+                        GRBLinExpr expr = 0;
+                        for (ulint e = 0; e < m; e++) {
+                            if (edgeCycle[e] == 0 && getSolution(x[e]) > 0.5) {
+                                if (vertexCycle[E[e].first.first] == c && getSolution(y[E[e].first.first]) > 0.5
+                                && vertexCycle[E[e].first.second] == c && getSolution(y[E[e].first.second]) > 0.5)
+                                expr += x[e];
+                            }
+                        }
+                        addLazy(expr <= cycleSize - 1);
+                    }
+                }
+            } catch (GRBException e) {
+                cout << "Error number: " << e.getErrorCode() << endl;
+                cout << "Error message: " << e.getMessage() << endl;
+            } catch (...) {
+                cout << "Error during callback" << endl;
+            }
+        }
+};
 
 int main () {
     ulint n, mComplete, m, k, t, root;
@@ -379,10 +367,6 @@ int main () {
         env.set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/log.txt");
 
         GRBModel model = GRBModel(env);
-
-//        model.getEnv().set(GRB_IntParam_DualReductions, 0);
-  //      model.getEnv().set(GRB_IntParam_LogToConsole, 0);
-    //    model.getEnv().set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/log.txt");
 
         vector <GRBVar> y (n);
 
