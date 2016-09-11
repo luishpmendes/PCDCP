@@ -125,7 +125,7 @@ class subtourelim: public GRBCallback {
 
                     // build graph from solution vertices
                     for (ulint e = 0; e < m; e++) {
-                        if (getSolution(x[e]) > 0) {
+                        if (getSolution(x[e]) > 0.5) {
                             ulint a = E[e].first.first;
                             ulint b = E[e].first.second;
                             ulint c = E[e].second;
@@ -147,7 +147,7 @@ class subtourelim: public GRBCallback {
 
                         for (list < pair <ulint, ulint> > :: iterator it = adj[u].begin(); it != adj[u].end(); it++) {
                             int v = it->first;
-                            if (visitedVertices[v] == 0) {
+                            if (visitedVertices[v] == 0 && getSolution(y[v]) > 0.5) {
                                 visitedVertices[v] = 1;
                                 ulint e = mE[make_pair(u, v)];
                                 visitedEdges[e] = 1;
@@ -243,7 +243,7 @@ class subtourelim: public GRBCallback {
 
                     // build graph from solution vertices
                     for (ulint e = 0; e < m; e++) {
-                        if (getSolution(x[e]) > 0) {
+                        if (getSolution(x[e]) > 0.5) {
                             ulint a = E[e].first.first;
                             ulint b = E[e].first.second;
                             ulint c = E[e].second;
@@ -261,7 +261,7 @@ class subtourelim: public GRBCallback {
                     for (ulint i = 0; i < n; i++) {
                         ulint v = root;
                         for (ulint u = 0; u < n; u++) {
-                            if (vertexCycle[u] == 0) {
+                            if (vertexCycle[u] == 0 && getSolution(y[v]) > 0.5) {
                                 v = u;
                                 break;
                             }
