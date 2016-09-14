@@ -1,10 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
-int main () {
+int main (int argc, char * argv[]) {
 	string path;
 
 	if (argc == 2) {
@@ -47,7 +48,7 @@ int main () {
 						string p = *itP;
 						int errorFlag = 1;
 						ifstream errorFlagFile ("../" + path + "/output/N" + n + "D" + d + "K" + k + "T" + t + "P" + p + "/errorFlag.txt");
-						if (inputFile.is_open()) {
+						if (errorFlagFile.is_open()) {
 							errorFlagFile >> errorFlag;
 						}
 						cout << "N" << n << "D" << d << "K" << k << "T" << t << "P" << p + ": ";

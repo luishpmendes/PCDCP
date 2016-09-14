@@ -219,7 +219,7 @@ int main (int argc, char * argv[]) {
         if (costSolution == cost) {
             cout << "Solution Cost : OK" << endl;
         } else {
-            cout << "Solution Cost : ERROR" << endl;
+            cout << "Solution Cost : ERROR - " << costSolution << " != " << cost << endl;
             errorFlag = 1;
         }
 
@@ -328,7 +328,7 @@ int main (int argc, char * argv[]) {
             cout << nonSolutionVerticesInMainCycle[nonSolutionVerticesInMainCycle.size() - 1] << endl;
         }
 
-        ofstream errorFlagFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/errorFlag.txt", , ofstream::out);
+        ofstream errorFlagFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/errorFlag.txt", ofstream::out);
         errorFlagFile << errorFlag;
         errorFlagFile.close();
     }
