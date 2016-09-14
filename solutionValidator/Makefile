@@ -6,7 +6,10 @@ COMPILER = $(CPPC)
 CFLAGS += $(DEBUGFLAGS)
 
 clean: 
-	rm -rf solutionValidator
+	rm -rf solutionValidator validationAggregator
 
 solutionValidator: solutionValidator.cpp
 	$(COMPILER) $(CFLAGS) solutionValidator.cpp -o solutionValidator
+
+validationAggregator: validationAggregator.cpp
+	$(COMPILER) $(CFLAGS) validationAggregator.cpp -o validationAggregator

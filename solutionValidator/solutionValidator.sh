@@ -19,4 +19,6 @@ do
         done
     done
 done
+make validationAggregator;
+./validationAggregator $path > "../"$path"/output/validation.txt";
 make clean;

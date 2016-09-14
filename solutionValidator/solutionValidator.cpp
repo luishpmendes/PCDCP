@@ -86,18 +86,21 @@ int main (int argc, char * argv[]) {
     if (inputFile.is_open() && resultFile.is_open()) {
         ulint n, mComplete, m, k, t, root;
         double d, p;
+        int errorFlag = 0;
         inputFile >> n >> d >> k >> t >> p >> mComplete >> m >> root;
 
         if (N == itos(n)) {
             cout << "N == n : OK" << endl;
         } else {
             cout << "N == n : ERROR" << endl;
+            errorFlag = 1;
         }
 
         if (K == itos(k)) {
             cout << "K == k : OK" << endl;
         } else {
             cout << "K == k : ERROR" << endl;
+            errorFlag = 1;
         }
 
         vector < pair < pair <double, double>, ulint > > vertices (n, make_pair(make_pair(0, 0), 0));
@@ -139,12 +142,14 @@ int main (int argc, char * argv[]) {
             cout << "nSolution <= n : OK" << endl;
         } else {
             cout << "nSolution <= n : ERROR" << endl;
+            errorFlag = 1;
         }
 
         if (mSolution <= m) {
             cout << "mSolution <= m : OK" << endl;
         } else {
             cout << "mSolution <= m : ERROR" << endl;
+            errorFlag = 1;
         }
 
         vector <ulint> solutionVertices (nSolution, 0);
@@ -161,6 +166,7 @@ int main (int argc, char * argv[]) {
             cout << "Solution Vertices : OK" << endl;
         } else {
             cout << "Solution Vertices : ERROR - ";
+            errorFlag = 1;
             for (ulint i = 0; i < (ulint) solutionVerticesInvalid.size(); i++) {
                 cout << solutionVerticesInvalid[i] << " ";
             }
@@ -184,6 +190,7 @@ int main (int argc, char * argv[]) {
             cout << "Solution Edges : OK" << endl;            
         } else {
             cout << "Solution Edges : ERROR - ";
+            errorFlag = 1;
             for (ulint i = 0; i < (ulint) solutionEdgesInvalid.size(); i++) {
                 cout << "(" << solutionEdgesInvalid[i].first << ", " << solutionEdgesInvalid[i].second << ") ";
             }
@@ -213,6 +220,7 @@ int main (int argc, char * argv[]) {
             cout << "Solution Cost : OK" << endl;
         } else {
             cout << "Solution Cost : ERROR" << endl;
+            errorFlag = 1;
         }
 
         vector <ulint> verticesInSolution (n, 0);
@@ -256,6 +264,7 @@ int main (int argc, char * argv[]) {
             cout << "Cover : OK" << endl;
         } else {
             cout << "Cover : Error - Uncovered vertices: ";
+            errorFlag = 1;
             for (set <ulint> :: iterator it = uncoveredVertices.begin(); it != uncoveredVertices.end(); it++) {
                 ulint u = *it;
                 cout << u << " ";
@@ -301,6 +310,7 @@ int main (int argc, char * argv[]) {
             cout << "Solution Vertice Not in Main Cycle: OK" << endl;
         } else {
             cout << "Solution Vertice Not in Main Cycle: Error - ";
+            errorFlag = 1;
             for (int i = 0; i < (int) solutionVerticesNotInMainCycle.size() - 1; i++) {
                 cout << solutionVerticesNotInMainCycle[i] << " ";
             }
@@ -311,11 +321,16 @@ int main (int argc, char * argv[]) {
             cout << "Non Solution Vertice in Main Cycle: OK" << endl;
         } else {
             cout << "Non Solution Vertice in Main Cycle: Error - ";
+            errorFlag = 1;
             for (int i = 0; i < (int) nonSolutionVerticesInMainCycle.size() - 1; i++) {
                 cout << nonSolutionVerticesInMainCycle[i] << " ";
             }
             cout << nonSolutionVerticesInMainCycle[nonSolutionVerticesInMainCycle.size() - 1] << endl;
         }
+
+        ofstream errorFlagFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/errorFlag.txt", , ofstream::out);
+        errorFlagFile << errorFlag;
+        errorFlagFile.close();
     }
     return 0;
 }
