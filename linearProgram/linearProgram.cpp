@@ -461,8 +461,14 @@ int main () {
         env.set(GRB_IntParam_LazyConstraints, 1);
         env.set(GRB_IntParam_LogToConsole, 0);
         env.set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/log.txt");
+        env.set(GRB_DoubleParam_TimeLimit, 10);
 
         GRBModel model = GRBModel(env);
+
+        model.getEnv().set(GRB_IntParam_LazyConstraints, 1);
+        model.getEnv().set(GRB_IntParam_LogToConsole, 0);
+        model.getEnv().set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/log.txt");
+        model.getEnv().set(GRB_DoubleParam_TimeLimit, 10);
 
         vector <GRBVar> y (n);
 
