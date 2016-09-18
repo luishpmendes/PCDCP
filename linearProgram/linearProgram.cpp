@@ -10,6 +10,7 @@
 #include <string>
 #include <algorithm>
 #include <iomanip>
+#include <cmath>
 
 #ifndef INFINITE
 #define INFINITE 15 << 25
@@ -534,7 +535,7 @@ int main () {
         model.optimize();
 
         if (model.get(GRB_IntAttr_SolCount) > 0) {
-            solutionCost = model.get(GRB_DoubleAttr_ObjVal);
+            solutionCost = round(model.get(GRB_DoubleAttr_ObjVal));
             solutionVectices.clear();
             for (ulint v = 0; v < n; v++) {
                 if (y[v].get(GRB_DoubleAttr_X) > 0.5) {
