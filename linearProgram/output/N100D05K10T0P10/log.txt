@@ -1,0 +1,46 @@
+
+Gurobi 6.5.2 (linux64) logging started Sun Sep 18 18:46:50 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Sun Sep 18 18:46:50 2016
+
+Optimize a model with 201 rows, 2575 columns and 5493 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 53 rows and 4 columns
+Presolve time: 0.01s
+Presolved: 148 rows, 2571 columns, 5245 nonzeros
+Variable types: 0 continuous, 2571 integer (2571 binary)
+
+Root relaxation: objective 1.000500e+03, 131 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1000.50000    0   14          - 1000.50000      -     -    0s
+     0     0 1004.50000    0   14          - 1004.50000      -     -    0s
+     0     0 1011.00000    0   25          - 1011.00000      -     -    0s
+     0     0 1012.37500    0   22          - 1012.37500      -     -    0s
+     0     0 1012.37500    0   26          - 1012.37500      -     -    0s
+     0     0 1012.37500    0   23          - 1012.37500      -     -    0s
+     0     2 1012.37500    0   23          - 1012.37500      -     -    0s
+  6006  4066 1059.20000   94    8          - 1018.43750      -   7.1    5s
+*10346  5474              71    1082.0000000 1019.00000  5.82%   6.9    9s
+ 10735  5558 1054.50000   51    6 1082.00000 1019.75000  5.75%   7.0   10s
+
+Cutting planes:
+  Gomory: 7
+  Cover: 8
+  MIR: 2
+  Flow cover: 4
+  Zero half: 9
+  Lazy constraints: 1298
+
+Explored 11121 nodes (76729 simplex iterations) in 10.04 seconds
+Thread count was 8 (of 8 available processors)
+
+Time limit reached
+Best objective 1.082000000000e+03, best bound 1.021000000000e+03, gap 5.6377%
