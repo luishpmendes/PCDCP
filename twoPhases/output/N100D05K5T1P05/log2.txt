@@ -1,0 +1,48 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 11:40:52 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 11:40:52 2016
+
+Optimize a model with 201 rows, 2575 columns and 5151 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [2e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 5373
+Presolve removed 101 rows and 100 columns
+Presolve time: 0.01s
+Presolved: 100 rows, 2475 columns, 4950 nonzeros
+Variable types: 0 continuous, 2475 integer (2475 binary)
+
+Root relaxation: objective 1.110500e+03, 144 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1110.50000    0    6 5373.00000 1110.50000  79.3%     -    0s
+     0     0 1115.00000    0   18 5373.00000 1115.00000  79.2%     -    0s
+     0     0 1115.50000    0   20 5373.00000 1115.50000  79.2%     -    0s
+     0     0 1115.50000    0    4 5373.00000 1115.50000  79.2%     -    0s
+     0     0 1115.50000    0   26 5373.00000 1115.50000  79.2%     -    0s
+     0     0 1115.50000    0   26 5373.00000 1115.50000  79.2%     -    0s
+     0     2 1115.50000    0   26 5373.00000 1115.50000  79.2%     -    0s
+* 3387  1908             122    1629.0000000 1120.48934  31.2%   6.9    5s
+* 4324  2327             168    1412.0000000 1121.00000  20.6%   6.8    6s
+* 6023  3532             181    1402.0000000 1122.12500  20.0%   6.3    8s
+* 7025  3467              92    1235.0000000 1123.00000  9.07%   6.2    9s
+  7817  4003 1185.00000   55   20 1235.00000 1123.00000  9.07%   6.1   10s
+
+Cutting planes:
+  Gomory: 10
+  MIR: 2
+  Flow cover: 3
+  Zero half: 10
+  Lazy constraints: 971
+
+Explored 7955 nodes (48992 simplex iterations) in 10.02 seconds
+Thread count was 8 (of 8 available processors)
+
+Time limit reached
+Best objective 1.235000000000e+03, best bound 1.123000000000e+03, gap 9.0688%
