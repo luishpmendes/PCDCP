@@ -174,7 +174,7 @@ int main () {
     cin >> nComplete >> d >> k >> t >> p >> n >> m >> root;
 
     vector <ulint> penalty (nComplete); // vector with de penalties of each vectex
-    vector < list < pair <ulint, ulint> > > adj (n); // adjacency lists for the graph
+    vector < list < pair <ulint, ulint> > > adj (nComplete); // adjacency lists for the graph
 
     for (ulint v = 0; v < nComplete; v++) {
         cin >> penalty[v];

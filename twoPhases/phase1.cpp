@@ -159,7 +159,7 @@ int main () {
                 }
             }
 
-            cout << n << ' ' << d << ' ' << k << ' ' << t << ' ' << p << ' ' << solutionV.size() << ' ' << solutionE.size() << ' ' << root;
+            cout << n << ' ' << d << ' ' << k << ' ' << t << ' ' << p << ' ' << solutionV.size() << ' ' << solutionE.size() << ' ' << root << endl;
 
             for (ulint i = 0; i < n; i++) {
                 cout << penalty[i] << endl;

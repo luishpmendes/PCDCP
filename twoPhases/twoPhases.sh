@@ -33,7 +33,7 @@ do
                 do
                     echo "phase2 - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
                     mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
-                    ./phase2 < "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/result.tmp" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/result.out";
+                    ./phase1 < "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/result.tmp" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/result.out";
                 done
             done
         done
