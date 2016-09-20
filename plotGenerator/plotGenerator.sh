@@ -1,6 +1,6 @@
 #!/bin/bash
 make plotGenerator;
-for path in "linearProgram twoPhases"
+for path in "linearProgram" "twoPhases"
 do
     for n in 10 20 50 100
     do
@@ -12,7 +12,7 @@ do
                 do
                     for p in 0.1 0.5 1.0
                     do
-                        echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
+                        echo $path" - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/vertices.txt";
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/edges.txt";
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/solutionVertices.txt";
