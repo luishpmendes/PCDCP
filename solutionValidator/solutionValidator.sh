@@ -12,7 +12,7 @@ do
                 do
                     for p in 0.1 0.5 1.0
                     do
-                        echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
+                        echo $path" - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/validation.txt";
                         ./solutionValidator $path $n ${d//.} $k $t ${p//.} > "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/validation.txt";
                     done
