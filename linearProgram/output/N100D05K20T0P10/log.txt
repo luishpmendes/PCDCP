@@ -1,0 +1,53 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:23:17 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:23:17 2016
+
+Optimize a model with 201 rows, 2575 columns and 6267 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 4069
+Presolve removed 41 rows and 1 columns
+Presolve time: 0.01s
+Presolved: 160 rows, 2574 columns, 5824 nonzeros
+Variable types: 0 continuous, 2574 integer (2574 binary)
+
+Root relaxation: objective 1.065000e+03, 150 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1065.00000    0   24 4069.00000 1065.00000  73.8%     -    0s
+     0     0 1072.00000    0   16 4069.00000 1072.00000  73.7%     -    0s
+     0     0 1073.50000    0    8 4069.00000 1073.50000  73.6%     -    0s
+     0     0 1073.50000    0   22 4069.00000 1073.50000  73.6%     -    0s
+     0     0 1073.50000    0   16 4069.00000 1073.50000  73.6%     -    0s
+     0     2 1073.50000    0   16 4069.00000 1073.50000  73.6%     -    0s
+*  559   481              91    1242.0000000 1074.00000  13.5%   4.6    0s
+* 4096  2353             160    1218.0000000 1078.50000  11.5%   5.2    3s
+* 4244  2001             134    1138.0000000 1078.50000  5.23%   5.2    3s
+* 4295  1225              45    1103.0000000 1078.66667  2.21%   5.2    4s
+H 6493  1598                    1094.0000000 1080.00000  1.28%   4.8    4s
+  6812  1673     cutoff   50      1094.00000 1080.50000  1.23%   4.8    5s
+* 7567  1859              53    1093.0000000 1081.00000  1.10%   4.7    5s
+* 7687  1790              31    1092.0000000 1081.00000  1.01%   4.7    5s
+H 7700  1650                    1091.0000000 1081.00000  0.92%   4.7    5s
+H 9534   409                    1085.0000000 1082.00000  0.28%   4.6    7s
+
+Cutting planes:
+  Gomory: 11
+  Cover: 9
+  MIR: 2
+  Zero half: 8
+  Mod-K: 1
+  Lazy constraints: 849
+
+Explored 10664 nodes (48068 simplex iterations) in 7.36 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.085000000000e+03, best bound 1.085000000000e+03, gap 0.0%

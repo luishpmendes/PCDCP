@@ -1,0 +1,49 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:17:46 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:17:46 2016
+
+Optimize a model with 101 rows, 908 columns and 1837 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 44 rows and 36 columns
+Presolve time: 0.00s
+Presolved: 57 rows, 872 columns, 1748 nonzeros
+Variable types: 0 continuous, 872 integer (872 binary)
+
+Root relaxation: objective 6.295000e+02, 66 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  629.50000    0    6          -  629.50000      -     -    0s
+H    0     0                    1120.0000000  629.50000  43.8%     -    0s
+     0     0  633.33333    0   19 1120.00000  633.33333  43.5%     -    0s
+     0     0  635.75000    0   22 1120.00000  635.75000  43.2%     -    0s
+     0     0  638.50000    0   27 1120.00000  638.50000  43.0%     -    0s
+     0     0  640.00000    0   24 1120.00000  640.00000  42.9%     -    0s
+     0     0  640.00000    0   24 1120.00000  640.00000  42.9%     -    0s
+     0     2  640.00000    0   24 1120.00000  640.00000  42.9%     -    0s
+*  430   165              12     673.0000000  648.50000  3.64%   3.4    0s
+*  553   172              15     669.0000000  648.50000  3.06%   3.6    0s
+* 1959   595              10     667.0000000  654.08333  1.94%   3.1    0s
+H 2060   581                     666.0000000  654.33333  1.75%   3.1    0s
+H 2228   636                     664.0000000  655.00000  1.36%   3.1    0s
+
+Cutting planes:
+  Gomory: 10
+  Cover: 7
+  Clique: 1
+  Flow cover: 4
+  Zero half: 10
+  Lazy constraints: 199
+
+Explored 3045 nodes (9686 simplex iterations) in 0.83 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.640000000000e+02, best bound 6.640000000000e+02, gap 0.0%

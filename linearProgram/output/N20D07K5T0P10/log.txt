@@ -1,0 +1,39 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:16:19 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:16:19 2016
+
+Optimize a model with 41 rows, 153 columns and 315 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [4e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 1104
+Presolve removed 19 rows and 16 columns
+Presolve time: 0.00s
+Presolved: 22 rows, 137 columns, 276 nonzeros
+Variable types: 0 continuous, 137 integer (137 binary)
+
+Root relaxation: objective 4.410000e+02, 28 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  441.00000    0    6 1104.00000  441.00000  60.1%     -    0s
+H    0     0                     523.0000000  441.00000  15.7%     -    0s
+     0     0  450.00000    0   12  523.00000  450.00000  14.0%     -    0s
+*    0     0               0     450.0000000  450.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 2
+  MIR: 1
+  Zero half: 4
+  Lazy constraints: 1
+
+Explored 0 nodes (34 simplex iterations) in 0.00 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.500000000000e+02, best bound 4.500000000000e+02, gap 0.0%

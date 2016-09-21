@@ -1,0 +1,47 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:16:57 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:16:57 2016
+
+Optimize a model with 101 rows, 663 columns and 1391 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 3070
+Presolve removed 31 rows and 11 columns
+Presolve time: 0.00s
+Presolved: 70 rows, 652 columns, 1318 nonzeros
+Variable types: 0 continuous, 652 integer (652 binary)
+
+Root relaxation: objective 8.605000e+02, 70 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  860.50000    0   12 3070.00000  860.50000  72.0%     -    0s
+     0     0  865.50000    0   14 3070.00000  865.50000  71.8%     -    0s
+     0     0  870.26667    0   25 3070.00000  870.26667  71.7%     -    0s
+     0     0  870.28571    0   25 3070.00000  870.28571  71.7%     -    0s
+     0     2  870.54167    0   26 3070.00000  870.54167  71.6%     -    0s
+*  154    70              23     919.0000000  871.80000  5.14%   4.1    0s
+*  357   100               9     899.0000000  874.00000  2.78%   4.6    0s
+*  667    35               9     895.0000000  878.00000  1.90%   4.8    0s
+*  713    45              10     893.0000000  878.75000  1.60%   4.8    0s
+*  788    18              10     888.0000000  878.75000  1.04%   4.7    0s
+*  842    23              11     887.0000000  879.00000  0.90%   4.8    0s
+
+Cutting planes:
+  Gomory: 2
+  Cover: 15
+  MIR: 1
+  Zero half: 2
+  Lazy constraints: 78
+
+Explored 1057 nodes (4959 simplex iterations) in 0.20 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.870000000000e+02, best bound 8.870000000000e+02, gap 0.0%

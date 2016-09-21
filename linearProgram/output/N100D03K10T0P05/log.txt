@@ -1,0 +1,49 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:19:25 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:19:25 2016
+
+Optimize a model with 201 rows, 1585 columns and 3473 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 3299
+Presolve removed 52 rows and 6 columns
+Presolve time: 0.01s
+Presolved: 149 rows, 1579 columns, 3249 nonzeros
+Variable types: 0 continuous, 1579 integer (1579 binary)
+
+Root relaxation: objective 1.289250e+03, 135 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1289.25000    0   30 3299.00000 1289.25000  60.9%     -    0s
+     0     0 1345.25000    0   24 3299.00000 1345.25000  59.2%     -    0s
+     0     0 1347.50000    0   14 3299.00000 1347.50000  59.2%     -    0s
+     0     0 1349.25000    0   26 3299.00000 1349.25000  59.1%     -    0s
+     0     0 1349.50000    0    8 3299.00000 1349.50000  59.1%     -    0s
+     0     0 1350.00000    0   12 3299.00000 1350.00000  59.1%     -    0s
+     0     0 1350.00000    0   12 3299.00000 1350.00000  59.1%     -    0s
+     0     2 1350.00000    0   12 3299.00000 1350.00000  59.1%     -    0s
+H  859   621                    1431.0000000 1350.28571  5.64%   4.9    0s
+  1342   887 1359.00000   29   10 1431.00000 1354.84000  5.32%   5.6    5s
+H 2900  1506                    1424.0000000 1355.16667  4.83%   6.0    6s
+  6397  3636 1379.38889   63   23 1424.00000 1356.33333  4.75%   5.4   10s
+
+Cutting planes:
+  Gomory: 26
+  Cover: 76
+  MIR: 1
+  Flow cover: 5
+  Zero half: 16
+  Lazy constraints: 922
+
+Explored 6852 nodes (37487 simplex iterations) in 10.03 seconds
+Thread count was 8 (of 8 available processors)
+
+Time limit reached
+Best objective 1.424000000000e+03, best bound 1.357000000000e+03, gap 4.7051%

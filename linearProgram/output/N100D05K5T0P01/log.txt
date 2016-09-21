@@ -1,0 +1,48 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:21:15 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:21:15 2016
+
+Optimize a model with 201 rows, 2575 columns and 5217 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 74 rows and 49 columns
+Presolve time: 0.01s
+Presolved: 127 rows, 2526 columns, 5072 nonzeros
+Variable types: 0 continuous, 2526 integer (2526 binary)
+Found heuristic solution: objective 5295.0000000
+
+Root relaxation: objective 9.430000e+02, 173 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  943.00000    0   26 5295.00000  943.00000  82.2%     -    0s
+     0     0  964.66667    0   43 5295.00000  964.66667  81.8%     -    0s
+     0     0  966.08333    0   41 5295.00000  966.08333  81.8%     -    0s
+     0     0  967.16667    0   48 5295.00000  967.16667  81.7%     -    0s
+     0     0  967.41667    0   51 5295.00000  967.41667  81.7%     -    0s
+     0     0  967.41667    0   51 5295.00000  967.41667  81.7%     -    0s
+     0     2  967.41667    0   51 5295.00000  967.41667  81.7%     -    0s
+*  819   657             133    1564.0000000  968.00000  38.1%   5.2    1s
+*  852   682             133    1562.0000000  968.00000  38.0%   5.3    1s
+  1059   841  968.51923   16   71 1562.00000  968.51923  38.0%   5.7    5s
+* 3054  1750             186    1427.0000000  969.12575  32.1%   6.4    7s
+  4159  2508 1147.00000  160   12 1427.00000  969.12575  32.1%   6.4   10s
+
+Cutting planes:
+  Gomory: 20
+  Cover: 43
+  Flow cover: 1
+  Zero half: 13
+  Lazy constraints: 631
+
+Explored 4291 nodes (27652 simplex iterations) in 10.04 seconds
+Thread count was 8 (of 8 available processors)
+
+Time limit reached
+Best objective 1.427000000000e+03, best bound 9.700000000000e+02, gap 32.0252%
