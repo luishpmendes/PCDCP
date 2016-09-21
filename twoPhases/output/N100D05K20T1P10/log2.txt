@@ -1,0 +1,48 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:35:09 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:35:09 2016
+
+Optimize a model with 201 rows, 2575 columns and 5151 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 5067
+Presolve removed 101 rows and 100 columns
+Presolve time: 0.01s
+Presolved: 100 rows, 2475 columns, 4950 nonzeros
+Variable types: 0 continuous, 2475 integer (2475 binary)
+
+Root relaxation: objective 1.134500e+03, 133 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1134.50000    0   12 5067.00000 1134.50000  77.6%     -    0s
+     0     0 1137.50000    0    6 5067.00000 1137.50000  77.6%     -    0s
+     0     0 1138.00000    0    8 5067.00000 1138.00000  77.5%     -    0s
+     0     0 1138.50000    0   16 5067.00000 1138.50000  77.5%     -    0s
+     0     0 1138.50000    0   14 5067.00000 1138.50000  77.5%     -    0s
+     0     2 1138.50000    0   14 5067.00000 1138.50000  77.5%     -    0s
+* 2953  1726             161    1756.0000000 1140.50000  35.1%   6.7    3s
+* 3258  1770             164    1755.0000000 1140.50000  35.0%   6.8    3s
+* 3648  1982             165    1749.0000000 1140.50000  34.8%   6.9    4s
+H 4203  2471                    1744.0000000 1140.50000  34.6%   6.9    4s
+* 4210  2472             274    1742.0000000 1140.50000  34.5%   6.9    4s
+  4267  2456 1287.50000  179   21 1742.00000 1140.50000  34.5%   6.9    5s
+* 4421  2616             277    1735.0000000 1140.50000  34.3%   6.9    5s
+  7507  4879 1647.00000  196    - 1735.00000 1141.50000  34.2%   6.2   10s
+
+Cutting planes:
+  Gomory: 8
+  Zero half: 10
+  Lazy constraints: 1203
+
+Explored 8663 nodes (53020 simplex iterations) in 10.05 seconds
+Thread count was 8 (of 8 available processors)
+
+Time limit reached
+Best objective 1.735000000000e+03, best bound 1.142000000000e+03, gap 34.1787%
