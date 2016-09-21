@@ -37,13 +37,13 @@ using namespace std;
 typedef long int ulint;
 typedef vector < vector <ulint> > matrix;
 
-string itos(ulint i) {
+string itos (ulint i) {
     stringstream s;
     s << i;
     return s.str();
 }
 
-string ftos(double i) {
+string ftos (double i) {
     stringstream s;
     s << i;
     return s.str();
@@ -554,8 +554,19 @@ int main () {
                     solutionEdges.insert(e);
                 }
             }
+            cout << solutionVectices.size() << ' ' << solutionEdges.size() << ' ' << solutionCost << endl;
+            for (set <ulint> :: iterator it = solutionVectices.begin(); it != solutionVectices.end(); it++) {
+                ulint v = *it;
+                cout << v << endl;
+            }
+            for (set <ulint> :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
+                ulint e = *it;
+                ulint a = E[e].first.first;
+                ulint b = E[e].first.second;
+                cout << a << " " << b << endl;
+            }
         } else {
-            cout << "Solution not found." << endl;
+            cout << "0 0 0" << endl;
         }
 
         // exporting model
@@ -565,18 +576,6 @@ int main () {
         cout << e.getMessage() << endl;
     } catch (...) {
         cout << "Exception during opstimisation" << endl;
-    }
-
-    cout << solutionVectices.size() << ' ' << solutionEdges.size() << ' ' << solutionCost << endl;
-    for (set <ulint> :: iterator it = solutionVectices.begin(); it != solutionVectices.end(); it++) {
-        ulint v = *it;
-        cout << v << endl;
-    }
-    for (set <ulint> :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
-        ulint e = *it;
-        ulint a = E[e].first.first;
-        ulint b = E[e].first.second;
-        cout << a << " " << b << endl;
     }
     return 0;
 }
