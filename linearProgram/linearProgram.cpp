@@ -6,7 +6,6 @@
 #include <set>
 #include <sstream>
 #include <map>
-#include <climits>
 #include <string>
 #include <algorithm>
 #include <iomanip>
@@ -439,10 +438,6 @@ int main () {
 
     vector < set <ulint> > Ns = neighbourhoods (W, k);
 
-    ulint solutionCost = 0;
-    set <ulint> solutionVectices;
-    set <ulint> solutionEdges;
-
     try {
         string N = itos(n);
         stringstream ssD;
@@ -541,14 +536,15 @@ int main () {
         model.optimize();
 
         if (model.get(GRB_IntAttr_SolCount) > 0) {
+            ulint solutionCost = 0;
+            set <ulint> solutionVectices;
+            set <ulint> solutionEdges;
             solutionCost = round(model.get(GRB_DoubleAttr_ObjVal));
-            solutionVectices.clear();
             for (ulint v = 0; v < n; v++) {
                 if (y[v].get(GRB_DoubleAttr_X) > 0.5) {
                     solutionVectices.insert(v);
                 }
             }
-            solutionEdges.clear();
             for (ulint e = 0; e < m; e++) {
                 if (x[e].get(GRB_DoubleAttr_X) > 0.5) {
                     solutionEdges.insert(e);

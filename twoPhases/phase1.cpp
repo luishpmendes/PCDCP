@@ -1,12 +1,8 @@
 #include "gurobi_c++.h"
 #include <iostream>
 #include <vector>
-#include <list>
-#include <queue>
 #include <set>
 #include <sstream>
-#include <map>
-#include <climits>
 #include <string>
 #include <algorithm>
 #include <iomanip>
@@ -47,7 +43,6 @@ int main () {
 
     vector <ulint> penalty (n); // vector with the penalties of each vertex
     matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complete graph
-    vector < list < pair <ulint, ulint> > > adj (n); // adjacency lists for the graph
 
     for (ulint i = 0; i < n; i++) {
         W[i][i] = 0;
@@ -59,7 +54,6 @@ int main () {
     }
 
     vector < pair < pair <ulint, ulint> , ulint> > E (m); // vector of edges with the format ((u, v), w)
-    map < pair <ulint, ulint>, ulint> mE; // map an edge to its ID
 
     // reading complete graph
     for (ulint e = 0; e < mComplete; e++) {
@@ -73,11 +67,7 @@ int main () {
     for (ulint e = 0; e < m; e++) {
         ulint u, v, w;
         cin >> u >> v >> w;
-        adj[u].push_back(make_pair(v, w));
-        adj[v].push_back(make_pair(u, w));
         E[e] = make_pair(make_pair(u, v), w);
-        mE[make_pair(u, v)] = e;
-        mE[make_pair(v, u)] = e;
     }
 
     vector < set <ulint> > Ns = neighbourhoods (W, k);

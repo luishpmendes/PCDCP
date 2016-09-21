@@ -6,7 +6,6 @@
 #include <set>
 #include <sstream>
 #include <map>
-#include <climits>
 #include <string>
 #include <algorithm>
 #include <iomanip>
@@ -203,10 +202,6 @@ int main () {
         mE[make_pair(v, u)] = e;
     }
 
-    ulint solutionCost = 0;
-    set <ulint> solutionVectices;
-    set <ulint> solutionEdges;
-
     try {
         string N = itos(n);
         stringstream ssD;
@@ -301,21 +296,33 @@ int main () {
         model.optimize();
 
         if (model.get(GRB_IntAttr_SolCount) > 0) {
+            ulint solutionCost = 0;
+            set <ulint> solutionVectices;
+            set <ulint> solutionEdges;
             solutionCost = round(model.get(GRB_DoubleAttr_ObjVal));
-            solutionVectices.clear();
             for (ulint v = 0; v < n; v++) {
                 if (y[v].get(GRB_DoubleAttr_X) > 0.5) {
                     solutionVectices.insert(v);
                 }
             }
-            solutionEdges.clear();
             for (ulint e = 0; e < m; e++) {
                 if (x[e].get(GRB_DoubleAttr_X) > 0.5) {
                     solutionEdges.insert(e);
                 }
             }
+            cout << solutionVectices.size() << ' ' << solutionEdges.size() << ' ' << solutionCost << endl;
+            for (set <ulint> :: iterator it = solutionVectices.begin(); it != solutionVectices.end(); it++) {
+                ulint v = *it;
+                cout << v << endl;
+            }
+            for (set <ulint> :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
+                ulint e = *it;
+                ulint a = E[e].first.first;
+                ulint b = E[e].first.second;
+                cout << a << " " << b << endl;
+            }
         } else {
-            cout << "Solution not found." << endl;
+            cout << "0 0 0" << endl;
         }
 
         // exporting model
@@ -325,18 +332,6 @@ int main () {
         cout << e.getMessage() << endl;
     } catch (...) {
         cout << "Exception during opstimisation" << endl;
-    }
-
-    cout << solutionVectices.size() << ' ' << solutionEdges.size() << ' ' << solutionCost << endl;
-    for (set <ulint> :: iterator it = solutionVectices.begin(); it != solutionVectices.end(); it++) {
-        ulint v = *it;
-        cout << v << endl;
-    }
-    for (set <ulint> :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
-        ulint e = *it;
-        ulint a = E[e].first.first;
-        ulint b = E[e].first.second;
-        cout << a << " " << b << endl;
     }
     return 0;
 }
