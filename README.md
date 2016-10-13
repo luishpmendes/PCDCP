@@ -28,3 +28,9 @@ raiz só aleatório - feito
 p: 1, 0.5, 0.1 - feito
 
 instancia com mais de um ciclo: N20D05K5T0P05
+
+
+ao invez de trabalhar com o grafo induzido no grafo original
+trabalhar com o grafo induzido no grafo completo de caminhos minimos obtido pelo floyd warshall
+
+mudar o modelo para trabalhar com grafo direcionado, para poder distinguir o sentido em que as arestas estão sendo percorridas (não precisa)
