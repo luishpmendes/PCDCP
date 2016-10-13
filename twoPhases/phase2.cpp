@@ -272,9 +272,11 @@ int main () {
         // dominance
         // ∀ v ∈ V
         for (ulint v = 0; v < n; v++) {
-            GRBLinExpr constr = 0.0;
-            constr += y[v];
-            model.addConstr(constr == solutionV[v], "c_1_" + itos(v));
+            if (solutionV[v] == 1) {
+                GRBLinExpr constr = 0.0;
+                constr += y[v];
+                model.addConstr(constr == 1, "c_1_" + itos(v));
+            }
         }
 
         // each vertex must have exactly two edges adjacent to itself
