@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:30:09 2016
+Gurobi 6.5.2 (linux64) logging started Thu Oct 13 20:59:15 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:30:09 2016
+Gurobi 6.5.2 (linux64) logging started Thu Oct 13 20:59:15 2016
 
 Optimize a model with 21 rows, 24 columns and 49 nonzeros
 Coefficient statistics:
@@ -16,7 +16,7 @@ Presolved: 0 rows, 1 columns, 0 nonzeros
 Variable types: 0 continuous, 1 integer (1 binary)
 Found heuristic solution: objective 422.0000000
 
-Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Explored 0 nodes (0 simplex iterations) in 0.02 seconds
 Thread count was 8 (of 8 available processors)
 
 Optimal solution found (tolerance 1.00e-04)

@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:30:31 2016
+Gurobi 6.5.2 (linux64) logging started Thu Oct 13 20:59:38 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:30:31 2016
+Gurobi 6.5.2 (linux64) logging started Thu Oct 13 20:59:38 2016
 
 Optimize a model with 101 rows, 663 columns and 1327 nonzeros
 Coefficient statistics:
@@ -39,7 +39,7 @@ Cutting planes:
   Zero half: 6
   Lazy constraints: 51
 
-Explored 1990 nodes (7146 simplex iterations) in 0.19 seconds
+Explored 1990 nodes (7146 simplex iterations) in 0.16 seconds
 Thread count was 8 (of 8 available processors)
 
 Optimal solution found (tolerance 1.00e-04)

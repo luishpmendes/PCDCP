@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:31:52 2016
+Gurobi 6.5.2 (linux64) logging started Thu Oct 13 21:00:56 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:31:52 2016
+Gurobi 6.5.2 (linux64) logging started Thu Oct 13 21:00:56 2016
 
 Optimize a model with 201 rows, 1585 columns and 3171 nonzeros
 Coefficient statistics:
@@ -30,21 +30,22 @@ Root relaxation: objective 1.505000e+03, 145 iterations, 0.00 seconds
 H 1058   867                    2274.0000000 1509.00000  33.6%   7.0    0s
 H 2265  1324                    1737.0000000 1512.13333  12.9%   7.1    2s
 * 3270  1410              71    1628.0000000 1513.00000  7.06%   6.5    2s
-* 5401  2678             138    1610.0000000 1515.00000  5.90%   5.8    4s
-* 5404  2655             140    1608.0000000 1515.00000  5.78%   5.8    4s
-* 5743  1092              36    1533.0000000 1515.00000  1.17%   5.8    4s
-  6162  1050     cutoff   33      1533.00000 1515.50000  1.14%   5.7    5s
-H 8189  1310                    1530.0000000 1519.00000  0.72%   5.5    6s
-* 9098   858              31    1528.0000000 1520.75000  0.47%   5.4    6s
-*10241   326              29    1527.0000000 1523.00000  0.26%   5.3    7s
+  5268  2796 1520.00000   25   10 1628.00000 1515.00000  6.94%   5.8    5s
+* 5401  2678             138    1610.0000000 1515.00000  5.90%   5.8    5s
+* 5404  2655             140    1608.0000000 1515.00000  5.78%   5.8    5s
+* 5743  1092              36    1533.0000000 1515.00000  1.17%   5.8    5s
+H 8189  1310                    1530.0000000 1519.00000  0.72%   5.5    7s
+* 9098   858              31    1528.0000000 1520.75000  0.47%   5.4    8s
+*10241   326              29    1527.0000000 1523.00000  0.26%   5.3    9s
+ 10562   117     cutoff   25      1527.00000 1524.00000  0.20%   5.2   10s
 
 Cutting planes:
   Gomory: 5
   Zero half: 5
-  Lazy constraints: 1061
+  Lazy constraints: 1049
 
-Explored 10768 nodes (55222 simplex iterations) in 7.63 seconds
+Explored 10618 nodes (55084 simplex iterations) in 10.01 seconds
 Thread count was 8 (of 8 available processors)
 
-Optimal solution found (tolerance 1.00e-04)
-Best objective 1.527000000000e+03, best bound 1.527000000000e+03, gap 0.0%
+Time limit reached
+Best objective 1.527000000000e+03, best bound 1.524000000000e+03, gap 0.1965%

@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:36:09 2016
+Gurobi 6.5.2 (linux64) logging started Thu Oct 13 21:05:16 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Sep 20 21:36:09 2016
+Gurobi 6.5.2 (linux64) logging started Thu Oct 13 21:05:16 2016
 
 Optimize a model with 201 rows, 3565 columns and 7131 nonzeros
 Coefficient statistics:
@@ -26,27 +26,21 @@ Root relaxation: objective 9.120000e+02, 160 iterations, 0.00 seconds
      0     0  913.83333    0   34          -  913.83333      -     -    0s
      0     0  913.83333    0   26          -  913.83333      -     -    0s
      0     2  913.83333    0   26          -  913.83333      -     -    0s
-* 6473  4596             134    1026.0000000  917.50000  10.6%   5.3    4s
-* 6507  4551             174    1020.0000000  917.50000  10.0%   5.4    4s
-  6692  4618 1012.00000  130   10 1020.00000  917.59091  10.0%   5.3    5s
-* 7879  5164              75    1002.0000000  917.79730  8.40%   5.3    5s
-* 9694  2278              50     938.0000000  917.79730  2.15%   5.2    8s
-*10291  2179              26     937.0000000  918.36842  1.99%   5.2    8s
-*10602  1662              30     933.0000000  918.40909  1.56%   5.2    8s
-*11553  1550              25     932.0000000  919.00000  1.39%   5.3    9s
-*11825  1053              25     930.0000000  920.31818  1.04%   5.3    9s
-*12343   710              30     928.0000000  921.33333  0.72%   5.4    9s
- 12619   379  923.70833   24   37  928.00000  923.50000  0.48%   5.4   10s
+  5599  4052  936.50000   53   12          -  917.50000      -   5.2    5s
+* 6473  4596             134    1026.0000000  917.50000  10.6%   5.3    5s
+* 6507  4551             174    1020.0000000  917.50000  10.0%   5.4    5s
+* 7879  5164              75    1002.0000000  917.79730  8.40%   5.3    8s
+  8647  5680  929.00000   36   14 1002.00000  917.79730  8.40%   5.3   10s
 
 Cutting planes:
   Gomory: 9
   MIR: 1
   Flow cover: 6
   Zero half: 11
-  Lazy constraints: 831
+  Lazy constraints: 758
 
-Explored 12810 nodes (70169 simplex iterations) in 10.01 seconds
+Explored 9330 nodes (49179 simplex iterations) in 10.07 seconds
 Thread count was 8 (of 8 available processors)
 
 Time limit reached
-Best objective 9.280000000000e+02, best bound 9.250000000000e+02, gap 0.3233%
+Best objective 1.002000000000e+03, best bound 9.180000000000e+02, gap 8.3832%
