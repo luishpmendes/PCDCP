@@ -12,6 +12,10 @@
 #define INFINITE 15 << 25
 #endif
 
+#ifndef NIL
+#define NIL - (15 << 25)
+#endif
+
 using namespace std;
 
 typedef long int ulint;
@@ -35,6 +39,33 @@ vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
     return result;
 }
 
+void floydWarshall (matrix W, matrix * D, matrix * PI) {
+    *D = matrix (W.size(), vector <ulint> (W.size(), INFINITE));
+    *PI = matrix (W.size(), vector <ulint> (W.size(), NIL));
+    for (ulint i = 0; i < (ulint) W.size(); i++) {
+        for (ulint j = 0; j < (ulint) W.size(); j++) {
+            (*D)[i][j] = W[i][j];
+            if (i != j) {
+                if (W[i][j] < INFINITE) {
+                    (*PI)[i][j] = i;
+                }
+            } else {
+                (*PI)[i][j] = NIL;
+            }
+        }
+    }
+    for (ulint k = 0; k < (ulint) W.size(); k++) {
+        for (ulint i = 0; i < (ulint) W.size(); i++) {
+            for (ulint j = 0; j < (ulint) W.size(); j++) {
+                if ((*D)[i][j] > (*D)[i][k] + (*D)[k][j]) {
+                    (*D)[i][j] = (*D)[i][k] + (*D)[k][j];
+                    (*PI)[i][j] = (*PI)[k][j];
+                }
+            }
+        }
+    }
+}
+
 int main () {
     ulint n, mComplete, m, k, t, root;
     double d, p;
@@ -42,9 +73,13 @@ int main () {
     cin >> n >> d >> k >> t >> p >> mComplete >> m >> root;
 
     vector <ulint> penalty (n); // vector with the penalties of each vertex
-    matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complete graph
+    matrix Wcomplete (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complete graph
+    matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the graph
+    vector < pair < pair <ulint, ulint> , ulint> > E (m); // vector of edges with the format ((u, v), w)
+    matrix Dist, PI; // matrices for the distance and precedence on the graph
 
     for (ulint i = 0; i < n; i++) {
+        Wcomplete[i][i] = 0;
         W[i][i] = 0;
     }
 
@@ -53,24 +88,27 @@ int main () {
         cin >> x >> y >> penalty[i];
     }
 
-    vector < pair < pair <ulint, ulint> , ulint> > E (m); // vector of edges with the format ((u, v), w)
-
     // reading complete graph
     for (ulint e = 0; e < mComplete; e++) {
         ulint u, v, w;
         cin >> u >> v >> w;
-        W[u][v] = w;
-        W[v][u] = w;
+        Wcomplete[u][v] = w;
+        Wcomplete[v][u] = w;
     }
+
 
     // reading graph
     for (ulint e = 0; e < m; e++) {
         ulint u, v, w;
         cin >> u >> v >> w;
         E[e] = make_pair(make_pair(u, v), w);
+        W[u][v] = w;
+        W[v][u] = w;
     }
 
-    vector < set <ulint> > Ns = neighbourhoods (W, k);
+    floydWarshall (W, &Dist, &PI);
+
+    vector < set <ulint> > Ns = neighbourhoods (Wcomplete, k);
 
     try {
         string N = itos(n);
@@ -143,9 +181,21 @@ int main () {
                 }
             }
             vector < pair < pair <ulint, ulint> , ulint> > solutionE;
-            for (ulint e = 0; e < m; e++) {
+/*            for (ulint e = 0; e < m; e++) {
                 if (y[E[e].first.first].get(GRB_DoubleAttr_X) > 0.5 && y[E[e].first.second].get(GRB_DoubleAttr_X) > 0.5) {
                     solutionE.push_back(E[e]);
+                }
+            }
+*/
+            for (ulint u = 0; u < n; u++) {
+                for (ulint v = u + 1; v < n; v++) {
+                    if (y[u].get(GRB_DoubleAttr_X) > 0.5 && y[v].get(GRB_DoubleAttr_X) > 0.5) {
+                        pair < pair <ulint, ulint> , ulint> edge;
+                        edge.first.first = u;
+                        edge.first.second = v;
+                        edge.second = Dist[u][v];
+                        solutionE.push_back(edge);
+                    }
                 }
             }
 
@@ -166,7 +216,18 @@ int main () {
                 u = e.first.first;
                 v = e.first.second;
                 w = e.second;
-                cout << u << ' ' << v << ' ' << w << endl;
+                cout << u << ' ' << v << ' ' << w;
+                vector <ulint> path;
+                while (v != u) {
+                    path.push_back(v);
+                    v = PI[u][v];
+                }
+                path.push_back(v);
+                cout << ' ' << path.size();
+                for (vector <ulint> :: reverse_iterator it = path.rbegin(); it != path.rend(); it++) {
+                    cout << ' ' << *it;
+                }
+                cout << endl;
             }
         }
 

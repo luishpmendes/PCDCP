@@ -11,14 +11,6 @@
 #include <iomanip>
 #include <cmath>
 
-#ifndef INFINITE
-#define INFINITE 15 << 25
-#endif
-
-#ifndef NIL
-#define NIL - (15 << 25)
-#endif
-
 #ifndef WHITE
 #define WHITE 0
 #endif
@@ -190,16 +182,21 @@ int main () {
 
     vector < pair < pair <ulint, ulint> , ulint> > E (m); // vector of edges with the format ((u, v), w)
     map < pair <ulint, ulint>, ulint> mE; // map an edge to its ID
+    vector < vector <ulint> > paths (m);
 
     // reading graph
     for (ulint e = 0; e < m; e++) {
-        ulint u, v, w;
-        cin >> u >> v >> w;
+        ulint u, v, w, pathSize;
+        cin >> u >> v >> w >> pathSize;
         adj[u].push_back(make_pair(v, w));
         adj[v].push_back(make_pair(u, w));
         E[e] = make_pair(make_pair(u, v), w);
         mE[make_pair(u, v)] = e;
         mE[make_pair(v, u)] = e;
+        paths[e] = vector <ulint> (pathSize);
+        for (ulint i = 0; i < pathSize; i++) {
+            cin >> paths[e][i];
+        }
     }
 
     try {
@@ -299,29 +296,36 @@ int main () {
 
         if (model.get(GRB_IntAttr_SolCount) > 0) {
             ulint solutionCost = 0;
-            set <ulint> solutionVectices;
-            set <ulint> solutionEdges;
+            vector <ulint> solutionVectices;
+            vector < pair <ulint, ulint> > solutionEdges;
             solutionCost = round(model.get(GRB_DoubleAttr_ObjVal));
             for (ulint v = 0; v < n; v++) {
                 if (y[v].get(GRB_DoubleAttr_X) > 0.5) {
-                    solutionVectices.insert(v);
+                    solutionVectices.push_back(v);
                 }
             }
             for (ulint e = 0; e < m; e++) {
                 if (x[e].get(GRB_DoubleAttr_X) > 0.5) {
-                    solutionEdges.insert(e);
+                    for (ulint i = 0; i < (ulint) paths[e].size() - 1; i++) {
+                        pair <ulint, ulint> edge;
+                        edge.first = paths[e][i];
+                        edge.second = paths[e][i + 1];
+                        solutionEdges.push_back(edge);
+                    }
+                    pair <ulint, ulint> edge;
+                    edge.first = paths[e][paths[e].size() - 2];
+                    edge.second = paths[e][paths[e].size() - 1];
+                    solutionEdges.push_back(edge);
                 }
             }
             cout << solutionVectices.size() << ' ' << solutionEdges.size() << ' ' << solutionCost << endl;
-            for (set <ulint> :: iterator it = solutionVectices.begin(); it != solutionVectices.end(); it++) {
+            for (vector <ulint> :: iterator it = solutionVectices.begin(); it != solutionVectices.end(); it++) {
                 ulint v = *it;
                 cout << v << endl;
             }
-            for (set <ulint> :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
-                ulint e = *it;
-                ulint a = E[e].first.first;
-                ulint b = E[e].first.second;
-                cout << a << " " << b << endl;
+            for (vector < pair <ulint, ulint> > :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
+                pair <ulint, ulint> e = *it;
+                cout << e.first << " " << e.second << endl;
             }
         } else {
             cout << "0 0 0" << endl;
