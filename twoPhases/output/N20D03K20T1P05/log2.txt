@@ -1,29 +1,46 @@
 
-Gurobi 6.5.2 (linux64) logging started Thu Oct 13 20:59:16 2016
+Gurobi 6.5.2 (linux64) logging started Sat Oct 15 16:47:59 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Thu Oct 13 20:59:16 2016
+Gurobi 6.5.2 (linux64) logging started Sat Oct 15 16:47:59 2016
 
-Optimize a model with 41 rows, 77 columns and 155 nonzeros
+Optimize a model with 41 rows, 210 columns and 421 nonzeros
 Coefficient statistics:
   Matrix range    [1e+00, 2e+00]
   Objective range [1e+01, 1e+02]
   Bounds range    [1e+00, 1e+00]
   RHS range       [1e+00, 1e+00]
-Found heuristic solution: objective 971
 Presolve removed 21 rows and 20 columns
 Presolve time: 0.00s
-Presolved: 20 rows, 57 columns, 114 nonzeros
-Variable types: 0 continuous, 57 integer (57 binary)
+Presolved: 20 rows, 190 columns, 380 nonzeros
+Variable types: 0 continuous, 190 integer (190 binary)
 
-Root relaxation: objective 7.050000e+02, 20 iterations, 0.00 seconds
+Root relaxation: objective 6.960000e+02, 29 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
+     0     0  696.00000    0    4          -  696.00000      -     -    0s
+H    0     0                     951.0000000  696.00000  26.8%     -    0s
+H    0     0                     796.0000000  696.00000  12.6%     -    0s
+     0     0  697.00000    0   12  796.00000  697.00000  12.4%     -    0s
+     0     0  701.00000    0   16  796.00000  701.00000  11.9%     -    0s
+     0     0  701.33333    0   16  796.00000  701.33333  11.9%     -    0s
+     0     0  701.50000    0   12  796.00000  701.50000  11.9%     -    0s
+     0     0  702.50000    0    8  796.00000  702.50000  11.7%     -    0s
+H    0     0                     728.0000000  702.50000  3.50%     -    0s
+     0     0  702.66667    0    8  728.00000  702.66667  3.48%     -    0s
+     0     0  702.66667    0    4  728.00000  702.66667  3.48%     -    0s
+     0     0  702.66667    0    8  728.00000  702.66667  3.48%     -    0s
+     0     0  702.66667    0    8  728.00000  702.66667  3.48%     -    0s
 *    0     0               0     705.0000000  705.00000  0.00%     -    0s
 
-Explored 0 nodes (20 simplex iterations) in 0.00 seconds
+Cutting planes:
+  Gomory: 2
+  MIR: 3
+  Zero half: 1
+
+Explored 0 nodes (102 simplex iterations) in 0.01 seconds
 Thread count was 8 (of 8 available processors)
 
 Optimal solution found (tolerance 1.00e-04)

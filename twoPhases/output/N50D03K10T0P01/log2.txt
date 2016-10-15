@@ -1,10 +1,10 @@
 
-Gurobi 6.5.2 (linux64) logging started Thu Oct 13 20:59:27 2016
+Gurobi 6.5.2 (linux64) logging started Sat Oct 15 16:48:57 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Thu Oct 13 20:59:27 2016
+Gurobi 6.5.2 (linux64) logging started Sat Oct 15 16:48:57 2016
 
-Optimize a model with 101 rows, 418 columns and 837 nonzeros
+Optimize a model with 101 rows, 1275 columns and 2551 nonzeros
 Coefficient statistics:
   Matrix range    [1e+00, 2e+00]
   Objective range [1e+00, 1e+02]
@@ -12,21 +12,28 @@ Coefficient statistics:
   RHS range       [1e+00, 1e+00]
 Presolve removed 51 rows and 50 columns
 Presolve time: 0.00s
-Presolved: 50 rows, 368 columns, 736 nonzeros
-Variable types: 0 continuous, 368 integer (368 binary)
+Presolved: 50 rows, 1225 columns, 2450 nonzeros
+Variable types: 0 continuous, 1225 integer (1225 binary)
 
-Root relaxation: objective 1.171000e+03, 71 iterations, 0.00 seconds
+Root relaxation: objective 1.109000e+03, 84 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-*    0     0               0    1171.0000000 1171.00000  0.00%     -    0s
+     0     0 1109.00000    0    6          - 1109.00000      -     -    0s
+     0     0 1109.00000    0    6          - 1109.00000      -     -    0s
+     0     0 1109.00000    0    6          - 1109.00000      -     -    0s
+     0     0 1109.00000    0    6          - 1109.00000      -     -    0s
+     0     2 1109.00000    0   10          - 1109.00000      -     -    0s
+*  620   242              19    1128.0000000 1110.50000  1.55%   3.8    0s
+*  775   117              14    1126.0000000 1111.00000  1.33%   4.1    0s
 
 Cutting planes:
-  Lazy constraints: 2
+  Zero half: 4
+  Lazy constraints: 123
 
-Explored 0 nodes (71 simplex iterations) in 0.00 seconds
+Explored 1059 nodes (4639 simplex iterations) in 0.20 seconds
 Thread count was 8 (of 8 available processors)
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 1.171000000000e+03, best bound 1.171000000000e+03, gap 0.0%
+Best objective 1.126000000000e+03, best bound 1.126000000000e+03, gap 0.0%

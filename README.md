@@ -32,5 +32,6 @@ instancia com mais de um ciclo: N20D05K5T0P05
 
 ao invez de trabalhar com o grafo induzido no grafo original
 trabalhar com o grafo induzido no grafo completo de caminhos minimos obtido pelo floyd warshall
+pensar em como montar a solução correta no final utilizando a matriz de predecessores
 
 mudar o modelo para trabalhar com grafo direcionado, para poder distinguir o sentido em que as arestas estão sendo percorridas (não precisa)
