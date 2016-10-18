@@ -296,12 +296,12 @@ int main () {
 
         if (model.get(GRB_IntAttr_SolCount) > 0) {
             ulint solutionCost = 0;
-            vector <ulint> solutionVectices;
-            vector < pair <ulint, ulint> > solutionEdges;
+            set <ulint> solutionVectices;
+            set < pair <ulint, ulint> > solutionEdges;
             solutionCost = round(model.get(GRB_DoubleAttr_ObjVal));
             for (ulint v = 0; v < n; v++) {
                 if (y[v].get(GRB_DoubleAttr_X) > 0.5) {
-                    solutionVectices.push_back(v);
+                    solutionVectices.insert(v);
                 }
             }
             for (ulint e = 0; e < m; e++) {
@@ -310,20 +310,20 @@ int main () {
                         pair <ulint, ulint> edge;
                         edge.first = paths[e][i];
                         edge.second = paths[e][i + 1];
-                        solutionEdges.push_back(edge);
+                        solutionEdges.insert(edge);
                     }
                     pair <ulint, ulint> edge;
                     edge.first = paths[e][paths[e].size() - 2];
                     edge.second = paths[e][paths[e].size() - 1];
-                    solutionEdges.push_back(edge);
+                    solutionEdges.insert(edge);
                 }
             }
             cout << solutionVectices.size() << ' ' << solutionEdges.size() << ' ' << solutionCost << endl;
-            for (vector <ulint> :: iterator it = solutionVectices.begin(); it != solutionVectices.end(); it++) {
+            for (set <ulint> :: iterator it = solutionVectices.begin(); it != solutionVectices.end(); it++) {
                 ulint v = *it;
                 cout << v << endl;
             }
-            for (vector < pair <ulint, ulint> > :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
+            for (set < pair <ulint, ulint> > :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
                 pair <ulint, ulint> e = *it;
                 cout << e.first << " " << e.second << endl;
             }
