@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 10:00:40 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:54:41 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 10:00:40 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:54:41 2016
 
 Optimize a model with 201 rows, 5050 columns and 10101 nonzeros
 Coefficient statistics:
@@ -27,7 +27,7 @@ Root relaxation: objective 1.502000e+03, 173 iterations, 0.00 seconds
      0     0 1510.50000    0   17          - 1510.50000      -     -    0s
      0     0 1510.50000    0    6          - 1510.50000      -     -    0s
      0     2 1510.50000    0    6          - 1510.50000      -     -    0s
-  3167  2013 1633.50000  157    6          - 1511.66667      -   6.1    5s
+  2861  1854 1627.50000  140   12          - 1511.66667      -   6.2    5s
 * 5242  3594             242    1799.0000000 1512.00000  16.0%   6.0    7s
   5995  4192 1680.00000  152    6 1799.00000 1512.00000  16.0%   5.9   10s
 

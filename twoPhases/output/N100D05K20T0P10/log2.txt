@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 10:05:54 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:59:55 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 10:05:54 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:59:55 2016
 
 Optimize a model with 201 rows, 5050 columns and 10101 nonzeros
 Coefficient statistics:
@@ -11,7 +11,7 @@ Coefficient statistics:
   Bounds range    [1e+00, 1e+00]
   RHS range       [1e+00, 1e+00]
 Presolve removed 101 rows and 100 columns
-Presolve time: 0.01s
+Presolve time: 0.02s
 Presolved: 100 rows, 4950 columns, 9900 nonzeros
 Variable types: 0 continuous, 4950 integer (4950 binary)
 
@@ -26,16 +26,16 @@ Root relaxation: objective 1.076500e+03, 178 iterations, 0.00 seconds
      0     0 1077.16667    0   14          - 1077.16667      -     -    0s
      0     0 1077.16667    0   12          - 1077.16667      -     -    0s
      0     2 1077.16667    0   12          - 1077.16667      -     -    0s
-  5695  3472 1170.71429  167   21          - 1080.50000      -   5.8    5s
-  9563  6652 1087.75000   26    8          - 1080.57143      -   5.7   10s
+  3292  2234 1091.00000   41   11          - 1080.50000      -   5.4    5s
+  6686  4154 1215.00000  218   11          - 1080.50000      -   5.8   10s
 
 Cutting planes:
   Gomory: 3
   Flow cover: 4
   Zero half: 5
-  Lazy constraints: 1195
+  Lazy constraints: 876
 
-Explored 9807 nodes (55890 simplex iterations) in 10.05 seconds
+Explored 7132 nodes (41023 simplex iterations) in 10.03 seconds
 Thread count was 8 (of 8 available processors)
 
 Time limit reached

@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 10:04:13 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:58:14 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 10:04:13 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:58:14 2016
 
 Optimize a model with 201 rows, 5050 columns and 10101 nonzeros
 Coefficient statistics:
@@ -12,11 +12,11 @@ Coefficient statistics:
   RHS range       [1e+00, 1e+00]
 Found heuristic solution: objective 5008
 Presolve removed 101 rows and 100 columns
-Presolve time: 0.02s
+Presolve time: 0.01s
 Presolved: 100 rows, 4950 columns, 9900 nonzeros
 Variable types: 0 continuous, 4950 integer (4950 binary)
 
-Root relaxation: objective 1.104500e+03, 166 iterations, 0.01 seconds
+Root relaxation: objective 1.104500e+03, 166 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
@@ -27,17 +27,20 @@ Root relaxation: objective 1.104500e+03, 166 iterations, 0.01 seconds
      0     0 1107.50000    0    6 5008.00000 1107.50000  77.9%     -    0s
      0     0 1107.50000    0    6 5008.00000 1107.50000  77.9%     -    0s
      0     2 1107.50000    0    6 5008.00000 1107.50000  77.9%     -    0s
-  2079  1302 1112.50000   24    6 5008.00000 1108.28571  77.9%   5.3    5s
-  5683  3528 infeasible  265      5008.00000 1109.00000  77.9%   5.0   10s
+  3127  1830 1466.50000  158    6 5008.00000 1108.50000  77.9%   5.1    5s
+* 6588  4191             342    1718.0000000 1109.00000  35.4%   4.9    9s
+* 6590  4189             340    1713.0000000 1109.00000  35.3%   4.9    9s
+  6776  4249 1219.00000  139    6 1713.00000 1109.00000  35.3%   4.9   10s
+* 7133  4330             313    1580.0000000 1109.00000  29.8%   5.0   10s
 
 Cutting planes:
   Gomory: 5
   Flow cover: 2
   Zero half: 8
-  Lazy constraints: 840
+  Lazy constraints: 985
 
-Explored 5980 nodes (30165 simplex iterations) in 10.12 seconds
+Explored 7170 nodes (35725 simplex iterations) in 10.05 seconds
 Thread count was 8 (of 8 available processors)
 
 Time limit reached
-Best objective 5.008000000000e+03, best bound 1.109000000000e+03, gap 77.8554%
+Best objective 1.580000000000e+03, best bound 1.109000000000e+03, gap 29.8101%

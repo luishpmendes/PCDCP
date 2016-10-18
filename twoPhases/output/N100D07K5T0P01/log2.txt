@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 10:07:35 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 12:01:36 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 10:07:35 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 12:01:36 2016
 
 Optimize a model with 201 rows, 5050 columns and 10101 nonzeros
 Coefficient statistics:
@@ -27,17 +27,17 @@ Root relaxation: objective 8.505000e+02, 168 iterations, 0.00 seconds
      0     0  852.60000    0   19          -  852.60000      -     -    0s
      0     0  852.60000    0   19          -  852.60000      -     -    0s
      0     2  852.60000    0   19          -  852.60000      -     -    0s
-  4351  2905  869.25000   56   15          -  855.57143      -   5.4    5s
-  8020  4963  859.35484   27   22          -  856.50000      -   5.3   10s
+  3806  2611  862.50000   35    9          -  855.50000      -   5.3    5s
+  7629  4660  866.50000   43    9          -  856.50000      -   5.3   10s
 
 Cutting planes:
   Gomory: 4
   MIR: 1
   Flow cover: 2
   Zero half: 8
-  Lazy constraints: 1152
+  Lazy constraints: 1095
 
-Explored 8074 nodes (42673 simplex iterations) in 10.02 seconds
+Explored 7785 nodes (41165 simplex iterations) in 10.03 seconds
 Thread count was 8 (of 8 available processors)
 
 Time limit reached
