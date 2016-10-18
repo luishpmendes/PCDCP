@@ -1,0 +1,46 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 09:53:20 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 09:53:20 2016
+
+Optimize a model with 101 rows, 1275 columns and 2551 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 51 rows and 50 columns
+Presolve time: 0.00s
+Presolved: 50 rows, 1225 columns, 2450 nonzeros
+Variable types: 0 continuous, 1225 integer (1225 binary)
+
+Root relaxation: objective 1.055000e+03, 80 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1055.00000    0    4          - 1055.00000      -     -    0s
+     0     0 1055.17391    0   14          - 1055.17391      -     -    0s
+     0     0 1055.25000    0   14          - 1055.25000      -     -    0s
+     0     0 1055.28571    0   14          - 1055.28571      -     -    0s
+     0     0 1055.30769    0   14          - 1055.30769      -     -    0s
+     0     2 1055.30769    0   14          - 1055.30769      -     -    0s
+* 2677  1535              98    1420.0000000 1079.50000  24.0%   4.9    1s
+* 2999  1477              52    1175.0000000 1080.93333  8.01%   4.9    1s
+H 3083  1093                    1119.0000000 1080.93333  3.40%   4.8    1s
+* 3177  1003              38    1116.0000000 1081.00000  3.14%   4.8    1s
+* 3625   875              27    1104.0000000 1082.25000  1.97%   4.7    1s
+* 4231   703              33    1100.0000000 1085.00000  1.36%   4.7    1s
+* 4398   520              23    1099.0000000 1085.50000  1.23%   4.7    1s
+
+Cutting planes:
+  Gomory: 3
+  Zero half: 4
+  Lazy constraints: 636
+
+Explored 5614 nodes (25088 simplex iterations) in 2.18 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.099000000000e+03, best bound 1.099000000000e+03, gap 0.0%
