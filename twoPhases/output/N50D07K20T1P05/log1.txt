@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:45:58 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 22:29:31 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:45:58 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 22:29:31 2016
 
 Optimize a model with 51 rows, 50 columns and 301 nonzeros
 Coefficient statistics:

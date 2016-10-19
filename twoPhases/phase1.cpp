@@ -45,12 +45,8 @@ void floydWarshall (matrix W, matrix * D, matrix * PI) {
     for (ulint i = 0; i < (ulint) W.size(); i++) {
         for (ulint j = 0; j < (ulint) W.size(); j++) {
             (*D)[i][j] = W[i][j];
-            if (i != j) {
-                if (W[i][j] < INFINITE) {
-                    (*PI)[i][j] = i;
-                }
-            } else {
-                (*PI)[i][j] = NIL;
+            if (i != j && W[i][j] < INFINITE) {
+                (*PI)[i][j] = i;
             }
         }
     }
@@ -105,8 +101,36 @@ int main () {
         W[u][v] = w;
         W[v][u] = w;
     }
-
+/*
+    cout << "W: " << endl;
+    for (ulint i = 0; i < (ulint) W.size(); i++) {
+        for (ulint j = 0; j < (ulint) W.size(); j++) {
+            cout << W[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+*/
     floydWarshall (W, &Dist, &PI);
+/*
+    cout << "Dist: " << endl;
+    for (ulint i = 0; i < (ulint) Dist.size(); i++) {
+        for (ulint j = 0; j < (ulint) Dist.size(); j++) {
+            cout << Dist[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
+    cout << "PI: " << endl;
+    for (ulint i = 0; i < (ulint) PI.size(); i++) {
+        for (ulint j = 0; j < (ulint) PI.size(); j++) {
+            cout << PI[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+*/
 
     vector < set <ulint> > Ns = neighbourhoods (Wcomplete, k);
 

@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:59:04 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 22:42:44 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:59:04 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 22:42:44 2016
 
 Optimize a model with 201 rows, 5050 columns and 10101 nonzeros
 Coefficient statistics:
@@ -12,7 +12,7 @@ Coefficient statistics:
   RHS range       [1e+00, 1e+00]
 Found heuristic solution: objective 5442
 Presolve removed 101 rows and 100 columns
-Presolve time: 0.02s
+Presolve time: 0.01s
 Presolved: 100 rows, 4950 columns, 9900 nonzeros
 Variable types: 0 continuous, 4950 integer (4950 binary)
 
@@ -27,22 +27,22 @@ Root relaxation: objective 1.214500e+03, 157 iterations, 0.00 seconds
      0     0 1218.50000    0   12 5442.00000 1218.50000  77.6%     -    0s
      0     0 1218.50000    0    8 5442.00000 1218.50000  77.6%     -    0s
      0     2 1218.50000    0    8 5442.00000 1218.50000  77.6%     -    0s
-  2070  1585 1254.00000   91   12 5442.00000 1222.00000  77.5%   5.2    5s
-H 4031  2539                    1707.0000000 1222.00000  28.4%   5.1    6s
-* 4209  2550             183    1703.0000000 1222.00000  28.2%   5.1    6s
+  1791  1416 1229.00000   57    8 5442.00000 1222.00000  77.5%   5.3    5s
+H 4031  2539                    1707.0000000 1222.00000  28.4%   5.1    7s
+* 4209  2550             183    1703.0000000 1222.00000  28.2%   5.1    7s
 * 4709  2740             184    1702.0000000 1222.75000  28.2%   5.0    7s
 * 4716  2739             187    1696.0000000 1222.75000  27.9%   5.0    7s
 * 4721  2739             187    1692.0000000 1222.75000  27.7%   5.0    7s
-  6065  3842 1227.00000   32    - 1692.00000 1223.00000  27.7%   5.0   10s
+  6622  4345 1399.00000  179    4 1692.00000 1223.00000  27.7%   5.1   10s
 
 Cutting planes:
   Gomory: 8
   MIR: 1
   Flow cover: 2
   Zero half: 11
-  Lazy constraints: 685
+  Lazy constraints: 700
 
-Explored 6622 nodes (33999 simplex iterations) in 10.07 seconds
+Explored 6699 nodes (34410 simplex iterations) in 10.02 seconds
 Thread count was 8 (of 8 available processors)
 
 Time limit reached

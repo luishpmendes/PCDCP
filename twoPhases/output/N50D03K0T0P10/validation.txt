@@ -5,7 +5,7 @@ nSolution <= n : OK
 mSolution <= m : OK
 Solution Vertices : OK
 Solution Edges : OK
-Solution Cost : ERROR - 2191 != 3382
+Solution Cost : OK
 Cover : OK
 Solution Vertice Not in Main Cycle: OK
 Non Solution Vertice in Main Cycle: OK

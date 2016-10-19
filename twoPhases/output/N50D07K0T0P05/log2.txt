@@ -1,8 +1,8 @@
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:49:52 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 22:33:27 2016
 
 
-Gurobi 6.5.2 (linux64) logging started Tue Oct 18 11:49:52 2016
+Gurobi 6.5.2 (linux64) logging started Tue Oct 18 22:33:27 2016
 
 Optimize a model with 101 rows, 1275 columns and 2551 nonzeros
 Coefficient statistics:
@@ -11,7 +11,7 @@ Coefficient statistics:
   Bounds range    [1e+00, 1e+00]
   RHS range       [1e+00, 1e+00]
 Presolve removed 51 rows and 50 columns
-Presolve time: 0.00s
+Presolve time: 0.01s
 Presolved: 50 rows, 1225 columns, 2450 nonzeros
 Variable types: 0 continuous, 1225 integer (1225 binary)
 
@@ -26,22 +26,21 @@ Root relaxation: objective 6.370000e+02, 83 iterations, 0.00 seconds
      0     0  640.37500    0   11          -  640.37500      -     -    0s
      0     0  640.37500    0   11          -  640.37500      -     -    0s
      0     2  640.37500    0   11          -  640.37500      -     -    0s
-* 6208  3654              80     737.0000000  655.55556  11.1%   4.5    3s
-  6883  4136  687.00000   36    4  737.00000  656.57143  10.9%   4.4    5s
-H 7104  2775                     689.0000000  657.00000  4.64%   4.4    6s
-* 8392  3121              30     687.0000000  658.75000  4.11%   4.3    6s
-*10048  3198              37     685.0000000  661.00000  3.50%   4.3    7s
-*11401  2895              30     684.0000000  664.57143  2.84%   4.4    8s
- 12621  2409     cutoff   28       684.00000  670.50000  1.97%   4.6   10s
+* 6208  3654              80     737.0000000  655.55556  11.1%   4.5    4s
+  6711  3977  686.66667   35    6  737.00000  656.57143  10.9%   4.5    5s
+H 7104  2775                     689.0000000  657.00000  4.64%   4.4    7s
+* 8392  3121              30     687.0000000  658.75000  4.11%   4.3    8s
+  9666  3376     cutoff   45       687.00000  661.00000  3.78%   4.3   10s
+*10019  3195              37     685.0000000  661.00000  3.50%   4.3   10s
 
 Cutting planes:
-  Gomory: 7
+  Gomory: 6
   Flow cover: 5
   Zero half: 2
-  Lazy constraints: 1373
+  Lazy constraints: 1288
 
-Explored 13015 nodes (59897 simplex iterations) in 10.01 seconds
+Explored 10346 nodes (44640 simplex iterations) in 10.03 seconds
 Thread count was 8 (of 8 available processors)
 
 Time limit reached
-Best objective 6.840000000000e+02, best bound 6.720000000000e+02, gap 1.7544%
+Best objective 6.850000000000e+02, best bound 6.630000000000e+02, gap 3.2117%
