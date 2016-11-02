@@ -395,7 +395,15 @@ class subtourelim: public GRBCallback {
         }
 };
 */
-int main () {
+int main (int argc, char * argv[]) {
+    double timeLimit;
+
+    if (argc == 2) {
+        timeLimit = atof(argv[1]);
+    } else {
+        timeLimit = 10.0;
+    }
+
     ulint n, mComplete, m, k, t, root;
     double d, p;
 
@@ -456,14 +464,14 @@ int main () {
         env.set(GRB_IntParam_LazyConstraints, 1);
         env.set(GRB_IntParam_LogToConsole, 0);
         env.set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/log.txt");
-        env.set(GRB_DoubleParam_TimeLimit, 10);
+        env.set(GRB_DoubleParam_TimeLimit, timeLimit);
 
         GRBModel model = GRBModel(env);
 
         model.getEnv().set(GRB_IntParam_LazyConstraints, 1);
         model.getEnv().set(GRB_IntParam_LogToConsole, 0);
         model.getEnv().set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/log.txt");
-        model.getEnv().set(GRB_DoubleParam_TimeLimit, 10);
+        model.getEnv().set(GRB_DoubleParam_TimeLimit, timeLimit);
 
         vector <GRBVar> y (n);
 
