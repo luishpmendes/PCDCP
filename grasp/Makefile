@@ -1,5 +1,5 @@
 CPP = g++
-CARGS = -Wall -m64 -O3 -fno-inline -std=c++11
+CARGS = -Wall -m64 -g -fno-inline -std=c++11
 
 clean: 
 	rm -rf grasp
