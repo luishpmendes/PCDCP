@@ -23,12 +23,6 @@ string itos (ulint i) {
     return s.str();
 }
 
-string ftos (double i) {
-    stringstream s;
-    s << i;
-    return s.str();
-}
-
 vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
     vector < set <ulint> > result (W.size());
     for (ulint u = 0; u < W.size(); u++) {
@@ -89,11 +83,11 @@ class subtourelim: public GRBCallback {
                     Q.push(root);
 
                     while (!Q.empty()) {
-                        int u = Q.front();
+                        ulint u = Q.front();
                         Q.pop();
 
                         for (list < pair <ulint, ulint> > :: iterator it = adj[u].begin(); it != adj[u].end(); it++) {
-                            int v = it->first;
+                            ulint v = it->first;
                             if (visitedVertices[v] == 0 && getSolution(y[v]) >= 0.5) {
                                 visitedVertices[v] = 1;
                                 ulint e = mE[make_pair(u, v)];
