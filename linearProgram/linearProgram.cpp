@@ -11,30 +11,11 @@
 #include <iomanip>
 #include <cmath>
 
-#ifndef INFINITE
-#define INFINITE 15 << 25
-#endif
-
-#ifndef NIL
-#define NIL - (15 << 25)
-#endif
-
-#ifndef WHITE
-#define WHITE 0
-#endif
-
-#ifndef GRAY
-#define GRAY  1
-#endif
-
-#ifndef BLACK
-#define BLACK 2
-#endif
-
 using namespace std;
 
-typedef long int ulint;
-typedef vector < vector <ulint> > matrix;
+typedef long int lint;
+typedef unsigned long int ulint;
+typedef vector < vector <lint> > matrix;
 
 string itos (ulint i) {
     stringstream s;
@@ -47,77 +28,17 @@ string ftos (double i) {
     s << i;
     return s.str();
 }
-/*
-class myCompare {
-    public:
-        bool operator ()(pair <int, int> a, pair <int, int> b) {
-            return (a.second > b.second || (a.second == b.second && a.first > b.first));
-        }
-};
-*/
+
 vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
     vector < set <ulint> > result (W.size());
-/*
-    matrix D = matrix (W.size(), vector <ulint> (W.size(), INFINITE));
-
-    for (ulint i = 0; i < W.size(); i++) {
-        for (ulint j = 0; j < W.size(); j++) {
-            D[i][j] = W[i][j];
-        }
-    }
-
-    for (ulint l = 0; l < W.size(); l++) {
-        for (ulint i = 0; i < W.size(); i++) {
-            for (ulint j = 0; j < W.size(); j++) {
-                if (D[i][j] > D[i][l] + D[l][j]) {
-                    D[i][j] = D[i][l] + D[l][j];
-                }
-            }
-        }
-    }
-
     for (ulint u = 0; u < W.size(); u++) {
         for (ulint v = 0; v < W[u].size(); v++) {
-            if (D[u][v] <= k) {
-                result[u].insert(v);
-            }
-        }
-    }
-*/
-    for (ulint u = 0; u < (ulint) W.size(); u++) {
-        for (ulint v = 0; v < (ulint) W[u].size(); v++) {
-            if (W[u][v] <= k) {
+            if (W[u][v] >= 0 && (ulint) W[u][v] <= k) {
                 result[u].insert(v);
             }
         }
     }
     return result;
-}
-
-void bfs (vector < list < pair <ulint, ulint> > > adj, map < pair <ulint, ulint>, ulint> mE, ulint s, ulint cycleNumber, vector <ulint> * vertexCycle, vector <ulint> * edgeCycle) {
-    vector <ulint> color (adj.size(), WHITE);
-    queue <ulint> Q;
-
-    color[s] = GRAY;
-
-    Q.push(s);
-
-    while (!Q.empty()) {
-        ulint u = Q.front();
-        Q.pop();
-
-        for (list < pair <ulint, ulint> > :: iterator it = adj[u].begin(); it != adj[u].end(); it++) {
-            ulint v = (*it).first;
-            if (color[v] == WHITE && (*vertexCycle)[v] == 0) {
-                color[v] = GRAY;
-                ulint e = mE[make_pair(u, v)];
-                (*edgeCycle)[e] = cycleNumber;
-                Q.push(v);
-            }
-        }
-        color[u] = BLACK;
-        (*vertexCycle)[u] = cycleNumber;
-    }
 }
 
 class subtourelim: public GRBCallback {
@@ -140,27 +61,25 @@ class subtourelim: public GRBCallback {
             root = _root;
         }
     protected :
-        // let C be the cycle that contains u, with n1 vertices
+        // let C be the cycle that contains root, with n1 vertices
         // let S = n - n1
         // the sum of the edges that are not in C must be less than S-1
         void callback () {
             try {
                 if (where == GRB_CB_MIPSOL) {
-                    // find subtour containing vertex u, and add constraint to edges not in the tour
+                    // find subtour containing vertex root, and add constraint to edges not in the tour
                     vector < list < pair <ulint, ulint> > > adj (n);
 
                     // build graph from solution vertices
                     for (ulint e = 0; e < m; e++) {
-                        if (getSolution(x[e]) > 0.5) {
-                            ulint a = E[e].first.first;
-                            ulint b = E[e].first.second;
-                            ulint c = E[e].second;
-                            adj[a].push_back(make_pair(b, c));
-                            adj[b].push_back(make_pair(a, c));
+                        if (getSolution(x[e]) >= 0.5) {
+                            ulint u = E[e].first.first;
+                            ulint v = E[e].first.second;
+                            ulint w = E[e].second;
+                            adj[u].push_back(make_pair(v, w));
+                            adj[v].push_back(make_pair(u, w));
                         }
                     }
-
-                    // week constraint
 
                     vector <ulint> visitedVertices (n, 0);
                     vector <ulint> visitedEdges (m, 0);
@@ -175,7 +94,7 @@ class subtourelim: public GRBCallback {
 
                         for (list < pair <ulint, ulint> > :: iterator it = adj[u].begin(); it != adj[u].end(); it++) {
                             int v = it->first;
-                            if (visitedVertices[v] == 0 && getSolution(y[v]) > 0.5) {
+                            if (visitedVertices[v] == 0 && getSolution(y[v]) >= 0.5) {
                                 visitedVertices[v] = 1;
                                 ulint e = mE[make_pair(u, v)];
                                 visitedEdges[e] = 1;
@@ -186,7 +105,7 @@ class subtourelim: public GRBCallback {
 
                     ulint nUnvisitedVertices = 0;
                     for (ulint v = 0; v < n; v++) {
-                        if (visitedVertices[v] == 0 && getSolution(y[v]) > 0.5) {
+                        if (visitedVertices[v] == 0 && getSolution(y[v]) >= 0.5) {
                             nUnvisitedVertices++;
                         }
                     }
@@ -194,57 +113,14 @@ class subtourelim: public GRBCallback {
                     if (nUnvisitedVertices > 0) {
                         GRBLinExpr expr = 0;
                         for (ulint e = 0; e < m; e++) {
-                            if (visitedEdges[e] == 0 && getSolution(x[e]) > 0.5) {
-                                if (visitedVertices[E[e].first.first] == 0 && getSolution(y[E[e].first.first]) > 0.5
-                                && visitedVertices[E[e].first.second] == 0 && getSolution(y[E[e].first.second]) > 0.5)
+                            if (visitedEdges[e] == 0 && getSolution(x[e]) >= 0.5) {
+                                if (visitedVertices[E[e].first.first] == 0 && getSolution(y[E[e].first.first]) >= 0.5
+                                && visitedVertices[E[e].first.second] == 0 && getSolution(y[E[e].first.second]) >= 0.5)
                                 expr += x[e];
                             }
                         }
                         addLazy(expr <= nUnvisitedVertices - 1);
                     }
-
-                    // strong constraints
-/*
-                    vector <ulint> vertexCycle (n, 0);
-                    vector <ulint> edgeCycle (m, 0);
-
-                    ulint cycleNumber = 1;
-                    bfs (adj, mE, root, cycleNumber++, &vertexCycle, &edgeCycle);
-
-                    for (ulint i = 0; i < n; i++) {
-                        ulint v = root;
-                        for (ulint u = 0; u < n; u++) {
-                            if (vertexCycle[u] == 0 && getSolution(y[u]) > 0.5) {
-                                v = u;
-                                break;
-                            }
-                        }
-                        if (v == root) {
-                            break;
-                        } else {
-                            bfs (adj, mE, v, cycleNumber++, &vertexCycle, &edgeCycle);
-                        }
-                    }
-                    for (ulint c = 2; c < cycleNumber; c++) {
-                        ulint cycleSize = 0;
-                        for (int v = 0; v < n; v++) {
-                            if (vertexCycle[v] == c && getSolution(y[v]) > 0.5) {
-                                cycleSize++;
-                            }
-                        }
-\                        if (cycleSize >= 1) {
-                            GRBLinExpr expr = 0;
-                            for (ulint e = 0; e < m; e++) {
-                                if (edgeCycle[e] == c && getSolution(x[e]) > 0.5) {
-                                    if (vertexCycle[E[e].first.first] == c && getSolution(y[E[e].first.first]) > 0.5
-                                    && vertexCycle[E[e].first.second] == c && getSolution(y[E[e].first.second]) > 0.5)
-                                    expr += x[e];
-                                }
-                            }
-                            addLazy(expr <= cycleSize - 1);
-                        }
-                    }
-*/
                 }
             } catch (GRBException e) {
                 cout << "Error number: " << e.getErrorCode() << endl;
@@ -255,146 +131,6 @@ class subtourelim: public GRBCallback {
         }
 };
 
-/*
-void bfs (vector < list < pair <ulint, ulint> > > adj, map < pair <ulint, ulint>, ulint> mE, ulint s, ulint cycleNumber, vector <ulint> * vertexCycle, vector <ulint> * edgeCycle) {
-    vector <ulint> color (adj.size(), WHITE);
-    queue <ulint> Q;
-
-    color[s] = GRAY;
-
-    Q.push(s);
-
-    while (!Q.empty()) {
-        ulint u = Q.front();
-        Q.pop();
-
-        for (list < pair <ulint, ulint> > :: iterator it = adj[u].begin(); it != adj[u].end(); it++) {
-            ulint v = (*it).first;
-            if (color[v] == WHITE && (*vertexCycle)[v] == 0) {
-                color[v] = GRAY;
-                ulint e = mE[make_pair(u, v)];
-                (*edgeCycle)[e] = cycleNumber;
-                Q.push(v);
-            }
-        }
-        color[u] = BLACK;
-        (*vertexCycle)[u] = cycleNumber;
-    }
-}
-
-class subtourelim: public GRBCallback {
-    public :
-        vector <GRBVar> y;
-        vector <GRBVar> x;
-        ulint n;
-        ulint m;
-        vector < pair < pair <ulint, ulint> , ulint> > E;
-        map < pair <ulint, ulint>, ulint> mE;
-        ulint root;
-
-        subtourelim (vector <GRBVar> _y, vector <GRBVar> _x, ulint _n, ulint _m, vector < pair < pair <ulint, ulint>, ulint> > _E, map < pair <ulint, ulint>, ulint> _mE, ulint _root) {
-            y = _y;
-            x = _x;
-            n = _n;
-            m = _m;
-            E = _E;
-            mE = _mE;
-            root = _root;
-        }
-    protected :
-        // let C be the cycle that contains u, with n1 vertices
-        // let S = n - n1
-        // the sum of the edges that are not in C must be less than S-1
-        void callback () {
-//            cout << "callback" << endl;
-            try {
-                if (where == GRB_CB_MIPSOL) {
-                    // find subtour containing vertex u, and add constraint to edges not in the tour
-                    vector < list < pair <ulint, ulint> > > adj (n);
-
-                    // build graph from solution vertices
-                    for (ulint e = 0; e < m; e++) {
-                        if (getSolution(x[e]) > 0.5) {
-                            ulint a = E[e].first.first;
-                            ulint b = E[e].first.second;
-                            ulint c = E[e].second;
-                            adj[a].push_back(make_pair(b, c));
-                            adj[b].push_back(make_pair(a, c));
-                        }
-                    }
-/ *
-                    for (ulint u = 0; u < n; u++) {
-                        cout << "adj[" << u << "] = ";
-                        for (list < pair <ulint, ulint> > :: iterator it = adj[u].begin(); it != adj[u].end(); ++it) {
-                            ulint v = (*it).first;
-                            cout << v << ", ";
-                        }
-                        cout << endl;
-                    }
-* /
-                    vector <ulint> vertexCycle (n, 0);
-                    vector <ulint> edgeCycle (m, 0);
-
-                    ulint cycleNumber = 1;
-                    //cout << "bfs(v = " << root << ", cycleNumber = " << cycleNumber << ")" << endl;
-                    bfs (adj, mE, root, cycleNumber++, &vertexCycle, &edgeCycle);
-
-                    for (ulint i = 0; i < n; i++) {
-                        ulint v = root;
-                        for (ulint u = 0; u < n; u++) {
-                            if (vertexCycle[u] == 0 && getSolution(y[u]) > 0.5) {
-                                v = u;
-                                break;
-                            }
-                        }
-                        if (v == root) {
-                            break;
-                        } else {
-                            //cout << "bfs(v = " << v << ", cycleNumber = " << cycleNumber << ")" << endl;
-                            bfs (adj, mE, v, cycleNumber++, &vertexCycle, &edgeCycle);
-                        }
-                    }
-/ *
-                    for (int v = 0; v < n; v++) {
-                        cout << "vertexCycle[" << v << "] = " << vertexCycle[v] << endl;
-                    }
-
-                    for (int e = 0; e < m; e++) {
-                        cout << "edgeCycle[(" << E[e].first.first << ", " << E[e].first.second << ")] = " << edgeCycle[e] << endl;
-                    }
-* /
-                    for (ulint c = 2; c < cycleNumber; c++) {
-                        ulint cycleSize = 0;
-                        for (int v = 0; v < n; v++) {
-                            if (vertexCycle[v] == c && getSolution(y[v]) > 0.5) {
-                                cycleSize++;
-                            }
-                        }
-                        //cout << "cycle " << c << ": ";
-                        if (cycleSize >= 1) {
-                            GRBLinExpr expr = 0;
-                            for (ulint e = 0; e < m; e++) {
-                                if (edgeCycle[e] == c && getSolution(x[e]) > 0.5) {
-                                    if (vertexCycle[E[e].first.first] == c && getSolution(y[E[e].first.first]) > 0.5
-                                    && vertexCycle[E[e].first.second] == c && getSolution(y[E[e].first.second]) > 0.5)
-                                    expr += x[e];
-                                    //cout << "(" << E[e].first.first << ", " << E[e].first.second << ") + ";
-                                }
-                            }
-                            //cout << "\b\b <= " << cycleSize - 1 << endl;
-                            addLazy(expr <= cycleSize - 1);
-                        }
-                    }
-                }
-            } catch (GRBException e) {
-                cout << "Error number: " << e.getErrorCode() << endl;
-                cout << "Error message: " << e.getMessage() << endl;
-            } catch (...) {
-                cout << "Error during callback" << endl;
-            }
-        }
-};
-*/
 int main (int argc, char * argv[]) {
     double timeLimit;
 
@@ -410,7 +146,7 @@ int main (int argc, char * argv[]) {
     cin >> n >> d >> k >> t >> p >> mComplete >> m >> root;
 
     vector <ulint> penalty (n); // vector with de penalties of each vectex
-    matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complete graph
+    matrix W (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
     vector < list < pair <ulint, ulint> > > adj (n); // adjacency lists for the graph
 
     for (ulint i = 0; i < n; i++) {
@@ -483,12 +219,12 @@ int main (int argc, char * argv[]) {
 
         vector <GRBVar> x (m);
 
-        // ∀ (u, v) ∈ E
+        // ∀ e ∈ E
         for (ulint e = 0; e < m; e++) {
             ulint u, v;
             u = E[e].first.first;
             v = E[e].first.second;
-            // y_u_v ∈ {0.0, 1.0}
+            // x_e ∈ {0.0, 1.0}
             x[e] = model.addVar(0.0, 1.0, 0.0, GRB_BINARY, "x_" + itos(u) + "_" + itos(v));
         }
 
@@ -496,14 +232,14 @@ int main (int argc, char * argv[]) {
 
         GRBLinExpr obj = 0.0;
 
-        // obj = ∑ ce * ye
+        // obj = ∑ ce * xe
         for (ulint e = 0; e < m; e++) {
             ulint w;
             w = E[e].second;
             obj += w * x[e];
         }
 
-        // obj += ∑ πv * xv
+        // obj += ∑ πv * (1 - yv)
         for (ulint v = 0; v < n; v++) {
             obj += penalty[v] * (1.0 - y[v]);
         }
@@ -549,12 +285,12 @@ int main (int argc, char * argv[]) {
             set <ulint> solutionEdges;
             solutionCost = round(model.get(GRB_DoubleAttr_ObjVal));
             for (ulint v = 0; v < n; v++) {
-                if (y[v].get(GRB_DoubleAttr_X) > 0.5) {
+                if (y[v].get(GRB_DoubleAttr_X) >= 0.5) {
                     solutionVectices.insert(v);
                 }
             }
             for (ulint e = 0; e < m; e++) {
-                if (x[e].get(GRB_DoubleAttr_X) > 0.5) {
+                if (x[e].get(GRB_DoubleAttr_X) >= 0.5) {
                     solutionEdges.insert(e);
                 }
             }
@@ -568,7 +304,7 @@ int main (int argc, char * argv[]) {
                 ulint a = E[e].first.first;
                 ulint b = E[e].first.second;
                 cout << a << " " << b << endl;
-            }
+            }   
         } else {
             cout << "0 0 0" << endl;
         }
