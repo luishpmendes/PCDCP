@@ -8,18 +8,11 @@
 #include <iomanip>
 #include <cmath>
 
-#ifndef INFINITE
-#define INFINITE 15 << 25
-#endif
-
-#ifndef NIL
-#define NIL - (15 << 25)
-#endif
-
 using namespace std;
 
-typedef long int ulint;
-typedef vector < vector <ulint> > matrix;
+typedef long int lint;
+typedef unsigned long int ulint;
+typedef vector < vector <lint> > matrix;
 
 string itos (ulint i) {
     stringstream s;
@@ -29,9 +22,9 @@ string itos (ulint i) {
 
 vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
     vector < set <ulint> > result (W.size());
-    for (ulint u = 0; u < (ulint) W.size(); u++) {
-        for (ulint v = 0; v < (ulint) W[u].size(); v++) {
-            if (W[u][v] <= k) {
+    for (ulint u = 0; u < W.size(); u++) {
+        for (ulint v = 0; v < W[u].size(); v++) {
+            if (W[u][v] >= 0 && (ulint) W[u][v] <= k) {
                 result[u].insert(v);
             }
         }
@@ -40,22 +33,24 @@ vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
 }
 
 void floydWarshall (matrix W, matrix * D, matrix * PI) {
-    *D = matrix (W.size(), vector <ulint> (W.size(), INFINITE));
-    *PI = matrix (W.size(), vector <ulint> (W.size(), NIL));
-    for (ulint i = 0; i < (ulint) W.size(); i++) {
-        for (ulint j = 0; j < (ulint) W.size(); j++) {
+    *D = matrix (W.size(), vector <lint> (W.size(), -1));
+    *PI = matrix (W.size(), vector <lint> (W.size(), -1));
+    for (ulint i = 0; i < W.size(); i++) {
+        for (ulint j = 0; j < W.size(); j++) {
             (*D)[i][j] = W[i][j];
-            if (i != j && W[i][j] < INFINITE) {
+            if (i != j && W[i][j] >= 0) {
                 (*PI)[i][j] = i;
             }
         }
     }
-    for (ulint k = 0; k < (ulint) W.size(); k++) {
-        for (ulint i = 0; i < (ulint) W.size(); i++) {
-            for (ulint j = 0; j < (ulint) W.size(); j++) {
-                if ((*D)[i][j] > (*D)[i][k] + (*D)[k][j]) {
-                    (*D)[i][j] = (*D)[i][k] + (*D)[k][j];
-                    (*PI)[i][j] = (*PI)[k][j];
+    for (ulint k = 0; k < W.size(); k++) {
+        for (ulint i = 0; i < W.size(); i++) {
+            for (ulint j = 0; j < W.size(); j++) {
+                if ((*D)[i][k] >= 0 && (*D)[k][j] >= 0) {
+                    if ((*D)[i][j] < 0 || (*D)[i][j] > (*D)[i][k] + (*D)[k][j]) {
+                        (*D)[i][j] = (*D)[i][k] + (*D)[k][j];
+                        (*PI)[i][j] = (*PI)[k][j];
+                    }
                 }
             }
         }
@@ -77,8 +72,8 @@ int main (int argc, char * argv[]) {
     cin >> n >> d >> k >> t >> p >> mComplete >> m >> root;
 
     vector <ulint> penalty (n); // vector with the penalties of each vertex
-    matrix Wcomplete (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complete graph
-    matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the graph
+    matrix Wcomplete (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
+    matrix W (n, vector <lint> (n, -1)); // adjacency matrix for the graph
     vector < pair < pair <ulint, ulint> , ulint> > E (m); // vector of edges with the format ((u, v), w)
     matrix Dist, PI; // matrices for the distance and precedence on the graph
 
@@ -100,7 +95,6 @@ int main (int argc, char * argv[]) {
         Wcomplete[v][u] = w;
     }
 
-
     // reading graph
     for (ulint e = 0; e < m; e++) {
         ulint u, v, w;
@@ -109,36 +103,8 @@ int main (int argc, char * argv[]) {
         W[u][v] = w;
         W[v][u] = w;
     }
-/*
-    cout << "W: " << endl;
-    for (ulint i = 0; i < (ulint) W.size(); i++) {
-        for (ulint j = 0; j < (ulint) W.size(); j++) {
-            cout << W[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << endl;
-*/
-    floydWarshall (W, &Dist, &PI);
-/*
-    cout << "Dist: " << endl;
-    for (ulint i = 0; i < (ulint) Dist.size(); i++) {
-        for (ulint j = 0; j < (ulint) Dist.size(); j++) {
-            cout << Dist[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << endl;
 
-    cout << "PI: " << endl;
-    for (ulint i = 0; i < (ulint) PI.size(); i++) {
-        for (ulint j = 0; j < (ulint) PI.size(); j++) {
-            cout << PI[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << endl;
-*/
+    floydWarshall (W, &Dist, &PI);
 
     vector < set <ulint> > Ns = neighbourhoods (Wcomplete, k);
 
@@ -181,7 +147,7 @@ int main (int argc, char * argv[]) {
 
         GRBLinExpr obj = 0.0;
 
-        // obj = ∑ πv * xv
+        // obj = ∑ πv * (1 - yv)
         for (ulint v = 0; v < n; v++) {
             obj += penalty[v] * (1.0 - y[v]);
         }
@@ -208,20 +174,14 @@ int main (int argc, char * argv[]) {
         if (model.get(GRB_IntAttr_SolCount) > 0) {
             vector <ulint> solutionV;
             for (ulint v = 0; v < n; v++) {
-                if (y[v].get(GRB_DoubleAttr_X) > 0.5) {
+                if (y[v].get(GRB_DoubleAttr_X) >= 0.5) {
                     solutionV.push_back(v);
                 }
             }
             vector < pair < pair <ulint, ulint> , ulint> > solutionE;
-/*            for (ulint e = 0; e < m; e++) {
-                if (y[E[e].first.first].get(GRB_DoubleAttr_X) > 0.5 && y[E[e].first.second].get(GRB_DoubleAttr_X) > 0.5) {
-                    solutionE.push_back(E[e]);
-                }
-            }
-*/
             for (ulint u = 0; u < n; u++) {
                 for (ulint v = u + 1; v < n; v++) {
-                    if (y[u].get(GRB_DoubleAttr_X) > 0.5 && y[v].get(GRB_DoubleAttr_X) > 0.5) {
+                    if (y[u].get(GRB_DoubleAttr_X) >= 0.5 && y[v].get(GRB_DoubleAttr_X) >= 0.5) {
                         pair < pair <ulint, ulint> , ulint> edge;
                         edge.first.first = u;
                         edge.first.second = v;
@@ -238,7 +198,7 @@ int main (int argc, char * argv[]) {
             }
 
             for (vector <ulint> :: iterator it = solutionV.begin(); it != solutionV.end(); it++) {
-                int v = *it;
+                ulint v = *it;
                 cout << v << endl;
             }
 

@@ -11,59 +11,15 @@
 #include <iomanip>
 #include <cmath>
 
-#ifndef WHITE
-#define WHITE 0
-#endif
-
-#ifndef GRAY
-#define GRAY  1
-#endif
-
-#ifndef BLACK
-#define BLACK 2
-#endif
-
 using namespace std;
 
-typedef long int ulint;
-typedef vector < vector <ulint> > matrix;
+typedef long int lint;
+typedef unsigned long int ulint;
 
 string itos (ulint i) {
     stringstream s;
     s << i;
     return s.str();
-}
-
-string ftos (double i) {
-    stringstream s;
-    s << i;
-    return s.str();
-}
-
-void bfs (vector < list < pair <ulint, ulint> > > adj, map < pair <ulint, ulint>, ulint> mE, ulint s, ulint cycleNumber, vector <ulint> * vertexCycle, vector <ulint> * edgeCycle) {
-    vector <ulint> color (adj.size(), WHITE);
-    queue <ulint> Q;
-
-    color[s] = GRAY;
-
-    Q.push(s);
-
-    while (!Q.empty()) {
-        ulint u = Q.front();
-        Q.pop();
-
-        for (list < pair <ulint, ulint> > :: iterator it = adj[u].begin(); it != adj[u].end(); it++) {
-            ulint v = (*it).first;
-            if (color[v] == WHITE && (*vertexCycle)[v] == 0) {
-                color[v] = GRAY;
-                ulint e = mE[make_pair(u, v)];
-                (*edgeCycle)[e] = cycleNumber;
-                Q.push(v);
-            }
-        }
-        color[u] = BLACK;
-        (*vertexCycle)[u] = cycleNumber;
-    }
 }
 
 class subtourelim: public GRBCallback {
@@ -97,7 +53,7 @@ class subtourelim: public GRBCallback {
 
                     // build graph from solution vertices
                     for (ulint e = 0; e < m; e++) {
-                        if (getSolution(x[e]) > 0.5) {
+                        if (getSolution(x[e]) >= 0.5) {
                             ulint a = E[e].first.first;
                             ulint b = E[e].first.second;
                             ulint c = E[e].second;
@@ -105,8 +61,6 @@ class subtourelim: public GRBCallback {
                             adj[b].push_back(make_pair(a, c));
                         }
                     }
-
-                    // week constraint
 
                     vector <ulint> visitedVertices (n, 0);
                     vector <ulint> visitedEdges (m, 0);
@@ -116,12 +70,12 @@ class subtourelim: public GRBCallback {
                     Q.push(root);
 
                     while (!Q.empty()) {
-                        int u = Q.front();
+                        ulint u = Q.front();
                         Q.pop();
 
                         for (list < pair <ulint, ulint> > :: iterator it = adj[u].begin(); it != adj[u].end(); it++) {
-                            int v = it->first;
-                            if (visitedVertices[v] == 0 && getSolution(y[v]) > 0.5) {
+                            ulint v = it->first;
+                            if (visitedVertices[v] == 0 && getSolution(y[v]) >= 0.5) {
                                 visitedVertices[v] = 1;
                                 ulint e = mE[make_pair(u, v)];
                                 visitedEdges[e] = 1;
@@ -132,7 +86,7 @@ class subtourelim: public GRBCallback {
 
                     ulint nUnvisitedVertices = 0;
                     for (ulint v = 0; v < n; v++) {
-                        if (visitedVertices[v] == 0 && getSolution(y[v]) > 0.5) {
+                        if (visitedVertices[v] == 0 && getSolution(y[v]) >= 0.5) {
                             nUnvisitedVertices++;
                         }
                     }
@@ -140,9 +94,9 @@ class subtourelim: public GRBCallback {
                     if (nUnvisitedVertices > 0) {
                         GRBLinExpr expr = 0;
                         for (ulint e = 0; e < m; e++) {
-                            if (visitedEdges[e] == 0 && getSolution(x[e]) > 0.5) {
-                                if (visitedVertices[E[e].first.first] == 0 && getSolution(y[E[e].first.first]) > 0.5
-                                && visitedVertices[E[e].first.second] == 0 && getSolution(y[E[e].first.second]) > 0.5)
+                            if (visitedEdges[e] == 0 && getSolution(x[e]) >= 0.5) {
+                                if (visitedVertices[E[e].first.first] == 0 && getSolution(y[E[e].first.first]) >= 0.5
+                                && visitedVertices[E[e].first.second] == 0 && getSolution(y[E[e].first.second]) >= 0.5)
                                 expr += x[e];
                             }
                         }
@@ -244,12 +198,12 @@ int main (int argc, char * argv[]) {
 
         vector <GRBVar> x (m);
 
-        // ∀ (u, v) ∈ E
+        // ∀ e ∈ E
         for (ulint e = 0; e < m; e++) {
             ulint u, v;
             u = E[e].first.first;
             v = E[e].first.second;
-            // y_u_v ∈ {0.0, 1.0}
+            // y_e ∈ {0.0, 1.0}
             x[e] = model.addVar(0.0, 1.0, 0.0, GRB_BINARY, "x_" + itos(u) + "_" + itos(v));
         }
 
@@ -257,14 +211,14 @@ int main (int argc, char * argv[]) {
 
         GRBLinExpr obj = 0.0;
 
-        // obj = ∑ ce * ye
+        // obj = ∑ ce * xe
         for (ulint e = 0; e < m; e++) {
             ulint w;
             w = E[e].second;
             obj += w * x[e];
         }
 
-        // obj += ∑ πv * xv
+        // obj += ∑ πv * (1 - yv)
         for (ulint v = 0; v < n; v++) {
             obj += penalty[v] * (1.0 - y[v]);
         }
@@ -308,15 +262,13 @@ int main (int argc, char * argv[]) {
             vector < pair <ulint, ulint> > solutionEdges;
             solutionCost = round(model.get(GRB_DoubleAttr_ObjVal));
             for (ulint v = 0; v < n; v++) {
-                if (y[v].get(GRB_DoubleAttr_X) > 0.5) {
+                if (y[v].get(GRB_DoubleAttr_X) >= 0.5) {
                     solutionVectices.insert(v);
                 }
             }
             for (ulint e = 0; e < m; e++) {
-                if (x[e].get(GRB_DoubleAttr_X) > 0.5) {
-//                    cout << "Aresta grafo completo: " << E[e].first.first << " " << E[e].first.second << endl;
-//                    cout << "Arestas grafo normal: ";
-                    for (ulint i = 0; i < (ulint) paths[e].size() - 1; i++) {
+                if (x[e].get(GRB_DoubleAttr_X) >= 0.5) {
+                    for (ulint i = 0; i < paths[e].size() - 1; i++) {
                         pair <ulint, ulint> edge;
                         if (paths[e][i] < paths[e][i + 1]) {
                             edge.first = paths[e][i];
@@ -326,28 +278,9 @@ int main (int argc, char * argv[]) {
                             edge.second = paths[e][i];
                         }
                         solutionEdges.push_back(edge);
-//                        cout << paths[e][i] << " ";
                     }
-//                    cout << paths[e][paths[e].size() - 1] << endl;
-                    /*
-                    pair <ulint, ulint> edge;
-                    edge.first = E[e].first.first;
-                    edge.second = E[e].first.second;
-                    solutionEdges.insert(edge);
-                    */
                 }
             }
-            /*vector < pair <ulint, ulint> > vSolutionEdges;
-            for (set < pair <ulint, ulint> > :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
-                ulint e = mE[*it];
-                for (ulint i = 0; i < (ulint) paths[e].size() - 1; i++) {
-                    pair <ulint, ulint> edge;
-                    edge.first = paths[e][i];
-                    edge.second = paths[e][i + 1];
-                    vSolutionEdges.push_back(edge);
-                }
-            }
-            */
             cout << solutionVectices.size() << ' ' << solutionEdges.size() << ' ' << solutionCost << endl;
             for (set <ulint> :: iterator it = solutionVectices.begin(); it != solutionVectices.end(); it++) {
                 ulint v = *it;
