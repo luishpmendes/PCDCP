@@ -128,7 +128,7 @@ class subtourelim: public GRBCallback {
 };
 
 int main (int argc, char * argv[]) {
-    chrono :: steady_clock :: time_point tStart = chrono :: steady_clock :: now();
+    chrono :: steady_clock :: time_point tBegin = chrono :: steady_clock :: now();
     double timeLimit;
 
     if (argc == 2) {
@@ -310,7 +310,7 @@ int main (int argc, char * argv[]) {
         model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/model.lp");
 
         chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
-        chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tStart);
+        chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
         ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/elapsedTime.txt", ofstream :: out);
         elapsedTimeFile << elapsedTime.count();
         elapsedTimeFile.close();
