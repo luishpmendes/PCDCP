@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <iomanip>
 #include <cmath>
+#include <chrono>
+#include <fstream>
 
 using namespace std;
 
@@ -126,6 +128,7 @@ class subtourelim: public GRBCallback {
 };
 
 int main (int argc, char * argv[]) {
+    chrono :: steady_clock :: time_point tStart = chrono :: steady_clock :: now();
     double timeLimit;
 
     if (argc == 2) {
@@ -305,6 +308,16 @@ int main (int argc, char * argv[]) {
 
         // exporting model
         model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/model.lp");
+
+        chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
+        chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tStart);
+        ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/elapsedTime.txt", ofstream :: out);
+        elapsedTimeFile << elapsedTime.count();
+        elapsedTimeFile.close();
+
+        ofstream gapFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/gap.txt", ofstream :: out);
+        gapFile << model.get(GRB_DoubleAttr_MIPGap);
+        gapFile.close();
     } catch (GRBException e) {
         cout << "Error code = " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;
