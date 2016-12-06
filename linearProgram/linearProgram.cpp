@@ -318,6 +318,10 @@ int main (int argc, char * argv[]) {
         ofstream gapFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/gap.txt", ofstream :: out);
         gapFile << model.get(GRB_DoubleAttr_MIPGap);
         gapFile.close();
+
+        ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/objVal.txt", ofstream :: out);
+        objVal << model.get(GRB_DoubleAttr_ObjVal);
+        objValFile.close();
     } catch (GRBException e) {
         cout << "Error code = " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;
