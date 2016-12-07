@@ -8,3 +8,6 @@ clean:
 
 linearProgram: linearProgram.cpp
 	$(CPP) $(CARGS) -o linearProgram linearProgram.cpp -I$(INC) $(CPPLIB) -lpthread -lm
+
+solutionAggregator: solutionAggregator.cpp
+	$(COMPILER) $(CFLAGS) solutionAggregator.cpp -o solutionAggregator
