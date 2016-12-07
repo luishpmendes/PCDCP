@@ -40,4 +40,6 @@ do
         done
     done
 done
+make solutionAggregator;
+./solutionAggregator > "output/solution.csv";
 make clean;
