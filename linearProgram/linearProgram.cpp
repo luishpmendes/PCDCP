@@ -309,19 +309,19 @@ int main (int argc, char * argv[]) {
         // exporting model
         model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/model.lp");
 
-        chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
-        chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
-        ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/elapsedTime.txt", ofstream :: out);
-        elapsedTimeFile << elapsedTime.count();
-        elapsedTimeFile.close();
+        ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/objVal.txt", ofstream :: out);
+        objVal << model.get(GRB_DoubleAttr_ObjVal);
+        objValFile.close();
 
         ofstream gapFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/gap.txt", ofstream :: out);
         gapFile << model.get(GRB_DoubleAttr_MIPGap);
         gapFile.close();
 
-        ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/objVal.txt", ofstream :: out);
-        objVal << model.get(GRB_DoubleAttr_ObjVal);
-        objValFile.close();
+        chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
+        chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
+        ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/elapsedTime.txt", ofstream :: out);
+        elapsedTimeFile << elapsedTime.count();
+        elapsedTimeFile.close();
     } catch (GRBException e) {
         cout << "Error code = " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;
