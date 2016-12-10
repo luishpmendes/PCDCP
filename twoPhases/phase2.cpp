@@ -301,7 +301,7 @@ int main (int argc, char * argv[]) {
         model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/model2.lp");
 
         ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/objVal2.txt", ofstream :: out);
-        objVal << model.get(GRB_DoubleAttr_ObjVal);
+        objValFile << model.get(GRB_DoubleAttr_ObjVal);
         objValFile.close();
 
         ofstream gapFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/gap2.txt", ofstream :: out);

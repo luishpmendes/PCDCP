@@ -13,4 +13,4 @@ phase2: phase2.cpp
 	$(CPP) $(CARGS) -o phase2 phase2.cpp -I$(INC) $(CPPLIB) -lpthread -lm
 
 solutionAggregator: solutionAggregator.cpp
-	$(COMPILER) $(CFLAGS) solutionAggregator.cpp -o solutionAggregator
+	$(CPP) $(CARGS) solutionAggregator.cpp -o solutionAggregator
