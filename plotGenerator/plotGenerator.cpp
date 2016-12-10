@@ -7,28 +7,29 @@
 
 using namespace std;
 
-typedef long int ulint;
+typedef unsigned long int ulint;
 
 bool pointComp (pair < pair <double, double>, double > lhs, pair < pair <double, double>, double > rhs) {
     return lhs.second < rhs.second;
 }
 
 int main (int argc, char * argv[]) {
-    string path, N, D, K, T, P;
+    string path, N, D, K, T, P, I;
 
-    if (argc == 7) {
+    if (argc == 8) {
         path = string(argv[1]);
         N = string(argv[2]);
         D = string(argv[3]);
         K = string(argv[4]);
         T = string(argv[5]);
         P = string(argv[6]);
+        I = string(argv[7]);
     } else {
-        cin >> path >> N >> D >> K >> T >> P;
+        cin >> path >> N >> D >> K >> T >> P >> I;
     }
 
-    ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "P" + P + ".in");
-    ifstream resultFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/result.out");
+    ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + ".in");
+    ifstream resultFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/result.out");
 
     if (inputFile.is_open() && resultFile.is_open()) {
         ulint n, mComplete, m, k, t, root;
@@ -67,7 +68,7 @@ int main (int argc, char * argv[]) {
         }
 
         // printing vertices' coordinates and penalty
-        ofstream verticesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/vertices.txt");
+        ofstream verticesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/vertices.txt");
         for (ulint v = 0; v < n; v++) {
             verticesFile << vertices[v].first.first << ' ';
             verticesFile << vertices[v].first.second << ' ';
@@ -82,7 +83,7 @@ int main (int argc, char * argv[]) {
         }
 
         // reading the graph's edges and printing its coordinates
-        ofstream edgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/edges.txt");
+        ofstream edgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/edges.txt");
         for (ulint e = 0; e < m; e++) {
             ulint u, v, w;
             inputFile >> u >> v >> w;
@@ -97,7 +98,7 @@ int main (int argc, char * argv[]) {
         double costSolution;
         resultFile >> nSolution >> mSolution >> costSolution;
         // reading the solution's vertices and printing its coordinates and neighborhood radio
-        ofstream solutionVerticesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T +"P" + P + "/solutionVertices.txt");
+        ofstream solutionVerticesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionVertices.txt");
         for (ulint i = 0; i < nSolution; i++) {
             ulint v;
             resultFile >> v;
@@ -107,13 +108,11 @@ int main (int argc, char * argv[]) {
         }
         solutionVerticesFile.close();
 
-        //cout << "Edges:" << endl;
         // reading the solution's edges and printing its coordinates
-        ofstream solutionEdgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/solutionEdges.txt");
+        ofstream solutionEdgesFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionEdges.txt");
         for (ulint e = 0; e < mSolution; e++) {
             ulint u, v;
             resultFile >> u >> v;
-            //cout << u << " <-> " << v << " : (" << vertices[u].first.first << ", " << vertices[u].first.second << ") <-> (" << vertices[v].first.first << ", " << vertices[v].first.second << ")" << endl;
             solutionEdgesFile << vertices[u].first.first << ' ';
             solutionEdgesFile << vertices[u].first.second << endl;
             solutionEdgesFile << vertices[v].first.first << ' ';
