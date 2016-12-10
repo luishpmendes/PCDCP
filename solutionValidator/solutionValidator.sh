@@ -27,6 +27,6 @@ done
 make validationAggregator;
 for path in "linearProgram" "twoPhases"
 do
-    ./validationAggregator $path > "../"$path"/output/validation.txt";
+    ./validationAggregator $path > "../"$path"/output/validation.csv";
 done
 make clean;

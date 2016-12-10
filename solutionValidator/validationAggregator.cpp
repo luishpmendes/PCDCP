@@ -8,70 +8,76 @@ using namespace std;
 int main (int argc, char * argv[]) {
     string path;
 
-    if (argc == 2) {
+    if (argc >= 2) {
         path = string(argv[1]);
     } else {
         cin >> path;
     }
 
-    vector <string> N;
-    N.push_back("10");
-    N.push_back("20");
-    N.push_back("50");
-    N.push_back("100");
-    N.push_back("250");
-    vector <string> D;
-    D.push_back("03");
-    D.push_back("05");
-    D.push_back("07");
-    vector <string> K;
-    K.push_back("0");
-    K.push_back("5");
-    K.push_back("10");
-    K.push_back("20");
-    vector <string> T;
-    T.push_back("0");
-    T.push_back("1");
-    vector <string> P;
-    P.push_back("01");
-    P.push_back("05");
-    P.push_back("10");
-    vector <string> I;
-    P.push_back("0");
-    P.push_back("1");
-    P.push_back("2");
-    P.push_back("3");
-    P.push_back("4");
-    P.push_back("5");
-    P.push_back("6");
-    P.push_back("7");
-    P.push_back("8");
-    P.push_back("9");
+    vector <int> vN;
+    vN.push_back(10);
+    vN.push_back(20);
+    vN.push_back(50);
+    vN.push_back(100);
+    vN.push_back(250);
+    vector <double> vD;
+    vD.push_back(0.3);
+    vD.push_back(0.5);
+    vD.push_back(0.7);
+    vector <int> vK;
+    vK.push_back(0);
+    vK.push_back(5);
+    vK.push_back(10);
+    vK.push_back(20);
+    vector <int> vT;
+    vT.push_back(0);
+    vT.push_back(1);
+    vector <double> vP;
+    vP.push_back(0.1);
+    vP.push_back(0.5);
+    vP.push_back(1.0);
+    vector <int> vI;
+    vP.push_back(0);
+    vP.push_back(1);
+    vP.push_back(2);
+    vP.push_back(3);
+    vP.push_back(4);
+    vP.push_back(5);
+    vP.push_back(6);
+    vP.push_back(7);
+    vP.push_back(8);
+    vP.push_back(9);
 
-    for (vector <string> :: iterator itN = N.begin(); itN != N.end(); itN++) {
-        string n = *itN;
-        for (vector <string> :: iterator itD = D.begin(); itD != D.end(); itD++) {
-            string d = *itD;
-            for (vector <string> :: iterator itK = K.begin(); itK != K.end(); itK++) {
-                string k = *itK;
-                for (vector <string> :: iterator itT = T.begin(); itT != T.end(); itT++) {
-                    string t = *itT;
-                    for (vector <string> :: iterator itP = P.begin(); itP != P.end(); itP++) {
-                        string p = *itP;
-                        for (vector <string> :: iterator itI = I.begin(); itI != I.end(); itI++) {
-                            string i = *itI;
+    cout << "n,d,k,t,p,i,error" << endl;
+
+    for (vector <int> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
+        int n = *itN;
+        for (vector <double> :: iterator itD = vD.begin(); itD != vD.end(); itD++) {
+            double d = *itD;
+            stringstream ssD;
+            ssD << fixed << setprecision(1) << d;
+            string D = ssD.str();
+            D.erase(remove(D.begin(), D.end(), '.'), D.end());
+            for (vector <int> :: iterator itK = vK.begin(); itK != vK.end(); itK++) {
+                int k = *itK;
+                for (vector <int> :: iterator itT = vT.begin(); itT != vT.end(); itT++) {
+                    int t = *itT;
+                    for (vector <double> :: iterator itP = vP.begin(); itP != vP.end(); itP++) {
+                        double p = *itP;
+                        stringstream ssP;
+                        ssP << fixed << setprecision(1) << p;
+                        string P = ssP.str();
+                        P.erase(remove(P.begin(), P.end(), '.'), P.end());
+                        for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
+                            int i = *itI;
 
                             int errorFlag = 1;
-                            ifstream errorFlagFile ("../" + path + "/output/N" + n + "D" + d + "K" + k + "T" + t + "P" + p + "I" + i + "/errorFlag.txt");
+                            ifstream errorFlagFile ("../" + path + "/output/N" + n + "D" + D + "K" + k + "T" + t + "P" + P + "I" + i + "/errorFlag.txt");
                             if (errorFlagFile.is_open()) {
                                 errorFlagFile >> errorFlag;
                             }
-                            cout << "N" << n << "D" << d << "K" << k << "T" << t << "P" << p << "I" << i << ": ";
-                            if (errorFlag == 0) {
-                                cout << "OK" << endl;
-                            } else {
-                                cout << "ERROR" << endl;
-                            }
+
+                            out << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << errorFlag << endl;
                         }
                     }
                 }
