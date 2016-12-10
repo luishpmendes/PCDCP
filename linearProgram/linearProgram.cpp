@@ -129,14 +129,15 @@ class subtourelim: public GRBCallback {
 
 int main (int argc, char * argv[]) {
     chrono :: steady_clock :: time_point tBegin = chrono :: steady_clock :: now();
-    string I;
-    double timeLimit;
+    string I ("0");
+    double timeLimit = 10.0;
 
-    if (argc == 2) {
-        I = string (argv[2]);
+    if (argc >= 2) {
+        I = string (argv[1]);
+    }
+
+    if (argc >= 3) {
         timeLimit = atof(argv[2]);
-    } else {
-        timeLimit = 10.0;
     }
 
     ulint n, mComplete, m, k, t, root;
