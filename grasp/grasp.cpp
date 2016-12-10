@@ -12,6 +12,7 @@
 #include <numeric>
 #include <iterator>
 #include <chrono>
+#include <fstream>
 
 #ifndef INFINITE
 #define INFINITE 15 << 25
@@ -38,6 +39,12 @@ using namespace std;
 typedef long int lint;
 typedef unsigned long int ulint;
 typedef vector < vector <lint> > matrix;
+
+string itos (ulint i) {
+    stringstream s;
+    s << i;
+    return s.str();
+}
 
 vector < set <ulint> > neighbourhoods (matrix W, lint k) {
     vector < set <ulint> > result (W.size());
@@ -351,15 +358,21 @@ vector <ulint> grasp (matrix W, vector < list < pair <ulint, ulint> > > adj, vec
 }
 
 int main (int argc, char * argv[]) {
-    ulint maxIterations;
-    double alpha;
+    chrono :: steady_clock :: time_point tBegin = chrono :: steady_clock :: now();
+    string I ("0");
+    ulint maxIterations = 100;
+    double alpha = 0.3;
 
-    if (argc == 3) {
-        maxIterations = atoi(argv[1]);
-        alpha = atof(argv[2]);
-    } else {
-        maxIterations = 100;
-        alpha = 0.5;
+    if (argc >= 2) {
+        I = string (argv[1]);
+    }
+
+    if (argc >= 3) {
+        maxIterations = atoi(argv[2]);
+    }
+
+    if (argc >= 4) {
+        alpha = atof(argv[3]);
     }
 
     if (alpha < 0.0) {
@@ -435,6 +448,28 @@ int main (int argc, char * argv[]) {
         cout << solution[i] << ' ' << solution[i + 1] << endl;
     }
     cout << solution[solution.size() - 1] << ' ' << solution[0] << endl;
+
+    string N = itos(n);
+    stringstream ssD;
+    ssD << fixed << setprecision(1) << d;
+    string D = ssD.str();
+    D.erase(remove(D.begin(), D.end(), '.'), D.end());
+    string K = itos(k);
+    string T = itos(t);
+    stringstream ssP;
+    ssP << fixed << setprecision(1) << p;
+    string P = ssP.str();
+    P.erase(remove(P.begin(), P.end(), '.'), P.end());
+
+    ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/objVal.txt", ofstream :: out);
+    objValFile << solutionCost;
+    objValFile.close();
+
+    chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
+    chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
+    ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/elapsedTime.txt", ofstream :: out);
+    elapsedTimeFile << elapsedTime.count();
+    elapsedTimeFile.close();
 
     return 0;
 }
