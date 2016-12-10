@@ -12,9 +12,12 @@ do
                 do
                     for p in 0.1 0.5 1.0
                     do
-                        echo $path" - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
-                        rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/validation.txt";
-                        ./solutionValidator $path $n ${d//.} $k $t ${p//.} > "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/validation.txt";
+                        for i in {0..9}
+                        do
+                            echo $path" - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
+                            rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/validation.txt";
+                            ./solutionValidator $path $n ${d//.} $k $t ${p//.} $i > "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/validation.txt";
+                        done
                     done
                 done
             done

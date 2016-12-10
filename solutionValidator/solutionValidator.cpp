@@ -27,33 +27,6 @@ string itos(ulint i) {
 
 vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
     vector < set <ulint> > result (W.size());
-/*
-    matrix D = matrix (W.size(), vector <ulint> (W.size(), INFINITE));
-
-    for (ulint i = 0; i < W.size(); i++) {
-        for (ulint j = 0; j < W.size(); j++) {
-            D[i][j] = W[i][j];
-        }
-    }
-
-    for (ulint l = 0; l < W.size(); l++) {
-        for (ulint i = 0; i < W.size(); i++) {
-            for (ulint j = 0; j < W.size(); j++) {
-                if (D[i][j] > D[i][l] + D[l][j]) {
-                    D[i][j] = D[i][l] + D[l][j];
-                }
-            }
-        }
-    }
-
-    for (ulint u = 0; u < W.size(); u++) {
-        for (ulint v = 0; v < W[u].size(); v++) {
-            if (D[u][v] <= k) {
-                result[u].insert(v);
-            }
-        }
-    }
-*/
     for (ulint u = 0; u < (ulint) W.size(); u++) {
         for (ulint v = 0; v < (ulint) W[u].size(); v++) {
             if (W[u][v] <= k) {
@@ -65,23 +38,24 @@ vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
 }
 
 int main (int argc, char * argv[]) {
-    string path, N, D, K, T, P;
+    string path, N, D, K, T, P, I;
 
     cout << argc << endl;
 
-    if (argc == 7) {
+    if (argc == 8) {
         path = string(argv[1]);
         N = string(argv[2]);
         D = string(argv[3]);
         K = string(argv[4]);
         T = string(argv[5]);
         P = string(argv[6]);
+        P = string(argv[7]);
     } else {
-        cin >> path >> N >> D >> K >> T >> P;
+        cin >> path >> N >> D >> K >> T >> P >> I;
     }
 
-    ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "P" + P + ".in");
-    ifstream resultFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/result.out");
+    ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + ".in");
+    ifstream resultFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/result.out");
 
     if (inputFile.is_open() && resultFile.is_open()) {
         ulint n, mComplete, m, k, t, root;
@@ -328,7 +302,7 @@ int main (int argc, char * argv[]) {
             cout << nonSolutionVerticesInMainCycle[nonSolutionVerticesInMainCycle.size() - 1] << endl;
         }
 
-        ofstream errorFlagFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/errorFlag.txt", ofstream::out);
+        ofstream errorFlagFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/errorFlag.txt", ofstream::out);
         errorFlagFile << errorFlag;
         errorFlagFile.close();
     }
