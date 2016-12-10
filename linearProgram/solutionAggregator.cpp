@@ -10,7 +10,7 @@ using namespace std;
 
 typedef unsigned long int ulint;
 
-int main (int argc, char * argv[]) {
+int main () {
     vector <int> vN;
     vN.push_back(10);
     vN.push_back(20);
