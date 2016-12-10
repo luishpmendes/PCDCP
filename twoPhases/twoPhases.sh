@@ -35,9 +35,12 @@ do
             do
                 for p in 0.1 0.5 1.0
                 do
-                    echo "phase2 - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
-                    mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
-                    ./phase2 $timeLimit < "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/result.tmp" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/result.out";
+                    for i in {0..9}
+                    do
+                        echo "phase2 - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
+                        mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
+                        ./phase2 $timeLimit < "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/result.tmp" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/result.out";
+                    done
                 done
             done
         done

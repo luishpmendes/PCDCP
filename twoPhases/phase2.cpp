@@ -116,12 +116,15 @@ class subtourelim: public GRBCallback {
 
 int main (int argc, char * argv[]) {
     chrono :: steady_clock :: time_point tBegin = chrono :: steady_clock :: now();
-    double timeLimit;
+    string I ("0");
+    double timeLimit = 10.0;
 
-    if (argc == 2) {
-        timeLimit = atof(argv[1]);
-    } else {
-        timeLimit = 10.0;
+    if (argc >= 2) {
+        I = string (argv[1]);
+    }
+
+    if (argc >= 3) {
+        timeLimit = atof(argv[2]);
     }
 
     ulint nComplete, k, t, n, m, root;
@@ -181,14 +184,14 @@ int main (int argc, char * argv[]) {
 
         env.set(GRB_IntParam_LazyConstraints, 1);
         env.set(GRB_IntParam_LogToConsole, 0);
-        env.set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/log2.txt");
+        env.set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/log2.txt");
         env.set(GRB_DoubleParam_TimeLimit, timeLimit);
 
         GRBModel model = GRBModel(env);
 
         model.getEnv().set(GRB_IntParam_LazyConstraints, 1);
         model.getEnv().set(GRB_IntParam_LogToConsole, 0);
-        model.getEnv().set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/log2.txt");
+        model.getEnv().set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/log2.txt");
         model.getEnv().set(GRB_DoubleParam_TimeLimit, timeLimit);
 
         vector <GRBVar> y (n);
@@ -298,19 +301,19 @@ int main (int argc, char * argv[]) {
         }
 
         // exporting model
-        model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/model2.lp");
+        model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/model2.lp");
 
-        ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/objVal2.txt", ofstream :: out);
+        ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/objVal2.txt", ofstream :: out);
         objValFile << model.get(GRB_DoubleAttr_ObjVal);
         objValFile.close();
 
-        ofstream gapFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/gap2.txt", ofstream :: out);
+        ofstream gapFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/gap2.txt", ofstream :: out);
         gapFile << model.get(GRB_DoubleAttr_MIPGap);
         gapFile.close();
 
         chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
         chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
-        ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "/elapsedTime2.txt", ofstream :: out);
+        ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/elapsedTime2.txt", ofstream :: out);
         elapsedTimeFile << elapsedTime.count();
         elapsedTimeFile.close();
     } catch (GRBException e) {
