@@ -29,8 +29,19 @@ int main (int argc, char * argv[]) {
     P.push_back("01");
     P.push_back("05");
     P.push_back("10");
+    vector <string> I;
+    I.push_back("0");
+    I.push_back("1");
+    I.push_back("2");
+    I.push_back("3");
+    I.push_back("4");
+    I.push_back("5");
+    I.push_back("6");
+    I.push_back("7");
+    I.push_back("8");
+    I.push_back("9");
 
-    cout << "n,d,k,t,p,objVal,gap,elapsedTime" << endl;
+    cout << "n,d,k,t,p,i,objVal,gap,elapsedTime" << endl;
 
     for (vector <string> :: iterator itN = N.begin(); itN != N.end(); itN++) {
         string n = *itN;
@@ -42,26 +53,29 @@ int main (int argc, char * argv[]) {
                     string t = *itT;
                     for (vector <string> :: iterator itP = P.begin(); itP != P.end(); itP++) {
                         string p = *itP;
+                        for (vector <string> :: iterator itI = I.begin(); itI != I.end(); itI++) {
+                            string i = *itI;
 
-                        double objVal = 0.0;
-                        ifstream objValFile ("./output/N" + n + "D" + d + "K" + k + "T" + t + "P" + p + "/objVal.txt");
-                        if (objValFile.is_open()) {
-                            objValFile >> objVal;
+                            double objVal = 0.0;
+                            ifstream objValFile ("./output/N" + n + "D" + d + "K" + k + "T" + t + "P" + p + "I" + i + "/objVal.txt");
+                            if (objValFile.is_open()) {
+                                objValFile >> objVal;
+                            }
+
+                            double gap = 0.0;
+                            ifstream gapFile ("./output/N" + n + "D" + d + "K" + k + "T" + t + "P" + p + "I" + i + "/gap.txt");
+                            if (gapFile.is_open()) {
+                                gapFile >> gap;
+                            }
+
+                            ulint elapsedTime = 0.0;
+                            ifstream elapsedTimeFile ("./output/N" + n + "D" + d + "K" + k + "T" + t + "P" + p + "I" + i + "/elapsedTime.txt");
+                            if (elapsedTimeFile.is_open()) {
+                                elapsedTimeFile >> elapsedTime;
+                            }
+
+                            cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << objVal << ',' << gap << ',' << elapsedTime << endl;
                         }
-
-                        double gap = 0.0;
-                        ifstream gapFile ("./output/N" + n + "D" + d + "K" + k + "T" + t + "P" + p + "/gap.txt");
-                        if (gapFile.is_open()) {
-                            gapFile >> gap;
-                        }
-
-                        ulint elapsedTime = 0.0;
-                        ifstream elapsedTimeFile ("./output/N" + n + "D" + d + "K" + k + "T" + t + "P" + p + "/elapsedTime.txt");
-                        if (elapsedTimeFile.is_open()) {
-                            elapsedTimeFile >> elapsedTime;
-                        }
-
-                        cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << objVal << ',' << gap << ',' << elapsedTime << endl;
                     }
                 }
             }

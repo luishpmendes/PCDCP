@@ -13,9 +13,12 @@ do
             do
                 for p in 0.1 0.5 1.0
                 do
-                    echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
-                    mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.};
-                    ./linearProgram $timeLimit < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"P"${p//.}".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"/result.out";
+                    for i in {0..9}
+                    do
+                        echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
+                        mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
+                        ./linearProgram $i $timeLimit < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/result.out";
+                    done
                 done
             done
         done
