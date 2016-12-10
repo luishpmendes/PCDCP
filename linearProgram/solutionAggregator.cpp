@@ -13,6 +13,8 @@ int main (int argc, char * argv[]) {
     N.push_back("20");
     N.push_back("50");
     N.push_back("100");
+    N.push_back("200");
+    N.push_back("500");
     vector <string> D;
     D.push_back("03");
     D.push_back("05");

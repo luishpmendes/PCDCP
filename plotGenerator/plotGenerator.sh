@@ -2,7 +2,7 @@
 make plotGenerator;
 for path in "linearProgram" "twoPhases" "grasp"
 do
-    for n in 10 20 50 100
+    for n in 10 20 50 100 200 500
     do
         for d in 0.3 0.5 0.7
         do
