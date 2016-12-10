@@ -10,14 +10,11 @@
 #include <list>
 #include <queue>
 
-#ifndef INFINITE
-#define INFINITE 15 << 25
-#endif
-
 using namespace std;
 
-typedef long int ulint;
-typedef vector < vector <ulint> > matrix;
+typedef long int lint;
+typedef unsigned long int ulint;
+typedef vector < vector <lint> > matrix;
 
 string itos(ulint i) {
     stringstream s;
@@ -27,9 +24,9 @@ string itos(ulint i) {
 
 vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
     vector < set <ulint> > result (W.size());
-    for (ulint u = 0; u < (ulint) W.size(); u++) {
-        for (ulint v = 0; v < (ulint) W[u].size(); v++) {
-            if (W[u][v] <= k) {
+    for (ulint u = 0; u < W.size(); u++) {
+        for (ulint v = 0; v < W[u].size(); v++) {
+            if (W[u][v] >= 0 && (ulint) W[u][v] <= k) {
                 result[u].insert(v);
             }
         }
@@ -85,7 +82,7 @@ int main (int argc, char * argv[]) {
             inputFile >> vertices[v].second;
         }
 
-        matrix W (n, vector <ulint> (n, INFINITE)); // adjacency matrix for the complete graph
+        matrix W (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
         for (ulint i = 0; i < n; i++) {
             W[i][i] = 0;
         }
@@ -141,7 +138,7 @@ int main (int argc, char * argv[]) {
         } else {
             cout << "Solution Vertices : ERROR - ";
             errorFlag = 1;
-            for (ulint i = 0; i < (ulint) solutionVerticesInvalid.size(); i++) {
+            for (ulint i = 0; i < solutionVerticesInvalid.size(); i++) {
                 cout << solutionVerticesInvalid[i] << " ";
             }
             cout << endl;
@@ -165,7 +162,7 @@ int main (int argc, char * argv[]) {
         } else {
             cout << "Solution Edges : ERROR - ";
             errorFlag = 1;
-            for (ulint i = 0; i < (ulint) solutionEdgesInvalid.size(); i++) {
+            for (ulint i = 0; i < solutionEdgesInvalid.size(); i++) {
                 cout << "(" << solutionEdgesInvalid[i].first << ", " << solutionEdgesInvalid[i].second << ") ";
             }
             cout << endl;
@@ -268,7 +265,7 @@ int main (int argc, char * argv[]) {
         vector <ulint> solutionVerticesNotInMainCycle;
         vector <ulint> nonSolutionVerticesInMainCycle;
 
-        for (int v = 0; v < n; v++) {
+        for (ulint v = 0; v < n; v++) {
             if (verticesInSolution[v] == 1) {
                 if (verticesInMainCycle[v] == 0) {
                     solutionVerticesNotInMainCycle.push_back(v);
