@@ -2,6 +2,9 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <sstream>
+#include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
@@ -52,6 +55,9 @@ int main (int argc, char * argv[]) {
 
     for (vector <int> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
         int n = *itN;
+        stringstream ssN;
+        ssN << n;
+        string N = ssN.str();
         for (vector <double> :: iterator itD = vD.begin(); itD != vD.end(); itD++) {
             double d = *itD;
             stringstream ssD;
@@ -60,8 +66,14 @@ int main (int argc, char * argv[]) {
             D.erase(remove(D.begin(), D.end(), '.'), D.end());
             for (vector <int> :: iterator itK = vK.begin(); itK != vK.end(); itK++) {
                 int k = *itK;
+                stringstream ssK;
+                ssK << k;
+                string K = ssK.str();
                 for (vector <int> :: iterator itT = vT.begin(); itT != vT.end(); itT++) {
                     int t = *itT;
+                    stringstream ssT;
+                    ssK << t;
+                    string T = ssT.str();
                     for (vector <double> :: iterator itP = vP.begin(); itP != vP.end(); itP++) {
                         double p = *itP;
                         stringstream ssP;
@@ -70,14 +82,17 @@ int main (int argc, char * argv[]) {
                         P.erase(remove(P.begin(), P.end(), '.'), P.end());
                         for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
                             int i = *itI;
+                            stringstream ssI;
+                            ssK << i;
+                            string I = ssI.str();
 
                             int errorFlag = 1;
-                            ifstream errorFlagFile ("../" + path + "/output/N" + n + "D" + D + "K" + k + "T" + t + "P" + P + "I" + i + "/errorFlag.txt");
+                            ifstream errorFlagFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/errorFlag.txt");
                             if (errorFlagFile.is_open()) {
                                 errorFlagFile >> errorFlag;
                             }
 
-                            out << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << errorFlag << endl;
+                            cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << errorFlag << endl;
                         }
                     }
                 }
