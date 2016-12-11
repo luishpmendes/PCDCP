@@ -61,6 +61,7 @@ int main () {
             stringstream ssD;
             ssD << fixed << setprecision(1) << d;
             string D = ssD.str();
+            D.erase(remove(D.begin(), D.end(), '.'), D.end());
             for (vector <int> :: iterator itK = vK.begin(); itK != vK.end(); itK++) {
                 int k = *itK;
                 stringstream ssK;
@@ -76,6 +77,7 @@ int main () {
                         stringstream ssP;
                         ssP << fixed << setprecision(1) << p;
                         string P = ssP.str();
+                        P.erase(remove(P.begin(), P.end(), '.'), P.end());
                         for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
                             int i = *itI;
                             stringstream ssI;
@@ -86,6 +88,7 @@ int main () {
                                 stringstream ssA;
                                 ssA << fixed << setprecision(1) << a;
                                 string A = ssA.str();
+                                A.erase(remove(A.begin(), A.end(), '.'), A.end());
 
                                 double objVal = 0.0;
                                 ifstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/objVal.txt");

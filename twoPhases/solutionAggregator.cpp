@@ -57,6 +57,7 @@ int main () {
             stringstream ssD;
             ssD << fixed << setprecision(1) << d;
             string D = ssD.str();
+            D.erase(remove(D.begin(), D.end(), '.'), D.end());
             for (vector <int> :: iterator itK = vK.begin(); itK != vK.end(); itK++) {
                 int k = *itK;
                 stringstream ssK;
@@ -72,6 +73,7 @@ int main () {
                         stringstream ssP;
                         ssP << fixed << setprecision(1) << p;
                         string P = ssP.str();
+                        P.erase(remove(P.begin(), P.end(), '.'), P.end());
                         for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
                             int i = *itI;
                             stringstream ssI;
