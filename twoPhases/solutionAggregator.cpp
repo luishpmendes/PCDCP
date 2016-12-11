@@ -77,7 +77,7 @@ int main () {
                         for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
                             int i = *itI;
                             stringstream ssI;
-                            ssK << i;
+                            ssI << i;
                             string I = ssI.str();
 
                             double objVal1 = 0.0;

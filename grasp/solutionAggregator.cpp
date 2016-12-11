@@ -81,7 +81,7 @@ int main () {
                         for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
                             int i = *itI;
                             stringstream ssI;
-                            ssK << i;
+                            ssI << i;
                             string I = ssI.str();
                             for (vector <double> :: iterator itA = vA.begin(); itA != vA.end(); itA++) {
                                 double a = *itA;
