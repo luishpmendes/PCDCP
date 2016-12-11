@@ -40,16 +40,16 @@ int main (int argc, char * argv[]) {
     vP.push_back(0.5);
     vP.push_back(1.0);
     vector <int> vI;
-    vP.push_back(0);
-    vP.push_back(1);
-    vP.push_back(2);
-    vP.push_back(3);
-    vP.push_back(4);
-    vP.push_back(5);
-    vP.push_back(6);
-    vP.push_back(7);
-    vP.push_back(8);
-    vP.push_back(9);
+    vI.push_back(0);
+    vI.push_back(1);
+    vI.push_back(2);
+    vI.push_back(3);
+    vI.push_back(4);
+    vI.push_back(5);
+    vI.push_back(6);
+    vI.push_back(7);
+    vI.push_back(8);
+    vI.push_back(9);
 
     cout << "n,d,k,t,p,i,error" << endl;
 

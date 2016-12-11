@@ -83,7 +83,6 @@ int main () {
                             double objVal = 0.0;
                             ifstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/objVal.txt");
                             if (objValFile.is_open()) {
-                                cout << "file opened" << endl;
                                 objValFile >> objVal;
                             }
 
