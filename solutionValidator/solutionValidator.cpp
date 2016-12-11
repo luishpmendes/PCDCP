@@ -37,8 +37,6 @@ vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
 int main (int argc, char * argv[]) {
     string path, N, D, K, T, P, I;
 
-    cout << argc << endl;
-
     if (argc == 8) {
         path = string(argv[1]);
         N = string(argv[2]);
@@ -46,7 +44,7 @@ int main (int argc, char * argv[]) {
         K = string(argv[4]);
         T = string(argv[5]);
         P = string(argv[6]);
-        P = string(argv[7]);
+        I = string(argv[7]);
     } else {
         cin >> path >> N >> D >> K >> T >> P >> I;
     }
