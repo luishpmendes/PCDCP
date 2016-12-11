@@ -66,7 +66,7 @@ int main () {
                 for (vector <int> :: iterator itT = vT.begin(); itT != vT.end(); itT++) {
                     int t = *itT;
                     stringstream ssT;
-                    ssK << t;
+                    ssT << t;
                     string T = ssT.str();
                     for (vector <double> :: iterator itP = vP.begin(); itP != vP.end(); itP++) {
                         double p = *itP;
@@ -83,6 +83,7 @@ int main () {
                             double objVal = 0.0;
                             ifstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/objVal.txt");
                             if (objValFile.is_open()) {
+                                cout << "file opened" << endl;
                                 objValFile >> objVal;
                             }
 

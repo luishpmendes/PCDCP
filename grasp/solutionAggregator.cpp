@@ -70,7 +70,7 @@ int main () {
                 for (vector <int> :: iterator itT = vT.begin(); itT != vT.end(); itT++) {
                     int t = *itT;
                     stringstream ssT;
-                    ssK << t;
+                    ssT << t;
                     string T = ssT.str();
                     for (vector <double> :: iterator itP = vP.begin(); itP != vP.end(); itP++) {
                         double p = *itP;

@@ -72,7 +72,7 @@ int main (int argc, char * argv[]) {
                 for (vector <int> :: iterator itT = vT.begin(); itT != vT.end(); itT++) {
                     int t = *itT;
                     stringstream ssT;
-                    ssK << t;
+                    ssT << t;
                     string T = ssT.str();
                     for (vector <double> :: iterator itP = vP.begin(); itP != vP.end(); itP++) {
                         double p = *itP;
@@ -83,7 +83,7 @@ int main (int argc, char * argv[]) {
                         for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
                             int i = *itI;
                             stringstream ssI;
-                            ssK << i;
+                            ssI << i;
                             string I = ssI.str();
 
                             int errorFlag = 1;
