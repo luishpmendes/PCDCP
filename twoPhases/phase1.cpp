@@ -155,7 +155,7 @@ int main (int argc, char * argv[]) {
 
         // obj = ∑ πv * (1 - yv)
         for (ulint v = 0; v < n; v++) {
-            obj += (-1.0/((double) penalty[v])) * (1.0 - y[v]);
+            obj += (-1.0/((double) (penalty[v]) + 1.0)) * (1.0 - y[v]);
         }
 
         model.setObjective(obj, GRB_MINIMIZE);
