@@ -1,0 +1,49 @@
+
+Gurobi 6.5.2 (linux64) logging started Thu Dec 15 12:36:50 2016
+
+
+Gurobi 6.5.2 (linux64) logging started Thu Dec 15 12:36:50 2016
+
+Optimize a model with 101 rows, 1275 columns and 2551 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 51 rows and 50 columns
+Presolve time: 0.00s
+Presolved: 50 rows, 1225 columns, 2450 nonzeros
+Variable types: 0 continuous, 1225 integer (1225 binary)
+
+Root relaxation: objective 9.720000e+02, 71 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  972.00000    0    6          -  972.00000      -     -    0s
+     0     0  972.00000    0   14          -  972.00000      -     -    0s
+     0     0  974.50000    0   15          -  974.50000      -     -    0s
+     0     0  975.25000    0   20          -  975.25000      -     -    0s
+     0     0  978.16667    0   19          -  978.16667      -     -    0s
+     0     0  979.50000    0   18          -  979.50000      -     -    0s
+     0     0  979.50000    0   18          -  979.50000      -     -    0s
+     0     2  979.50000    0   17          -  979.50000      -     -    0s
+H 1031   856                    1951.0000000  984.00000  49.6%   4.6    0s
+* 1592   989              45    1049.0000000  989.00000  5.72%   5.0    0s
+* 1714   866              30    1038.0000000  991.00000  4.53%   5.0    0s
+* 2248   790              26    1026.0000000  994.00000  3.12%   4.9    0s
+* 2639   620              26    1024.0000000  997.70000  2.57%   4.9    0s
+* 2904   298              30    1020.0000000 1002.00000  1.76%   5.0    0s
+
+Cutting planes:
+  Gomory: 4
+  MIR: 3
+  Flow cover: 1
+  Zero half: 6
+  Lazy constraints: 137
+
+Explored 3581 nodes (17500 simplex iterations) in 0.90 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.020000000000e+03, best bound 1.020000000000e+03, gap 0.0%
