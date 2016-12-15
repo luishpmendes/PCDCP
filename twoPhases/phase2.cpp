@@ -194,10 +194,10 @@ int main (int argc, char * argv[]) {
         model.getEnv().set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/log2.txt");
         model.getEnv().set(GRB_DoubleParam_TimeLimit, timeLimit);
 
-        vector <GRBVar> y (n);
+        vector <GRBVar> y (nComplete);
 
         // ∀ v ∈ V
-        for (ulint v = 0; v < n; v++) {
+        for (ulint v = 0; v < nComplete; v++) {
             // y_v ∈ {0.0, 1.0}
             y[v] = model.addVar(0.0, 1.0, 0.0, GRB_BINARY, "y_" + itos(v));
         }
@@ -236,7 +236,7 @@ int main (int argc, char * argv[]) {
 
         // dominance
         // ∀ v ∈ V
-        for (ulint v = 0; v < n; v++) {
+        for (ulint v = 0; v < nComplete; v++) {
             if (solutionV[v] == 1) {
                 GRBLinExpr constr = 0.0;
                 constr += y[v];
@@ -246,7 +246,7 @@ int main (int argc, char * argv[]) {
 
         // each vertex must have exactly two edges adjacent to itself
         // ∀ v ∈ V
-        for (ulint v = 0; v < n; v++) {
+        for (ulint v = 0; v < nComplete; v++) {
             // ∑ xe == 2 * yv , e ∈ δ({v})
             GRBLinExpr constr = 0.0;
             for (list < pair <ulint, ulint> > :: iterator it = adj[v].begin(); it != adj[v].end(); it++) {
@@ -257,7 +257,7 @@ int main (int argc, char * argv[]) {
             model.addConstr(constr == 2.0 * y[v], "c_2_" + itos(v));
         }
 
-        subtourelim cb = subtourelim(y, x, n, m, E, mE, root);
+        subtourelim cb = subtourelim(y, x, nComplete, m, E, mE, root);
         model.setCallback(&cb);
 
         model.optimize();
