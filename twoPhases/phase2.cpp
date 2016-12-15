@@ -267,7 +267,7 @@ int main (int argc, char * argv[]) {
             set <ulint> solutionVectices;
             set < pair <ulint, ulint> > solutionEdges;
             solutionCost = round(model.get(GRB_DoubleAttr_ObjVal));
-            for (ulint v = 0; v < n; v++) {
+            for (ulint v = 0; v < nComplete; v++) {
                 if (y[v].get(GRB_DoubleAttr_X) >= 0.5) {
                     solutionVectices.insert(v);
                 }
