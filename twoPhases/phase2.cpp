@@ -168,7 +168,7 @@ int main (int argc, char * argv[]) {
     }
 
     try {
-        string N = itos(n);
+        string N = itos(nComplete);
         stringstream ssD;
         ssD << fixed << setprecision(1) << d;
         string D = ssD.str();
