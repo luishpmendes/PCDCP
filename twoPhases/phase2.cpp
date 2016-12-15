@@ -225,7 +225,7 @@ int main (int argc, char * argv[]) {
         }
 
         // obj += ∑ πv * (1 - yv)
-        for (ulint v = 0; v < n; v++) {
+        for (ulint v = 0; v < nComplete; v++) {
             obj += penalty[v] * (1.0 - y[v]);
         }
 
@@ -265,7 +265,7 @@ int main (int argc, char * argv[]) {
         if (model.get(GRB_IntAttr_SolCount) > 0) {
             ulint solutionCost = 0;
             set <ulint> solutionVectices;
-            set < pair <ulint, ulint> > solutionEdges;
+            vector < pair <ulint, ulint> > solutionEdges;
             solutionCost = round(model.get(GRB_DoubleAttr_ObjVal));
             for (ulint v = 0; v < nComplete; v++) {
                 if (y[v].get(GRB_DoubleAttr_X) >= 0.5) {
@@ -283,7 +283,7 @@ int main (int argc, char * argv[]) {
                             edge.first = paths[e][i + 1];
                             edge.second = paths[e][i];
                         }
-                        solutionEdges.insert(edge);
+                        solutionEdges.push_back(edge);
                     }
                 }
             }
@@ -292,7 +292,7 @@ int main (int argc, char * argv[]) {
                 ulint v = *it;
                 cout << v << endl;
             }
-            for (set < pair <ulint, ulint> > :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
+            for (vector < pair <ulint, ulint> > :: iterator it = solutionEdges.begin(); it != solutionEdges.end(); it++) {
                 pair <ulint, ulint> e = *it;
                 cout << e.first << " " << e.second << endl;
             }
