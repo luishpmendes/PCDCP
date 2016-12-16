@@ -5,10 +5,13 @@
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
+typedef long int lint;
 typedef unsigned long int ulint;
+typedef vector < vector <lint> > matrix;
 
 int main () {
     vector <int> vN;
@@ -32,7 +35,7 @@ int main () {
     vector <int> vI;
     vI.push_back(0);
 
-    cout << "n,d,k,t,p,i,objVal1,gap1,elapsedTime1,objVal2,gap2,elapsedTime2" << endl;
+    cout << "n,d,k,t,p,i,objVal1,gap1,elapsedTime1,objVal2,gap2,elapsedTime2,nSolution,sumPenalty,sumEdgeCost" << endl;
 
     for (vector <int> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
         int n = *itN;
