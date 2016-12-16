@@ -106,7 +106,83 @@ int main () {
                                 elapsedTime2File >> elapsedTime2;
                             }
 
-                            cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << objVal1 << ',' << gap1 << ',' << elapsedTime1 << ',' << objVal2 << ',' << gap2 << ',' << elapsedTime2 << endl;
+                            double nSolution = 0.0, sumPenalty = 0.0, sumEdgeCost = 0.0;
+
+                            ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + ".in");
+                            ifstream resultFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/result.out");
+
+                            if (inputFile.is_open() && resultFile.is_open()) {
+                                ulint n, mComplete, m, k, t, root;
+                                double d, p;
+                                inputFile >> n >> d >> k >> t >> p >> mComplete >> m >> root;
+
+                                vector < pair < pair <double, double>, ulint > > vertices (n, make_pair(make_pair(0, 0), 0));
+                                // reading vertices' coordinates and penalty
+                                for (ulint v = 0; v < n; v++) {
+                                    inputFile >> vertices[v].first.first;
+                                    inputFile >> vertices[v].first.second;
+                                    inputFile >> vertices[v].second;
+                                }
+
+                                matrix W (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
+                                for (ulint i = 0; i < n; i++) {
+                                    W[i][i] = 0;
+                                }
+
+                                // reading (and ignoring) the complete graph's edges
+                                for (ulint j = 0; j < mComplete; j++) {
+                                    ulint u, v, w;
+                                    inputFile >> u >> v >> w;
+                                    W[u][v] = w;
+                                    W[v][u] = w;
+                                }
+
+                                vector < pair <ulint, ulint> > edges (m, make_pair(0, 0));
+                                map < pair <ulint, ulint>, ulint > weights;
+                                // reading the graph's edges and its weights
+                                for (ulint e = 0; e < m; e++) {
+                                    ulint u, v, w;
+                                    inputFile >> u >> v >> w;
+                                    edges[e].first = u;
+                                    edges[e].second = v;
+                                    weights[edges[e]] = w;
+                                }
+
+                                ulint mSolution, costSolution;
+                                resultFile >> nSolution >> mSolution >> costSolution;
+
+                                vector <ulint> solutionVertices (nSolution, 0);
+                                // reading the solution's vertices
+                                for (ulint v = 0; v < nSolution; v++) {
+                                    resultFile >> solutionVertices[v];
+                                }
+
+                                vector < pair <ulint, ulint> > solutionEdges (mSolution, make_pair(0, 0));
+                                // reading the solution's edges
+                                for (ulint e = 0; e < mSolution; e++) {
+                                    resultFile >> solutionEdges[e].first;
+                                    resultFile >> solutionEdges[e].second;
+                                }
+
+                                ulint allPenalties = 0;
+                                for (ulint v = 0; v < n; v++) {
+                                    allPenalties += vertices[v].second;
+                                }
+
+                                ulint chosenPenalties = 0;
+                                for (ulint v = 0; v < nSolution; v++) {
+                                    chosenPenalties += vertices[solutionVertices[v]].second;
+                                }
+
+                                sumPenalty = (allPenalties - chosenPenalties);
+
+                                for (ulint e = 0; e < mSolution; e++) {
+                                    sumEdgeCost += weights[solutionEdges[e]];
+                                }
+
+                            }
+
+                            cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << objVal1 << ',' << gap1 << ',' << elapsedTime1 << ',' << objVal2 << ',' << gap2 << ',' << elapsedTime2 << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << endl;
                         }
                     }
                 }
