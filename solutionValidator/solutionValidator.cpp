@@ -162,8 +162,9 @@ int main (int argc, char * argv[]) {
         vector < pair <ulint, ulint> > solutionEdgesInvalid;
         // reading the solution's edges
         for (ulint e = 0; e < mSolution; e++) {
-            resultFile >> solutionEdges[e].first;
-            resultFile >> solutionEdges[e].second;
+            ulint u, v;
+            resultFile >> u >> v;
+            solutionEdges[e] = minmax(u, v);
             // check if the ends of the solution edge are solution vertices
             if (setSolutionVertices.find(solutionEdges[e].first) == setSolutionVertices.end() 
             || setSolutionVertices.find(solutionEdges[e].second) == setSolutionVertices.end()) {
@@ -187,17 +188,17 @@ int main (int argc, char * argv[]) {
             cost += weights[solutionEdges[e]];
         }
 
-        ulint allPenalties = 0;
+        vector <int> isInSolution(n, 0);
+
+        for (ulint i = 0; i < solutionVertices.size(); i++) {
+            isInSolution[solutionVertices[i]] = 1;
+        }
+
         for (ulint v = 0; v < n; v++) {
-            allPenalties += vertices[v].second;
+            if (isInSolution[v] == 0) {
+                cost += vertices[v].second;
+            }
         }
-
-        ulint chosenPenalties = 0;
-        for (ulint v = 0; v < nSolution; v++) {
-            chosenPenalties += vertices[solutionVertices[v]].second;
-        }
-
-        cost += (allPenalties - chosenPenalties);
 
         // check if solution cost is correct
         if (costSolution == cost) {

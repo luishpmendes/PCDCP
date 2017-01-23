@@ -40,7 +40,7 @@ do
                         do
                             echo "grasp - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"A"${alpha//.};
                             rm -f "../grasp/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"A"${alpha//.}"/validation.txt";
-                            ./solutionValidator $path $n ${d//.} $k $t ${p//.} $i ${alpha//.} > "../grasp/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"A"${alpha//.}"/validation.txt";
+                            ./solutionValidator grasp $n ${d//.} $k $t ${p//.} $i ${alpha//.} > "../grasp/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"A"${alpha//.}"/validation.txt";
                         done
                     done
                 done
