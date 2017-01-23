@@ -35,7 +35,7 @@ vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
 }
 
 int main (int argc, char * argv[]) {
-    string path, N, D, K, T, P, I;
+    string path, N, D, K, T, P, I, A;
 
     if (argc == 8) {
         path = string(argv[1]);
@@ -45,12 +45,27 @@ int main (int argc, char * argv[]) {
         T = string(argv[5]);
         P = string(argv[6]);
         I = string(argv[7]);
+    } else if (argc == 9) {
+        path = string(argv[1]);
+        N = string(argv[2]);
+        D = string(argv[3]);
+        K = string(argv[4]);
+        T = string(argv[5]);
+        P = string(argv[6]);
+        I = string(argv[7]);
+        A = string(argv[8]);
     } else {
-        cin >> path >> N >> D >> K >> T >> P >> I;
+        cin >> path >> N >> D >> K >> T >> P >> I >> A;
     }
 
     ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + ".in");
-    ifstream resultFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/result.out");
+    ifstream resultFile;
+
+    if (path.compare("grasp") != 0) {
+        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/result.out");
+    } else {
+        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/result.out");
+    }
 
     if (inputFile.is_open() && resultFile.is_open()) {
         ulint n, mComplete, m, k, t, root;
