@@ -13,27 +13,6 @@
 #include <iterator>
 #include <chrono>
 #include <fstream>
-#include <stack>
-
-#ifndef INFINITE
-#define INFINITE 15 << 25
-#endif
-
-#ifndef NIL
-#define NIL - (15 << 25)
-#endif
-
-#ifndef WHITE
-#define WHITE 0
-#endif
-
-#ifndef GRAY
-#define GRAY  1
-#endif
-
-#ifndef BLACK
-#define BLACK 2
-#endif
 
 using namespace std;
 
@@ -167,9 +146,7 @@ void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint>
                         }
                         vIterator = next(vIterator);
                     }
-                    if (minCostU < INFINITE) {
-                        cantidateList.push_back(make_pair(minU, make_pair(minCostU, minWIterator)));
-                    }
+                    cantidateList.push_back(make_pair(minU, make_pair(minCostU, minWIterator)));
                 }
             }
         }
@@ -188,12 +165,13 @@ void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint>
             double restriction = ((double) (maxCost - minCost));
             restriction *= alpha;
             restriction += ((double) minCost);
-            vector < pair <list <ulint>, pair <ulint, list <ulint> :: iterator> > > restrictedCantidateList;
+            vector < pair <list <ulint>, pair <lint, list <ulint> :: iterator> > > restrictedCantidateList;
             for (ulint i = 0; i < cantidateList.size(); i++) {
                 if (cantidateList[i].second.first <= restriction) {
                     restrictedCantidateList.push_back(cantidateList[i]);
                 }
             }
+
             // Select an element s from the RCL at random;
             default_random_engine generator (seed);
             uniform_int_distribution <ulint> distribution (0, restrictedCantidateList.size() - 1);
@@ -451,11 +429,18 @@ int main (int argc, char * argv[]) {
 
     vector <ulint> solution = grasp(W, adj, Dist, PI, penalty, Ns, maxIterations, alpha, seed);
 
-    ulint solutionCost = 0;
+    lint solutionCost = 0;
 
-    for (vector <ulint> :: iterator it = solution.begin(); it != solution.end(); it++) {
-        ulint v = *it;
-        solutionCost += penalty[v];
+    vector <int> isInSolution(W.size(), 0);
+
+    for (ulint i = 0; i < solution.size(); i++) {
+        isInSolution[solution[i]] = 1;
+    }
+
+    for (ulint v = 0; v < W.size(); v++) {
+        if (isInSolution[v] == 0) {
+            solutionCost += penalty[v];
+        }
     }
 
     for (ulint i = 0; i < solution.size() - 1; i++) {
