@@ -13,6 +13,7 @@
 #include <iterator>
 #include <chrono>
 #include <fstream>
+#include <stack>
 
 #ifndef INFINITE
 #define INFINITE 15 << 25
@@ -58,137 +59,163 @@ vector < set <ulint> > neighbourhoods (matrix W, lint k) {
     return result;
 }
 
-void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, vector < set <ulint> > Ns, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
-    cout << "entrou: greedyRandomizedConstruction" << endl;
+void floydWarshall (matrix W, matrix * D, matrix * PI) {
+    *D = matrix (W.size(), vector <lint> (W.size(), -1));
+    *PI = matrix (W.size(), vector <lint> (W.size(), -1));
+    for (ulint i = 0; i < W.size(); i++) {
+        for (ulint j = 0; j < W.size(); j++) {
+            (*D)[i][j] = W[i][j];
+            if (i != j && W[i][j] >= 0) {
+                (*PI)[i][j] = i;
+            }
+        }
+    }
+    for (ulint k = 0; k < W.size(); k++) {
+        for (ulint i = 0; i < W.size(); i++) {
+            for (ulint j = 0; j < W.size(); j++) {
+                if ((*D)[i][k] >= 0 && (*D)[k][j] >= 0) {
+                    if ((*D)[i][j] < 0 || (*D)[i][j] > (*D)[i][k] + (*D)[k][j]) {
+                        (*D)[i][j] = (*D)[i][k] + (*D)[k][j];
+                        (*PI)[i][j] = (*PI)[k][j];
+                    }
+                }
+            }
+        }
+    }
+}
+
+void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, vector < set <ulint> > Ns, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
     list <ulint> lSolution;
-    ulint newSolutionCost = 0;
+    (*solutionCost) = 0;
     for (ulint u = 0; u < W.size(); u++) {
-        newSolutionCost += penalty[u];
+        (*solutionCost) += penalty[u];
     }
     vector <ulint> isInSolution(W.size(), 0);
     vector <ulint> isDominated(W.size(), 0);
+
     // while Solution is not a complete solution do
     while ((ulint) accumulate(isDominated.begin(), isDominated.end(), 0) < isDominated.size()) {
         // populate canditate list with its respectives incremental costs and position
-        vector < pair <ulint, pair <lint, list <ulint> :: iterator> > > cantidateList;
-        // try to populate with only not dominated vertices
+        vector < pair <list <ulint>, pair <lint, list <ulint> :: iterator> > > cantidateList;
+        // try to populate the list
         for (ulint u = 0; u < W.size(); u++) {
-            if (isDominated[u] == 0) {
-                lint minCostVW = -1;
-                if (lSolution.size() <= 0) {
-                    minCostVW = -penalty[u];
-                } else if (W[u][*(lSolution.begin())] >= 0 && W[u][*(prev(lSolution.end()))] >= 0) {
-                    minCostVW = -penalty[u];
-                    minCostVW += W[u][*(lSolution.begin())];
-                    minCostVW += W[u][*(prev(lSolution.end()))];
-                    minCostVW -= W[*(lSolution.begin())][*(prev(lSolution.end()))];                    
+            // check if the vertice u is not in the solution
+            if (isInSolution[u] == 0) {
+                // check if the vertice u dominates a not already dominated vertice
+                int flag = 0;
+                if (isDominated[u] == 0) {
+                    flag = 1;
                 }
-                list <ulint> :: iterator minWIterator = lSolution.begin();
-                list <ulint> :: iterator vIterator = lSolution.begin();
-                while (vIterator != lSolution.end()) {
-                    list <ulint> :: iterator wIterator = next(vIterator);
-                    ulint v = *vIterator;
-                    ulint w = *wIterator;
-                    lint costVW = INFINITE;
-                    if (W[u][v] >= 0 && W[u][w] >= 0) {
-                        costVW = -penalty[u];
-                        costVW += W[u][v];
-                        costVW += W[u][w];
-                        costVW -= W[v][w];
+                for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end() && flag == 0; it++) {
+                    if (isDominated[*it] == 0) {
+                        flag = 1;
                     }
-                    if (minCostVW < 0 || minCostVW > costVW) {
-                        minCostVW = costVW;
-                        minWIterator = wIterator;
-                    }
-                    vIterator = next(vIterator);
                 }
-                if (minCostVW >= INFINITE) {
-                    cantidateList.push_back(make_pair(u, make_pair(minCostVW, minWIterator)));
-                }
-            }
-        }
-        // if not possible, try to populate with vertices not in solution, but already dominated
-        if (cantidateList.size() <= 0) {
-            for (ulint u = 0; u < W.size(); u++) {
-                if (isInSolution[u] == 0) {
-                    lint minCostVW = -1;
-                    if (lSolution.size() <= 0) {
-                        minCostVW = -penalty[u];
-                    } else if (W[u][*(lSolution.begin())] >= 0 && W[u][*(prev(lSolution.end()))] >= 0) {
-                        minCostVW = -penalty[u];
-                        minCostVW += W[u][*(lSolution.begin())];
-                        minCostVW += W[u][*(prev(lSolution.end()))];
-                        minCostVW -= W[*(lSolution.begin())][*(prev(lSolution.end()))];
-                    }
+                if (flag == 1) {
+                    list <ulint> minU;
+                    minU.push_back(u);
                     list <ulint> :: iterator minWIterator = lSolution.begin();
+                    lint minCostU = -penalty[u];
+                    if (lSolution.size() > 0) {
+                        ulint v = *(prev(lSolution.end()));
+                        ulint w = *(minWIterator);
+                        minCostU += Dist[v][u];
+                        minCostU += Dist[u][w];
+                        minCostU -= W[v][w];
+                        ulint x = PI[v][u]; // x = predecessor of u on the path from v to u
+                        while (x >= 0 && x != v) {
+                            minCostU -= (1 - isDominated[x]) * penalty[x];
+                            minU.push_front(x);
+                            x = PI[v][x];
+                        }
+                        x = PI[w][u]; // x = predecessor of u on the path from w to u
+                        while (x >= 0 && x != w) {
+                            minCostU -= (1 - isDominated[x]) * penalty[x];
+                            minU.push_back(x);
+                            x = PI[w][x];
+                        }
+                    }
                     list <ulint> :: iterator vIterator = lSolution.begin();
                     while (vIterator != lSolution.end()) {
                         list <ulint> :: iterator wIterator = next(vIterator);
-                        ulint v = *vIterator;
-                        ulint w = *wIterator;
-                        lint costVW = INFINITE;
-                        if (W[u][v] >= 0 && W[u][w] >= 0) {
-                            costVW = -penalty[u];
-                            costVW += W[u][v];
-                            costVW += W[u][w];
-                            costVW -= W[v][w];
-                        }
-                        if (minCostVW > costVW) {
-                            minCostVW = costVW;
-                            minWIterator = wIterator;
+                        if (wIterator != lSolution.end()) {
+                            ulint v = *vIterator;
+                            ulint w = *wIterator;
+                            list <ulint> lU;
+                            lU.push_back(u);
+                            lint costU = -penalty[u];
+                            costU += Dist[v][u];
+                            costU += Dist[u][w];
+                            costU -= W[v][w];
+                            ulint x = PI[v][u];
+                            while (x >= 0 && x != v) {
+                                costU -= (1 - isDominated[x]) * penalty[x];
+                                lU.push_front(x);
+                                x = PI[v][x];
+                            }
+                            x = PI[w][u];
+                            while (x >= 0 && x != w) {
+                                costU -= (1 - isDominated[x]) * penalty[x];
+                                lU.push_back(x);
+                                x = PI[w][x];
+                            }
+                            if (minCostU > costU) {
+                                minCostU = costU;
+                                minU = list <ulint> (lU.begin(), lU.end());
+                                minWIterator = wIterator;
+                            }
                         }
                         vIterator = next(vIterator);
                     }
-                    if (minCostVW < INFINITE) {
-                        cantidateList.push_back(make_pair(u, make_pair(minCostVW, minWIterator)));
+                    if (minCostU < INFINITE) {
+                        cantidateList.push_back(make_pair(minU, make_pair(minCostU, minWIterator)));
                     }
                 }
             }
         }
-        lint minCost, maxCost;
-        minCost = maxCost = 0;
         if (cantidateList.size() > 0) {
+            lint minCost, maxCost;
             minCost = maxCost = cantidateList[0].second.first;
-        }
-        for (ulint i = 1; i < cantidateList.size(); i++) {
-            if (minCost > cantidateList[i].second.first) {
-                minCost = cantidateList[i].second.first;
+            for (ulint i = 1; i < cantidateList.size(); i++) {
+                if (minCost > cantidateList[i].second.first) {
+                    minCost = cantidateList[i].second.first;
+                }
+                if (maxCost < cantidateList[i].second.first) {
+                    maxCost = cantidateList[i].second.first;
+                }
             }
-            if (maxCost < cantidateList[i].second.first) {
-                maxCost = cantidateList[i].second.first;
+            // build the restricted canditate list (RCL)
+            double restriction = ((double) (maxCost - minCost));
+            restriction *= alpha;
+            restriction += ((double) minCost);
+            vector < pair <list <ulint>, pair <ulint, list <ulint> :: iterator> > > restrictedCantidateList;
+            for (ulint i = 0; i < cantidateList.size(); i++) {
+                if (cantidateList[i].second.first <= restriction) {
+                    restrictedCantidateList.push_back(cantidateList[i]);
+                }
             }
-        }
-        // build the restricted canditate list (RCL)
-        double aux = ((double) (maxCost - minCost));
-        aux *= alpha;
-        aux += ((double) minCost);
-        vector < pair <ulint, pair <ulint, list <ulint> :: iterator> > > restrictedCantidateList;
-        for (ulint i = 0; i < cantidateList.size(); i++) {
-            if (cantidateList[i].second.first <= aux) {
-                restrictedCantidateList.push_back(cantidateList[i]);
+            // Select an element s from the RCL at random;
+            default_random_engine generator (seed);
+            uniform_int_distribution <ulint> distribution (0, restrictedCantidateList.size() - 1);
+            ulint s = distribution(generator);
+            lSolution.insert(restrictedCantidateList[s].second.second, restrictedCantidateList[s].first.begin(), restrictedCantidateList[s].first.end());
+            (*solutionCost) += restrictedCantidateList[s].second.first;
+            for (list <ulint> :: iterator it = restrictedCantidateList[s].first.begin(); it != restrictedCantidateList[s].first.end(); it++) {
+                isInSolution[*it] = 1;
+                isDominated[*it] = 1;
+                for (set <ulint> :: iterator it2 = Ns[*it].begin(); it2 != Ns[*it].end(); it2++) {
+                    isDominated[*it2] = 1;
+                }
             }
-        }
-        // Select an element s from the RCL at random;
-        default_random_engine generator (seed);
-        uniform_int_distribution <ulint> distribution (0, restrictedCantidateList.size() - 1);
-        ulint s = distribution(generator);
-        lSolution.insert(restrictedCantidateList[s].second.second, restrictedCantidateList[s].first);
-        newSolutionCost += restrictedCantidateList[s].second.first;
-        isInSolution[restrictedCantidateList[s].first] = 1;
-        isDominated[restrictedCantidateList[s].first] = 1;
-        for (set <ulint> :: iterator it = Ns[restrictedCantidateList[s].first].begin(); it != Ns[restrictedCantidateList[s].first].end(); it++) {
-            isDominated[*it] = 1;
         }
     }
     (*solution) = vector <ulint> (lSolution.begin(), lSolution.end());
-    (*solutionCost) = newSolutionCost;
 }
 
 // maneira mais generica: contador de quantos vértices da rota dominam cada vértice do grafo
 // vejo os vertices v dominados por um vértice u da rota, se o contador[v] >= 2, posso eliminar u
 // exclusao
 bool mergeDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
-    cout << "entrou: mergeDominantVertices" << endl;
     bool result = false;
     vector <ulint> dominatorsCount (W.size(), 0);
     for (ulint i = 0; i < (*solution).size(); i++) {
@@ -243,7 +270,6 @@ bool mergeDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > ad
 
 // troca
 bool swapDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
-    cout << "entrou: swapDominantVertices" << endl;
     bool result = false;
     ulint flag = 0;
     while (flag == 0) {
@@ -283,7 +309,6 @@ bool swapDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj
 }
 
 bool twoOpt (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> * solution, ulint * solutionCost) {
-    cout << "entrou: twoOpt" << endl;
     bool result = false;
     ulint flag = 0;
     while (flag == 0) {
@@ -336,17 +361,15 @@ void localSearch (matrix W, vector < list < pair <ulint, ulint> > > adj, vector 
     }
 }
 
-vector <ulint> grasp (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed) {
-
+vector <ulint> grasp (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed) {
     vector <ulint> bestSolution;
     ulint bestSolutionCost = 0;
-
     for (ulint k = 0; k < maxIterations; k++) {
         vector <ulint> solution;
         ulint solutionCost = 0;
 
-        greedyRandomizedConstruction(W, adj, penalty, Ns, alpha, seed, &solution, &solutionCost);
-        localSearch(W, adj, penalty, Ns, &solution, &solutionCost);
+        greedyRandomizedConstruction(W, adj, Dist, PI, penalty, Ns, alpha, seed, &solution, &solutionCost);
+        //localSearch(W, adj, penalty, Ns, &solution, &solutionCost);
 
         if (k == 0 || bestSolutionCost > solutionCost) {
             bestSolution = solution;
@@ -390,6 +413,7 @@ int main (int argc, char * argv[]) {
     matrix WComplete (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
     matrix W (n, vector <lint> (n, -1)); // adjacency matrix for the graph
     vector < list < pair <ulint, ulint> > > adj (n); // adjacency lists for the graph
+    matrix Dist, PI; // matrices for the distance and precedence on the graph
 
     for (ulint v = 0; v < n; v++) {
         WComplete[v][v] = 0;
@@ -421,9 +445,11 @@ int main (int argc, char * argv[]) {
 
     vector < set <ulint> > Ns = neighbourhoods (WComplete, k);
 
+    floydWarshall (W, &Dist, &PI);
+
     ulint seed = chrono::system_clock::now().time_since_epoch().count();
 
-    vector <ulint> solution = grasp(W, adj, penalty, Ns, maxIterations, alpha, seed);
+    vector <ulint> solution = grasp(W, adj, Dist, PI, penalty, Ns, maxIterations, alpha, seed);
 
     ulint solutionCost = 0;
 
