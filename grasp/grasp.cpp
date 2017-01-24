@@ -308,18 +308,16 @@ bool twoOpt (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulin
             for (ulint j = i + 1; j < (*solution).size() && flag == 1; j++) {
                 ulint x, y;
                 x = (*solution)[j];
-                if (j < (*solution).size()) {
+                if (j < (*solution).size() - 1) {
                     y = (*solution)[j + 1];
                 } else {
-                    y = (*solution)[j];
+                    y = (*solution)[0];
                 }
                 if (W[u][x] > 0 && W[v][y] > 0) {
                     if (W[u][v] + W[x][y] > W[u][x] + W[v][y]) {
                         result = true;
                         flag = 0;
-                        for (ulint k = 0; k <= j - i; k++) {
-                            (*solution)[i + k] = (*solution)[j - k];
-                        }
+                        reverse((*solution).begin() + i, (*solution).begin() + j + 1);
                         (*solutionCost) += W[u][x] + W[v][y] - W[u][v] - W[x][y];
                     }
                 }
