@@ -195,9 +195,11 @@ void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint>
 // exclusao
 bool mergeDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
     bool result = false;
+    vector <ulint> occurrencesCount (W.size(), 0);
     vector <ulint> dominatorsCount (W.size(), 0);
     for (ulint i = 0; i < (*solution).size(); i++) {
         ulint u = (*solution)[i];
+        occurrencesCount[u]++;
         for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
             ulint v = *it;
             dominatorsCount[v]++;
@@ -209,7 +211,7 @@ bool mergeDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > ad
         for (ulint i = 0; i < (*solution).size(); i++) {
             ulint u = (*solution)[i];
             ulint flag2 = 0;
-            for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end() && flag == 0; it++) {
+            for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end() && flag2 == 0; it++) {
                 ulint v = *it;
                 if (dominatorsCount[v] < 2) {
                     flag2 = 1;
@@ -228,12 +230,16 @@ bool mergeDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > ad
                 }
                 // if there is an edge linking prevU with nextU
                 if (W[prevU][nextU] > 0) {
-                    lint deltaCost = W[prevU][nextU] - W[prevU][u] - W[u][nextU] + penalty[u];
+                    lint deltaCost = W[prevU][nextU] - W[prevU][u] - W[u][nextU];
+                    if (occurrencesCount[u] == 1) {
+                        deltaCost += penalty[u];
+                    }
                     if (deltaCost < 0) {
                         result = true;
                         flag = 0;
                         (*solution).erase((*solution).begin() + i);
                         (*solutionCost) += deltaCost;
+                        occurrencesCount[u]--;
                         for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
                             ulint v = *it;
                             dominatorsCount[v]--;
@@ -347,7 +353,7 @@ vector <ulint> grasp (matrix W, vector < list < pair <ulint, ulint> > > adj, mat
         ulint solutionCost = 0;
 
         greedyRandomizedConstruction(W, adj, Dist, PI, penalty, Ns, alpha, seed, &solution, &solutionCost);
-        //localSearch(W, adj, penalty, Ns, &solution, &solutionCost);
+        localSearch(W, adj, penalty, Ns, &solution, &solutionCost);
 
         if (k == 0 || bestSolutionCost > solutionCost) {
             bestSolution = solution;
