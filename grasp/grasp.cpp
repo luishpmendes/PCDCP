@@ -255,6 +255,11 @@ bool mergeDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > ad
 // troca
 bool swapDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
     bool result = false;
+    vector <ulint> occurrencesCount (W.size(), 0);
+    for (ulint i = 0; i < (*solution).size(); i++) {
+        ulint u = (*solution)[i];
+        occurrencesCount[u]++;
+    }
     ulint flag = 0;
     while (flag == 0) {
         flag = 1;
@@ -272,17 +277,25 @@ bool swapDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj
             for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
                 ulint v = *it;
                 vector <ulint> setDiff;
-                set_difference(Ns[u].begin(), Ns[u].end(), Ns[v].begin(), Ns[v].end(), setDiff.begin());
+                set_difference(Ns[u].begin(), Ns[u].end(), Ns[v].begin(), Ns[v].end(), inserter(setDiff, setDiff.begin()));
                 // if the neighborhood of v contains the neighborhood of u
                 if (setDiff.size() <= 0) {
                     // if there is edges linking v with the 'neighbors' of u
                     if (W[prevU][v] > 0 && W[v][nextU] > 0) {
-                        lint deltaCost = -penalty[v] + W[prevU][v] + W[v][nextU] + penalty[u] - W[prevU][u] - W[u][nextU];
+                        lint deltaCost = W[prevU][v] + W[v][nextU] - W[prevU][u] - W[u][nextU];
+                        if (occurrencesCount[u] == 1) {
+                            deltaCost += penalty[u];
+                        }
+                        if (occurrencesCount[v] == 0) {
+                            deltaCost -= penalty[v];
+                        }
                         if (deltaCost < 0) {
                             result = true;
                             flag = 0;
                             (*solution)[i] = v;
                             (*solutionCost) += deltaCost;
+                            occurrencesCount[u]--;
+                            occurrencesCount[v]++;
                         }
                     }
                 }
