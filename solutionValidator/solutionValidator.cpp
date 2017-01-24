@@ -313,7 +313,14 @@ int main (int argc, char * argv[]) {
             cout << nonSolutionVerticesInMainCycle[nonSolutionVerticesInMainCycle.size() - 1] << endl;
         }
 
-        ofstream errorFlagFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/errorFlag.txt", ofstream::out);
+        ofstream errorFlagFile;
+
+        if (path.compare("grasp") != 0) {
+            errorFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/errorFlag.txt", ofstream::out);
+        } else {
+            errorFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/errorFlag.txt", ofstream::out);
+        }
+
         errorFlagFile << errorFlag;
         errorFlagFile.close();
     }
