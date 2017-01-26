@@ -82,9 +82,6 @@ void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint>
             if (isInSolution[u] == 0) {
                 // check if the vertice u dominates a not already dominated vertice
                 int flag = 0;
-                if (isDominated[u] == 0) {
-                    flag = 1;
-                }
                 for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end() && flag == 0; it++) {
                     if (isDominated[*it] == 0) {
                         flag = 1;
@@ -101,17 +98,21 @@ void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint>
                         minCostU += Dist[v][u];
                         minCostU += Dist[u][w];
                         minCostU -= W[v][w];
+                        set <ulint> verticesToBeAdded;
                         ulint x = PI[v][u]; // x = predecessor of u on the path from v to u
                         while (x >= 0 && x != v) {
-                            minCostU -= (1 - isDominated[x]) * penalty[x];
+                            verticesToBeAdded.insert(x);
                             minU.push_front(x);
                             x = PI[v][x];
                         }
                         x = PI[w][u]; // x = predecessor of u on the path from w to u
                         while (x >= 0 && x != w) {
-                            minCostU -= (1 - isDominated[x]) * penalty[x];
+                            verticesToBeAdded.insert(x);
                             minU.push_back(x);
                             x = PI[w][x];
+                        }
+                        for (set <ulint> :: iterator it = verticesToBeAdded.begin(); it != verticesToBeAdded.end(); it++) {
+                            minCostU -= (1 - isInSolution[*it]) * penalty[*it];
                         }
                     }
                     list <ulint> :: iterator vIterator = lSolution.begin();
@@ -127,16 +128,20 @@ void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint>
                             costU += Dist[u][w];
                             costU -= W[v][w];
                             ulint x = PI[v][u];
+                            set <ulint> verticesToBeAdded;
                             while (x >= 0 && x != v) {
-                                costU -= (1 - isDominated[x]) * penalty[x];
+                                verticesToBeAdded.insert(x);
                                 lU.push_front(x);
                                 x = PI[v][x];
                             }
                             x = PI[w][u];
                             while (x >= 0 && x != w) {
-                                costU -= (1 - isDominated[x]) * penalty[x];
+                                verticesToBeAdded.insert(x);
                                 lU.push_back(x);
                                 x = PI[w][x];
+                            }
+                            for (set <ulint> :: iterator it = verticesToBeAdded.begin(); it != verticesToBeAdded.end(); it++) {
+                                costU -= (1 - isInSolution[*it]) * penalty[*it];
                             }
                             if (minCostU > costU) {
                                 minCostU = costU;
@@ -180,7 +185,6 @@ void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint>
             (*solutionCost) += restrictedCantidateList[s].second.first;
             for (list <ulint> :: iterator it = restrictedCantidateList[s].first.begin(); it != restrictedCantidateList[s].first.end(); it++) {
                 isInSolution[*it] = 1;
-                isDominated[*it] = 1;
                 for (set <ulint> :: iterator it2 = Ns[*it].begin(); it2 != Ns[*it].end(); it2++) {
                     isDominated[*it2] = 1;
                 }
@@ -356,23 +360,19 @@ void localSearch (matrix W, vector < list < pair <ulint, ulint> > > adj, vector 
     }
 }
 
-vector <ulint> grasp (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed) {
-    vector <ulint> bestSolution;
-    ulint bestSolutionCost = 0;
+void grasp (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
     for (ulint k = 0; k < maxIterations; k++) {
-        vector <ulint> solution;
-        ulint solutionCost = 0;
+        vector <ulint> currentSolution;
+        ulint currentSolutionCost = 0;
 
-        greedyRandomizedConstruction(W, adj, Dist, PI, penalty, Ns, alpha, seed, &solution, &solutionCost);
-        localSearch(W, adj, penalty, Ns, &solution, &solutionCost);
+        greedyRandomizedConstruction(W, adj, Dist, PI, penalty, Ns, alpha, seed, &currentSolution, &currentSolutionCost);
+        //localSearch(W, adj, penalty, Ns, &currentSolution, &currentSolutionCost);
 
-        if (k == 0 || bestSolutionCost > solutionCost) {
-            bestSolution = solution;
-            bestSolutionCost = solutionCost;
+        if (k == 0 || (*solutionCost) > currentSolutionCost) {
+            (*solution) = vector <ulint> (currentSolution.begin(), currentSolution.end());
+            (*solutionCost) = currentSolutionCost;
         }
     }
-
-    return bestSolution;
 }
 
 int main (int argc, char * argv[]) {
@@ -444,26 +444,10 @@ int main (int argc, char * argv[]) {
 
     ulint seed = chrono::system_clock::now().time_since_epoch().count();
 
-    vector <ulint> solution = grasp(W, adj, Dist, PI, penalty, Ns, maxIterations, alpha, seed);
+    vector <ulint> solution;
+    ulint solutionCost = 0;
 
-    lint solutionCost = 0;
-
-    vector <int> isInSolution(W.size(), 0);
-
-    for (ulint i = 0; i < solution.size(); i++) {
-        isInSolution[solution[i]] = 1;
-    }
-
-    for (ulint v = 0; v < W.size(); v++) {
-        if (isInSolution[v] == 0) {
-            solutionCost += penalty[v];
-        }
-    }
-
-    for (ulint i = 0; i < solution.size() - 1; i++) {
-        solutionCost += W[solution[i]][solution[i + 1]];
-    }
-    solutionCost += W[solution[solution.size() - 1]][solution[0]];
+    grasp(W, adj, Dist, PI, penalty, Ns, maxIterations, alpha, seed, &solution, &solutionCost);
 
     cout << solution.size() << ' ' << solution.size() << ' ' << solutionCost << endl;
 
@@ -473,9 +457,11 @@ int main (int argc, char * argv[]) {
     }
 
     for (ulint i = 0; i < solution.size() - 1; i++) {
-        cout << solution[i] << ' ' << solution[i + 1] << endl;
+        pair <ulint, ulint> e = minmax(solution[i], solution[i + 1]);
+        cout << e.first << ' ' << e.second << endl;
     }
-    cout << solution[solution.size() - 1] << ' ' << solution[0] << endl;
+    pair <ulint, ulint> e = minmax(solution[solution.size() - 1], solution[0]);
+    cout << e.first << ' ' << e.second << endl;
 
     string N = itos(n);
     stringstream ssD;
