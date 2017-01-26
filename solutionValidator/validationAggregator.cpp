@@ -38,8 +38,11 @@ int main (int argc, char * argv[]) {
     vector <int> vI;
     vI.push_back(0);
 
-    cout << "n,d,k,t,p,i,error" << endl;
-
+    if (path.compare("grasp") == 0) {
+        cout << "n,d,k,t,p,i,a,error" << endl;
+    } else {
+        cout << "n,d,k,t,p,i,error" << endl;
+    }
     for (vector <int> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
         int n = *itN;
         stringstream ssN;
@@ -73,13 +76,35 @@ int main (int argc, char * argv[]) {
                             ssI << i;
                             string I = ssI.str();
 
-                            int errorFlag = 1;
-                            ifstream errorFlagFile ("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/errorFlag.txt");
-                            if (errorFlagFile.is_open()) {
-                                errorFlagFile >> errorFlag;
+                            if (path.compare("grasp") == 0) {
+                                vector <double> vA;
+                                vA.push_back(0.3);
+                                vA.push_back(0.5);
+                                vA.push_back(0.7);
+                                for (vector <double> :: iterator itA = vA.begin(); itA != vA.end(); itA++) {
+                                    double a = *itA;
+                                    stringstream ssA;
+                                    ssA << fixed << setprecision(1) << d;
+                                    string A = ssA.str();
+                                    A.erase(remove(A.begin(), A.end(), '.'), A.end());
+                                    int errorFlag = 1;
+                                    ifstream errorFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/errorFlag.txt");
+                                    if (errorFlagFile.is_open()) {
+                                        errorFlagFile >> errorFlag;
+                                    }
+
+                                    cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << a << ',' << errorFlag << endl;
+                                }
+                            } else {
+                                int errorFlag = 1;
+                                ifstream errorFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/errorFlag.txt");
+                                if (errorFlagFile.is_open()) {
+                                    errorFlagFile >> errorFlag;
+                                }
+
+                                cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << errorFlag << endl;
                             }
 
-                            cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << errorFlag << endl;
                         }
                     }
                 }
