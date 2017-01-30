@@ -39,9 +39,9 @@ int main (int argc, char * argv[]) {
     vI.push_back(0);
 
     if (path.compare("grasp") == 0) {
-        cout << "n,d,k,t,p,i,a,error" << endl;
+        cout << "n,d,k,t,p,i,a,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
     } else {
-        cout << "n,d,k,t,p,i,error" << endl;
+        cout << "n,d,k,t,p,i,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
     }
     for (vector <int> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
         int n = *itN;
@@ -87,22 +87,127 @@ int main (int argc, char * argv[]) {
                                     ssA << fixed << setprecision(1) << d;
                                     string A = ssA.str();
                                     A.erase(remove(A.begin(), A.end(), '.'), A.end());
-                                    int errorFlag = 1;
+
+                                    int nFlag, kFlag, nSolutionFlag, mSolutionFlag, solutionVerticesFlag, solutionEdgesFlag, solutionCostFlag, coverFlag, solutionVerticesNotInMainCycleFlag, nonSolutionVerticesInMainCycleFlag, errorFlag;
+                                    nFlag = kFlag = nSolutionFlag = mSolutionFlag = solutionVerticesFlag = solutionEdgesFlag = solutionCostFlag = coverFlag = solutionVerticesNotInMainCycleFlag = nonSolutionVerticesInMainCycleFlag = errorFlag = 1;
+
+                                    ifstream nFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/nFlag.txt");
+                                    if (nFlagFile.is_open()) {
+                                        nFlagFile >> nFlag;
+                                    }
+
+                                    ifstream kFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/kFlag.txt");
+                                    if (kFlagFile.is_open()) {
+                                        kFlagFile >> kFlag;
+                                    }
+
+                                    ifstream nSolutionFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/nSolutionFlag.txt");
+                                    if (nSolutionFlagFile.is_open()) {
+                                        nSolutionFlagFile >> nSolutionFlag;
+                                    }
+
+                                    ifstream mSolutionFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/mSolutionFlag.txt");
+                                    if (mSolutionFlagFile.is_open()) {
+                                        mSolutionFlagFile >> mSolutionFlag;
+                                    }
+
+                                    ifstream solutionVerticesFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/solutionVerticesFlag.txt");
+                                    if (solutionVerticesFlagFile.is_open()) {
+                                        solutionVerticesFlagFile >> solutionVerticesFlag;
+                                    }
+
+                                    ifstream solutionEdgesFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/solutionEdgesFlag.txt");
+                                    if (solutionEdgesFlagFile.is_open()) {
+                                        solutionEdgesFlagFile >> solutionEdgesFlag;
+                                    }
+
+                                    ifstream solutionCostFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/solutionCostFlag.txt");
+                                    if (solutionCostFlagFile.is_open()) {
+                                        solutionCostFlagFile >> solutionCostFlag;
+                                    }
+
+                                    ifstream coverFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/coverFlag.txt");
+                                    if (coverFlagFile.is_open()) {
+                                        coverFlagFile >> coverFlag;
+                                    }
+
+                                    ifstream solutionVerticesNotInMainCycleFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/solutionVerticesNotInMainCycleFlag.txt");
+                                    if (solutionVerticesNotInMainCycleFlagFile.is_open()) {
+                                        solutionVerticesNotInMainCycleFlagFile >> solutionVerticesNotInMainCycleFlag;
+                                    }
+
+                                    ifstream nonSolutionVerticesInMainCycleFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/nonSolutionVerticesInMainCycleFlag.txt");
+                                    if (nonSolutionVerticesInMainCycleFlagFile.is_open()) {
+                                        nonSolutionVerticesInMainCycleFlagFile >> nonSolutionVerticesInMainCycleFlag;
+                                    }
+
                                     ifstream errorFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/errorFlag.txt");
                                     if (errorFlagFile.is_open()) {
                                         errorFlagFile >> errorFlag;
                                     }
 
-                                    cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << a << ',' << errorFlag << endl;
+                                    cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << a << ',' << nFlag << ',' << kFlag << ',' << nSolutionFlag << ',' << mSolutionFlag << ',' << solutionVerticesFlag << ',' << solutionEdgesFlag << ',' << solutionCostFlag << ',' << coverFlag << ',' << solutionVerticesNotInMainCycleFlag << ',' << nonSolutionVerticesInMainCycleFlag << ',' << errorFlag << endl;
                                 }
                             } else {
-                                int errorFlag = 1;
+                                int nFlag, kFlag, nSolutionFlag, mSolutionFlag, solutionVerticesFlag, solutionEdgesFlag, solutionCostFlag, coverFlag, solutionVerticesNotInMainCycleFlag, nonSolutionVerticesInMainCycleFlag, errorFlag;
+                                nFlag = kFlag = nSolutionFlag = mSolutionFlag = solutionVerticesFlag = solutionEdgesFlag = solutionCostFlag = coverFlag = solutionVerticesNotInMainCycleFlag = nonSolutionVerticesInMainCycleFlag = errorFlag = 1;
+
+                                ifstream nFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/nFlag.txt");
+                                if (nFlagFile.is_open()) {
+                                    nFlagFile >> nFlag;
+                                }
+
+                                ifstream kFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/kFlag.txt");
+                                if (kFlagFile.is_open()) {
+                                    kFlagFile >> kFlag;
+                                }
+
+                                ifstream nSolutionFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/nSolutionFlag.txt");
+                                if (nSolutionFlagFile.is_open()) {
+                                    nSolutionFlagFile >> nSolutionFlag;
+                                }
+
+                                ifstream mSolutionFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/mSolutionFlag.txt");
+                                if (mSolutionFlagFile.is_open()) {
+                                    mSolutionFlagFile >> mSolutionFlag;
+                                }
+
+                                ifstream solutionVerticesFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionVerticesFlag.txt");
+                                if (solutionVerticesFlagFile.is_open()) {
+                                    solutionVerticesFlagFile >> solutionVerticesFlag;
+                                }
+
+                                ifstream solutionEdgesFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionEdgesFlag.txt");
+                                if (solutionEdgesFlagFile.is_open()) {
+                                    solutionEdgesFlagFile >> solutionEdgesFlag;
+                                }
+
+                                ifstream solutionCostFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionCostFlag.txt");
+                                if (solutionCostFlagFile.is_open()) {
+                                    solutionCostFlagFile >> solutionCostFlag;
+                                }
+
+                                ifstream coverFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/coverFlag.txt");
+                                if (coverFlagFile.is_open()) {
+                                    coverFlagFile >> coverFlag;
+                                }
+
+                                ifstream solutionVerticesNotInMainCycleFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionVerticesNotInMainCycleFlag.txt");
+                                if (solutionVerticesNotInMainCycleFlagFile.is_open()) {
+                                    solutionVerticesNotInMainCycleFlagFile >> solutionVerticesNotInMainCycleFlag;
+                                }
+
+                                ifstream nonSolutionVerticesInMainCycleFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/nonSolutionVerticesInMainCycleFlag.txt");
+                                if (nonSolutionVerticesInMainCycleFlagFile.is_open()) {
+                                    nonSolutionVerticesInMainCycleFlagFile >> nonSolutionVerticesInMainCycleFlag;
+                                }
+
                                 ifstream errorFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/errorFlag.txt");
                                 if (errorFlagFile.is_open()) {
                                     errorFlagFile >> errorFlag;
                                 }
 
-                                cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << errorFlag << endl;
+                                cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << nFlag << ',' << kFlag << ',' << nSolutionFlag << ',' << mSolutionFlag << ',' << solutionVerticesFlag << ',' << solutionEdgesFlag << ',' << solutionCostFlag << ',' << coverFlag << ',' << solutionVerticesNotInMainCycleFlag << ',' << nonSolutionVerticesInMainCycleFlag << ',' << errorFlag << endl;
                             }
 
                         }
