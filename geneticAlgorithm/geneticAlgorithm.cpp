@@ -13,6 +13,7 @@ using namespace std;
 typedef long int lint;
 typedef unsigned long int ulint;
 typedef vector < vector <lint> > matrix;
+typedef pair < vector <ulint>, lint > tIndividual;
 
 string itos (ulint i) {
     stringstream s;
@@ -57,31 +58,115 @@ void floydWarshall (matrix W, matrix * D, matrix * PI) {
     }
 }
 
-void geneticAlgorithm (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
+set < tIndividual > initialPopulation (ulint populationSize) {
+    set < tIndividual > result;
+    return result;
+}
+
+void crossOver (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tIndividual parent1, tIndividual parent2, tIndividual * offspring1, tIndividual * offspring2) {
+}
+
+void mutation (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, double mutationRate, tIndividual * individual) {
+}
+
+tIndividual selection (set < tIndividual > population) {
+    tIndividual result;
+    ulint at = 0;
+    for (set < tIndividual > :: iterator it = population.begin(); it != population.end(); it++) {
+        tIndividual individual = *it;
+        at += individual.second;
+    }
+    ulint rouletteWheelSelectionSeed = chrono :: system_clock :: now().time_since_epoch().count();
+    default_random_engine rouletteWheelSelectionGenerator (rouletteWheelSelectionSeed);
+    uniform_int_distribution <ulint> rouletteWheelSelectionDistribution (0, at);
+    ulint r = rouletteWheelSelectionDistribution(rouletteWheelSelectionGenerator);
+    ulint sum = 0;
+    for (set < tIndividual > :: iterator it = population.begin(); it != population.end(); it++) {
+        tIndividual individual = *it;
+        sum += individual.second;
+        if (sum >= r) {
+            result = individual;
+            break;
+        }
+    }
+    return result;
+}
+
+bool indValueComp (tIndividual lhs, tIndividual rhs) {
+    return lhs.second < rhs.second;
+}
+
+// elitism
+set < tIndividual > populationSubstitution (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint populationSize, double mutationRate, set < tIndividual > population) {
+    set < tIndividual > result;
+    vector < tIndividual > sortedPopulation (population.begin(), population.end());
+    sort(sortedPopulation.begin(), sortedPopulation.end(), indValueComp);
+    result.insert(sortedPopulation[0]);
+    while (result.size() < populationSize) {
+        tIndividual parent1 = selection(population);
+        tIndividual parent2 = selection(population);
+        tIndividual offspring1;
+        tIndividual offspring2;
+        crossOver (W, adj, Dist, PI, penalty, root, Ns, parent1, parent2, &offspring1, &offspring2);
+        mutation(W, adj, Dist, PI, penalty, root, Ns, mutationRate, &offspring1);
+        mutation(W, adj, Dist, PI, penalty, root, Ns, mutationRate, &offspring2);
+        result.insert(offspring1);
+        if (result.size() < population.size()) {
+            result.insert(offspring2);
+        }
+    }
+    return result;
+}
+
+bool termination (chrono :: steady_clock :: time_point tBegin, double timeLimit) {
+    chrono :: steady_clock :: time_point tCurrent = chrono :: steady_clock :: now();
+    chrono :: seconds elapsedTime = chrono :: duration_cast <chrono :: seconds> (tCurrent - tBegin);
+    if (elapsedTime.count() >= timeLimit) {
+        return true;
+    }
+    return false;
+}
+
+tIndividual geneticAlgorithm (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, chrono :: steady_clock :: time_point tBegin, double timeLimit, ulint populationSize, double mutationRate) {
+    tIndividual result;
+    bool flag = true;
+    set < tIndividual > oldPopulation;
+    set < tIndividual > newPopulation = initialPopulation (populationSize);
+    while (termination (tBegin, timeLimit) != true) {
+        oldPopulation = set < tIndividual > (newPopulation.begin(), newPopulation.end());
+        newPopulation = populationSubstitution(W, adj, Dist, PI, penalty, root, Ns, populationSize, mutationRate, oldPopulation);
+    }
+    for (set < tIndividual > :: iterator it = newPopulation.begin(); it != newPopulation.end(); it++) {
+        tIndividual individual = *it;
+        if (flag || result.second > individual.second) {
+            flag = false;
+            result = individual;
+        }
+    }
+    return result;
 }
 
 int main (int argc, char * argv[]) {
     chrono :: steady_clock :: time_point tBegin = chrono :: steady_clock :: now();
     string I ("0");
-    ulint maxIterations = 100;
-    double alpha = 0.3;
+    double timeLimit = 100;
+    ulint populationSize = 100;
+    double mutationRate = 0.1;
 
     if (argc >= 2) {
         I = string (argv[1]);
     }
 
     if (argc >= 3) {
-        maxIterations = atoi(argv[2]);
+        timeLimit = atof(argv[2]);
     }
 
     if (argc >= 4) {
-        alpha = atof(argv[3]);
+        populationSize = atoi(argv[3]);
     }
 
-    if (alpha < 0.0) {
-        alpha = 0.0;
-    } else if (alpha > 1.0) {
-        alpha = 1.0;
+    if (argc >= 5) {
+        mutationRate = atof(argv[4]);
     }
 
     ulint n, mComplete, m, k, t, root;
@@ -127,25 +212,20 @@ int main (int argc, char * argv[]) {
 
     floydWarshall (W, &Dist, &PI);
 
-    ulint seed = chrono::system_clock::now().time_since_epoch().count();
+    tIndividual solution = geneticAlgorithm(W, adj, Dist, PI, penalty, root, Ns, tBegin, timeLimit, populationSize, mutationRate);
 
-    vector <ulint> solution;
-    ulint solutionCost = 0;
+    cout << solution.first.size() << ' ' << solution.first.size() << ' ' << solution.second << endl;
 
-    geneticAlgorithm(W, adj, Dist, PI, penalty, root, Ns, maxIterations, alpha, seed, &solution, &solutionCost);
-
-    cout << solution.size() << ' ' << solution.size() << ' ' << solutionCost << endl;
-
-    for (vector <ulint> :: iterator it = solution.begin(); it != solution.end(); it++) {
+    for (vector <ulint> :: iterator it = solution.first.begin(); it != solution.first.end(); it++) {
         ulint v = *it;
         cout << v << endl;
     }
 
-    for (ulint i = 0; i < solution.size() - 1; i++) {
-        pair <ulint, ulint> e = minmax(solution[i], solution[i + 1]);
+    for (ulint i = 0; i < solution.first.size() - 1; i++) {
+        pair <ulint, ulint> e = minmax(solution.first[i], solution.first[i + 1]);
         cout << e.first << ' ' << e.second << endl;
     }
-    pair <ulint, ulint> e = minmax(solution[solution.size() - 1], solution[0]);
+    pair <ulint, ulint> e = minmax(solution.first[solution.first.size() - 1], solution.first[0]);
     cout << e.first << ' ' << e.second << endl;
 
     string N = itos(n);
@@ -159,18 +239,14 @@ int main (int argc, char * argv[]) {
     ssP << fixed << setprecision(1) << p;
     string P = ssP.str();
     P.erase(remove(P.begin(), P.end(), '.'), P.end());
-    stringstream ssA;
-    ssA << fixed << setprecision(1) << alpha;
-    string A = ssA.str();
-    A.erase(remove(A.begin(), A.end(), '.'), A.end());
 
-    ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/objVal.txt", ofstream :: out);
-    objValFile << solutionCost;
+    ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/objVal.txt", ofstream :: out);
+    objValFile << solution.second;
     objValFile.close();
 
     chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
     chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
-    ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/elapsedTime.txt", ofstream :: out);
+    ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/elapsedTime.txt", ofstream :: out);
     elapsedTimeFile << elapsedTime.count();
     elapsedTimeFile.close();
 
