@@ -13,7 +13,8 @@ using namespace std;
 typedef long int lint;
 typedef unsigned long int ulint;
 typedef vector < vector <lint> > matrix;
-typedef pair < vector <ulint>, lint > tIndividual;
+typedef pair < vector <ulint>, lint > tGenotype; // permutation
+typedef pair < vector <ulint>, lint > tPhenotype; // circular list
 
 string itos (ulint i) {
     stringstream s;
@@ -58,22 +59,102 @@ void floydWarshall (matrix W, matrix * D, matrix * PI) {
     }
 }
 
-set < tIndividual > initialPopulation (ulint populationSize) {
-    set < tIndividual > result;
+// from circular list to permutation
+tGenotype encode (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype solution) {
+    tGenotype result;
+    result.first = vector <ulint> (W.size());
+    result.second = 0;
+    ulint i = 0;
+    for (ulint u = 0; u < W.size(); u++) {
+        result.second += penalty[u];
+    }
+    vector <int> isInSolution (W.size(), 0);
+    for (ulint j = 0; j < solution.first.size() - 1; j++) {
+        ulint u = solution.first[j];
+        ulint v = solution.first[j + 1];
+        result.first[i++] = u;
+        isInSolution[u] = 1;
+        result.second += W[u][v];
+    }
+    result.first[i++] = solution.first.size() - 1;
+    isInSolution[solution.first[solution.first.size() - 1]] = 1;
+    result.second += W[solution.first[solution.first.size() - 1]][solution.first[0]];
+    for (ulint u = 0; u < W.size(); u++) {
+        if (isInSolution[u] == 0) {
+            result.first[i++] = u;
+        } else {
+            result.second -= penalty[u];
+        }
+    }
+    if (solution.second != result.second) {
+        // ERROR!!!
+    }
     return result;
 }
 
-void crossOver (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tIndividual parent1, tIndividual parent2, tIndividual * offspring1, tIndividual * offspring2) {
+// from permutation to circular list
+tPhenotype decode (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tGenotype solution) {
+    tPhenotype result;
+    vector <ulint> aux;
+    vector <ulint> isDominated(W.size(), 0);
+    for (ulint i = 0; i < solution.first.size() && (ulint) accumulate(isDominated.begin(), isDominated.end(), 0) < isDominated.size(); i++) {
+        ulint u = solution.first[i];
+        aux.push_back(u);
+        for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
+            isDominated[*it] = 1;
+        }
+    }
+    for (ulint i = 0; i < aux.size() - 1; i++) {
+        ulint u, v;
+        u = aux[i];
+        v = aux[i + 1];
+        while (u != v) {
+            result.first.push_back(u);
+            u = PI[v][u];
+        }
+    }
+    ulint u, v;
+    u = aux[aux.size() - 1];
+    v = aux[0];
+    while (u != v) {
+        result.first.push_back(u);
+        u = PI[v][u];
+    }
+    result.second = 0;
+    for (ulint u = 0; u < W.size(); u++) {
+        result.second += penalty[u];
+    }
+    vector <int> isInSolution (W.size(), 0);
+    for (ulint i = 0; i < aux.size() - 1; i++) {
+        isInSolution[solution.first[i]] = 1;
+        result.second += W[solution.first[i]][solution.first[i + 1]];
+    }
+    for (ulint u = 0; u < W.size(); u++) {
+        result.second -= isInSolution[u] * penalty[u];
+    }
+    if (solution.second != result.second) {
+        // ERROR!!!
+    }
+    return result;
 }
 
-void mutation (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, double mutationRate, tIndividual * individual) {
+set < tGenotype > initialPopulation (ulint populationSize) {
+    set < tGenotype > result;
+    return result;
 }
 
-tIndividual selection (set < tIndividual > population) {
-    tIndividual result;
+void crossOver (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tGenotype parent1, tGenotype parent2, tGenotype * offspring1, tGenotype * offspring2) {
+
+}
+
+void mutation (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, double mutationRate, tGenotype * individual) {
+}
+
+tGenotype selection (set < tGenotype > population) {
+    tGenotype result;
     ulint at = 0;
-    for (set < tIndividual > :: iterator it = population.begin(); it != population.end(); it++) {
-        tIndividual individual = *it;
+    for (set < tGenotype > :: iterator it = population.begin(); it != population.end(); it++) {
+        tGenotype individual = *it;
         at += individual.second;
     }
     ulint rouletteWheelSelectionSeed = chrono :: system_clock :: now().time_since_epoch().count();
@@ -81,8 +162,8 @@ tIndividual selection (set < tIndividual > population) {
     uniform_int_distribution <ulint> rouletteWheelSelectionDistribution (0, at);
     ulint r = rouletteWheelSelectionDistribution(rouletteWheelSelectionGenerator);
     ulint sum = 0;
-    for (set < tIndividual > :: iterator it = population.begin(); it != population.end(); it++) {
-        tIndividual individual = *it;
+    for (set < tGenotype > :: iterator it = population.begin(); it != population.end(); it++) {
+        tGenotype individual = *it;
         sum += individual.second;
         if (sum >= r) {
             result = individual;
@@ -92,21 +173,21 @@ tIndividual selection (set < tIndividual > population) {
     return result;
 }
 
-bool indValueComp (tIndividual lhs, tIndividual rhs) {
+bool indValueComp (tGenotype lhs, tGenotype rhs) {
     return lhs.second < rhs.second;
 }
 
 // elitism
-set < tIndividual > populationSubstitution (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint populationSize, double mutationRate, set < tIndividual > population) {
-    set < tIndividual > result;
-    vector < tIndividual > sortedPopulation (population.begin(), population.end());
+set < tGenotype > populationSubstitution (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint populationSize, double mutationRate, set < tGenotype > population) {
+    set < tGenotype > result;
+    vector < tGenotype > sortedPopulation (population.begin(), population.end());
     sort(sortedPopulation.begin(), sortedPopulation.end(), indValueComp);
     result.insert(sortedPopulation[0]);
     while (result.size() < populationSize) {
-        tIndividual parent1 = selection(population);
-        tIndividual parent2 = selection(population);
-        tIndividual offspring1;
-        tIndividual offspring2;
+        tGenotype parent1 = selection(population);
+        tGenotype parent2 = selection(population);
+        tGenotype offspring1;
+        tGenotype offspring2;
         crossOver (W, adj, Dist, PI, penalty, root, Ns, parent1, parent2, &offspring1, &offspring2);
         mutation(W, adj, Dist, PI, penalty, root, Ns, mutationRate, &offspring1);
         mutation(W, adj, Dist, PI, penalty, root, Ns, mutationRate, &offspring2);
@@ -127,17 +208,17 @@ bool termination (chrono :: steady_clock :: time_point tBegin, double timeLimit)
     return false;
 }
 
-tIndividual geneticAlgorithm (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, chrono :: steady_clock :: time_point tBegin, double timeLimit, ulint populationSize, double mutationRate) {
-    tIndividual result;
+tGenotype geneticAlgorithm (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, chrono :: steady_clock :: time_point tBegin, double timeLimit, ulint populationSize, double mutationRate) {
+    tGenotype result;
     bool flag = true;
-    set < tIndividual > oldPopulation;
-    set < tIndividual > newPopulation = initialPopulation (populationSize);
+    set < tGenotype > oldPopulation;
+    set < tGenotype > newPopulation = initialPopulation (populationSize);
     while (termination (tBegin, timeLimit) != true) {
-        oldPopulation = set < tIndividual > (newPopulation.begin(), newPopulation.end());
+        oldPopulation = set < tGenotype > (newPopulation.begin(), newPopulation.end());
         newPopulation = populationSubstitution(W, adj, Dist, PI, penalty, root, Ns, populationSize, mutationRate, oldPopulation);
     }
-    for (set < tIndividual > :: iterator it = newPopulation.begin(); it != newPopulation.end(); it++) {
-        tIndividual individual = *it;
+    for (set < tGenotype > :: iterator it = newPopulation.begin(); it != newPopulation.end(); it++) {
+        tGenotype individual = *it;
         if (flag || result.second > individual.second) {
             flag = false;
             result = individual;
@@ -212,7 +293,7 @@ int main (int argc, char * argv[]) {
 
     floydWarshall (W, &Dist, &PI);
 
-    tIndividual solution = geneticAlgorithm(W, adj, Dist, PI, penalty, root, Ns, tBegin, timeLimit, populationSize, mutationRate);
+    tGenotype solution = geneticAlgorithm(W, adj, Dist, PI, penalty, root, Ns, tBegin, timeLimit, populationSize, mutationRate);
 
     cout << solution.first.size() << ' ' << solution.first.size() << ' ' << solution.second << endl;
 
