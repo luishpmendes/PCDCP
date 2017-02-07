@@ -565,14 +565,19 @@ int main (int argc, char * argv[]) {
     ssP << fixed << setprecision(1) << p;
     string P = ssP.str();
     P.erase(remove(P.begin(), P.end(), '.'), P.end());
+    string PS = itos(populationSize);
+    stringstream ssMR;
+    ssMR << fixed << setprecision(1) << d;
+    string MR = ssMR.str();
+    MR.erase(remove(MR.begin(), MR.end(), '.'), MR.end());
 
-    ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/objVal.txt", ofstream :: out);
+    ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/objVal.txt", ofstream :: out);
     objValFile << solution.second;
     objValFile.close();
 
     chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
     chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
-    ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/elapsedTime.txt", ofstream :: out);
+    ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/elapsedTime.txt", ofstream :: out);
     elapsedTimeFile << elapsedTime.count();
     elapsedTimeFile.close();
 
