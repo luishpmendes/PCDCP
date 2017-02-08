@@ -60,7 +60,7 @@ void floydWarshall (matrix W, matrix * D, matrix * PI) {
 }
 
 // from circular list
-lint fitnessFunction (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> solution) {
+lint fitnessFunction (matrix W, vector <ulint> penalty, vector <ulint> solution) {
     lint result = 0;
     result = 0;
     for (ulint u = 0; u < W.size(); u++) {
@@ -77,16 +77,16 @@ lint fitnessFunction (matrix W, vector < list < pair <ulint, ulint> > > adj, mat
     return result;
 }
 
-vector <ulint> circularList2Permutation (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> solution) {
-    vector <ulint> result (W.size());
-    vector <int> isInSolution (W.size(), 0);
+vector <ulint> circularList2Permutation (ulint n, vector <ulint> solution) {
+    vector <ulint> result (n);
+    vector <int> isInSolution (n, 0);
     ulint i = 0;
     for (ulint j = 0; j < solution.size(); j++) {
         ulint u = solution[j];
         result[i++] = u;
         isInSolution[u] = 1;
     }
-    for (ulint u = 0; u < W.size(); u++) {
+    for (ulint u = 0; u < n; u++) {
         if (isInSolution[u] == 0) {
             result[i++] = u;
         }
@@ -95,17 +95,17 @@ vector <ulint> circularList2Permutation (matrix W, vector < list < pair <ulint, 
 }
 
 // from circular list to permutation
-tGenotype encode (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype solution) {
+tGenotype encode (matrix W, vector <ulint> penalty, tPhenotype solution) {
     tGenotype result;
-    result.first = circularList2Permutation (W, adj, Dist, PI, penalty, root, Ns, solution.first);
-    result.second = fitnessFunction (W, adj, Dist, PI, penalty, root, Ns, solution.first);
+    result.first = circularList2Permutation (W.size(), solution.first);
+    result.second = fitnessFunction (W, penalty, solution.first);
     return result;
 }
 
-vector <ulint> permutation2circularList (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> solution) {
+vector <ulint> permutation2circularList (ulint n, matrix PI, vector < set <ulint> > Ns, vector <ulint> solution) {
     vector <ulint> result;
     vector <ulint> aux;
-    vector <ulint> isDominated(W.size(), 0);
+    vector <ulint> isDominated(n, 0);
     for (ulint i = 0; i < solution.size() && (ulint) accumulate(isDominated.begin(), isDominated.end(), 0) < isDominated.size(); i++) {
         ulint u = solution[i];
         aux.push_back(u);
@@ -126,14 +126,14 @@ vector <ulint> permutation2circularList (matrix W, vector < list < pair <ulint, 
 }
 
 // from permutation to circular list
-tPhenotype decode (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tGenotype solution) {
+tPhenotype decode (matrix W, matrix PI, vector <ulint> penalty, vector < set <ulint> > Ns, tGenotype solution) {
     tPhenotype result;
-    result.first = permutation2circularList (W, adj, Dist, PI, penalty, root, Ns, solution.first);
-    result.second = fitnessFunction (W, adj, Dist, PI, penalty, root, Ns, solution.first);
+    result.first = permutation2circularList (W.size(), PI, Ns, solution.first);
+    result.second = fitnessFunction (W, penalty, solution.first);
     return result;
 }
 
-bool mergeDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype * solution) {
+bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype * solution) {
     bool result = false;
     vector <ulint> occurrencesCount (W.size(), 0);
     vector <ulint> dominatorsCount (W.size(), 0);
@@ -195,7 +195,7 @@ bool mergeDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > ad
     return result;
 }
 
-bool swapDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype * solution) {
+bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype * solution) {
     bool result = false;
     vector <ulint> occurrencesCount (W.size(), 0);
     for (ulint i = 0; i < (*solution).first.size(); i++) {
@@ -250,7 +250,7 @@ bool swapDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj
     return result;
 }
 
-bool twoOpt (matrix W, vector < list < pair <ulint, ulint> > > adj, tPhenotype * solution) {
+bool twoOpt (matrix W, tPhenotype * solution) {
     bool result = false;
     ulint flag = 0;
     while (flag == 0) {
@@ -285,23 +285,23 @@ bool twoOpt (matrix W, vector < list < pair <ulint, ulint> > > adj, tPhenotype *
     return result;
 }
 
-void localSearch (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype * solution) {
+void localSearch (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype * solution) {
     ulint flag = 0;
     while (flag == 0) {
         flag = 1;
-        if (mergeDominantVertices (W, adj, penalty, root, Ns, solution)) {
+        if (mergeDominantVertices (W, penalty, root, Ns, solution)) {
             flag = 0;
         }
-        if (swapDominantVertices (W, adj, penalty, root, Ns, solution)) {
+        if (swapDominantVertices (W, penalty, root, Ns, solution)) {
             flag = 0;
         }
-        if (twoOpt (W, adj, solution)) {
+        if (twoOpt (W, solution)) {
             flag = 0;
         }
     }
 }
 
-set < tGenotype > initialPopulation (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint populationSize) {
+set < tGenotype > initialPopulation (matrix W, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint populationSize) {
     set < tGenotype > result;
     vector <ulint> sequence (W.size());
     for (ulint i = 0; i < sequence.size(); i++) {
@@ -322,20 +322,20 @@ set < tGenotype > initialPopulation (matrix W, vector < list < pair <ulint, ulin
                 permutation[0] = root;
             }
         }
-        vector <ulint> circularList = permutation2circularList (W, adj, Dist, PI, penalty, root, Ns, permutation);
+        vector <ulint> circularList = permutation2circularList (W.size(), PI, Ns, permutation);
         tGenotype chromossome;
         chromossome.first = vector <ulint> (permutation.begin(), permutation.end());
-        chromossome.second = fitnessFunction (W, adj, Dist, PI, penalty, root, Ns, circularList);
-        tPhenotype individual = decode (W, adj, Dist, PI, penalty, root, Ns, chromossome);
-        localSearch (W, adj, penalty, root, Ns, &individual);
-        chromossome = encode (W, adj, Dist, PI, penalty, root, Ns, individual);
+        chromossome.second = fitnessFunction (W, penalty, circularList);
+        tPhenotype individual = decode (W, PI, penalty, Ns, chromossome);
+        localSearch (W, penalty, root, Ns, &individual);
+        chromossome = encode (W, penalty, individual);
         result.insert(chromossome);
 
     }
     return result;
 }
 
-void crossOver (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tGenotype parent1, tGenotype parent2, tGenotype * offspring1, tGenotype * offspring2) {
+void crossOver (matrix W, matrix PI, vector <ulint> penalty, vector < set <ulint> > Ns, tGenotype parent1, tGenotype parent2, tGenotype * offspring1, tGenotype * offspring2) {
     // chooses crossover point at random
     ulint mutationSeed = chrono :: system_clock :: now().time_since_epoch().count();
     default_random_engine mutationGenerator (mutationSeed);
@@ -365,11 +365,11 @@ void crossOver (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Di
         }
     }
     // computing its costs
-    (*offspring1).second = fitnessFunction (W, adj, Dist, PI, penalty, root, Ns, permutation2circularList (W, adj, Dist, PI, penalty, root, Ns, (*offspring1).first));
-    (*offspring2).second = fitnessFunction (W, adj, Dist, PI, penalty, root, Ns, permutation2circularList (W, adj, Dist, PI, penalty, root, Ns, (*offspring2).first));
+    (*offspring1).second = fitnessFunction (W, penalty, permutation2circularList (W.size(), PI, Ns, (*offspring1).first));
+    (*offspring2).second = fitnessFunction (W, penalty, permutation2circularList (W.size(), PI, Ns, (*offspring2).first));
 }
 
-void mutation (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, double mutationRate, tGenotype * individual) {
+void mutation (matrix W, matrix PI, vector <ulint> penalty, vector < set <ulint> > Ns, double mutationRate, tGenotype * individual) {
     ulint mutationSeed1 = chrono :: system_clock :: now().time_since_epoch().count() + 1;
     default_random_engine mutationGenerator1 (mutationSeed1);
     uniform_real_distribution <double> mutationDistribution1 (0.0, 1.0);
@@ -382,7 +382,7 @@ void mutation (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dis
         ulint aux = (*individual).first[i];
         (*individual).first[i] = (*individual).first[j];
         (*individual).first[j] = aux;
-        (*individual).second = fitnessFunction (W, adj, Dist, PI, penalty, root, Ns, permutation2circularList (W, adj, Dist, PI, penalty, root, Ns, (*individual).first));
+        (*individual).second = fitnessFunction (W, penalty, permutation2circularList (W.size(), PI, Ns, (*individual).first));
     }
 }
 
@@ -414,7 +414,7 @@ bool indValueComp (tGenotype lhs, tGenotype rhs) {
 }
 
 // elitism
-set < tGenotype > populationSubstitution (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint populationSize, double mutationRate, set < tGenotype > population) {
+set < tGenotype > populationSubstitution (matrix W, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint populationSize, double mutationRate, set < tGenotype > population) {
     set < tGenotype > result;
     vector < tGenotype > sortedPopulation (population.begin(), population.end());
     sort(sortedPopulation.begin(), sortedPopulation.end(), indValueComp);
@@ -425,19 +425,19 @@ set < tGenotype > populationSubstitution (matrix W, vector < list < pair <ulint,
         tGenotype offspring1;
         tGenotype offspring2;
 
-        crossOver (W, adj, Dist, PI, penalty, root, Ns, parent1, parent2, &offspring1, &offspring2);
-        mutation(W, adj, Dist, PI, penalty, root, Ns, mutationRate, &offspring1);
-        mutation(W, adj, Dist, PI, penalty, root, Ns, mutationRate, &offspring2);
+        crossOver (W, PI, penalty, Ns, parent1, parent2, &offspring1, &offspring2);
+        mutation(W, PI, penalty, Ns, mutationRate, &offspring1);
+        mutation(W, PI, penalty, Ns, mutationRate, &offspring2);
 
-        tPhenotype individual1 = decode (W, adj, Dist, PI, penalty, root, Ns, offspring1);
-        localSearch (W, adj, penalty, root, Ns, &individual1);
-        offspring1 = encode (W, adj, Dist, PI, penalty, root, Ns, individual1);
+        tPhenotype individual1 = decode (W, PI, penalty, Ns, offspring1);
+        localSearch (W, penalty, root, Ns, &individual1);
+        offspring1 = encode (W, penalty, individual1);
         result.insert(offspring1);
 
         if (result.size() < population.size()) {
-            tPhenotype individual2 = decode (W, adj, Dist, PI, penalty, root, Ns, offspring2);
-            localSearch (W, adj, penalty, root, Ns, &individual2);
-            offspring2 = encode (W, adj, Dist, PI, penalty, root, Ns, individual2);
+            tPhenotype individual2 = decode (W, PI, penalty, Ns, offspring2);
+            localSearch (W, penalty, root, Ns, &individual2);
+            offspring2 = encode (W, penalty, individual2);
             result.insert(offspring2);
         }
     }
@@ -453,14 +453,14 @@ bool termination (chrono :: steady_clock :: time_point tBegin, double timeLimit)
     return false;
 }
 
-tGenotype geneticAlgorithm (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, chrono :: steady_clock :: time_point tBegin, double timeLimit, ulint populationSize, double mutationRate) {
+tGenotype geneticAlgorithm (matrix W, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, chrono :: steady_clock :: time_point tBegin, double timeLimit, ulint populationSize, double mutationRate) {
     tGenotype result;
     bool flag = true;
     set < tGenotype > oldPopulation;
-    set < tGenotype > newPopulation = initialPopulation (W, adj, Dist, PI, penalty, root, Ns, populationSize);
+    set < tGenotype > newPopulation = initialPopulation (W, PI, penalty, root, Ns, populationSize);
     while (termination (tBegin, timeLimit) != true) {
         oldPopulation = set < tGenotype > (newPopulation.begin(), newPopulation.end());
-        newPopulation = populationSubstitution(W, adj, Dist, PI, penalty, root, Ns, populationSize, mutationRate, oldPopulation);
+        newPopulation = populationSubstitution(W, PI, penalty, root, Ns, populationSize, mutationRate, oldPopulation);
     }
     for (set < tGenotype > :: iterator it = newPopulation.begin(); it != newPopulation.end(); it++) {
         tGenotype individual = *it;
@@ -503,7 +503,6 @@ int main (int argc, char * argv[]) {
     vector <ulint> penalty (n); // vector with de penalties of each vectex
     matrix WComplete (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
     matrix W (n, vector <lint> (n, -1)); // adjacency matrix for the graph
-    vector < list < pair <ulint, ulint> > > adj (n); // adjacency lists for the graph
     matrix Dist, PI; // matrices for the distance and precedence on the graph
 
     for (ulint v = 0; v < n; v++) {
@@ -530,15 +529,13 @@ int main (int argc, char * argv[]) {
         cin >> u >> v >> w;
         W[u][v] = w;
         W[v][u] = w;
-        adj[u].push_back(make_pair(v, w));
-        adj[v].push_back(make_pair(u, w));
     }
 
     vector < set <ulint> > Ns = neighbourhoods (WComplete, k);
 
     floydWarshall (W, &Dist, &PI);
 
-    tGenotype solution = geneticAlgorithm(W, adj, Dist, PI, penalty, root, Ns, tBegin, timeLimit, populationSize, mutationRate);
+    tGenotype solution = geneticAlgorithm(W, PI, penalty, root, Ns, tBegin, timeLimit, populationSize, mutationRate);
 
     cout << solution.first.size() << ' ' << solution.first.size() << ' ' << solution.second << endl;
 
