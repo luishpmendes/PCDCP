@@ -293,7 +293,7 @@ bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector 
                 if (i < (*solution).first.size() - 1) {
                     nextU = (*solution).first[i + 1];
                 }
-                for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
+                for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end() && flag == 1; it++) {
                     ulint v = *it;
                     vector <ulint> setDiff;
                     set_difference(Ns[u].begin(), Ns[u].end(), Ns[v].begin(), Ns[v].end(), inserter(setDiff, setDiff.begin()));
