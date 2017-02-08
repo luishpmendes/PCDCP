@@ -63,7 +63,7 @@ void floydWarshall (matrix W, matrix * D, matrix * PI) {
     }
 }
 
-void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
+void greedyRandomizedConstruction (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
     list <ulint> lSolution;
     (*solutionCost) = 0;
     for (ulint u = 0; u < W.size(); u++) {
@@ -204,7 +204,7 @@ void greedyRandomizedConstruction (matrix W, vector < list < pair <ulint, ulint>
 // maneira mais generica: contador de quantos vértices da rota dominam cada vértice do grafo
 // vejo os vertices v dominados por um vértice u da rota, se o contador[v] >= 2, posso eliminar u
 // exclusao
-bool mergeDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
+bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
     bool result = false;
     vector <ulint> occurrencesCount (W.size(), 0);
     vector <ulint> dominatorsCount (W.size(), 0);
@@ -267,7 +267,7 @@ bool mergeDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > ad
 }
 
 // troca
-bool swapDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
+bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
     bool result = false;
     vector <ulint> occurrencesCount (W.size(), 0);
     for (ulint i = 0; i < (*solution).size(); i++) {
@@ -322,7 +322,7 @@ bool swapDominantVertices (matrix W, vector < list < pair <ulint, ulint> > > adj
     return result;
 }
 
-bool twoOpt (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> * solution, ulint * solutionCost) {
+bool twoOpt (matrix W, vector <ulint> * solution, ulint * solutionCost) {
     bool result = false;
     ulint flag = 0;
     while (flag == 0) {
@@ -357,29 +357,29 @@ bool twoOpt (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulin
     return result;
 }
 
-void localSearch (matrix W, vector < list < pair <ulint, ulint> > > adj, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
+void localSearch (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
     ulint flag = 0;
     while (flag == 0) {
         flag = 1;
-        if (mergeDominantVertices (W, adj, penalty, root, Ns, solution, solutionCost)) {
+        if (mergeDominantVertices (W, penalty, root, Ns, solution, solutionCost)) {
             flag = 0;
         }
-        if (swapDominantVertices (W, adj, penalty, root, Ns, solution, solutionCost)) {
+        if (swapDominantVertices (W, penalty, root, Ns, solution, solutionCost)) {
             flag = 0;
         }
-        if (twoOpt (W, adj, solution, solutionCost)) {
+        if (twoOpt (W, solution, solutionCost)) {
             flag = 0;
         }
     }
 }
 
-void grasp (matrix W, vector < list < pair <ulint, ulint> > > adj, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
+void grasp (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
     for (ulint k = 0; k < maxIterations; k++) {
         vector <ulint> currentSolution;
         ulint currentSolutionCost = 0;
 
-        greedyRandomizedConstruction(W, adj, Dist, PI, penalty, root, Ns, alpha, seed, &currentSolution, &currentSolutionCost);
-        localSearch(W, adj, penalty, root, Ns, &currentSolution, &currentSolutionCost);
+        greedyRandomizedConstruction(W, Dist, PI, penalty, root, Ns, alpha, seed, &currentSolution, &currentSolutionCost);
+        localSearch(W, penalty, root, Ns, &currentSolution, &currentSolutionCost);
 
         if (k == 0 || (*solutionCost) > currentSolutionCost) {
             (*solution) = vector <ulint> (currentSolution.begin(), currentSolution.end());
@@ -420,7 +420,6 @@ int main (int argc, char * argv[]) {
     vector <ulint> penalty (n); // vector with de penalties of each vectex
     matrix WComplete (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
     matrix W (n, vector <lint> (n, -1)); // adjacency matrix for the graph
-    vector < list < pair <ulint, ulint> > > adj (n); // adjacency lists for the graph
     matrix Dist, PI; // matrices for the distance and precedence on the graph
 
     for (ulint v = 0; v < n; v++) {
@@ -447,8 +446,6 @@ int main (int argc, char * argv[]) {
         cin >> u >> v >> w;
         W[u][v] = w;
         W[v][u] = w;
-        adj[u].push_back(make_pair(v, w));
-        adj[v].push_back(make_pair(u, w));
     }
 
     vector < set <ulint> > Ns = neighbourhoods (WComplete, k);
@@ -460,7 +457,7 @@ int main (int argc, char * argv[]) {
     vector <ulint> solution;
     ulint solutionCost = 0;
 
-    grasp(W, adj, Dist, PI, penalty, root, Ns, maxIterations, alpha, seed, &solution, &solutionCost);
+    grasp(W, Dist, PI, penalty, root, Ns, maxIterations, alpha, seed, &solution, &solutionCost);
 
     cout << solution.size() << ' ' << solution.size() << ' ' << solutionCost << endl;
 
