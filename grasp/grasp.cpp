@@ -376,15 +376,14 @@ void localSearch (matrix W, vector <ulint> penalty, ulint root, vector < set <ul
     }
 }
 
-tSolution grasp (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
+tSolution grasp (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed) {
     tSolution result;
     for (ulint k = 0; k < maxIterations; k++) {
-        tSolution solution = greedyRandomizedConstruction(W, Dist, PI, penalty, root, Ns, alpha, seed);
-        localSearch(W, penalty, root, Ns, &solution);
+        tSolution newSolution = greedyRandomizedConstruction(W, Dist, PI, penalty, root, Ns, alpha, seed);
+        localSearch(W, penalty, root, Ns, &newSolution);
 
-        if (k == 0 || result.second > solution.second) {
-            result.first = vector <ulint> (solution.first.begin(), solution.first.end());
-            result.second = solution.second;
+        if (k == 0 || result.second > newSolution.second) {
+            result = newSolution;
         }
     }
     return result;
@@ -456,23 +455,20 @@ int main (int argc, char * argv[]) {
 
     ulint seed = chrono::system_clock::now().time_since_epoch().count();
 
-    vector <ulint> solution;
-    ulint solutionCost = 0;
+    tSolution solution = grasp(W, Dist, PI, penalty, root, Ns, maxIterations, alpha, seed);
 
-    grasp(W, Dist, PI, penalty, root, Ns, maxIterations, alpha, seed, &solution, &solutionCost);
+    cout << solution.first.size() << ' ' << solution.first.size() << ' ' << solution.second << endl;
 
-    cout << solution.size() << ' ' << solution.size() << ' ' << solutionCost << endl;
-
-    for (vector <ulint> :: iterator it = solution.begin(); it != solution.end(); it++) {
+    for (vector <ulint> :: iterator it = solution.first.begin(); it != solution.first.end(); it++) {
         ulint v = *it;
         cout << v << endl;
     }
 
-    for (ulint i = 0; i < solution.size() - 1; i++) {
-        pair <ulint, ulint> e = minmax(solution[i], solution[i + 1]);
+    for (ulint i = 0; i < solution.first.size() - 1; i++) {
+        pair <ulint, ulint> e = minmax(solution.first[i], solution.first[i + 1]);
         cout << e.first << ' ' << e.second << endl;
     }
-    pair <ulint, ulint> e = minmax(solution[solution.size() - 1], solution[0]);
+    pair <ulint, ulint> e = minmax(solution.first[solution.first.size() - 1], solution.first[0]);
     cout << e.first << ' ' << e.second << endl;
 
     string N = itos(n);
@@ -492,7 +488,7 @@ int main (int argc, char * argv[]) {
     A.erase(remove(A.begin(), A.end(), '.'), A.end());
 
     ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/objVal.txt", ofstream :: out);
-    objValFile << solutionCost;
+    objValFile << solution.second;
     objValFile.close();
 
     chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
