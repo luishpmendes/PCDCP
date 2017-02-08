@@ -191,7 +191,7 @@ tSolution greedyRandomizedConstruction (matrix W, matrix Dist, matrix PI, vector
             uniform_int_distribution <ulint> distribution (0, restrictedCantidateList.size() - 1);
             ulint s = distribution(generator);
             lSolution.insert(restrictedCantidateList[s].second.second, restrictedCantidateList[s].first.begin(), restrictedCantidateList[s].first.end());
-            (*solutionCost) += restrictedCantidateList[s].second.first;
+            result.second += restrictedCantidateList[s].second.first;
             for (list <ulint> :: iterator it = restrictedCantidateList[s].first.begin(); it != restrictedCantidateList[s].first.end(); it++) {
                 isInSolution[*it] = 1;
                 for (set <ulint> :: iterator it2 = Ns[*it].begin(); it2 != Ns[*it].end(); it2++) {
@@ -242,7 +242,7 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
                     }
                     nextU = (*solution).first[0];
                     if (i < (*solution).first.size() - 1) {
-                        nextU = (*solution)[i + 1];
+                        nextU = (*solution).first[i + 1];
                     }
                     // if there is an edge linking prevU with nextU
                     if (W[prevU][nextU] > 0) {
@@ -254,7 +254,7 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
                             result = true;
                             flag = 0;
                             (*solution).first.erase((*solution).first.begin() + i);
-                            (*solution).first.second += deltaCost;
+                            (*solution).second += deltaCost;
                             occurrencesCount[u]--;
                             for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
                                 ulint v = *it;
@@ -379,17 +379,15 @@ void localSearch (matrix W, vector <ulint> penalty, ulint root, vector < set <ul
 tSolution grasp (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
     tSolution result;
     for (ulint k = 0; k < maxIterations; k++) {
-        vector <ulint> currentSolution;
-        ulint currentSolutionCost = 0;
-
         tSolution solution = greedyRandomizedConstruction(W, Dist, PI, penalty, root, Ns, alpha, seed);
         localSearch(W, penalty, root, Ns, &solution);
 
-        if (k == 0 || (*solutionCost) > solution.second) {
+        if (k == 0 || result.second > solution.second) {
             result.first = vector <ulint> (solution.first.begin(), solution.first.end());
-            result.second = currentSolutionCost;
+            result.second = solution.second;
         }
     }
+    return result;
 }
 
 int main (int argc, char * argv[]) {
