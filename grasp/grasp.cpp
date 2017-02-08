@@ -19,6 +19,7 @@ using namespace std;
 typedef long int lint;
 typedef unsigned long int ulint;
 typedef vector < vector <lint> > matrix;
+typedef pair < vector <ulint>, lint > tSolution;
 
 string itos (ulint i) {
     stringstream s;
@@ -63,18 +64,19 @@ void floydWarshall (matrix W, matrix * D, matrix * PI) {
     }
 }
 
-void greedyRandomizedConstruction (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
+tSolution greedyRandomizedConstruction (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, double alpha, ulint seed) {
+    tSolution result;
     list <ulint> lSolution;
-    (*solutionCost) = 0;
+    result.second = 0;
     for (ulint u = 0; u < W.size(); u++) {
-        (*solutionCost) += penalty[u];
+        result.second += penalty[u];
     }
 
     vector <ulint> isInSolution(W.size(), 0);
     vector <ulint> isDominated(W.size(), 0);
 
     lSolution.insert(lSolution.begin(), root);
-    (*solutionCost) -= penalty[root];
+    result.second -= penalty[root];
 
     isInSolution[root] = 1;
     for (set <ulint> :: iterator it = Ns[root].begin(); it != Ns[root].end(); it++) {
@@ -198,18 +200,19 @@ void greedyRandomizedConstruction (matrix W, matrix Dist, matrix PI, vector <uli
             }
         }
     }
-    (*solution) = vector <ulint> (lSolution.begin(), lSolution.end());
+    result.first = vector <ulint> (lSolution.begin(), lSolution.end());
+    return result;
 }
 
 // maneira mais generica: contador de quantos vértices da rota dominam cada vértice do grafo
 // vejo os vertices v dominados por um vértice u da rota, se o contador[v] >= 2, posso eliminar u
 // exclusao
-bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
+bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tSolution * solution) {
     bool result = false;
     vector <ulint> occurrencesCount (W.size(), 0);
     vector <ulint> dominatorsCount (W.size(), 0);
-    for (ulint i = 0; i < (*solution).size(); i++) {
-        ulint u = (*solution)[i];
+    for (ulint i = 0; i < (*solution).first.size(); i++) {
+        ulint u = (*solution).first[i];
         occurrencesCount[u]++;
         for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
             ulint v = *it;
@@ -219,8 +222,8 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
     ulint flag = 0;
     while (flag == 0) {
         flag = 1;
-        for (ulint i = 0; i < (*solution).size(); i++) {
-            ulint u = (*solution)[i];
+        for (ulint i = 0; i < (*solution).first.size(); i++) {
+            ulint u = (*solution).first[i];
             // check to avoid removing the only occurrence of the root vertice 
             if (u != root || occurrencesCount[root] > 1) {
                 ulint flag2 = 0;
@@ -233,12 +236,12 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
                 // all vertices dominated by u are dominated by at least one other vertex in solution
                 if (flag2 == 0) {
                     ulint prevU, nextU;
-                    prevU = (*solution)[(*solution).size() - 1];
+                    prevU = (*solution).first[(*solution).first.size() - 1];
                     if (i > 0) {
-                        prevU = (*solution)[i - 1];
+                        prevU = (*solution).first[i - 1];
                     }
-                    nextU = (*solution)[0];
-                    if (i < (*solution).size() - 1) {
+                    nextU = (*solution).first[0];
+                    if (i < (*solution).first.size() - 1) {
                         nextU = (*solution)[i + 1];
                     }
                     // if there is an edge linking prevU with nextU
@@ -250,8 +253,8 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
                         if (deltaCost < 0) {
                             result = true;
                             flag = 0;
-                            (*solution).erase((*solution).begin() + i);
-                            (*solutionCost) += deltaCost;
+                            (*solution).first.erase((*solution).first.begin() + i);
+                            (*solution).first.second += deltaCost;
                             occurrencesCount[u]--;
                             for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
                                 ulint v = *it;
@@ -267,28 +270,28 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
 }
 
 // troca
-bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
+bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tSolution * solution) {
     bool result = false;
     vector <ulint> occurrencesCount (W.size(), 0);
-    for (ulint i = 0; i < (*solution).size(); i++) {
-        ulint u = (*solution)[i];
+    for (ulint i = 0; i < (*solution).first.size(); i++) {
+        ulint u = (*solution).first[i];
         occurrencesCount[u]++;
     }
     ulint flag = 0;
     while (flag == 0) {
         flag = 1;
-        for (ulint i = 0; i < (*solution).size() && flag == 1; i++) {
+        for (ulint i = 0; i < (*solution).first.size() && flag == 1; i++) {
             ulint u, prevU, nextU;
-            u = (*solution)[i];
+            u = (*solution).first[i];
             // check to avoid removing the only occurrence of the root vertice 
             if (u != root || occurrencesCount[root] > 1) {
-                prevU = (*solution)[(*solution).size() - 1];
+                prevU = (*solution).first[(*solution).first.size() - 1];
                 if (i > 0) {
-                    prevU = (*solution)[i - 1];
+                    prevU = (*solution).first[i - 1];
                 }
-                nextU = (*solution)[0];
-                if (i < (*solution).size() - 1) {
-                    nextU = (*solution)[i + 1];
+                nextU = (*solution).first[0];
+                if (i < (*solution).first.size() - 1) {
+                    nextU = (*solution).first[i + 1];
                 }
                 for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
                     ulint v = *it;
@@ -308,8 +311,8 @@ bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector 
                             if (deltaCost < 0) {
                                 result = true;
                                 flag = 0;
-                                (*solution)[i] = v;
-                                (*solutionCost) += deltaCost;
+                                (*solution).first[i] = v;
+                                (*solution).second += deltaCost;
                                 occurrencesCount[u]--;
                                 occurrencesCount[v]++;
                             }
@@ -322,33 +325,33 @@ bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector 
     return result;
 }
 
-bool twoOpt (matrix W, vector <ulint> * solution, ulint * solutionCost) {
+bool twoOpt (matrix W, tSolution * solution) {
     bool result = false;
     ulint flag = 0;
     while (flag == 0) {
         flag = 1;
-        for (ulint i = 0; i < (*solution).size() - 1 && flag == 1; i++) {
+        for (ulint i = 0; i < (*solution).first.size() - 1 && flag == 1; i++) {
             ulint u, v;
             if (i > 0) {
-                u = (*solution)[i - 1];
+                u = (*solution).first[i - 1];
             } else {
-                u = (*solution)[(*solution).size() - 1];
+                u = (*solution).first[(*solution).first.size() - 1];
             }
-            v = (*solution)[i];
-            for (ulint j = i + 1; j < (*solution).size() && flag == 1; j++) {
+            v = (*solution).first[i];
+            for (ulint j = i + 1; j < (*solution).first.size() && flag == 1; j++) {
                 ulint x, y;
-                x = (*solution)[j];
-                if (j < (*solution).size() - 1) {
-                    y = (*solution)[j + 1];
+                x = (*solution).first[j];
+                if (j < (*solution).first.size() - 1) {
+                    y = (*solution).first[j + 1];
                 } else {
-                    y = (*solution)[0];
+                    y = (*solution).first[0];
                 }
                 if (W[u][x] > 0 && W[v][y] > 0) {
                     if (W[u][v] + W[x][y] > W[u][x] + W[v][y]) {
                         result = true;
                         flag = 0;
-                        reverse((*solution).begin() + i, (*solution).begin() + j + 1);
-                        (*solutionCost) += W[u][x] + W[v][y] - W[u][v] - W[x][y];
+                        reverse((*solution).first.begin() + i, (*solution).first.begin() + j + 1);
+                        (*solution).second += W[u][x] + W[v][y] - W[u][v] - W[x][y];
                     }
                 }
             }
@@ -357,33 +360,34 @@ bool twoOpt (matrix W, vector <ulint> * solution, ulint * solutionCost) {
     return result;
 }
 
-void localSearch (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, vector <ulint> * solution, ulint * solutionCost) {
+void localSearch (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tSolution * solution) {
     ulint flag = 0;
     while (flag == 0) {
         flag = 1;
-        if (mergeDominantVertices (W, penalty, root, Ns, solution, solutionCost)) {
+        if (mergeDominantVertices (W, penalty, root, Ns, solution)) {
             flag = 0;
         }
-        if (swapDominantVertices (W, penalty, root, Ns, solution, solutionCost)) {
+        if (swapDominantVertices (W, penalty, root, Ns, solution)) {
             flag = 0;
         }
-        if (twoOpt (W, solution, solutionCost)) {
+        if (twoOpt (W, solution)) {
             flag = 0;
         }
     }
 }
 
-void grasp (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
+tSolution grasp (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed, vector <ulint> * solution, ulint * solutionCost) {
+    tSolution result;
     for (ulint k = 0; k < maxIterations; k++) {
         vector <ulint> currentSolution;
         ulint currentSolutionCost = 0;
 
-        greedyRandomizedConstruction(W, Dist, PI, penalty, root, Ns, alpha, seed, &currentSolution, &currentSolutionCost);
-        localSearch(W, penalty, root, Ns, &currentSolution, &currentSolutionCost);
+        tSolution solution = greedyRandomizedConstruction(W, Dist, PI, penalty, root, Ns, alpha, seed);
+        localSearch(W, penalty, root, Ns, &solution);
 
-        if (k == 0 || (*solutionCost) > currentSolutionCost) {
-            (*solution) = vector <ulint> (currentSolution.begin(), currentSolution.end());
-            (*solutionCost) = currentSolutionCost;
+        if (k == 0 || (*solutionCost) > solution.second) {
+            result.first = vector <ulint> (solution.first.begin(), solution.first.end());
+            result.second = currentSolutionCost;
         }
     }
 }
