@@ -2,7 +2,7 @@
 rm -rf output;
 mkdir -p output;
 make geneticAlgorithm;
-timeLimit=100;
+timeLimit=10;
 for n in 10 20 50 100
 do
     for d in 0.3 0.5 0.7

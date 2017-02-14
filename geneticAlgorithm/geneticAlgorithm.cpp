@@ -63,30 +63,29 @@ void floydWarshall (matrix W, matrix * D, matrix * PI) {
 lint fitnessFunction (matrix W, vector <ulint> penalty, vector <ulint> solution) {
     lint result = 0;
     result = 0;
-    for (ulint u = 0; u < W.size(); u++) {
-        result += penalty[u];
-    }
     vector <int> isInSolution (W.size(), 0);
     for (ulint i = 0; i < solution.size() - 1; i++) {
         isInSolution[solution[i]] = 1;
         result += W[solution[i]][solution[i + 1]];
     }
-    for (ulint u = 0; u < W.size(); u++) {
-        result -= isInSolution[u] * penalty[u];
+    isInSolution[solution[solution.size() - 1]] = 1;
+    result += W[solution[solution.size() - 1]][solution[0]];
+    for (ulint u = 0; u < isInSolution.size() && u < penalty.size(); u++) {
+        result += (1 - isInSolution[u]) * penalty[u];
     }
     return result;
 }
 
 vector <ulint> circularList2Permutation (ulint n, vector <ulint> solution) {
-    vector <ulint> result (n);
+    vector <ulint> result (n, 0);
     vector <int> isInSolution (n, 0);
     ulint i = 0;
-    for (ulint j = 0; j < solution.size(); j++) {
+    for (ulint j = 0; j < solution.size() && i < n; j++) {
         ulint u = solution[j];
         result[i++] = u;
         isInSolution[u] = 1;
     }
-    for (ulint u = 0; u < n; u++) {
+    for (ulint u = 0; u < n && i < n; u++) {
         if (isInSolution[u] == 0) {
             result[i++] = u;
         }
@@ -127,10 +126,9 @@ vector <ulint> permutation2circularList (ulint n, matrix PI, vector < set <ulint
 
 // from permutation to circular list
 tPhenotype decode (matrix W, matrix PI, vector <ulint> penalty, vector < set <ulint> > Ns, tGenotype solution) {
-    tPhenotype result;
-    result.first = permutation2circularList (W.size(), PI, Ns, solution.first);
-    result.second = fitnessFunction (W, penalty, solution.first);
-    return result;
+    vector <ulint> circularList = permutation2circularList (W.size(), PI, Ns, solution.first);
+    lint solutionCost = fitnessFunction (W, penalty, circularList);
+    return make_pair(circularList, solutionCost);
 }
 
 bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype * solution) {
@@ -218,7 +216,7 @@ bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector 
                 if (i < (*solution).first.size() - 1) {
                     nextU = (*solution).first[i + 1];
                 }
-                for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
+                for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end() && flag == 1; it++) {
                     ulint v = *it;
                     vector <ulint> setDiff;
                     set_difference(Ns[u].begin(), Ns[u].end(), Ns[v].begin(), Ns[v].end(), inserter(setDiff, setDiff.begin()));
@@ -303,7 +301,7 @@ void localSearch (matrix W, vector <ulint> penalty, ulint root, vector < set <ul
 
 set < tGenotype > initialPopulation (matrix W, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint populationSize) {
     set < tGenotype > result;
-    vector <ulint> sequence (W.size());
+    vector <ulint> sequence (W.size(), 0);
     for (ulint i = 0; i < sequence.size(); i++) {
         sequence[i] = i;
     }
@@ -323,14 +321,12 @@ set < tGenotype > initialPopulation (matrix W, matrix PI, vector <ulint> penalty
             }
         }
         vector <ulint> circularList = permutation2circularList (W.size(), PI, Ns, permutation);
-        tGenotype chromossome;
-        chromossome.first = vector <ulint> (permutation.begin(), permutation.end());
-        chromossome.second = fitnessFunction (W, penalty, circularList);
+        lint solutionCost = fitnessFunction (W, penalty, circularList);
+        tGenotype chromossome = make_pair(permutation, solutionCost);
         tPhenotype individual = decode (W, PI, penalty, Ns, chromossome);
         localSearch (W, penalty, root, Ns, &individual);
-        chromossome = encode (W, penalty, individual);
-        result.insert(chromossome);
-
+        tGenotype chromossome2 = encode (W, penalty, individual);
+        result.insert(chromossome2);
     }
     return result;
 }
@@ -354,7 +350,7 @@ void crossOver (matrix W, matrix PI, vector <ulint> penalty, vector < set <ulint
         isInOffspring2[parent2.first[i]] = 2;
     }
     // fill chromosome with genes from the other parent
-    for (ulint i = 0; i <= W.size(); i++) {
+    for (ulint i = 0; i <= parent1.first.size() && i < parent2.first.size(); i++) {
         if (isInOffspring1[parent2.first[i]] == 0) {
             (*offspring1).first.push_back(parent2.first[i]);
             isInOffspring1[parent2.first[i]] = 1;
