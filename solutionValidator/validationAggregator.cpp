@@ -40,6 +40,8 @@ int main (int argc, char * argv[]) {
 
     if (path.compare("grasp") == 0) {
         cout << "n,d,k,t,p,i,a,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
+    } else if (path.compare("geneticAlgorithm") == 0) {
+        cout << "n,d,k,t,p,i,ps,mr,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
     } else {
         cout << "n,d,k,t,p,i,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
     }
@@ -84,7 +86,7 @@ int main (int argc, char * argv[]) {
                                 for (vector <double> :: iterator itA = vA.begin(); itA != vA.end(); itA++) {
                                     double a = *itA;
                                     stringstream ssA;
-                                    ssA << fixed << setprecision(1) << d;
+                                    ssA << fixed << setprecision(1) << a;
                                     string A = ssA.str();
                                     A.erase(remove(A.begin(), A.end(), '.'), A.end());
 
@@ -147,6 +149,89 @@ int main (int argc, char * argv[]) {
                                     }
 
                                     cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << a << ',' << nFlag << ',' << kFlag << ',' << nSolutionFlag << ',' << mSolutionFlag << ',' << solutionVerticesFlag << ',' << solutionEdgesFlag << ',' << solutionCostFlag << ',' << coverFlag << ',' << solutionVerticesNotInMainCycleFlag << ',' << nonSolutionVerticesInMainCycleFlag << ',' << errorFlag << endl;
+                                }
+                            } else if (path.compare("geneticAlgorithm") == 0) {
+                                vector <int> vPS;
+                                vPS.push_back(10);
+                                vPS.push_back(50);
+                                vPS.push_back(100);
+                                for (vector <int> :: iterator itPS = vPS.begin(); itPS != vPS.end(); itPS++) {
+                                    int ps = *itPS;
+                                    stringstream ssPS;
+                                    ssPS << ps;
+                                    string PS = ssPS.str();
+
+                                    vector <double> vMR;
+                                    vMR.push_back(0.3);
+                                    vMR.push_back(0.5);
+                                    vMR.push_back(0.7);
+                                    for (vector <double> :: iterator itMR = vMR.begin(); itMR != vMR.end(); itMR++) {
+                                        double mr = *itMR;
+                                        stringstream ssMR;
+                                        ssMR << fixed << setprecision(1) << mr;
+                                        string MR = ssMR.str();
+                                        MR.erase(remove(MR.begin(), MR.end(), '.'), MR.end());
+
+                                        int nFlag, kFlag, nSolutionFlag, mSolutionFlag, solutionVerticesFlag, solutionEdgesFlag, solutionCostFlag, coverFlag, solutionVerticesNotInMainCycleFlag, nonSolutionVerticesInMainCycleFlag, errorFlag;
+                                        nFlag = kFlag = nSolutionFlag = mSolutionFlag = solutionVerticesFlag = solutionEdgesFlag = solutionCostFlag = coverFlag = solutionVerticesNotInMainCycleFlag = nonSolutionVerticesInMainCycleFlag = errorFlag = 1;
+                                    
+                                        ifstream nFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/nFlag.txt");
+                                        if (nFlagFile.is_open()) {
+                                            nFlagFile >> nFlag;
+                                        }
+
+                                        ifstream kFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/kFlag.txt");
+                                        if (kFlagFile.is_open()) {
+                                            kFlagFile >> kFlag;
+                                        }
+
+                                        ifstream nSolutionFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/nSolutionFlag.txt");
+                                        if (nSolutionFlagFile.is_open()) {
+                                            nSolutionFlagFile >> nSolutionFlag;
+                                        }
+
+                                        ifstream mSolutionFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/mSolutionFlag.txt");
+                                        if (mSolutionFlagFile.is_open()) {
+                                            mSolutionFlagFile >> mSolutionFlag;
+                                        }
+
+                                        ifstream solutionVerticesFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/solutionVerticesFlag.txt");
+                                        if (solutionVerticesFlagFile.is_open()) {
+                                            solutionVerticesFlagFile >> solutionVerticesFlag;
+                                        }
+
+                                        ifstream solutionEdgesFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/solutionEdgesFlag.txt");
+                                        if (solutionEdgesFlagFile.is_open()) {
+                                            solutionEdgesFlagFile >> solutionEdgesFlag;
+                                        }
+
+                                        ifstream solutionCostFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/solutionCostFlag.txt");
+                                        if (solutionCostFlagFile.is_open()) {
+                                            solutionCostFlagFile >> solutionCostFlag;
+                                        }
+
+                                        ifstream coverFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/coverFlag.txt");
+                                        if (coverFlagFile.is_open()) {
+                                            coverFlagFile >> coverFlag;
+                                        }
+
+                                        ifstream solutionVerticesNotInMainCycleFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/solutionVerticesNotInMainCycleFlag.txt");
+                                        if (solutionVerticesNotInMainCycleFlagFile.is_open()) {
+                                            solutionVerticesNotInMainCycleFlagFile >> solutionVerticesNotInMainCycleFlag;
+                                        }
+
+                                        ifstream nonSolutionVerticesInMainCycleFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/nonSolutionVerticesInMainCycleFlag.txt");
+                                        if (nonSolutionVerticesInMainCycleFlagFile.is_open()) {
+                                            nonSolutionVerticesInMainCycleFlagFile >> nonSolutionVerticesInMainCycleFlag;
+                                        }
+
+                                        ifstream errorFlagFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/errorFlag.txt");
+                                        if (errorFlagFile.is_open()) {
+                                            errorFlagFile >> errorFlag;
+                                        }
+
+                                        cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << ps << ',' << mr << ',' << nFlag << ',' << kFlag << ',' << nSolutionFlag << ',' << mSolutionFlag << ',' << solutionVerticesFlag << ',' << solutionEdgesFlag << ',' << solutionCostFlag << ',' << coverFlag << ',' << solutionVerticesNotInMainCycleFlag << ',' << nonSolutionVerticesInMainCycleFlag << ',' << errorFlag << endl;
+                                    }
                                 }
                             } else {
                                 int nFlag, kFlag, nSolutionFlag, mSolutionFlag, solutionVerticesFlag, solutionEdgesFlag, solutionCostFlag, coverFlag, solutionVerticesNotInMainCycleFlag, nonSolutionVerticesInMainCycleFlag, errorFlag;

@@ -35,7 +35,7 @@ vector < set <ulint> > neighbourhoods (matrix W, ulint k) {
 }
 
 int main (int argc, char * argv[]) {
-    string path, N, D, K, T, P, I, A;
+    string path, N, D, K, T, P, I, A, PS, MR;
 
     if (argc == 8) {
         path = string(argv[1]);
@@ -54,17 +54,29 @@ int main (int argc, char * argv[]) {
         P = string(argv[6]);
         I = string(argv[7]);
         A = string(argv[8]);
+    } else if (argc == 10) {
+        path = string(argv[1]);
+        N = string(argv[2]);
+        D = string(argv[3]);
+        K = string(argv[4]);
+        T = string(argv[5]);
+        P = string(argv[6]);
+        I = string(argv[7]);
+        PS = string(argv[8]);
+        MR = string(argv[8]);
     } else {
-        cin >> path >> N >> D >> K >> T >> P >> I >> A;
+        cin >> path >> N >> D >> K >> T >> P >> I >> A >> PS >> MR;
     }
 
     ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + ".in");
     ifstream resultFile;
 
-    if (path.compare("grasp") != 0) {
-        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/result.out");
-    } else {
+    if (path.compare("grasp") == 0) {
         resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/result.out");
+    } else if (path.compare("geneticAlgorithm") == 0) {
+        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/result.out");
+    } else {
+        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/result.out");
     }
 
     if (inputFile.is_open() && resultFile.is_open()) {
@@ -315,100 +327,122 @@ int main (int argc, char * argv[]) {
         }
 
         ofstream nFlagFile;
-        if (path.compare("grasp") != 0) {
-            nFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/nFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             nFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/nFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            nFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/nFlag.txt", ofstream::out);
+        } else {
+            nFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/nFlag.txt", ofstream::out);
         }
         nFlagFile << nFlag;
         nFlagFile.close();
 
         ofstream kFlagFile;
-        if (path.compare("grasp") != 0) {
-            kFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/kFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             kFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/kFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            kFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/kFlag.txt", ofstream::out);
+        } else {
+            kFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/kFlag.txt", ofstream::out);
         }
         kFlagFile << kFlag;
         kFlagFile.close();
 
         ofstream nSolutionFlagFile;
-        if (path.compare("grasp") != 0) {
-            nSolutionFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/nSolutionFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             nSolutionFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/nSolutionFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            nSolutionFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/nSolutionFlag.txt", ofstream::out);
+        } else {
+            nSolutionFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/nSolutionFlag.txt", ofstream::out);
         }
         nSolutionFlagFile << nSolutionFlag;
         nSolutionFlagFile.close();
 
         ofstream mSolutionFlagFile;
-        if (path.compare("grasp") != 0) {
-            mSolutionFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/mSolutionFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             mSolutionFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/mSolutionFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            mSolutionFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/mSolutionFlag.txt", ofstream::out);
+        } else {
+            mSolutionFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/mSolutionFlag.txt", ofstream::out);
         }
         mSolutionFlagFile << mSolutionFlag;
         mSolutionFlagFile.close();
 
         ofstream solutionVerticesFlagFile;
-        if (path.compare("grasp") != 0) {
-            solutionVerticesFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionVerticesFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             solutionVerticesFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/solutionVerticesFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            solutionVerticesFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/solutionVerticesFlag.txt", ofstream::out);
+        } else {
+            solutionVerticesFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionVerticesFlag.txt", ofstream::out);
         }
         solutionVerticesFlagFile << solutionVerticesFlag;
         solutionVerticesFlagFile.close();
 
         ofstream solutionEdgesFlagFile;
-        if (path.compare("grasp") != 0) {
-            solutionEdgesFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionEdgesFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             solutionEdgesFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/solutionEdgesFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            solutionEdgesFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/solutionEdgesFlag.txt", ofstream::out);
+        } else {
+            solutionEdgesFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionEdgesFlag.txt", ofstream::out);
         }
         solutionEdgesFlagFile << solutionEdgesFlag;
         solutionEdgesFlagFile.close();
 
         ofstream solutionCostFlagFile;
-        if (path.compare("grasp") != 0) {
-            solutionCostFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionCostFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             solutionCostFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/solutionCostFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            solutionCostFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/solutionCostFlag.txt", ofstream::out);
+        } else {
+            solutionCostFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionCostFlag.txt", ofstream::out);
         }
         solutionCostFlagFile << solutionCostFlag;
         solutionCostFlagFile.close();
 
         ofstream coverFlagFile;
-        if (path.compare("grasp") != 0) {
-            coverFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/coverFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             coverFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/coverFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            coverFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/coverFlag.txt", ofstream::out);
+        } else {
+            coverFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/coverFlag.txt", ofstream::out);
         }
         coverFlagFile << coverFlag;
         coverFlagFile.close();
 
         ofstream solutionVerticesNotInMainCycleFlagFile;
-        if (path.compare("grasp") != 0) {
-            solutionVerticesNotInMainCycleFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionVerticesNotInMainCycleFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             solutionVerticesNotInMainCycleFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/solutionVerticesNotInMainCycleFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            solutionVerticesNotInMainCycleFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/solutionVerticesNotInMainCycleFlag.txt", ofstream::out);
+        } else {
+            solutionVerticesNotInMainCycleFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionVerticesNotInMainCycleFlag.txt", ofstream::out);
         }
         solutionVerticesNotInMainCycleFlagFile << solutionVerticesNotInMainCycleFlag;
         solutionVerticesNotInMainCycleFlagFile.close();
 
         ofstream nonSolutionVerticesInMainCycleFlagFile;
-        if (path.compare("grasp") != 0) {
-            nonSolutionVerticesInMainCycleFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/nonSolutionVerticesInMainCycleFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             nonSolutionVerticesInMainCycleFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/nonSolutionVerticesInMainCycleFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            nonSolutionVerticesInMainCycleFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/nonSolutionVerticesInMainCycleFlag.txt", ofstream::out);
+        } else {
+            nonSolutionVerticesInMainCycleFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/nonSolutionVerticesInMainCycleFlag.txt", ofstream::out);
         }
         nonSolutionVerticesInMainCycleFlagFile << nonSolutionVerticesInMainCycleFlag;
         nonSolutionVerticesInMainCycleFlagFile.close();
 
         ofstream errorFlagFile;
-        if (path.compare("grasp") != 0) {
-            errorFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/errorFlag.txt", ofstream::out);
-        } else {
+        if (path.compare("grasp") == 0) {
             errorFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/errorFlag.txt", ofstream::out);
+        } else if (path.compare("geneticAlgorithm") == 0) {
+            errorFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/errorFlag.txt", ofstream::out);
+        } else {
+            errorFlagFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/errorFlag.txt", ofstream::out);
         }
         errorFlagFile << errorFlag;
         errorFlagFile.close();
