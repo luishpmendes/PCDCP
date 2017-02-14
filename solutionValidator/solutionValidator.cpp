@@ -63,7 +63,7 @@ int main (int argc, char * argv[]) {
         P = string(argv[6]);
         I = string(argv[7]);
         PS = string(argv[8]);
-        MR = string(argv[8]);
+        MR = string(argv[9]);
     } else {
         cin >> path >> N >> D >> K >> T >> P >> I >> A >> PS >> MR;
     }

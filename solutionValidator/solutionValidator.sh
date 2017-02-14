@@ -60,13 +60,13 @@ do
                 do
                     for i in 0
                     do
-                        for populationSize in 10 50 100
+                        for ps in 10 50 100
                         do
-                            for mutationRate in 0.1 0.2 0.3
+                            for mr in 0.1 0.2 0.3
                             do
-                                echo "geneticAlgorithm - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$populationSize"MR"${mutationRate//.};
-                                rm -f "../geneticAlgorithm/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$populationSize"MR"${mutationRate//.}"/validation.txt";
-                                ./solutionValidator geneticAlgorithm $n ${d//.} $k $t ${p//.} $i $populationSize ${mutationRate//.} > "../geneticAlgorithm/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$populationSize"MR"${mutationRate//.}"/validation.txt";
+                                echo "geneticAlgorithm - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.};
+                                rm -f "../geneticAlgorithm/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.}"/validation.txt";
+                                ./solutionValidator geneticAlgorithm $n ${d//.} $k $t ${p//.} $i $ps ${mr//.} > "../geneticAlgorithm/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.}"/validation.txt";
                             done
                         done
                     done

@@ -15,13 +15,13 @@ do
                 do
                     for i in 0
                     do
-                        for populationSize in 10 50 100
+                        for ps in 10 50 100
                         do
-                            for mutationRate in 0.1 0.2 0.3
+                            for mr in 0.1 0.2 0.3
                             do
                                 echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
-                                mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$populationSize"MR"${mutationRate//.};
-                                ./geneticAlgorithm $i $timeLimit $populationSize $mutationRate < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$populationSize"MR"${mutationRate//.}"/result.out";
+                                mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.};
+                                ./geneticAlgorithm $i $timeLimit $ps $mr < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.}"/result.out";
                             done
                         done
                     done
