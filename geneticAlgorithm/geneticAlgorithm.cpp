@@ -121,6 +121,13 @@ vector <ulint> permutation2circularList (ulint n, matrix PI, vector < set <ulint
             u = PI[v][u];
         }
     }
+    ulint u, v;
+    u = aux[aux.size() - 1];
+    v = aux[0];
+    while (u != v) {
+        result.push_back(u);
+        u = PI[v][u];
+    }
     return result;
 }
 
