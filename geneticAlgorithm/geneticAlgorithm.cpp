@@ -531,20 +531,22 @@ int main (int argc, char * argv[]) {
 
     floydWarshall (W, &Dist, &PI);
 
-    tGenotype solution = geneticAlgorithm(W, PI, penalty, root, Ns, tBegin, timeLimit, populationSize, mutationRate);
+    tGenotype chromossome = geneticAlgorithm(W, PI, penalty, root, Ns, tBegin, timeLimit, populationSize, mutationRate);
 
-    cout << solution.first.size() << ' ' << solution.first.size() << ' ' << solution.second << endl;
+    tPhenotype individual = decode (W, PI, penalty, Ns, chromossome);
 
-    for (vector <ulint> :: iterator it = solution.first.begin(); it != solution.first.end(); it++) {
+    cout << individual.first.size() << ' ' << individual.first.size() << ' ' << individual.second << endl;
+
+    for (vector <ulint> :: iterator it = individual.first.begin(); it != individual.first.end(); it++) {
         ulint v = *it;
         cout << v << endl;
     }
 
-    for (ulint i = 0; i < solution.first.size() - 1; i++) {
-        pair <ulint, ulint> e = minmax(solution.first[i], solution.first[i + 1]);
+    for (ulint i = 0; i < individual.first.size() - 1; i++) {
+        pair <ulint, ulint> e = minmax(individual.first[i], individual.first[i + 1]);
         cout << e.first << ' ' << e.second << endl;
     }
-    pair <ulint, ulint> e = minmax(solution.first[solution.first.size() - 1], solution.first[0]);
+    pair <ulint, ulint> e = minmax(individual.first[individual.first.size() - 1], individual.first[0]);
     cout << e.first << ' ' << e.second << endl;
 
     string N = itos(n);
@@ -565,7 +567,7 @@ int main (int argc, char * argv[]) {
     MR.erase(remove(MR.begin(), MR.end(), '.'), MR.end());
 
     ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/objVal.txt", ofstream :: out);
-    objValFile << solution.second;
+    objValFile << individual.second;
     objValFile.close();
 
     chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
