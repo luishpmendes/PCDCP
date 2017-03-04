@@ -14,7 +14,7 @@ typedef long int lint;
 typedef unsigned long int ulint;
 typedef vector < vector <lint> > matrix;
 typedef pair < vector <ulint>, lint > tGenotype; // permutation
-typedef pair < vector <ulint>, lint > tPhenotype; // circular list
+typedef pair < vector < pair <ulint, bool> >, lint > tPhenotype; // circular list
 
 string itos (ulint i) {
     stringstream s;
@@ -60,22 +60,22 @@ void floydWarshall (matrix W, matrix * D, matrix * PI) {
 }
 
 // from circular list
-lint fitnessFunction (matrix W, vector <ulint> penalty, vector <ulint> solution) {
+lint fitnessFunction (matrix W, vector <ulint> penalty, vector < pair <ulint, bool> > solution) {
     lint result = 0;
     result = 0;
     vector <int> isInSolution (W.size(), 0);
     for (ulint i = 0; i < solution.size() - 1; i++) {
-        isInSolution[solution[i]] = 1;
-        result += W[solution[i]][solution[i + 1]];
+        isInSolution[solution[i].first] = 1;
+        result += W[solution[i].first][solution[i + 1].first];
     }
-    isInSolution[solution[solution.size() - 1]] = 1;
-    result += W[solution[solution.size() - 1]][solution[0]];
+    isInSolution[solution[solution.size() - 1].first] = 1;
+    result += W[solution[solution.size() - 1].first][solution[0].first];
     for (ulint u = 0; u < isInSolution.size() && u < penalty.size(); u++) {
         result += (1 - isInSolution[u]) * penalty[u];
     }
     return result;
 }
-
+/*
 vector <ulint> circularList2Permutation (ulint n, vector < set <ulint> > Ns, vector <ulint> solution) {
     vector <ulint> result (n, 0);
     vector <ulint> isDominated(n, 0);
@@ -98,17 +98,68 @@ vector <ulint> circularList2Permutation (ulint n, vector < set <ulint> > Ns, vec
     }
     return result;
 }
+*/
+
+/*
+vector <ulint> circularList2Permutation (ulint n, matrix PI, vector < set <ulint> > Ns, vector <ulint> solution) {
+    vector <ulint> result;
+
+    vector <ulint> aux;
+    
+    ulint i = 0;
+
+    while (i < solution.size()) {
+        ulint j = i;
+
+        while (j < solution.size() - 1 && PI[solution[i]][solution[j + 1]] == solution[j]) {
+            j++;
+        }
+
+        if (j < solution.size() - 1) {
+            aux.push_back(i);
+            i = j;
+        } else {
+            if (PI[solution[i]][solution[0]] != solution[j]) {
+                aux.push_back(j);
+            }
+            break;
+        }
+    }
+
+    return result;
+}
+*/
+
+vector <ulint> circularList2Permutation (ulint n, vector < pair <ulint, bool> > solution) {
+    vector <ulint> result;
+    vector <bool> isInResult (n, false);
+    for (ulint i = 0; i < solution.size(); i++) {
+        if (solution[i].second) {
+            if (!isInResult[solution[i].first]) { // if necessário??
+                result.push_back(solution[i].first);
+                isInResult[solution[i].first] = true;
+            }
+        }
+    }
+    for (ulint u = 0; u < n; u++) {
+        if (!isInResult[u]) {
+            result.push_back(u);
+            isInResult[u] = true;
+        }
+    }
+    return result;
+}
 
 // from circular list to permutation
-tGenotype encode (matrix W, vector <ulint> penalty, vector < set <ulint> > Ns, tPhenotype solution) {
+tGenotype encode (matrix W, vector <ulint> penalty, tPhenotype solution) {
     tGenotype result;
-    result.first = circularList2Permutation (W.size(), Ns, solution.first);
+    result.first = circularList2Permutation (W.size(), solution.first);
     result.second = fitnessFunction (W, penalty, solution.first);
     return result;
 }
 
-vector <ulint> permutation2circularList (ulint n, matrix PI, vector < set <ulint> > Ns, vector <ulint> solution) {
-    vector <ulint> result;
+vector < pair <ulint, bool> > permutation2circularList (ulint n, matrix PI, vector < set <ulint> > Ns, vector <ulint> solution) {
+    vector < pair <ulint, bool> > result;
     vector <ulint> aux;
     vector <ulint> isDominated(n, 0);
     for (ulint i = 0; i < solution.size() && (ulint) accumulate(isDominated.begin(), isDominated.end(), 0) < isDominated.size(); i++) {
@@ -123,7 +174,11 @@ vector <ulint> permutation2circularList (ulint n, matrix PI, vector < set <ulint
         u = aux[i];
         v = aux[i + 1];
         while (u != v) {
-            result.push_back(u);
+            if (u == aux[i]) {
+                result.push_back(make_pair(u, true));
+            } else {
+                result.push_back(make_pair(u, false));
+            }
             u = PI[v][u];
         }
     }
@@ -131,7 +186,11 @@ vector <ulint> permutation2circularList (ulint n, matrix PI, vector < set <ulint
     u = aux[aux.size() - 1];
     v = aux[0];
     while (u != v) {
-        result.push_back(u);
+        if (u == aux[aux.size() - 1]) {
+            result.push_back(make_pair(u, true));
+        } else {
+            result.push_back(make_pair(u, false));
+        }
         u = PI[v][u];
     }
     return result;
@@ -139,28 +198,32 @@ vector <ulint> permutation2circularList (ulint n, matrix PI, vector < set <ulint
 
 // from permutation to circular list
 tPhenotype decode (matrix W, matrix PI, vector <ulint> penalty, vector < set <ulint> > Ns, tGenotype solution) {
-    vector <ulint> circularList = permutation2circularList (W.size(), PI, Ns, solution.first);
+    vector < pair <ulint, bool> > circularList = permutation2circularList (W.size(), PI, Ns, solution.first);
     lint solutionCost = fitnessFunction (W, penalty, circularList);
     return make_pair(circularList, solutionCost);
 }
 
+// candidata a sair
 bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype * solution) {
     bool result = false;
     vector <ulint> occurrencesCount (W.size(), 0);
     vector <ulint> dominatorsCount (W.size(), 0);
     for (ulint i = 0; i < (*solution).first.size(); i++) {
-        ulint u = (*solution).first[i];
+        ulint u = (*solution).first[i].first;
         occurrencesCount[u]++;
-        for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
-            ulint v = *it;
-            dominatorsCount[v]++;
+        if ((*solution).first[i].second) {
+            // if u é representante
+            for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
+                ulint v = *it;
+                dominatorsCount[v]++;
+            }
         }
     }
     ulint flag = 0;
     while (flag == 0) {
         flag = 1;
         for (ulint i = 0; i < (*solution).first.size(); i++) {
-            ulint u = (*solution).first[i];
+            ulint u = (*solution).first[i].first;
             // check to avoid removing the only occurrence of the root vertice 
             if (u != root || occurrencesCount[root] > 1) {
                 ulint flag2 = 0;
@@ -173,13 +236,13 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
                 // all vertices dominated by u are dominated by at least one other vertex in solution
                 if (flag2 == 0) {
                     ulint prevU, nextU;
-                    prevU = (*solution).first[(*solution).first.size() - 1];
+                    prevU = (*solution).first[(*solution).first.size() - 1].first;
                     if (i > 0) {
-                        prevU = (*solution).first[i - 1];
+                        prevU = (*solution).first[i - 1].first;
                     }
-                    nextU = (*solution).first[0];
+                    nextU = (*solution).first[0].first;
                     if (i < (*solution).first.size() - 1) {
-                        nextU = (*solution).first[i + 1];
+                        nextU = (*solution).first[i + 1].first;
                     }
                     // if there is an edge linking prevU with nextU
                     if (W[prevU][nextU] > 0) {
@@ -206,11 +269,13 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
     return result;
 }
 
+// se u for representante, v (q vai substitui-lo) será tambem
+// eliminar esta busca
 bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype * solution) {
     bool result = false;
     vector <ulint> occurrencesCount (W.size(), 0);
     for (ulint i = 0; i < (*solution).first.size(); i++) {
-        ulint u = (*solution).first[i];
+        ulint u = (*solution).first[i].first;
         occurrencesCount[u]++;
     }
     ulint flag = 0;
@@ -218,16 +283,16 @@ bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector 
         flag = 1;
         for (ulint i = 0; i < (*solution).first.size() && flag == 1; i++) {
             ulint u, prevU, nextU;
-            u = (*solution).first[i];
+            u = (*solution).first[i].first;
             // check to avoid removing the only occurrence of the root vertice 
             if (u != root || occurrencesCount[root] > 1) {
-                prevU = (*solution).first[(*solution).first.size() - 1];
+                prevU = (*solution).first[(*solution).first.size() - 1].first;
                 if (i > 0) {
-                    prevU = (*solution).first[i - 1];
+                    prevU = (*solution).first[i - 1].first;
                 }
-                nextU = (*solution).first[0];
+                nextU = (*solution).first[0].first;
                 if (i < (*solution).first.size() - 1) {
-                    nextU = (*solution).first[i + 1];
+                    nextU = (*solution).first[i + 1].first;
                 }
                 for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end() && flag == 1; it++) {
                     ulint v = *it;
@@ -247,7 +312,7 @@ bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector 
                             if (deltaCost < 0) {
                                 result = true;
                                 flag = 0;
-                                (*solution).first[i] = v;
+                                (*solution).first[i].first = v;
                                 (*solution).second += deltaCost;
                                 occurrencesCount[u]--;
                                 occurrencesCount[v]++;
@@ -261,6 +326,8 @@ bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector 
     return result;
 }
 
+// cada nó da lista circular tem uma flag dizendo se ele é representante
+// 2opt n muda os representantes
 bool twoOpt (matrix W, tPhenotype * solution) {
     bool result = false;
     ulint flag = 0;
@@ -269,18 +336,18 @@ bool twoOpt (matrix W, tPhenotype * solution) {
         for (ulint i = 0; i < (*solution).first.size() - 1 && flag == 1; i++) {
             ulint u, v;
             if (i > 0) {
-                u = (*solution).first[i - 1];
+                u = (*solution).first[i - 1].first;
             } else {
-                u = (*solution).first[(*solution).first.size() - 1];
+                u = (*solution).first[(*solution).first.size() - 1].first;
             }
-            v = (*solution).first[i];
+            v = (*solution).first[i].first;
             for (ulint j = i + 1; j < (*solution).first.size() && flag == 1; j++) {
                 ulint x, y;
-                x = (*solution).first[j];
+                x = (*solution).first[j].first;
                 if (j < (*solution).first.size() - 1) {
-                    y = (*solution).first[j + 1];
+                    y = (*solution).first[j + 1].first;
                 } else {
-                    y = (*solution).first[0];
+                    y = (*solution).first[0].first;
                 }
                 if (W[u][x] > 0 && W[v][y] > 0) {
                     if (W[u][v] + W[x][y] > W[u][x] + W[v][y]) {
@@ -376,12 +443,12 @@ set < tGenotype > initialPopulation (matrix W, matrix PI, vector <ulint> penalty
                 permutation[0] = root;
             }
         }
-        vector <ulint> circularList = permutation2circularList (W.size(), PI, Ns, permutation);
+        vector < pair <ulint, bool> > circularList = permutation2circularList (W.size(), PI, Ns, permutation);
         lint solutionCost = fitnessFunction (W, penalty, circularList);
         tGenotype chromossome = make_pair(permutation, solutionCost);
         tPhenotype individual = decode (W, PI, penalty, Ns, chromossome);
         localSearch (W, penalty, root, Ns, &individual);
-        chromossome = encode (W, penalty, Ns, individual);
+        chromossome = encode (W, penalty, individual);
         result.insert(chromossome);
     }
     return result;
@@ -493,13 +560,13 @@ set < tGenotype > populationSubstitution (matrix W, matrix PI, vector <ulint> pe
 
         tPhenotype individual1 = decode (W, PI, penalty, Ns, offspring1);
         localSearch (W, penalty, root, Ns, &individual1);
-        offspring1 = encode (W, penalty, Ns, individual1);
+        offspring1 = encode (W, penalty, individual1);
         result.insert(offspring1);
 
         if (result.size() < populationSize) {
             tPhenotype individual2 = decode (W, PI, penalty, Ns, offspring2);
             localSearch (W, penalty, root, Ns, &individual2);
-            offspring2 = encode (W, penalty, Ns, individual2);
+            offspring2 = encode (W, penalty, individual2);
             result.insert(offspring2);
         }
     }
@@ -603,16 +670,16 @@ int main (int argc, char * argv[]) {
 
     cout << individual.first.size() << ' ' << individual.first.size() << ' ' << individual.second << endl;
 
-    for (vector <ulint> :: iterator it = individual.first.begin(); it != individual.first.end(); it++) {
-        ulint v = *it;
+    for (vector < pair <ulint, bool> > :: iterator it = individual.first.begin(); it != individual.first.end(); it++) {
+        ulint v = (*it).first;
         cout << v << endl;
     }
 
     for (ulint i = 0; i < individual.first.size() - 1; i++) {
-        pair <ulint, ulint> e = minmax(individual.first[i], individual.first[i + 1]);
+        pair <ulint, ulint> e = minmax(individual.first[i].first, individual.first[i + 1].first);
         cout << e.first << ' ' << e.second << endl;
     }
-    pair <ulint, ulint> e = minmax(individual.first[individual.first.size() - 1], individual.first[0]);
+    pair <ulint, ulint> e = minmax(individual.first[individual.first.size() - 1].first, individual.first[0].first);
     cout << e.first << ' ' << e.second << endl;
 
     string N = itos(n);
