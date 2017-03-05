@@ -162,9 +162,9 @@ int main (int argc, char * argv[]) {
                                     string PS = ssPS.str();
 
                                     vector <double> vMR;
+                                    vMR.push_back(0.1);
+                                    vMR.push_back(0.2);
                                     vMR.push_back(0.3);
-                                    vMR.push_back(0.5);
-                                    vMR.push_back(0.7);
                                     for (vector <double> :: iterator itMR = vMR.begin(); itMR != vMR.end(); itMR++) {
                                         double mr = *itMR;
                                         stringstream ssMR;
