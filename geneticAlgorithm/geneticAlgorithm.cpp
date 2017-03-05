@@ -449,12 +449,13 @@ set < tGenotype > initialPopulation (matrix W, matrix PI, vector <ulint> penalty
         tPhenotype individual = decode (W, PI, penalty, Ns, chromossome);
         localSearch (W, penalty, root, Ns, &individual);
         chromossome = encode (W, penalty, individual);
+        individual = decode (W, PI, penalty, Ns, chromossome);
+        chromossome = encode (W, penalty, individual);
         result.insert(chromossome);
     }
     return result;
 }
 
-// renomear
 void crossOver (matrix W, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tGenotype parent1, tGenotype parent2, tGenotype * offspring1, tGenotype * offspring2) {
     // chooses crossover point at random
     ulint mutationSeed = chrono :: system_clock :: now().time_since_epoch().count();
@@ -561,11 +562,15 @@ set < tGenotype > populationSubstitution (matrix W, matrix PI, vector <ulint> pe
         tPhenotype individual1 = decode (W, PI, penalty, Ns, offspring1);
         localSearch (W, penalty, root, Ns, &individual1);
         offspring1 = encode (W, penalty, individual1);
+        individual1 = decode (W, PI, penalty, Ns, offspring1);
+        offspring1 = encode (W, penalty, individual1);
         result.insert(offspring1);
 
         if (result.size() < populationSize) {
             tPhenotype individual2 = decode (W, PI, penalty, Ns, offspring2);
             localSearch (W, penalty, root, Ns, &individual2);
+            offspring2 = encode (W, penalty, individual2);
+            individual2 = decode (W, PI, penalty, Ns, offspring2);
             offspring2 = encode (W, penalty, individual2);
             result.insert(offspring2);
         }
