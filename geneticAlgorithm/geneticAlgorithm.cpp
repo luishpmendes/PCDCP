@@ -212,7 +212,7 @@ void fixCircularList (ulint root, vector < pair <ulint, bool> > * circularList) 
         it++;
     }
     if (it != (*circularList).end()) {
-        rotate((*circularList).begin(), (*circularList).end(), it);
+        rotate((*circularList).begin(), it, (*circularList).end());
     }
 }
 
