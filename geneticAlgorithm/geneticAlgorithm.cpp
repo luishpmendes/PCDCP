@@ -203,6 +203,19 @@ tPhenotype decode (matrix W, matrix PI, vector <ulint> penalty, vector < set <ul
     return make_pair(circularList, solutionCost);
 }
 
+void fixCircularList (ulint root, vector < pair <ulint, bool> > * circularList) {
+    vector < pair <ulint, bool> > :: iterator it = (*circularList).begin();
+    while (it != (*circularList).end()) {
+        if ((*it).first == root && (*it).second) {
+            break;
+        }
+        it++;
+    }
+    if (it != (*circularList).end()) {
+        rotate((*circularList).begin(), (*circularList).end(), it);
+    }
+}
+
 // candidata a sair
 bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, tPhenotype * solution) {
     bool result = false;
@@ -260,6 +273,7 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
                                 ulint v = *it;
                                 dominatorsCount[v]--;
                             }
+                            fixCircularList (root, &((*solution).first));
                         }
                     }
                 }
@@ -316,6 +330,7 @@ bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector 
                                 (*solution).second += deltaCost;
                                 occurrencesCount[u]--;
                                 occurrencesCount[v]++;
+                                fixCircularList (root, &((*solution).first));
                             }
                         }
                     }
@@ -328,7 +343,7 @@ bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector 
 
 // cada nó da lista circular tem uma flag dizendo se ele é representante
 // 2opt n muda os representantes
-bool twoOpt (matrix W, tPhenotype * solution) {
+bool twoOpt (matrix W, ulint root, tPhenotype * solution) {
     bool result = false;
     ulint flag = 0;
     while (flag == 0) {
@@ -355,6 +370,7 @@ bool twoOpt (matrix W, tPhenotype * solution) {
                         flag = 0;
                         reverse((*solution).first.begin() + i, (*solution).first.begin() + j + 1);
                         (*solution).second += W[u][x] + W[v][y] - W[u][v] - W[x][y];
+                        fixCircularList (root, &((*solution).first));
                     }
                 }
             }
@@ -373,7 +389,7 @@ void localSearch (matrix W, vector <ulint> penalty, ulint root, vector < set <ul
         if (swapDominantVertices (W, penalty, root, Ns, solution)) {
             flag = 0;
         }
-        if (twoOpt (W, solution)) {
+        if (twoOpt (W, root, solution)) {
             flag = 0;
         }
     }
