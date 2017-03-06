@@ -237,8 +237,8 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
         flag = 1;
         for (ulint i = 0; i < (*solution).first.size(); i++) {
             ulint u = (*solution).first[i].first;
-            // check to avoid removing the only occurrence of the root vertice 
-            if (u != root || occurrencesCount[root] > 1) {
+            // check to avoid removing the representant occurrence of the root vertice 
+            if (u != root || (*solution).first[i].second == false) {
                 ulint flag2 = 0;
                 for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end() && flag2 == 0; it++) {
                     ulint v = *it;
@@ -298,8 +298,8 @@ bool swapDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector 
         for (ulint i = 0; i < (*solution).first.size() && flag == 1; i++) {
             ulint u, prevU, nextU;
             u = (*solution).first[i].first;
-            // check to avoid removing the only occurrence of the root vertice 
-            if (u != root || occurrencesCount[root] > 1) {
+            // check to avoid removing the representant occurrence of the root vertice 
+            if (u != root || (*solution).first[i].second == false) {
                 prevU = (*solution).first[(*solution).first.size() - 1].first;
                 if (i > 0) {
                     prevU = (*solution).first[i - 1].first;
