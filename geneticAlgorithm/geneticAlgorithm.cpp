@@ -75,67 +75,13 @@ lint fitnessFunction (matrix W, vector <ulint> penalty, vector < pair <ulint, bo
     }
     return result;
 }
-/*
-vector <ulint> circularList2Permutation (ulint n, vector < set <ulint> > Ns, vector <ulint> solution) {
-    vector <ulint> result (n, 0);
-    vector <ulint> isDominated(n, 0);
-    vector <int> isInResult (n, 0);
-    ulint i = 0;
-    for (ulint j = 0; j < solution.size() && i < n && (ulint) accumulate(isDominated.begin(), isDominated.end(), 0) < isDominated.size(); j++) {
-        ulint u = solution[j];
-        if (isInResult[u] == 0) {
-            result[i++] = u;
-            isInResult[u] = 1;
-            for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
-                isDominated[*it] = 1;
-            }
-        }
-    }
-    for (ulint u = 0; u < n && i < n; u++) {
-        if (isInResult[u] == 0) {
-            result[i++] = u;
-        }
-    }
-    return result;
-}
-*/
-
-/*
-vector <ulint> circularList2Permutation (ulint n, matrix PI, vector < set <ulint> > Ns, vector <ulint> solution) {
-    vector <ulint> result;
-
-    vector <ulint> aux;
-    
-    ulint i = 0;
-
-    while (i < solution.size()) {
-        ulint j = i;
-
-        while (j < solution.size() - 1 && PI[solution[i]][solution[j + 1]] == solution[j]) {
-            j++;
-        }
-
-        if (j < solution.size() - 1) {
-            aux.push_back(i);
-            i = j;
-        } else {
-            if (PI[solution[i]][solution[0]] != solution[j]) {
-                aux.push_back(j);
-            }
-            break;
-        }
-    }
-
-    return result;
-}
-*/
 
 vector <ulint> circularList2Permutation (ulint n, vector < pair <ulint, bool> > solution) {
     vector <ulint> result;
     vector <bool> isInResult (n, false);
     for (ulint i = 0; i < solution.size(); i++) {
         if (solution[i].second) {
-            if (!isInResult[solution[i].first]) { // if necessário??
+            if (!isInResult[solution[i].first]) {
                 result.push_back(solution[i].first);
                 isInResult[solution[i].first] = true;
             }
