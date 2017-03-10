@@ -19,7 +19,7 @@ do
                         do
                             for mr in 0.1 0.2 0.3
                             do
-                                echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
+                                echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.};
                                 mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.};
                                 ./geneticAlgorithm $i $timeLimit $ps $mr < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.}"/result.out";
                             done

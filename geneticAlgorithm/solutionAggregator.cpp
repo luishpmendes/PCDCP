@@ -78,7 +78,7 @@ int main () {
                                 int ps = *itPS;
                                 stringstream ssPS;
                                 ssPS << ps;
-                                string PS = ssI.str();
+                                string PS = ssPS.str();
                                 for (vector <double> :: iterator itMR = vMR.begin(); itMR != vMR.end(); itMR++) {
                                     double mr = *itMR;
                                     stringstream ssMR;
@@ -87,6 +87,7 @@ int main () {
                                     MR.erase(remove(MR.begin(), MR.end(), '.'), MR.end());
 
                                     double objVal = 0.0;
+                                    cout << "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/objVal.txt" << endl;
                                     ifstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/objVal.txt");
                                     if (objValFile.is_open()) {
                                         objValFile >> objVal;
