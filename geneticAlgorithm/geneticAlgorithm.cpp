@@ -225,7 +225,6 @@ bool mergeDominantVertices (matrix W, vector <ulint> penalty, ulint root, vector
         ulint u = (*solution).first[i].first;
         occurrencesCount[u]++;
         if ((*solution).first[i].second) {
-            // if u é representante
             for (set <ulint> :: iterator it = Ns[u].begin(); it != Ns[u].end(); it++) {
                 ulint v = *it;
                 dominatorsCount[v]++;
