@@ -14,7 +14,7 @@ bool pointComp (pair < pair <double, double>, double > lhs, pair < pair <double,
 }
 
 int main (int argc, char * argv[]) {
-    string path, N, D, K, T, P, I, PS, MR;
+    string path, N, D, K, T, P, I, A, PS, MR;
 
     if (argc == 8) {
         path = string(argv[1]);
