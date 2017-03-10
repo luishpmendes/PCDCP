@@ -661,7 +661,7 @@ int main (int argc, char * argv[]) {
     P.erase(remove(P.begin(), P.end(), '.'), P.end());
     string PS = itos(populationSize);
     stringstream ssMR;
-    ssMR << fixed << setprecision(1) << d;
+    ssMR << fixed << setprecision(1) << mutationRate;
     string MR = ssMR.str();
     MR.erase(remove(MR.begin(), MR.end(), '.'), MR.end());
 
