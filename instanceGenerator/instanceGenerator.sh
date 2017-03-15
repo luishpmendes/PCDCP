@@ -10,13 +10,10 @@ do
         do
             for t in 0 1
             do
-                for p in 0.2
+                for i in 0
                 do
-                    for i in 0
-                    do
-                        echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
-                        ./instanceGenerator $n $d $k $t $p > "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i".in";
-                    done
+                    echo "N"$n"D"${d//.}"K"$k"T"$t"I"$i;
+                    ./instanceGenerator $n $d $k $t > "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"I"$i".in";
                 done
             done
         done

@@ -12,16 +12,15 @@ typedef unsigned long int ulint;
 
 int main (int argc, char * argv[]) {
     ulint n, k, t;
-    double density, m, p;
+    double density, m;
 
-    if (argc == 6) {
+    if (argc == 5) {
         n = atoi(argv[1]);
         density = atof(argv[2]);
         k = atoi(argv[3]);
         t = atoi(argv[4]);
-        p = atof(argv[5]);
     } else {
-        cin >> n >> density >> k >> t >> p;
+        cin >> n >> density >> k >> t;
     }
 
     double minDensity = 0.0;
@@ -93,7 +92,7 @@ int main (int argc, char * argv[]) {
     uniform_int_distribution <ulint> rootDistribution (0, n-1);
     root = rootDistribution(rootGenerator);
 
-    cout << n << ' ' << density << ' ' << k << ' ' << t << ' ' << p << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << root << endl;
+    cout << n << ' ' << density << ' ' << k << ' ' << t << ' ' << (n * (n - 1)) / 2 << ' ' << m << ' ' << root << endl;
 
     // printing vertices' coordinates and its penalty
     for (ulint i = 0; i < n; i++) {
@@ -103,7 +102,7 @@ int main (int argc, char * argv[]) {
         double y0 = points[referencePoint].second;
         double dx = x - x0;
         double dy = y - y0;
-        ulint dist = round(100 * sqrt(dx * dx + dy * dy) * p);
+        ulint dist = round(100 * sqrt(dx * dx + dy * dy) * 0.2);
         cout << x << ' ' << y << ' ' << dist << endl;
     }
 
