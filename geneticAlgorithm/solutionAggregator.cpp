@@ -12,10 +12,9 @@ typedef unsigned long int ulint;
 
 int main () {
     vector <int> vN;
-    vN.push_back(10);
-    vN.push_back(20);
     vN.push_back(50);
     vN.push_back(100);
+    vN.push_back(200);
     vector <double> vD;
     vD.push_back(0.3);
     vD.push_back(0.5);
@@ -29,6 +28,8 @@ int main () {
     vT.push_back(1);
     vector <int> vI;
     vI.push_back(0);
+    vI.push_back(1);
+    vI.push_back(2);
     vector <int> vPS;
     vPS.push_back(10);
     vPS.push_back(50);

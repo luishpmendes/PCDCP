@@ -3,7 +3,7 @@ rm -rf output;
 mkdir -p output;
 make geneticAlgorithm;
 timeLimit=10;
-for n in 10 20 50 100 # 50 100 200
+for n in 50 100 200
 do
     for d in 0.3 0.5 0.7
     do
@@ -11,7 +11,7 @@ do
         do
             for t in 0 1
             do
-                for i in 0 # 0 1 2
+                for i in 0 1 2
                 do
                     for ps in 10 50 100
                     do
