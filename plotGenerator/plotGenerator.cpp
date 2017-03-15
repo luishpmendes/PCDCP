@@ -14,54 +14,51 @@ bool pointComp (pair < pair <double, double>, double > lhs, pair < pair <double,
 }
 
 int main (int argc, char * argv[]) {
-    string path, N, D, K, T, P, I, A, PS, MR;
+    string path, N, D, K, T, I, A, PS, MR;
 
-    if (argc == 8) {
+    if (argc == 7) {
         path = string(argv[1]);
         N = string(argv[2]);
         D = string(argv[3]);
         K = string(argv[4]);
         T = string(argv[5]);
-        P = string(argv[6]);
-        I = string(argv[7]);
+        I = string(argv[6]);
+    } else if (argc == 8) {
+        path = string(argv[1]);
+        N = string(argv[2]);
+        D = string(argv[3]);
+        K = string(argv[4]);
+        T = string(argv[5]);
+        I = string(argv[6]);
+        A = string(argv[7]);
     } else if (argc == 9) {
         path = string(argv[1]);
         N = string(argv[2]);
         D = string(argv[3]);
         K = string(argv[4]);
         T = string(argv[5]);
-        P = string(argv[6]);
-        I = string(argv[7]);
-        A = string(argv[8]);
-    } else if (argc == 10) {
-        path = string(argv[1]);
-        N = string(argv[2]);
-        D = string(argv[3]);
-        K = string(argv[4]);
-        T = string(argv[5]);
-        P = string(argv[6]);
-        I = string(argv[7]);
-        PS = string(argv[8]);
-        MR = string(argv[9]);
+        I = string(argv[6]);
+        PS = string(argv[7]);
+        MR = string(argv[8]);
     } else {
-        cin >> path >> N >> D >> K >> T >> P >> I >> A >> PS >> MR;
+        cin >> path >> N >> D >> K >> T >> I >> A >> PS >> MR;
     }
 
-    ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + ".in");
+    ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "I" + I + ".in");
     ifstream resultFile;
 
     if (path.compare("grasp") == 0) {
-        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/result.out");
+        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "A" + A + "/result.out");
     } else if (path.compare("geneticAlgorithm") == 0) {
-        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/result.out");
+        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "PS" + PS + "MR" + MR + "/result.out");
     } else {
-        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/result.out");
+        resultFile = ifstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/result.out");
     }
 
     if (inputFile.is_open() && resultFile.is_open()) {
         ulint n, mComplete, m, k, t, root;
-        double d, p;
-        inputFile >> n >> d >> k >> t >> p >> mComplete >> m >> root;
+        double d;
+        inputFile >> n >> d >> k >> t >> mComplete >> m >> root;
         vector < pair < pair <double, double>, double > > vertices (n, make_pair(make_pair(0, 0), 0));
         // reading vertices' coordinates and penalty
         for (ulint v = 0; v < n; v++) {
@@ -97,11 +94,11 @@ int main (int argc, char * argv[]) {
         // printing vertices' coordinates and penalty
         ofstream verticesFile;
         if (path.compare("grasp") == 0) {
-            verticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/vertices.txt");
+            verticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "A" + A + "/vertices.txt");
         } else if (path.compare("geneticAlgorithm") == 0) {
-            verticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/vertices.txt");
+            verticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "PS" + PS + "MR" + MR + "/vertices.txt");
         } else {
-            verticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/vertices.txt");
+            verticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/vertices.txt");
         }
         for (ulint v = 0; v < n; v++) {
             verticesFile << vertices[v].first.first << ' ';
@@ -119,11 +116,11 @@ int main (int argc, char * argv[]) {
         // reading the graph's edges and printing its coordinates
         ofstream edgesFile;
         if (path.compare("grasp") == 0) {
-            edgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/edges.txt");
+            edgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "A" + A + "/edges.txt");
         } else if (path.compare("geneticAlgorithm") == 0) {
-            edgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/edges.txt");
+            edgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "PS" + PS + "MR" + MR + "/edges.txt");
         } else {
-            edgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/edges.txt");
+            edgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/edges.txt");
         }
         for (ulint e = 0; e < m; e++) {
             ulint u, v, w;
@@ -141,11 +138,11 @@ int main (int argc, char * argv[]) {
         // reading the solution's vertices and printing its coordinates and neighborhood radio
         ofstream solutionVerticesFile;
         if (path.compare("grasp") == 0) {
-            solutionVerticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/solutionVertices.txt");
+            solutionVerticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "A" + A + "/solutionVertices.txt");
         } else if (path.compare("geneticAlgorithm") == 0) {
-            solutionVerticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/solutionVertices.txt");
+            solutionVerticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "PS" + PS + "MR" + MR + "/solutionVertices.txt");
         } else {
-            solutionVerticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionVertices.txt");
+            solutionVerticesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/solutionVertices.txt");
         }
         for (ulint i = 0; i < nSolution; i++) {
             ulint v;
@@ -159,11 +156,11 @@ int main (int argc, char * argv[]) {
         // reading the solution's edges and printing its coordinates
         ofstream solutionEdgesFile;
         if (path.compare("grasp") == 0) {
-            solutionEdgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/solutionEdges.txt");
+            solutionEdgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "A" + A + "/solutionEdges.txt");
         } else if (path.compare("geneticAlgorithm") == 0) {
-            solutionEdgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/solutionEdges.txt");
+            solutionEdgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "PS" + PS + "MR" + MR + "/solutionEdges.txt");
         } else {
-            solutionEdgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/solutionEdges.txt");
+            solutionEdgesFile = ofstream("../" + path + "/output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/solutionEdges.txt");
         }
         for (ulint e = 0; e < mSolution; e++) {
             ulint u, v;
