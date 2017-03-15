@@ -18,10 +18,9 @@ int main (int argc, char * argv[]) {
     }
 
     vector <int> vN;
-    vN.push_back(10);
-    vN.push_back(20);
     vN.push_back(50);
     vN.push_back(100);
+    vN.push_back(200);
     vector <double> vD;
     vD.push_back(0.3);
     vD.push_back(0.5);
@@ -35,6 +34,8 @@ int main (int argc, char * argv[]) {
     vT.push_back(1);
     vector <int> vI;
     vI.push_back(0);
+    vI.push_back(1);
+    vI.push_back(2);
 
     if (path.compare("grasp") == 0) {
         cout << "n,d,k,t,p,i,a,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
