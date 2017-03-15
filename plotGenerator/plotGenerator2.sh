@@ -2,7 +2,7 @@
 make plotGenerator;
 for path in "linearProgram" "twoPhases"
 do
-    for n in 10 20 50 100
+    for n in 50 100 200
     do
         for d in 0.3 0.5 0.7
         do
@@ -10,7 +10,7 @@ do
             do
                 for t in 0 1
                 do
-                    for i in 0
+                    for i in 0 1 2
                     do
                         echo $path" - N"$n"D"${d//.}"K"$k"T"$t"I"$i;
                         rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/vertices.txt";
@@ -26,7 +26,7 @@ do
         done
     done
 done
-for n in 10 20 50 100
+for n in 50 100 200
 do
     for d in 0.3 0.5 0.7
     do
@@ -34,7 +34,7 @@ do
         do
             for t in 0 1
             do
-                for i in 0
+                for i in 0 1 2
                 do
                     for a in 0.3 0.5 0.7
                     do
@@ -52,7 +52,7 @@ do
         done
     done
 done
-for n in 10 20 50 100
+for n in 50 100 200
 do
     for d in 0.3 0.5 0.7
     do
@@ -60,7 +60,7 @@ do
         do
             for t in 0 1
             do
-                for i in 0
+                for i in 0 1 2
                 do
                     for ps in 10 50 100
                     do
