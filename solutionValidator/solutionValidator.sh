@@ -10,14 +10,11 @@ do
             do
                 for t in 0 1
                 do
-                    for p in 0.2
+                    for i in 0
                     do
-                        for i in 0
-                        do
-                            echo $path" - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
-                            rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/validation.txt";
-                            ./solutionValidator $path $n ${d//.} $k $t ${p//.} $i > "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/validation.txt";
-                        done
+                        echo $path" - N"$n"D"${d//.}"K"$k"T"$t"I"$i;
+                        rm -f "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/validation.txt";
+                        ./solutionValidator $path $n ${d//.} $k $t $i > "../"$path"/output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/validation.txt";
                     done
                 done
             done
@@ -32,16 +29,13 @@ do
         do
             for t in 0 1
             do
-                for p in 0.2
+                for i in 0
                 do
-                    for i in 0
+                    for alpha in 0.3 0.5 0.7
                     do
-                        for alpha in 0.3 0.5 0.7
-                        do
-                            echo "grasp - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"A"${alpha//.};
-                            rm -f "../grasp/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"A"${alpha//.}"/validation.txt";
-                            ./solutionValidator grasp $n ${d//.} $k $t ${p//.} $i ${alpha//.} > "../grasp/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"A"${alpha//.}"/validation.txt";
-                        done
+                        echo "grasp - N"$n"D"${d//.}"K"$k"T"$t"I"$i"A"${alpha//.};
+                        rm -f "../grasp/output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"A"${alpha//.}"/validation.txt";
+                        ./solutionValidator grasp $n ${d//.} $k $t $i ${alpha//.} > "../grasp/output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"A"${alpha//.}"/validation.txt";
                     done
                 done
             done
@@ -56,18 +50,15 @@ do
         do
             for t in 0 1
             do
-                for p in 0.2
+                for i in 0
                 do
-                    for i in 0
+                    for ps in 10 50 100
                     do
-                        for ps in 10 50 100
+                        for mr in 0.1 0.2 0.3
                         do
-                            for mr in 0.1 0.2 0.3
-                            do
-                                echo "geneticAlgorithm - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.};
-                                rm -f "../geneticAlgorithm/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.}"/validation.txt";
-                                ./solutionValidator geneticAlgorithm $n ${d//.} $k $t ${p//.} $i $ps ${mr//.} > "../geneticAlgorithm/output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.}"/validation.txt";
-                            done
+                            echo "geneticAlgorithm - N"$n"D"${d//.}"K"$k"T"$t"I"$i"PS"$ps"MR"${mr//.};
+                            rm -f "../geneticAlgorithm/output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"PS"$ps"MR"${mr//.}"/validation.txt";
+                            ./solutionValidator geneticAlgorithm $n ${d//.} $k $t $i $ps ${mr//.} > "../geneticAlgorithm/output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"PS"$ps"MR"${mr//.}"/validation.txt";
                         done
                     done
                 done
