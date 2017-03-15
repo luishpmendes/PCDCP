@@ -8,9 +8,9 @@ do
     do
         for k in 0 10 20
         do
-            for t in 0 1 2
+            for t in 0 1
             do
-                for i in 0
+                for i in 0 1 2
                 do
                     echo "N"$n"D"${d//.}"K"$k"T"$t"I"$i;
                     ./instanceGenerator $n $d $k $t > "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"I"$i".in";
