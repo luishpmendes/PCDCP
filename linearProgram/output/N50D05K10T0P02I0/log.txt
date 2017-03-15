@@ -1,0 +1,50 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 14 21:23:45 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 14 21:23:45 2017
+
+Optimize a model with 101 rows, 663 columns and 1391 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 33 rows and 10 columns
+Presolve time: 0.01s
+Presolved: 68 rows, 653 columns, 1317 nonzeros
+Variable types: 0 continuous, 653 integer (653 binary)
+
+Root relaxation: objective 6.860000e+02, 84 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  686.00000    0   10          -  686.00000      -     -    0s
+     0     0  702.75000    0   16          -  702.75000      -     -    0s
+     0     0  706.50000    0   24          -  706.50000      -     -    0s
+     0     0  708.66667    0   23          -  708.66667      -     -    0s
+     0     0  709.33333    0   11          -  709.33333      -     -    0s
+     0     0  709.50000    0   25          -  709.50000      -     -    0s
+     0     0  709.50000    0   27          -  709.50000      -     -    0s
+     0     0  709.50000    0   12          -  709.50000      -     -    0s
+     0     0  709.69231    0   27          -  709.69231      -     -    0s
+     0     0  709.69231    0   27          -  709.69231      -     -    0s
+     0     2  709.73333    0   34          -  709.73333      -     -    0s
+*  267   189              41     793.0000000  714.00000  10.0%   5.2    0s
+*  466   131               9     731.0000000  714.00000  2.33%   5.3    0s
+*  590   120              10     730.0000000  714.00000  2.19%   5.3    0s
+*  748    62               6     721.0000000  714.00000  0.97%   5.3    0s
+
+Cutting planes:
+  Gomory: 8
+  Cover: 30
+  MIR: 2
+  Zero half: 4
+  Lazy constraints: 98
+
+Explored 802 nodes (4303 simplex iterations) in 0.32 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.210000000000e+02, best bound 7.210000000000e+02, gap 0.0%

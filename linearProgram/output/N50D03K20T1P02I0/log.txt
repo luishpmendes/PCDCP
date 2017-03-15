@@ -1,0 +1,50 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 14 21:23:40 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 14 21:23:40 2017
+
+Optimize a model with 101 rows, 418 columns and 1177 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [2e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 24 rows and 2 columns
+Presolve time: 0.00s
+Presolved: 77 rows, 416 columns, 980 nonzeros
+Variable types: 0 continuous, 416 integer (416 binary)
+
+Root relaxation: objective 6.660000e+02, 53 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  666.00000    0   16          -  666.00000      -     -    0s
+     0     0  709.66667    0   18          -  709.66667      -     -    0s
+     0     0  724.33333    0   15          -  724.33333      -     -    0s
+     0     0  727.50000    0   20          -  727.50000      -     -    0s
+     0     0  729.75000    0   22          -  729.75000      -     -    0s
+     0     0  729.75000    0   22          -  729.75000      -     -    0s
+     0     2  729.75000    0   22          -  729.75000      -     -    0s
+*  183   125              28     847.0000000  733.50000  13.4%   3.8    0s
+*  188   125              33     823.0000000  733.50000  10.9%   3.8    0s
+H  262   156                     796.0000000  734.00000  7.79%   3.7    0s
+H 1019   389                     776.0000000  736.70769  5.06%   3.9    0s
+* 1386   459              34     766.0000000  749.37260  2.17%   4.7    1s
+* 1912   246              37     762.0000000  754.00000  1.05%   4.7    1s
+* 2045   195              36     761.0000000  754.17442  0.90%   4.8    1s
+
+Cutting planes:
+  Gomory: 20
+  Cover: 42
+  MIR: 1
+  Flow cover: 9
+  Zero half: 13
+  Lazy constraints: 85
+
+Explored 2332 nodes (11271 simplex iterations) in 1.93 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.610000000000e+02, best bound 7.610000000000e+02, gap 0.0%
