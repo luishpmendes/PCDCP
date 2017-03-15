@@ -27,8 +27,6 @@ int main () {
     vector <int> vT;
     vT.push_back(0);
     vT.push_back(1);
-    vector <double> vP;
-    vP.push_back(0.2);
     vector <int> vI;
     vI.push_back(0);
     vector <double> vA;
@@ -36,7 +34,7 @@ int main () {
     vA.push_back(0.5);
     vA.push_back(0.7);
 
-    cout << "n,d,k,t,p,i,a,objVal,elapsedTime" << endl;
+    cout << "n,d,k,t,i,a,objVal,elapsedTime" << endl;
 
     for (vector <int> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
         int n = *itN;
@@ -59,38 +57,31 @@ int main () {
                     stringstream ssT;
                     ssT << t;
                     string T = ssT.str();
-                    for (vector <double> :: iterator itP = vP.begin(); itP != vP.end(); itP++) {
-                        double p = *itP;
-                        stringstream ssP;
-                        ssP << fixed << setprecision(1) << p;
-                        string P = ssP.str();
-                        P.erase(remove(P.begin(), P.end(), '.'), P.end());
-                        for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
-                            int i = *itI;
-                            stringstream ssI;
-                            ssI << i;
-                            string I = ssI.str();
-                            for (vector <double> :: iterator itA = vA.begin(); itA != vA.end(); itA++) {
-                                double a = *itA;
-                                stringstream ssA;
-                                ssA << fixed << setprecision(1) << a;
-                                string A = ssA.str();
-                                A.erase(remove(A.begin(), A.end(), '.'), A.end());
+                    for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
+                        int i = *itI;
+                        stringstream ssI;
+                        ssI << i;
+                        string I = ssI.str();
+                        for (vector <double> :: iterator itA = vA.begin(); itA != vA.end(); itA++) {
+                            double a = *itA;
+                            stringstream ssA;
+                            ssA << fixed << setprecision(1) << a;
+                            string A = ssA.str();
+                            A.erase(remove(A.begin(), A.end(), '.'), A.end());
 
-                                double objVal = 0.0;
-                                ifstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/objVal.txt");
-                                if (objValFile.is_open()) {
-                                    objValFile >> objVal;
-                                }
-
-                                ulint elapsedTime = 0.0;
-                                ifstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/elapsedTime.txt");
-                                if (elapsedTimeFile.is_open()) {
-                                    elapsedTimeFile >> elapsedTime;
-                                }
-
-                                cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << a << ',' << objVal << ',' << elapsedTime << endl;
+                            double objVal = 0.0;
+                            ifstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "A" + A + "/objVal.txt");
+                            if (objValFile.is_open()) {
+                                objValFile >> objVal;
                             }
+
+                            ulint elapsedTime = 0.0;
+                            ifstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "A" + A + "/elapsedTime.txt");
+                            if (elapsedTimeFile.is_open()) {
+                                elapsedTimeFile >> elapsedTime;
+                            }
+
+                            cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << a << ',' << objVal << ',' << elapsedTime << endl;
                         }
                     }
                 }

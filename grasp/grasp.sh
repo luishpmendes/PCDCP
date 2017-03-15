@@ -11,16 +11,13 @@ do
         do
             for t in 0 1
             do
-                for p in 0.2
+                for i in 0
                 do
-                    for i in 0
+                    for alpha in 0.3 0.5 0.7
                     do
-                        for alpha in 0.3 0.5 0.7
-                        do
-                            echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"A"${alpha//.};
-                            mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"A"${alpha//.};
-                            ./grasp $i $iterationLimit $alpha < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"A"${alpha//.}"/result.out";
-                        done
+                        echo "N"$n"D"${d//.}"K"$k"T"$t"I"$i"A"${alpha//.};
+                        mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"A"${alpha//.};
+                        ./grasp $i $iterationLimit $alpha < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"A"${alpha//.}"/result.out";
                     done
                 done
             done

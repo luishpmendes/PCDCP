@@ -425,9 +425,9 @@ int main (int argc, char * argv[]) {
     }
 
     ulint n, mComplete, m, k, t, root;
-    double d, p;
+    double d;
 
-    cin >> n >> d >> k >> t >> p >> mComplete >> m >> root;
+    cin >> n >> d >> k >> t >> mComplete >> m >> root;
 
     vector <ulint> penalty (n); // vector with de penalties of each vectex
     matrix WComplete (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
@@ -489,22 +489,18 @@ int main (int argc, char * argv[]) {
     D.erase(remove(D.begin(), D.end(), '.'), D.end());
     string K = itos(k);
     string T = itos(t);
-    stringstream ssP;
-    ssP << fixed << setprecision(1) << p;
-    string P = ssP.str();
-    P.erase(remove(P.begin(), P.end(), '.'), P.end());
     stringstream ssA;
     ssA << fixed << setprecision(1) << alpha;
     string A = ssA.str();
     A.erase(remove(A.begin(), A.end(), '.'), A.end());
 
-    ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/objVal.txt", ofstream :: out);
+    ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "A" + A + "/objVal.txt", ofstream :: out);
     objValFile << solution.second;
     objValFile.close();
 
     chrono :: high_resolution_clock :: time_point tEnd = chrono :: high_resolution_clock :: now();
     chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
-    ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/elapsedTime.txt", ofstream :: out);
+    ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "A" + A + "/elapsedTime.txt", ofstream :: out);
     elapsedTimeFile << elapsedTime.count();
     elapsedTimeFile.close();
 
