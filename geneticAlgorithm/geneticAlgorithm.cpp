@@ -539,21 +539,21 @@ set < tGenotype > populationSubstitution (matrix W, matrix PI, vector <ulint> pe
     return result;
 }
 
-bool termination (chrono :: steady_clock :: time_point tBegin, double timeLimit) {
-    chrono :: steady_clock :: time_point tCurrent = chrono :: steady_clock :: now();
+bool termination (chrono :: high_resolution_clock :: time_point tBegin, ulint timeLimit) {
+    chrono :: high_resolution_clock :: time_point tCurrent = chrono :: high_resolution_clock :: now();
     chrono :: seconds elapsedTime = chrono :: duration_cast <chrono :: seconds> (tCurrent - tBegin);
-    if (elapsedTime.count() >= timeLimit) {
+    if ((ulint) elapsedTime.count() >= timeLimit) {
         return true;
     }
     return false;
 }
 
-tGenotype geneticAlgorithm (matrix W, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, chrono :: steady_clock :: time_point tBegin, double timeLimit, ulint populationSize, double mutationRate) {
+tGenotype geneticAlgorithm (matrix W, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, chrono :: high_resolution_clock :: time_point tBegin, ulint timeLimit, ulint populationSize, double mutationRate) {
     tGenotype result;
     bool flag = true;
     set < tGenotype > oldPopulation;
     set < tGenotype > newPopulation = initialPopulation (W, PI, penalty, root, Ns, populationSize);
-    if (termination (tBegin, timeLimit) != true) {
+    while (termination (tBegin, timeLimit) != true) {
         oldPopulation = set < tGenotype > (newPopulation.begin(), newPopulation.end());
         newPopulation = populationSubstitution(W, PI, penalty, root, Ns, populationSize, mutationRate, oldPopulation);
     }
@@ -568,10 +568,9 @@ tGenotype geneticAlgorithm (matrix W, matrix PI, vector <ulint> penalty, ulint r
 }
 
 int main (int argc, char * argv[]) {
-    chrono :: steady_clock :: time_point tBegin = chrono :: steady_clock :: now();
+    chrono :: high_resolution_clock :: time_point tBegin = chrono :: high_resolution_clock :: now();
     string I ("0");
-    double timeLimit = 100;
-    ulint populationSize = 100;
+    ulint timeLimit = 100, populationSize = 100;
     double mutationRate = 0.1;
 
     if (argc >= 2) {
@@ -579,7 +578,7 @@ int main (int argc, char * argv[]) {
     }
 
     if (argc >= 3) {
-        timeLimit = atof(argv[2]);
+        timeLimit = atoi(argv[2]);
     }
 
     if (argc >= 4) {
@@ -669,7 +668,7 @@ int main (int argc, char * argv[]) {
     objValFile << individual.second;
     objValFile.close();
 
-    chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
+    chrono :: high_resolution_clock :: time_point tEnd = chrono :: high_resolution_clock :: now();
     chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
     ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/elapsedTime.txt", ofstream :: out);
     elapsedTimeFile << elapsedTime.count();
