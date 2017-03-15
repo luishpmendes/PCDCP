@@ -1,0 +1,48 @@
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 12:48:32 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 12:48:32 2017
+
+Optimize a model with 101 rows, 908 columns and 1905 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [2e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 30 rows and 7 columns
+Presolve time: 0.00s
+Presolved: 71 rows, 901 columns, 1821 nonzeros
+Variable types: 0 continuous, 901 integer (901 binary)
+
+Root relaxation: objective 5.875000e+02, 62 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  587.50000    0   18          -  587.50000      -     -    0s
+     0     0  611.50000    0   10          -  611.50000      -     -    0s
+     0     0  614.83333    0   19          -  614.83333      -     -    0s
+     0     0  615.16667    0   20          -  615.16667      -     -    0s
+     0     0  615.16667    0   20          -  615.16667      -     -    0s
+     0     2  615.16667    0   20          -  615.16667      -     -    0s
+* 3668  2181             129     830.0000000  619.37988  25.4%   4.7    3s
+  4445  2714  631.77778   18   39  830.00000  620.62220  25.2%   4.6    5s
+* 4678  2751              88     794.0000000  620.62220  21.8%   4.6    5s
+* 5672  3338              79     757.0000000  621.70370  17.9%   4.6    6s
+*11756  7396              75     732.0000000  624.80277  14.6%   4.2    9s
+ 12417  7778  692.00000   66    -  732.00000  624.80277  14.6%   4.1   10s
+*12570  7877             102     730.0000000  624.80277  14.4%   4.1   10s
+
+Cutting planes:
+  Gomory: 15
+  Cover: 31
+  Flow cover: 6
+  Zero half: 8
+  Lazy constraints: 1407
+
+Explored 12588 nodes (51621 simplex iterations) in 10.02 seconds
+Thread count was 8 (of 8 available processors)
+
+Time limit reached
+Best objective 7.300000000000e+02, best bound 6.250000000000e+02, gap 14.3836%

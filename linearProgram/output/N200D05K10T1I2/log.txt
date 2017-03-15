@@ -1,0 +1,50 @@
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 13:02:10 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 13:02:10 2017
+
+Optimize a model with 401 rows, 10150 columns and 21549 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 4617
+Presolve removed 89 rows and 1 columns
+Presolve time: 0.06s
+Presolved: 312 rows, 10149 columns, 20865 nonzeros
+Variable types: 0 continuous, 10149 integer (10149 binary)
+
+Root relaxation: objective 1.341250e+03, 243 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1341.25000    0   41 4617.00000 1341.25000  70.9%     -    0s
+     0     0 1382.91429    0   55 4617.00000 1382.91429  70.0%     -    1s
+     0     0 1388.15556    0   79 4617.00000 1388.15556  69.9%     -    1s
+     0     0 1388.18182    0   76 4617.00000 1388.18182  69.9%     -    1s
+     0     0 1389.11905    0   85 4617.00000 1389.11905  69.9%     -    2s
+     0     0 1389.11905    0   91 4617.00000 1389.11905  69.9%     -    2s
+     0     0 1390.42361    0  103 4617.00000 1390.42361  69.9%     -    2s
+     0     0 1390.42500    0   96 4617.00000 1390.42500  69.9%     -    2s
+     0     0 1390.60000    0  101 4617.00000 1390.60000  69.9%     -    2s
+     0     0 1390.71667    0  106 4617.00000 1390.71667  69.9%     -    2s
+     0     0 1390.71667    0   85 4617.00000 1390.71667  69.9%     -    2s
+     0     2 1390.71667    0   83 4617.00000 1390.71667  69.9%     -    2s
+  1820  1675 1423.09091  126   85 4617.00000 1391.71528  69.9%   5.4    5s
+
+Cutting planes:
+  Gomory: 26
+  Cover: 73
+  MIR: 1
+  Flow cover: 5
+  Zero half: 16
+  Lazy constraints: 24
+
+Explored 1826 nodes (10814 simplex iterations) in 10.01 seconds
+Thread count was 8 (of 8 available processors)
+
+Time limit reached
+Best objective 4.617000000000e+03, best bound 1.398000000000e+03, gap 69.7206%

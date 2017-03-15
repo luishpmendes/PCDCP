@@ -1,0 +1,51 @@
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 12:52:37 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 12:52:37 2017
+
+Optimize a model with 201 rows, 2575 columns and 5447 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 2520
+Presolve removed 59 rows and 6 columns
+Presolve time: 0.01s
+Presolved: 142 rows, 2569 columns, 5198 nonzeros
+Variable types: 0 continuous, 2569 integer (2569 binary)
+
+Root relaxation: objective 8.307500e+02, 128 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  830.75000    0   37 2520.00000  830.75000  67.0%     -    0s
+     0     0  873.51667    0   44 2520.00000  873.51667  65.3%     -    0s
+     0     0  881.33333    0   54 2520.00000  881.33333  65.0%     -    0s
+     0     0  882.58333    0   58 2520.00000  882.58333  65.0%     -    0s
+     0     0  886.70536    0   70 2520.00000  886.70536  64.8%     -    0s
+     0     0  886.70536    0   77 2520.00000  886.70536  64.8%     -    0s
+     0     0  890.81515    0   43 2520.00000  890.81515  64.7%     -    0s
+     0     0  891.03788    0   50 2520.00000  891.03788  64.6%     -    0s
+     0     0  892.64069    0   68 2520.00000  892.64069  64.6%     -    0s
+     0     0  892.64069    0   68 2520.00000  892.64069  64.6%     -    0s
+     0     2  892.64069    0   68 2520.00000  892.64069  64.6%     -    0s
+  1049   916  913.00000   20  117 2520.00000  900.33626  64.3%   4.9    5s
+  1901  1323  902.43750   45   21 2520.00000  900.61882  64.3%   7.0   10s
+
+Cutting planes:
+  Gomory: 28
+  Cover: 85
+  Clique: 1
+  MIR: 1
+  Flow cover: 7
+  Zero half: 21
+  Lazy constraints: 140
+
+Explored 1919 nodes (13663 simplex iterations) in 10.01 seconds
+Thread count was 8 (of 8 available processors)
+
+Time limit reached
+Best objective 2.520000000000e+03, best bound 9.010000000000e+02, gap 64.2460%

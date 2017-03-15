@@ -1,0 +1,48 @@
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 12:59:38 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 12:59:38 2017
+
+Optimize a model with 401 rows, 6170 columns and 16505 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 2594
+Presolve removed 97 rows and 1 columns
+Presolve time: 0.03s
+Presolved: 304 rows, 6169 columns, 14480 nonzeros
+Variable types: 0 continuous, 6169 integer (6169 binary)
+
+Root relaxation: objective 1.254000e+03, 215 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1254.00000    0   56 2594.00000 1254.00000  51.7%     -    0s
+     0     0 1327.75000    0   34 2594.00000 1327.75000  48.8%     -    0s
+     0     0 1340.63889    0   45 2594.00000 1340.63889  48.3%     -    0s
+     0     0 1348.62500    0   54 2594.00000 1348.62500  48.0%     -    0s
+     0     0 1350.18750    0   46 2594.00000 1350.18750  47.9%     -    0s
+     0     0 1350.76923    0   63 2594.00000 1350.76923  47.9%     -    0s
+     0     0 1351.50000    0   47 2594.00000 1351.50000  47.9%     -    0s
+     0     0 1351.50000    0   35 2594.00000 1351.50000  47.9%     -    0s
+     0     2 1351.50000    0   27 2594.00000 1351.50000  47.9%     -    3s
+*  907   844             166    1511.0000000 1352.16667  10.5%   4.2    4s
+  1237  1129 1408.00000   68    - 1511.00000 1352.60345  10.5%   4.3    5s
+H 1372  1187                    1505.0000000 1352.60345  10.1%   4.3    5s
+
+Cutting planes:
+  Gomory: 67
+  Cover: 160
+  Flow cover: 14
+  Zero half: 7
+  Lazy constraints: 10
+
+Explored 1379 nodes (6936 simplex iterations) in 10.00 seconds
+Thread count was 8 (of 8 available processors)
+
+Time limit reached
+Best objective 1.505000000000e+03, best bound 1.361000000000e+03, gap 9.5681%

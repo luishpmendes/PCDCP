@@ -1,0 +1,47 @@
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 12:47:44 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 12:47:44 2017
+
+Optimize a model with 101 rows, 663 columns and 1407 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [2e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 33 rows and 10 columns
+Presolve time: 0.00s
+Presolved: 68 rows, 653 columns, 1314 nonzeros
+Variable types: 0 continuous, 653 integer (653 binary)
+
+Root relaxation: objective 6.900000e+02, 72 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  690.00000    0    8          -  690.00000      -     -    0s
+H    0     0                    1238.0000000  690.00000  44.3%     -    0s
+     0     0  717.00000    0   12 1238.00000  717.00000  42.1%     -    0s
+     0     0  720.50000    0    6 1238.00000  720.50000  41.8%     -    0s
+     0     0  721.00000    0    2 1238.00000  721.00000  41.8%     -    0s
+     0     0  721.75000    0   32 1238.00000  721.75000  41.7%     -    0s
+     0     0  721.75000    0    6 1238.00000  721.75000  41.7%     -    0s
+     0     2  722.66667    0   30 1238.00000  722.66667  41.6%     -    0s
+H   27    16                     790.0000000  725.00000  8.23%   4.0    0s
+*  235   142              20     779.0000000  725.00000  6.93%   3.8    0s
+*  241   142              23     778.0000000  725.00000  6.81%   3.8    0s
+*  321    87               8     736.0000000  725.00000  1.49%   3.9    0s
+*  322    77               9     735.0000000  725.00000  1.36%   3.9    0s
+
+Cutting planes:
+  Gomory: 8
+  Cover: 40
+  Zero half: 2
+  Lazy constraints: 47
+
+Explored 727 nodes (2825 simplex iterations) in 0.14 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.350000000000e+02, best bound 7.350000000000e+02, gap 0.0%

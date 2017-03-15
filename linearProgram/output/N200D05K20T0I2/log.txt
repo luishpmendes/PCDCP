@@ -1,0 +1,49 @@
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 13:02:41 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Wed Mar 15 13:02:41 2017
+
+Optimize a model with 401 rows, 10150 columns and 24733 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 2446
+Presolve removed 92 rows and 1 columns
+Presolve time: 0.05s
+Presolved: 309 rows, 10149 columns, 22720 nonzeros
+Variable types: 0 continuous, 10149 integer (10149 binary)
+
+Root relaxation: objective 1.055500e+03, 228 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1055.50000    0   58 2446.00000 1055.50000  56.8%     -    0s
+     0     0 1114.50000    0   28 2446.00000 1114.50000  54.4%     -    0s
+     0     0 1126.00000    0   38 2446.00000 1126.00000  54.0%     -    0s
+     0     0 1126.00000    0   30 2446.00000 1126.00000  54.0%     -    0s
+     0     0 1131.25000    0   32 2446.00000 1131.25000  53.8%     -    0s
+     0     0 1131.58333    0   39 2446.00000 1131.58333  53.7%     -    0s
+     0     0 1131.58333    0   32 2446.00000 1131.58333  53.7%     -    0s
+     0     2 1131.58333    0   26 2446.00000 1131.58333  53.7%     -    1s
+* 1722  1627             361    2147.0000000 1132.83333  47.2%   3.7    4s
+* 1723  1627             361    2146.0000000 1132.83333  47.2%   3.7    4s
+  1849  1728 1246.50000  201   66 2146.00000 1132.83333  47.2%   3.8    5s
+  2894  2349 1222.00000  143    2 2146.00000 1137.41667  47.0%   4.2   10s
+
+Cutting planes:
+  Gomory: 58
+  Cover: 129
+  MIR: 2
+  Flow cover: 9
+  Zero half: 10
+  Lazy constraints: 131
+
+Explored 3022 nodes (13150 simplex iterations) in 10.00 seconds
+Thread count was 8 (of 8 available processors)
+
+Time limit reached
+Best objective 2.146000000000e+03, best bound 1.138000000000e+03, gap 46.9711%
