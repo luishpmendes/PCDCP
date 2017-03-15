@@ -62,14 +62,14 @@ void floydWarshall (matrix W, matrix * D, matrix * PI) {
 int main (int argc, char * argv[]) {
     chrono :: steady_clock :: time_point tBegin = chrono :: steady_clock :: now();
     string I ("0");
-    double timeLimit = 10.0;
+    ulint timeLimit = 10.0;
 
     if (argc >= 2) {
         I = string (argv[1]);
     }
 
     if (argc >= 3) {
-        timeLimit = atof(argv[2]);
+        timeLimit = atoi(argv[2]);
     }
 
     ulint n, mComplete, m, k, t, root;
@@ -132,14 +132,14 @@ int main (int argc, char * argv[]) {
         env.set(GRB_IntParam_LazyConstraints, 1);
         env.set(GRB_IntParam_LogToConsole, 0);
         env.set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/log1.txt");
-        env.set(GRB_DoubleParam_TimeLimit, timeLimit);
+        env.set(GRB_DoubleParam_TimeLimit, ((double) timeLimit));
 
         GRBModel model = GRBModel(env);
 
         model.getEnv().set(GRB_IntParam_LazyConstraints, 1);
         model.getEnv().set(GRB_IntParam_LogToConsole, 0);
         model.getEnv().set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/log1.txt");
-        model.getEnv().set(GRB_DoubleParam_TimeLimit, timeLimit);
+        model.getEnv().set(GRB_DoubleParam_TimeLimit, ((double) timeLimit));
 
         vector <GRBVar> y (n);
 
@@ -245,6 +245,12 @@ int main (int argc, char * argv[]) {
         ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/elapsedTime1.txt", ofstream :: out);
         elapsedTimeFile << elapsedTime.count();
         elapsedTimeFile.close();
+
+        chrono :: nanoseconds elapsedTimeS = chrono :: duration_cast <chrono :: seconds> (tEnd - tBegin);
+        lint remainingTime = timeLimit - elapsedTimeS.count();
+        ofstream remainingTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/remainingTime.txt", ofstream :: out);
+        remainingTimeFile << remainingTime;
+        remainingTimeFile.close();
     } catch (GRBException e) {
         cout << "Error code = " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;

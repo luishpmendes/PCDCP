@@ -117,14 +117,14 @@ class subtourelim: public GRBCallback {
 int main (int argc, char * argv[]) {
     chrono :: steady_clock :: time_point tBegin = chrono :: steady_clock :: now();
     string I ("0");
-    double timeLimit = 10.0;
+    ulint timeLimit = 10;
 
     if (argc >= 2) {
         I = string (argv[1]);
     }
 
     if (argc >= 3) {
-        timeLimit = atof(argv[2]);
+        timeLimit = atoi(argv[2]);
     }
 
     ulint nComplete, k, t, n, m, root;
@@ -180,19 +180,28 @@ int main (int argc, char * argv[]) {
         string P = ssP.str();
         P.erase(remove(P.begin(), P.end(), '.'), P.end());
 
+        ifstream remainingTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/remainingTime.txt");
+        lint remainingTime = 0;
+        if (remainingTimeFile.is_open()) {
+            remainingTimeFile >> remainingTime;
+        }
+        if (remainingTime > 0) {
+            timeLimit += remainingTime;
+        }
+
         GRBEnv env = GRBEnv();
 
         env.set(GRB_IntParam_LazyConstraints, 1);
         env.set(GRB_IntParam_LogToConsole, 0);
         env.set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/log2.txt");
-        env.set(GRB_DoubleParam_TimeLimit, timeLimit);
+        env.set(GRB_DoubleParam_TimeLimit, ((double) timeLimit));
 
         GRBModel model = GRBModel(env);
 
         model.getEnv().set(GRB_IntParam_LazyConstraints, 1);
         model.getEnv().set(GRB_IntParam_LogToConsole, 0);
         model.getEnv().set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/log2.txt");
-        model.getEnv().set(GRB_DoubleParam_TimeLimit, timeLimit);
+        model.getEnv().set(GRB_DoubleParam_TimeLimit, ((double) timeLimit));
 
         vector <GRBVar> y (nComplete);
 
