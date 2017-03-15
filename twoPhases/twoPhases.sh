@@ -12,14 +12,11 @@ do
         do
             for t in 0 1
             do
-                for p in 0.2
+                for i in 0
                 do
-                    for i in 0
-                    do
-                        echo "phase1 - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
-                        mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
-                        ./phase1 $i $timeLimit < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/result.tmp";
-                    done
+                    echo "phase1 - N"$n"D"${d//.}"K"$k"T"$t"I"$i;
+                    mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i;
+                    ./phase1 $i $timeLimit < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/result.tmp";
                 done
             done
         done
@@ -33,14 +30,11 @@ do
         do
             for t in 0 1
             do
-                for p in 0.2
+                for i in 0
                 do
-                    for i in 0
-                    do
-                        echo "phase2 - N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
-                        mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i;
-                        ./phase2 $i $timeLimit < "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/result.tmp" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"/result.out";
-                    done
+                    echo "phase2 - N"$n"D"${d//.}"K"$k"T"$t"I"$i;
+                    mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i;
+                    ./phase2 $i $timeLimit < "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/result.tmp" > "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/result.out";
                 done
             done
         done

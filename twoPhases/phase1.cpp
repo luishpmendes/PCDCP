@@ -73,9 +73,9 @@ int main (int argc, char * argv[]) {
     }
 
     ulint n, mComplete, m, k, t, root;
-    double d, p;
+    double d;
 
-    cin >> n >> d >> k >> t >> p >> mComplete >> m >> root;
+    cin >> n >> d >> k >> t >> mComplete >> m >> root;
 
     vector <ulint> penalty (n); // vector with the penalties of each vertex
     matrix Wcomplete (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
@@ -122,23 +122,19 @@ int main (int argc, char * argv[]) {
         D.erase(remove(D.begin(), D.end(), '.'), D.end());
         string K = itos(k);
         string T = itos(t);
-        stringstream ssP;
-        ssP << fixed << setprecision(1) << p;
-        string P = ssP.str();
-        P.erase(remove(P.begin(), P.end(), '.'), P.end());
 
         GRBEnv env = GRBEnv();
 
         env.set(GRB_IntParam_LazyConstraints, 1);
         env.set(GRB_IntParam_LogToConsole, 0);
-        env.set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/log1.txt");
+        env.set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/log1.txt");
         env.set(GRB_DoubleParam_TimeLimit, ((double) timeLimit));
 
         GRBModel model = GRBModel(env);
 
         model.getEnv().set(GRB_IntParam_LazyConstraints, 1);
         model.getEnv().set(GRB_IntParam_LogToConsole, 0);
-        model.getEnv().set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/log1.txt");
+        model.getEnv().set(GRB_StringParam_LogFile, "./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/log1.txt");
         model.getEnv().set(GRB_DoubleParam_TimeLimit, ((double) timeLimit));
 
         vector <GRBVar> y (n);
@@ -197,7 +193,7 @@ int main (int argc, char * argv[]) {
                 }
             }
 
-            cout << n << ' ' << d << ' ' << k << ' ' << t << ' ' << p << ' ' << solutionV.size() << ' ' << solutionE.size() << ' ' << root << endl;
+            cout << n << ' ' << d << ' ' << k << ' ' << t << ' ' << solutionV.size() << ' ' << solutionE.size() << ' ' << root << endl;
 
             for (ulint i = 0; i < n; i++) {
                 cout << penalty[i] << endl;
@@ -230,25 +226,25 @@ int main (int argc, char * argv[]) {
         }
 
         // exporting model
-        model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/model1.lp");
+        model.write("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/model1.lp");
 
-        ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/objVal1.txt", ofstream :: out);
+        ofstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/objVal1.txt", ofstream :: out);
         objValFile << model.get(GRB_DoubleAttr_ObjVal);
         objValFile.close();
 
-        ofstream gapFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/gap1.txt", ofstream :: out);
+        ofstream gapFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/gap1.txt", ofstream :: out);
         gapFile << model.get(GRB_DoubleAttr_MIPGap);
         gapFile.close();
 
         chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
         chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
-        ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/elapsedTime1.txt", ofstream :: out);
+        ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/elapsedTime1.txt", ofstream :: out);
         elapsedTimeFile << elapsedTime.count();
         elapsedTimeFile.close();
 
         chrono :: nanoseconds elapsedTimeS = chrono :: duration_cast <chrono :: seconds> (tEnd - tBegin);
         lint remainingTime = timeLimit - elapsedTimeS.count();
-        ofstream remainingTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/remainingTime.txt", ofstream :: out);
+        ofstream remainingTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/remainingTime.txt", ofstream :: out);
         remainingTimeFile << remainingTime;
         remainingTimeFile.close();
     } catch (GRBException e) {

@@ -30,8 +30,6 @@ int main () {
     vector <int> vT;
     vT.push_back(0);
     vT.push_back(1);
-    vector <double> vP;
-    vP.push_back(0.2);
     vector <int> vI;
     vI.push_back(0);
 
@@ -58,132 +56,125 @@ int main () {
                     stringstream ssT;
                     ssT << t;
                     string T = ssT.str();
-                    for (vector <double> :: iterator itP = vP.begin(); itP != vP.end(); itP++) {
-                        double p = *itP;
-                        stringstream ssP;
-                        ssP << fixed << setprecision(1) << p;
-                        string P = ssP.str();
-                        P.erase(remove(P.begin(), P.end(), '.'), P.end());
-                        for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
-                            int i = *itI;
-                            stringstream ssI;
-                            ssI << i;
-                            string I = ssI.str();
+                    for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
+                        int i = *itI;
+                        stringstream ssI;
+                        ssI << i;
+                        string I = ssI.str();
 
-                            double objVal1 = 0.0;
-                            ifstream objVal1File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/objVal1.txt");
-                            if (objVal1File.is_open()) {
-                                objVal1File >> objVal1;
-                            }
-
-                            double gap1 = 0.0;
-                            ifstream gap1File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/gap1.txt");
-                            if (gap1File.is_open()) {
-                                gap1File >> gap1;
-                            }
-
-                            ulint elapsedTime1 = 0.0;
-                            ifstream elapsedTime1File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/elapsedTime1.txt");
-                            if (elapsedTime1File.is_open()) {
-                                elapsedTime1File >> elapsedTime1;
-                            }
-
-                            double objVal2 = 0.0;
-                            ifstream objVal2File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/objVal2.txt");
-                            if (objVal2File.is_open()) {
-                                objVal2File >> objVal2;
-                            }
-
-                            double gap2 = 0.0;
-                            ifstream gap2File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/gap2.txt");
-                            if (gap2File.is_open()) {
-                                gap2File >> gap2;
-                            }
-
-                            ulint elapsedTime2 = 0.0;
-                            ifstream elapsedTime2File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/elapsedTime2.txt");
-                            if (elapsedTime2File.is_open()) {
-                                elapsedTime2File >> elapsedTime2;
-                            }
-
-                            double nSolution = 0.0, sumPenalty = 0.0, sumEdgeCost = 0.0;
-
-                            ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + ".in");
-                            ifstream resultFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "/result.out");
-
-                            if (inputFile.is_open() && resultFile.is_open()) {
-                                ulint n, mComplete, m, k, t, root;
-                                double d, p;
-                                inputFile >> n >> d >> k >> t >> p >> mComplete >> m >> root;
-
-                                vector < pair < pair <double, double>, ulint > > vertices (n, make_pair(make_pair(0, 0), 0));
-                                // reading vertices' coordinates and penalty
-                                for (ulint v = 0; v < n; v++) {
-                                    inputFile >> vertices[v].first.first;
-                                    inputFile >> vertices[v].first.second;
-                                    inputFile >> vertices[v].second;
-                                }
-
-                                matrix W (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
-                                for (ulint i = 0; i < n; i++) {
-                                    W[i][i] = 0;
-                                }
-
-                                // reading (and ignoring) the complete graph's edges
-                                for (ulint j = 0; j < mComplete; j++) {
-                                    ulint u, v, w;
-                                    inputFile >> u >> v >> w;
-                                    W[u][v] = w;
-                                    W[v][u] = w;
-                                }
-
-                                vector < pair <ulint, ulint> > edges (m, make_pair(0, 0));
-                                map < pair <ulint, ulint>, ulint > weights;
-                                // reading the graph's edges and its weights
-                                for (ulint e = 0; e < m; e++) {
-                                    ulint u, v, w;
-                                    inputFile >> u >> v >> w;
-                                    edges[e].first = u;
-                                    edges[e].second = v;
-                                    weights[edges[e]] = w;
-                                }
-
-                                ulint mSolution, costSolution;
-                                resultFile >> nSolution >> mSolution >> costSolution;
-
-                                vector <ulint> solutionVertices (nSolution, 0);
-                                // reading the solution's vertices
-                                for (ulint v = 0; v < nSolution; v++) {
-                                    resultFile >> solutionVertices[v];
-                                }
-
-                                vector < pair <ulint, ulint> > solutionEdges (mSolution, make_pair(0, 0));
-                                // reading the solution's edges
-                                for (ulint e = 0; e < mSolution; e++) {
-                                    resultFile >> solutionEdges[e].first;
-                                    resultFile >> solutionEdges[e].second;
-                                }
-
-                                ulint allPenalties = 0;
-                                for (ulint v = 0; v < n; v++) {
-                                    allPenalties += vertices[v].second;
-                                }
-
-                                ulint chosenPenalties = 0;
-                                for (ulint v = 0; v < nSolution; v++) {
-                                    chosenPenalties += vertices[solutionVertices[v]].second;
-                                }
-
-                                sumPenalty = (allPenalties - chosenPenalties);
-
-                                for (ulint e = 0; e < mSolution; e++) {
-                                    sumEdgeCost += weights[solutionEdges[e]];
-                                }
-
-                            }
-
-                            cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << objVal1 << ',' << gap1 << ',' << elapsedTime1 << ',' << objVal2 << ',' << gap2 << ',' << elapsedTime2 << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << endl;
+                        double objVal1 = 0.0;
+                        ifstream objVal1File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/objVal1.txt");
+                        if (objVal1File.is_open()) {
+                            objVal1File >> objVal1;
                         }
+
+                        double gap1 = 0.0;
+                        ifstream gap1File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/gap1.txt");
+                        if (gap1File.is_open()) {
+                            gap1File >> gap1;
+                        }
+
+                        ulint elapsedTime1 = 0.0;
+                        ifstream elapsedTime1File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/elapsedTime1.txt");
+                        if (elapsedTime1File.is_open()) {
+                            elapsedTime1File >> elapsedTime1;
+                        }
+
+                        double objVal2 = 0.0;
+                        ifstream objVal2File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/objVal2.txt");
+                        if (objVal2File.is_open()) {
+                            objVal2File >> objVal2;
+                        }
+
+                        double gap2 = 0.0;
+                        ifstream gap2File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/gap2.txt");
+                        if (gap2File.is_open()) {
+                            gap2File >> gap2;
+                        }
+
+                        ulint elapsedTime2 = 0.0;
+                        ifstream elapsedTime2File ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/elapsedTime2.txt");
+                        if (elapsedTime2File.is_open()) {
+                            elapsedTime2File >> elapsedTime2;
+                        }
+
+                        double nSolution = 0.0, sumPenalty = 0.0, sumEdgeCost = 0.0;
+
+                        ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "I" + I + ".in");
+                        ifstream resultFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/result.out");
+
+                        if (inputFile.is_open() && resultFile.is_open()) {
+                            ulint n, mComplete, m, k, t, root;
+                            double d;
+                            inputFile >> n >> d >> k >> t >> mComplete >> m >> root;
+
+                            vector < pair < pair <double, double>, ulint > > vertices (n, make_pair(make_pair(0, 0), 0));
+                            // reading vertices' coordinates and penalty
+                            for (ulint v = 0; v < n; v++) {
+                                inputFile >> vertices[v].first.first;
+                                inputFile >> vertices[v].first.second;
+                                inputFile >> vertices[v].second;
+                            }
+
+                            matrix W (n, vector <lint> (n, -1)); // adjacency matrix for the complete graph
+                            for (ulint i = 0; i < n; i++) {
+                                W[i][i] = 0;
+                            }
+
+                            // reading (and ignoring) the complete graph's edges
+                            for (ulint j = 0; j < mComplete; j++) {
+                                ulint u, v, w;
+                                inputFile >> u >> v >> w;
+                                W[u][v] = w;
+                                W[v][u] = w;
+                            }
+
+                            vector < pair <ulint, ulint> > edges (m, make_pair(0, 0));
+                            map < pair <ulint, ulint>, ulint > weights;
+                            // reading the graph's edges and its weights
+                            for (ulint e = 0; e < m; e++) {
+                                ulint u, v, w;
+                                inputFile >> u >> v >> w;
+                                edges[e].first = u;
+                                edges[e].second = v;
+                                weights[edges[e]] = w;
+                            }
+
+                            ulint mSolution, costSolution;
+                            resultFile >> nSolution >> mSolution >> costSolution;
+
+                            vector <ulint> solutionVertices (nSolution, 0);
+                            // reading the solution's vertices
+                            for (ulint v = 0; v < nSolution; v++) {
+                                resultFile >> solutionVertices[v];
+                            }
+
+                            vector < pair <ulint, ulint> > solutionEdges (mSolution, make_pair(0, 0));
+                            // reading the solution's edges
+                            for (ulint e = 0; e < mSolution; e++) {
+                                resultFile >> solutionEdges[e].first;
+                                resultFile >> solutionEdges[e].second;
+                            }
+
+                            ulint allPenalties = 0;
+                            for (ulint v = 0; v < n; v++) {
+                                allPenalties += vertices[v].second;
+                            }
+
+                            ulint chosenPenalties = 0;
+                            for (ulint v = 0; v < nSolution; v++) {
+                                chosenPenalties += vertices[solutionVertices[v]].second;
+                            }
+
+                            sumPenalty = (allPenalties - chosenPenalties);
+
+                            for (ulint e = 0; e < mSolution; e++) {
+                                sumEdgeCost += weights[solutionEdges[e]];
+                            }
+
+                        }
+
+                        cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << objVal1 << ',' << gap1 << ',' << elapsedTime1 << ',' << objVal2 << ',' << gap2 << ',' << elapsedTime2 << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << endl;
                     }
                 }
             }
