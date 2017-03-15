@@ -2,7 +2,7 @@
 rm -rf output;
 mkdir -p output;
 make linearProgram;
-timeLimit=360.0;
+timeLimit=10;
 for n in 50 100 200
 do
     for d in 0.3 0.5 0.7

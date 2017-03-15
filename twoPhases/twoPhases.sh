@@ -3,7 +3,8 @@ rm -rf output;
 mkdir -p output;
 make phase1;
 make phase2;
-timeLimit=180.0;
+timeLimit1=5;
+timeLimit2=5;
 for n in 50 100 200
 do
     for d in 0.3 0.5 0.7
@@ -16,7 +17,7 @@ do
                 do
                     echo "phase1 - N"$n"D"${d//.}"K"$k"T"$t"I"$i;
                     mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i;
-                    ./phase1 $i $timeLimit < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/result.tmp";
+                    ./phase1 $i $timeLimit1 < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/result.tmp";
                 done
             done
         done
@@ -34,7 +35,7 @@ do
                 do
                     echo "phase2 - N"$n"D"${d//.}"K"$k"T"$t"I"$i;
                     mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i;
-                    ./phase2 $i $timeLimit < "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/result.tmp" > "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/result.out";
+                    ./phase2 $i $timeLimit2 < "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/result.tmp" > "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"/result.out";
                 done
             done
         done
