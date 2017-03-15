@@ -376,13 +376,24 @@ void localSearch (matrix W, vector <ulint> penalty, ulint root, vector < set <ul
     }
 }
 
-tSolution grasp (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, ulint maxIterations, double alpha, ulint seed) {
+bool termination (chrono :: high_resolution_clock :: time_point tBegin, ulint timeLimit) {
+    chrono :: high_resolution_clock :: time_point tCurrent = chrono :: high_resolution_clock :: now();
+    chrono :: seconds elapsedTime = chrono :: duration_cast <chrono :: seconds> (tCurrent - tBegin);
+    if ((ulint) elapsedTime.count() >= timeLimit) {
+        return true;
+    }
+    return false;
+}
+
+tSolution grasp (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint root, vector < set <ulint> > Ns, chrono :: high_resolution_clock :: time_point tBegin, ulint timeLimit, double alpha, ulint seed) {
     tSolution result;
-    for (ulint k = 0; k < maxIterations; k++) {
+    bool flag = true;
+    while (termination (tBegin, timeLimit) != true) {
         tSolution newSolution = greedyRandomizedConstruction(W, Dist, PI, penalty, root, Ns, alpha, seed);
         localSearch(W, penalty, root, Ns, &newSolution);
 
-        if (k == 0 || result.second > newSolution.second) {
+        if (flag || result.second > newSolution.second) {
+            flag = false;
             result = newSolution;
         }
     }
@@ -390,9 +401,9 @@ tSolution grasp (matrix W, matrix Dist, matrix PI, vector <ulint> penalty, ulint
 }
 
 int main (int argc, char * argv[]) {
-    chrono :: steady_clock :: time_point tBegin = chrono :: steady_clock :: now();
+    chrono :: high_resolution_clock :: time_point tBegin = chrono :: high_resolution_clock :: now();
     string I ("0");
-    ulint maxIterations = 100;
+    ulint timeLimit = 10;
     double alpha = 0.3;
 
     if (argc >= 2) {
@@ -400,7 +411,7 @@ int main (int argc, char * argv[]) {
     }
 
     if (argc >= 3) {
-        maxIterations = atoi(argv[2]);
+        timeLimit = atoi(argv[2]);
     }
 
     if (argc >= 4) {
@@ -453,9 +464,9 @@ int main (int argc, char * argv[]) {
 
     floydWarshall (W, &Dist, &PI);
 
-    ulint seed = chrono::system_clock::now().time_since_epoch().count();
+    ulint seed = chrono :: system_clock :: now().time_since_epoch().count();
 
-    tSolution solution = grasp(W, Dist, PI, penalty, root, Ns, maxIterations, alpha, seed);
+    tSolution solution = grasp(W, Dist, PI, penalty, root, Ns, tBegin, timeLimit, alpha, seed);
 
     cout << solution.first.size() << ' ' << solution.first.size() << ' ' << solution.second << endl;
 
@@ -491,7 +502,7 @@ int main (int argc, char * argv[]) {
     objValFile << solution.second;
     objValFile.close();
 
-    chrono :: steady_clock :: time_point tEnd = chrono :: steady_clock :: now();
+    chrono :: high_resolution_clock :: time_point tEnd = chrono :: high_resolution_clock :: now();
     chrono :: nanoseconds elapsedTime = chrono :: duration_cast <chrono :: nanoseconds> (tEnd - tBegin);
     ofstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "A" + A + "/elapsedTime.txt", ofstream :: out);
     elapsedTimeFile << elapsedTime.count();
