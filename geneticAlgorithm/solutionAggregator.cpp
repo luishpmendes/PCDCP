@@ -27,8 +27,6 @@ int main () {
     vector <int> vT;
     vT.push_back(0);
     vT.push_back(1);
-    vector <double> vP;
-    vP.push_back(0.2);
     vector <int> vI;
     vI.push_back(0);
     vector <int> vPS;
@@ -40,7 +38,7 @@ int main () {
     vMR.push_back(0.2);
     vMR.push_back(0.3);
 
-    cout << "n,d,k,t,p,i,ps,mr,objVal,elapsedTime" << endl;
+    cout << "n,d,k,t,i,ps,mr,objVal,elapsedTime" << endl;
 
     for (vector <int> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
         int n = *itN;
@@ -63,43 +61,36 @@ int main () {
                     stringstream ssT;
                     ssT << t;
                     string T = ssT.str();
-                    for (vector <double> :: iterator itP = vP.begin(); itP != vP.end(); itP++) {
-                        double p = *itP;
-                        stringstream ssP;
-                        ssP << fixed << setprecision(1) << p;
-                        string P = ssP.str();
-                        P.erase(remove(P.begin(), P.end(), '.'), P.end());
-                        for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
-                            int i = *itI;
-                            stringstream ssI;
-                            ssI << i;
-                            string I = ssI.str();
-                            for (vector <int> :: iterator itPS = vPS.begin(); itPS != vPS.end(); itPS++) {
-                                int ps = *itPS;
-                                stringstream ssPS;
-                                ssPS << ps;
-                                string PS = ssPS.str();
-                                for (vector <double> :: iterator itMR = vMR.begin(); itMR != vMR.end(); itMR++) {
-                                    double mr = *itMR;
-                                    stringstream ssMR;
-                                    ssMR << fixed << setprecision(1) << mr;
-                                    string MR = ssMR.str();
-                                    MR.erase(remove(MR.begin(), MR.end(), '.'), MR.end());
+                    for (vector <int> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
+                        int i = *itI;
+                        stringstream ssI;
+                        ssI << i;
+                        string I = ssI.str();
+                        for (vector <int> :: iterator itPS = vPS.begin(); itPS != vPS.end(); itPS++) {
+                            int ps = *itPS;
+                            stringstream ssPS;
+                            ssPS << ps;
+                            string PS = ssPS.str();
+                            for (vector <double> :: iterator itMR = vMR.begin(); itMR != vMR.end(); itMR++) {
+                                double mr = *itMR;
+                                stringstream ssMR;
+                                ssMR << fixed << setprecision(1) << mr;
+                                string MR = ssMR.str();
+                                MR.erase(remove(MR.begin(), MR.end(), '.'), MR.end());
 
-                                    double objVal = 0.0;
-                                    ifstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/objVal.txt");
-                                    if (objValFile.is_open()) {
-                                        objValFile >> objVal;
-                                    }
-
-                                    ulint elapsedTime = 0.0;
-                                    ifstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "P" + P + "I" + I + "PS" + PS + "MR" + MR + "/elapsedTime.txt");
-                                    if (elapsedTimeFile.is_open()) {
-                                        elapsedTimeFile >> elapsedTime;
-                                    }
-
-                                    cout << n << ',' << d << ',' << k << ',' << t << ',' << p << ',' << i << ',' << ps << ',' << mr << ',' << objVal << ',' << elapsedTime << endl;
+                                double objVal = 0.0;
+                                ifstream objValFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "PS" + PS + "MR" + MR + "/objVal.txt");
+                                if (objValFile.is_open()) {
+                                    objValFile >> objVal;
                                 }
+
+                                ulint elapsedTime = 0.0;
+                                ifstream elapsedTimeFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "PS" + PS + "MR" + MR + "/elapsedTime.txt");
+                                if (elapsedTimeFile.is_open()) {
+                                    elapsedTimeFile >> elapsedTime;
+                                }
+
+                                cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << ps << ',' << mr << ',' << objVal << ',' << elapsedTime << endl;
                             }
                         }
                     }

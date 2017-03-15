@@ -11,18 +11,15 @@ do
         do
             for t in 0 1
             do
-                for p in 0.2 # remover
+                for i in 0 # 0 1 2
                 do
-                    for i in 0 # 0 1 2
+                    for ps in 10 50 100
                     do
-                        for ps in 10 50 100
+                        for mr in 0.1 0.2 0.3
                         do
-                            for mr in 0.1 0.2 0.3
-                            do
-                                echo "N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.};
-                                mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.};
-                                ./geneticAlgorithm $i $timeLimit $ps $mr < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"P"${p//.}"I"$i"PS"$ps"MR"${mr//.}"/result.out";
-                            done
+                            echo "N"$n"D"${d//.}"K"$k"T"$t"I"$i"PS"$ps"MR"${mr//.};
+                            mkdir -p "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"PS"$ps"MR"${mr//.};
+                            ./geneticAlgorithm $i $timeLimit $ps $mr < "../input/instanceN"$n"D"${d//.}"K"$k"T"$t"I"$i".in" > "output/N"$n"D"${d//.}"K"$k"T"$t"I"$i"PS"$ps"MR"${mr//.}"/result.out";
                         done
                     done
                 done
