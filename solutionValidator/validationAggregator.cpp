@@ -38,11 +38,11 @@ int main (int argc, char * argv[]) {
     vI.push_back(2);
 
     if (path.compare("grasp") == 0) {
-        cout << "n,d,k,t,p,i,a,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
+        cout << "n,d,k,t,i,a,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
     } else if (path.compare("geneticAlgorithm") == 0) {
-        cout << "n,d,k,t,p,i,ps,mr,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
+        cout << "n,d,k,t,i,ps,mr,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
     } else {
-        cout << "n,d,k,t,p,i,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
+        cout << "n,d,k,t,i,nFlag,kFlag,nSolutionFlag,mSolutionFlag, solutionVerticesFlag,solutionEdgesFlag,solutionCostFlag,coverFlag,solutionVerticesNotInMainCycleFlag,nonSolutionVerticesInMainCycleFlag,errorFlag" << endl;
     }
     for (vector <int> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
         int n = *itN;
