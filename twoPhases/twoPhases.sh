@@ -3,8 +3,8 @@ rm -rf output;
 mkdir -p output;
 make phase1;
 make phase2;
-timeLimit1=5;
-timeLimit2=5;
+timeLimit1=30;
+timeLimit2=30;
 for n in 50 100 200
 do
     for d in 0.3 0.5 0.7
