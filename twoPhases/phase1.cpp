@@ -62,7 +62,7 @@ void floydWarshall (matrix W, matrix * D, matrix * PI) {
 int main (int argc, char * argv[]) {
     chrono :: steady_clock :: time_point tBegin = chrono :: steady_clock :: now();
     string I ("0");
-    ulint timeLimit = 10.0;
+    ulint timeLimit = 10;
 
     if (argc >= 2) {
         I = string (argv[1]);
