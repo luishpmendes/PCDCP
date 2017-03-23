@@ -1,0 +1,49 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 21 11:28:40 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 21 11:28:40 2017
+
+Optimize a model with 201 rows, 3565 columns and 8419 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [2e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 56 rows and 1 columns
+Presolve time: 0.01s
+Presolved: 145 rows, 3564 columns, 7487 nonzeros
+Variable types: 0 continuous, 3564 integer (3564 binary)
+
+Root relaxation: objective 8.430000e+02, 122 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  843.00000    0   23          -  843.00000      -     -    0s
+     0     0  859.50000    0   10          -  859.50000      -     -    0s
+     0     0  865.50000    0    4          -  865.50000      -     -    0s
+     0     0  867.00000    0   10          -  867.00000      -     -    0s
+     0     0  867.33333    0   17          -  867.33333      -     -    0s
+     0     0  867.33333    0   17          -  867.33333      -     -    0s
+     0     2  867.33333    0   11          -  867.33333      -     -    0s
+  4200  2694  879.00000  105    7          -  869.50000      -   4.9    5s
+  9149  6895  899.00000   97   11          -  869.50000      -   4.7   10s
+ 12496  9746  878.50000   44    7          -  870.00000      -   4.7   15s
+ 15534 12381  870.80000   21    9          -  870.00000      -   4.7   20s
+ 18282 14864  902.00000  142    4          -  870.18750      -   4.7   25s
+ 20540 16798 1044.50000  337   14          -  870.18750      -   4.7   30s
+ 22729 18568  900.50000  125    6          -  870.50000      -   4.7   35s
+ 24345 20004  918.33333  178    6          -  870.50000      -   4.7   40s
+
+Cutting planes:
+  Gomory: 25
+  Cover: 61
+  Zero half: 1
+  Lazy constraints: 2752
+
+Explored 25896 nodes (120963 simplex iterations) in 60.01 seconds
+Thread count was 4 (of 4 available processors)
+
+Time limit reached
+Best objective -, best bound 8.710000000000e+02, gap -

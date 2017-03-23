@@ -1,0 +1,53 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 21 11:11:42 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 21 11:11:42 2017
+
+Optimize a model with 201 rows, 2575 columns and 6211 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 48 rows and 1 columns
+Presolve time: 0.01s
+Presolved: 153 rows, 2574 columns, 5685 nonzeros
+Variable types: 0 continuous, 2574 integer (2574 binary)
+
+Root relaxation: objective 8.600000e+02, 124 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  860.00000    0   26          -  860.00000      -     -    0s
+     0     0  892.91667    0   19          -  892.91667      -     -    0s
+     0     0  903.16667    0   18          -  903.16667      -     -    0s
+     0     0  907.83333    0   29          -  907.83333      -     -    0s
+     0     0  908.33333    0   36          -  908.33333      -     -    0s
+     0     0  908.33333    0   36          -  908.33333      -     -    0s
+     0     2  908.33333    0   36          -  908.33333      -     -    0s
+  4857  3560 1016.75000  248    7          -  920.33333      -   5.7    5s
+* 5340  3669             300    1549.0000000  920.33333  40.6%   5.6    5s
+* 5350  3567             305    1535.0000000  920.33333  40.0%   5.6    5s
+H 6347  3894                    1433.0000000  920.33333  35.8%   5.5    7s
+  8306  5054  964.00000   78    - 1433.00000  921.25000  35.7%   5.3   10s
+H 9671  5735                    1256.0000000  921.62500  26.6%   5.2   11s
+ 11250  6978 1221.00000  193   10 1256.00000  921.79828  26.6%   5.1   15s
+*12147  6420             119    1110.0000000  921.90476  16.9%   5.1   16s
+*12338  6548             120    1099.0000000  922.00000  16.1%   5.1   16s
+*13947  7642             110    1080.0000000  922.00000  14.6%   4.9   18s
+ 15147  8608     cutoff  129      1080.00000  922.26849  14.6%   4.9   20s
+H17797  7995                    1005.0000000  922.50000  8.21%   4.7   24s
+ 17843  8014     cutoff   43      1005.00000  922.50000  8.21%   4.7   25s
+ 20412 10128 1003.00000  321    4 1005.00000  922.70588  8.19%   4.6   35s
+ 22600 11835  965.00000   52   36 1005.00000  923.00000  8.16%   4.5   59s
+
+Cutting planes:
+  Lazy constraints: 4
+
+Explored 22601 nodes (102005 simplex iterations) in 60.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Time limit reached
+Best objective 1.005000000000e+03, best bound 9.230000000000e+02, gap 8.1592%

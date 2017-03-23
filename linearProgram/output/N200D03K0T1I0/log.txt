@@ -1,0 +1,50 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 21 11:31:09 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 21 11:31:09 2017
+
+Optimize a model with 401 rows, 6170 columns and 12347 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 198 rows and 194 columns
+Presolve time: 0.03s
+Presolved: 203 rows, 5976 columns, 11953 nonzeros
+Variable types: 0 continuous, 5976 integer (5976 binary)
+
+Root relaxation: objective 1.910500e+03, 308 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1910.50000    0   30          - 1910.50000      -     -    0s
+     0     0 1915.00000    0   56          - 1915.00000      -     -    0s
+     0     0 1916.00000    0   45          - 1916.00000      -     -    0s
+     0     0 1916.16667    0   54          - 1916.16667      -     -    0s
+     0     0 1916.16667    0   54          - 1916.16667      -     -    0s
+     0     2 1916.16667    0   50          - 1916.16667      -     -    0s
+  1657  1236 1943.00000   84    6          - 1918.57692      -  10.2    5s
+H 3916  1587                    1967.0000000 1918.57692  2.46%  11.8    9s
+  4055  1623 1919.14286   32   16 1967.00000 1918.78000  2.45%  11.7   10s
+  6497  3487 1966.00000   98    4 1967.00000 1919.87500  2.40%  10.0   15s
+H 9080  3274                    1940.0000000 1920.93750  0.98%   9.4   19s
+  9087  3260     cutoff  144      1940.00000 1921.00000  0.98%   9.4   20s
+* 9426  1907              53    1931.0000000 1921.00000  0.52%   9.4   20s
+* 9750   649              36    1925.0000000 1921.25000  0.19%   9.4   20s
+* 9907   230              38    1924.0000000 1922.00000  0.10%   9.4   21s
+
+Cutting planes:
+  Gomory: 12
+  Cover: 5
+  Flow cover: 2
+  Zero half: 15
+  Lazy constraints: 1002
+
+Explored 10234 nodes (94905 simplex iterations) in 21.65 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.924000000000e+03, best bound 1.924000000000e+03, gap 0.0%
