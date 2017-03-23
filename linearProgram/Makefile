@@ -1,7 +1,7 @@
-INC = /home/lmendes/gurobi652/linux64/include/
+INC = /opt/gurobi652/linux64/include/
 CPP = g++
 CARGS = -Wall -m64 -O3 -fno-inline -std=c++11
-CPPLIB = -L/home/lmendes/gurobi652/linux64/lib/ -lgurobi_c++ -lgurobi65
+CPPLIB = -L/opt/gurobi652/linux64/lib/ -lgurobi_c++ -lgurobi65
 
 clean: 
 	rm -rf linearProgram solutionAggregator
