@@ -1,0 +1,49 @@
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 21 10:54:59 2017
+
+
+Gurobi 6.5.2 (linux64) logging started Tue Mar 21 10:54:59 2017
+
+Optimize a model with 201 rows, 1585 columns and 3171 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 2e+00]
+  Objective range [1e+00, 1e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 4879
+Presolve removed 101 rows and 100 columns
+Presolve time: 0.01s
+Presolved: 100 rows, 1485 columns, 2970 nonzeros
+Variable types: 0 continuous, 1485 integer (1485 binary)
+
+Root relaxation: objective 1.426500e+03, 145 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1426.50000    0    8 4879.00000 1426.50000  70.8%     -    0s
+     0     0 1428.50000    0   10 4879.00000 1428.50000  70.7%     -    0s
+     0     0 1429.75000    0   25 4879.00000 1429.75000  70.7%     -    0s
+     0     0 1430.00000    0    4 4879.00000 1430.00000  70.7%     -    0s
+     0     0 1430.00000    0   10 4879.00000 1430.00000  70.7%     -    0s
+     0     0 1430.00000    0    6 4879.00000 1430.00000  70.7%     -    0s
+     0     2 1430.00000    0    4 4879.00000 1430.00000  70.7%     -    0s
+*  151   119              29    1476.0000000 1430.22222  3.10%   6.6    0s
+*  887   540              12    1450.0000000 1431.22222  1.30%   6.0    0s
+H 1062   601                    1447.0000000 1433.94444  0.90%   5.9    0s
+H 1075   580                    1445.0000000 1436.02703  0.62%   6.2    1s
+* 1151   581              45    1444.0000000 1437.00000  0.48%   6.6    1s
+* 1197   522              64    1441.0000000 1437.00000  0.28%   6.5    1s
+* 1442   420              45    1440.0000000 1437.00000  0.21%   6.0    1s
+
+Cutting planes:
+  Gomory: 11
+  Flow cover: 3
+  Zero half: 5
+  Lazy constraints: 185
+
+Explored 2000 nodes (10362 simplex iterations) in 2.06 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.440000000000e+03, best bound 1.440000000000e+03, gap 0.0%
