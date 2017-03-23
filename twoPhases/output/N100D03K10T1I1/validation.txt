@@ -1,0 +1,10 @@
+N == n : OK
+K == k : OK
+nSolution <= n : OK
+mSolution <= m : OK
+Solution Vertices : OK
+Solution Edges : ERROR - (3, 5) (3, 90) (10, 61) (38, 61) (17, 94) (58, 94) (28, 47) (33, 47) (33, 80) (20, 31) (20, 51) (21, 32) (21, 86) (0, 34) (0, 59) (42, 49) (49, 74) (44, 66) (66, 67) (2, 44) (2, 79) 
+Solution Cost : OK
+Cover : OK
+Solution Vertice Not in Main Cycle: OK
+Non Solution Vertice in Main Cycle: Error - 0 2 3 20 21 33 47 49 61 66 94
