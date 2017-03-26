@@ -298,7 +298,7 @@ int main () {
                         ifstream resultFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/result.out");
 
                         if (inputFile.is_open() && resultFile.is_open()) {
-                            ulint n, mComplete, m, k, t, root;
+                            ulint n, mComplete, k, t, root;
                             double d;
                             inputFile >> n >> d >> k >> t >> mComplete >> m >> root;
 
