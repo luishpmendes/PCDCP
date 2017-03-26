@@ -270,7 +270,7 @@ int main () {
                             double nSolution = 0.0, sumPenalty = 0.0, sumEdgeCost = 0.0;
 
                             ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "I" + I + ".in");
-                            ifstream resultFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/result.out");
+                            ifstream resultFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "A" + A + "/result.out");
 
                             if (inputFile.is_open() && resultFile.is_open()) {
                                 ulint n, mComplete, k, t, root;
@@ -442,7 +442,7 @@ int main () {
                             vSumPenaltyDividedByObjValA[a].push_back((double) sumPenaltyDividedByObjVal);
                             vSumEdgeCostDividedByObjValA[a].push_back((double) sumEdgeCostDividedByObjVal);
 
-                            cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << a << ',' << objVal << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
+                            cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << a << ',' << objVal << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
                         }
                     }
                 }
