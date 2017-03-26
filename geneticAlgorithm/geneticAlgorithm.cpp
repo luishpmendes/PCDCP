@@ -472,19 +472,19 @@ void mutation (matrix W, matrix PI, vector <ulint> penalty, ulint root, vector <
 
 tGenotype selection (set < tGenotype > population) {
     tGenotype result;
-    ulint at = 0;
+    double at = 0.0;
     for (set < tGenotype > :: iterator it = population.begin(); it != population.end(); it++) {
         tGenotype individual = *it;
-        at += individual.second;
+        at += 1.0 / (double (individual.second + 1.0));
     }
     ulint rouletteWheelSelectionSeed = chrono :: system_clock :: now().time_since_epoch().count();
     default_random_engine rouletteWheelSelectionGenerator (rouletteWheelSelectionSeed);
-    uniform_int_distribution <ulint> rouletteWheelSelectionDistribution (0, at);
-    ulint r = rouletteWheelSelectionDistribution(rouletteWheelSelectionGenerator);
-    ulint sum = 0;
+    uniform_real_distribution <double> rouletteWheelSelectionDistribution (0.0, at);
+    double r = rouletteWheelSelectionDistribution(rouletteWheelSelectionGenerator);
+    double sum = 0;
     for (set < tGenotype > :: iterator it = population.begin(); it != population.end(); it++) {
         tGenotype individual = *it;
-        sum += individual.second;
+        sum += 1.0 / (double (individual.second + 1.0));
         if (sum >= r) {
             result = individual;
             break;
