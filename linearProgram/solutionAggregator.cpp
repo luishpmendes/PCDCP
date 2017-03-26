@@ -322,11 +322,19 @@ int main () {
                             flag = 1;
                         }
 
+                        vFlagN[n].push_back((double) flag);
+                        vFlagD[d].push_back((double) flag);
+                        vFlagK[k].push_back((double) flag);
+                        vFlagT[t].push_back((double) flag);
+                        if (vFlagM.find(m) == vFlagM.end()) {
+                            vFlagM[m] = vector <double> ();
+                        }
+                        vFlagM[m].push_back((double) flag);
+
                         if (flag == 1) {
                             sM.insert(m);
 
                             vMN[n].push_back((double) m);
-                            vFlagN[n].push_back((double) flag);
                             vObjValN[n].push_back((double) objVal);
                             vGapN[n].push_back((double) gap);
                             vElapsedTimeN[n].push_back((double) elapsedTime);
@@ -339,7 +347,6 @@ int main () {
                             vSumEdgeCostDividedByObjValN[n].push_back((double) sumEdgeCostDividedByObjVal);
 
                             vMD[d].push_back((double) m);
-                            vFlagD[d].push_back((double) flag);
                             vObjValD[d].push_back((double) objVal);
                             vGapD[d].push_back((double) gap);
                             vElapsedTimeD[d].push_back((double) elapsedTime);
@@ -352,7 +359,6 @@ int main () {
                             vSumEdgeCostDividedByObjValD[d].push_back((double) sumEdgeCostDividedByObjVal);
 
                             vMK[k].push_back((double) m);
-                            vFlagK[k].push_back((double) flag);
                             vObjValK[k].push_back((double) objVal);
                             vGapK[k].push_back((double) gap);
                             vElapsedTimeK[k].push_back((double) elapsedTime);
@@ -365,7 +371,6 @@ int main () {
                             vSumEdgeCostDividedByObjValK[k].push_back((double) sumEdgeCostDividedByObjVal);
 
                             vMT[t].push_back((double) m);
-                            vFlagT[t].push_back((double) flag);
                             vObjValT[t].push_back((double) objVal);
                             vGapT[t].push_back((double) gap);
                             vElapsedTimeT[t].push_back((double) elapsedTime);
@@ -377,9 +382,6 @@ int main () {
                             vSumPenaltyDividedByObjValT[t].push_back((double) sumPenaltyDividedByObjVal);
                             vSumEdgeCostDividedByObjValT[t].push_back((double) sumEdgeCostDividedByObjVal);
 
-                            if (vFlagM.find(m) == vFlagM.end()) {
-                                vFlagM[m] = vector <double> ();
-                            }
                             if (vObjValM.find(m) == vObjValM.end()) {
                                 vObjValM[m] = vector <double> ();
                             }
@@ -411,7 +413,6 @@ int main () {
                                 vSumEdgeCostDividedByObjValM[m] = vector <double> ();
                             }
 
-                            vFlagM[m].push_back((double) flag);
                             vObjValM[m].push_back((double) objVal);
                             vGapM[m].push_back((double) gap);
                             vElapsedTimeM[m].push_back((double) elapsedTime);
@@ -423,6 +424,7 @@ int main () {
                             vSumPenaltyDividedByObjValM[m].push_back((double) sumPenaltyDividedByObjVal);
                             vSumEdgeCostDividedByObjValM[m].push_back((double) sumEdgeCostDividedByObjVal);
                         }
+
                         cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << flag << ',' << objVal << ',' << gap << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
                     }
                 }

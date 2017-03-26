@@ -378,11 +378,19 @@ int main () {
                             flag = 1;
                         }
 
+                        vFlagN[n].push_back((double) flag);
+                        vFlagD[d].push_back((double) flag);
+                        vFlagK[k].push_back((double) flag);
+                        vFlagT[t].push_back((double) flag);
+                        if (vFlagM.find(m) == vFlagM.end()) {
+                            vFlagM[m] = vector <double> ();
+                        }
+                        vFlagM[m].push_back((double) flag);
+
                         if (flag == 1) {
                             sM.insert(m);
 
                             vMN[n].push_back((double) m);
-                            vFlagN[n].push_back((double) flag);
                             vObjVal1N[n].push_back((double) objVal1);
                             vGap1N[n].push_back((double) gap1);
                             vElapsedTime1N[n].push_back((double) elapsedTime1);
@@ -399,7 +407,6 @@ int main () {
                             vSumEdgeCostDividedByObjVal2N[n].push_back((double) sumEdgeCostDividedByObjVal2);
 
                             vMD[d].push_back((double) m);
-                            vFlagD[d].push_back((double) flag);
                             vObjVal1D[d].push_back((double) objVal1);
                             vGap1D[d].push_back((double) gap1);
                             vElapsedTime1D[d].push_back((double) elapsedTime1);
@@ -416,7 +423,6 @@ int main () {
                             vSumEdgeCostDividedByObjVal2D[d].push_back((double) sumEdgeCostDividedByObjVal2);
 
                             vMK[k].push_back((double) m);
-                            vFlagK[k].push_back((double) flag);
                             vObjVal1K[k].push_back((double) objVal1);
                             vGap1K[k].push_back((double) gap1);
                             vElapsedTime1K[k].push_back((double) elapsedTime1);
@@ -433,7 +439,6 @@ int main () {
                             vSumEdgeCostDividedByObjVal2K[k].push_back((double) sumEdgeCostDividedByObjVal2);
 
                             vMT[t].push_back((double) m);
-                            vFlagT[t].push_back((double) flag);
                             vObjVal1T[t].push_back((double) objVal1);
                             vGap1T[t].push_back((double) gap1);
                             vElapsedTime1T[t].push_back((double) elapsedTime1);
@@ -449,9 +454,6 @@ int main () {
                             vSumPenaltyDividedByObjVal2T[t].push_back((double) sumPenaltyDividedByObjVal2);
                             vSumEdgeCostDividedByObjVal2T[t].push_back((double) sumEdgeCostDividedByObjVal2);
 
-                            if (vFlagM.find(m) == vFlagM.end()) {
-                                vFlagM[m] = vector <double> ();
-                            }
                             if (vObjVal1M.find(m) == vObjVal1M.end()) {
                                 vObjVal1M[m] = vector <double> ();
                             }
@@ -495,7 +497,6 @@ int main () {
                                 vSumEdgeCostDividedByObjVal2M[m] = vector <double> ();
                             }
 
-                            vFlagM[m].push_back((double) flag);
                             vObjVal1M[m].push_back((double) objVal1);
                             vGap1M[m].push_back((double) gap1);
                             vElapsedTime1M[m].push_back((double) elapsedTime1);
