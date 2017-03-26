@@ -423,7 +423,7 @@ int main () {
                             vSumPenaltyDividedByObjValM[m].push_back((double) sumPenaltyDividedByObjVal);
                             vSumEdgeCostDividedByObjValM[m].push_back((double) sumEdgeCostDividedByObjVal);
                         }
-                        cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << flag << ',' << objVal << ',' << gap << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
+                        cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << flag << ',' << objVal << ',' << gap << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
                     }
                 }
             }
