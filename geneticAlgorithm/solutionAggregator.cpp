@@ -306,7 +306,7 @@ int main () {
                                 double nSolution = 0.0, sumPenalty = 0.0, sumEdgeCost = 0.0;
 
                                 ifstream inputFile ("../input/instanceN" + N + "D" + D + "K" + K + "T" + T + "I" + I + ".in");
-                                ifstream resultFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "/result.out");
+                                ifstream resultFile ("./output/N" + N + "D" + D + "K" + K + "T" + T + "I" + I + "PS" + PS + "MR" + MR + "/result.out");
 
                                 if (inputFile.is_open() && resultFile.is_open()) {
                                     ulint n, mComplete, k, t, root;
@@ -478,7 +478,7 @@ int main () {
                                 vSumPenaltyDividedByObjValPSMR[make_pair(ps, mr)].push_back((double) sumPenaltyDividedByObjVal);
                                 vSumEdgeCostDividedByObjValPSMR[make_pair(ps, mr)].push_back((double) sumEdgeCostDividedByObjVal);
 
-                                cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << ps << ',' << mr << ',' << objVal << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
+                                cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << ps << ',' << mr << ',' << objVal << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
                             }
                         }
                     }
@@ -558,7 +558,7 @@ int main () {
     solutionMFile.close();
 
     ofstream solutionPSMRFile ("./output/solutionPSMR.csv", ofstream :: out);
-    solutionPSMRFile << "a,m,deltam,objVal,deltaObjVal,elapsedTime,deltaElapsedTime,nSolution,deltaNSolution,sumPenalty,deltaSumPenalty,sumEdgeCost,deltaSumEdgeCost,objValTimesElapsedTime,deltaObjValTimesElapsedTime,nSolutionDividedByN,deltaNSolutionDividedByN,sumPenaltyDividedByObjVal,deltaSumPenaltyDividedByObjVal,sumEdgeCostDividedByObjVal,deltaSumEdgeCostDividedByObjVal" << endl;
+    solutionPSMRFile << "ps,mr,m,deltam,objVal,deltaObjVal,elapsedTime,deltaElapsedTime,nSolution,deltaNSolution,sumPenalty,deltaSumPenalty,sumEdgeCost,deltaSumEdgeCost,objValTimesElapsedTime,deltaObjValTimesElapsedTime,nSolutionDividedByN,deltaNSolutionDividedByN,sumPenaltyDividedByObjVal,deltaSumPenaltyDividedByObjVal,sumEdgeCostDividedByObjVal,deltaSumEdgeCostDividedByObjVal" << endl;
     for (vector <ulint> :: iterator itPS = vPS.begin(); itPS != vPS.end(); itPS++) {
         ulint ps = *itPS;
         for (vector <double> :: iterator itMR = vMR.begin(); itMR != vMR.end(); itMR++) {
