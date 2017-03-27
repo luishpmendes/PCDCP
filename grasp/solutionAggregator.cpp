@@ -50,6 +50,10 @@ struct keyComp {
 };
 
 int main () {
+    vector <double> vA;
+    vA.push_back(0.3);
+    vA.push_back(0.5);
+    vA.push_back(0.7);
     vector <ulint> vN;
     vN.push_back(50);
     vN.push_back(100);
@@ -69,10 +73,6 @@ int main () {
     vI.push_back(0);
     vI.push_back(1);
     vI.push_back(2);
-    vector <double> vA;
-    vA.push_back(0.3);
-    vA.push_back(0.5);
-    vA.push_back(0.7);
 
     set <ulint> sM;
 
@@ -218,40 +218,40 @@ int main () {
         vSumEdgeCostDividedByObjValA[a] = vector <double> ();
     }
 
-    cout << "n,d,k,t,i,m,a,objVal,elapsedTime,nSolution,sumPenalty,sumEdgeCost,objVal*elapsedTime,nSolution/n,sumPenalty/objVal,sumEdgeCost/objVal" << endl;
+    cout << "a,n,d,k,t,i,m,objVal,elapsedTime,nSolution,sumPenalty,sumEdgeCost,objVal*elapsedTime,nSolution/n,sumPenalty/objVal,sumEdgeCost/objVal" << endl;
 
-    for (vector <ulint> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
-        ulint n = *itN;
-        stringstream ssN;
-        ssN << n;
-        string N = ssN.str();
-        for (vector <double> :: iterator itD = vD.begin(); itD != vD.end(); itD++) {
-            double d = *itD;
-            stringstream ssD;
-            ssD << fixed << setprecision(1) << d;
-            string D = ssD.str();
-            D.erase(remove(D.begin(), D.end(), '.'), D.end());
-            for (vector <ulint> :: iterator itK = vK.begin(); itK != vK.end(); itK++) {
-                ulint k = *itK;
-                stringstream ssK;
-                ssK << k;
-                string K = ssK.str();
-                for (vector <ulint> :: iterator itT = vT.begin(); itT != vT.end(); itT++) {
-                    ulint t = *itT;
-                    stringstream ssT;
-                    ssT << t;
-                    string T = ssT.str();
-                    for (vector <ulint> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
-                        ulint i = *itI;
-                        stringstream ssI;
-                        ssI << i;
-                        string I = ssI.str();
-                        for (vector <double> :: iterator itA = vA.begin(); itA != vA.end(); itA++) {
-                            double a = *itA;
-                            stringstream ssA;
-                            ssA << fixed << setprecision(1) << a;
-                            string A = ssA.str();
-                            A.erase(remove(A.begin(), A.end(), '.'), A.end());
+    for (vector <double> :: iterator itA = vA.begin(); itA != vA.end(); itA++) {
+        double a = *itA;
+        stringstream ssA;
+        ssA << fixed << setprecision(1) << a;
+        string A = ssA.str();
+        A.erase(remove(A.begin(), A.end(), '.'), A.end());
+        for (vector <ulint> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
+            ulint n = *itN;
+            stringstream ssN;
+            ssN << n;
+            string N = ssN.str();
+            for (vector <double> :: iterator itD = vD.begin(); itD != vD.end(); itD++) {
+                double d = *itD;
+                stringstream ssD;
+                ssD << fixed << setprecision(1) << d;
+                string D = ssD.str();
+                D.erase(remove(D.begin(), D.end(), '.'), D.end());
+                for (vector <ulint> :: iterator itK = vK.begin(); itK != vK.end(); itK++) {
+                    ulint k = *itK;
+                    stringstream ssK;
+                    ssK << k;
+                    string K = ssK.str();
+                    for (vector <ulint> :: iterator itT = vT.begin(); itT != vT.end(); itT++) {
+                        ulint t = *itT;
+                        stringstream ssT;
+                        ssT << t;
+                        string T = ssT.str();
+                        for (vector <ulint> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
+                            ulint i = *itI;
+                            stringstream ssI;
+                            ssI << i;
+                            string I = ssI.str();
 
                             ulint m = 0;
 
@@ -442,7 +442,7 @@ int main () {
                             vSumPenaltyDividedByObjValA[a].push_back((double) sumPenaltyDividedByObjVal);
                             vSumEdgeCostDividedByObjValA[a].push_back((double) sumEdgeCostDividedByObjVal);
 
-                            cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << a << ',' << objVal << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
+                            cout << a << ',' << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << objVal << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
                         }
                     }
                 }
