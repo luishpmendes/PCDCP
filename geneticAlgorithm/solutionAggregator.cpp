@@ -62,6 +62,14 @@ struct keyComp2 {
 };
 
 int main () {
+    vector <ulint> vPS;
+    vPS.push_back(10);
+    vPS.push_back(50);
+    vPS.push_back(100);
+    vector <double> vMR;
+    vMR.push_back(0.1);
+    vMR.push_back(0.2);
+    vMR.push_back(0.3);
     vector <ulint> vN;
     vN.push_back(50);
     vN.push_back(100);
@@ -81,14 +89,6 @@ int main () {
     vI.push_back(0);
     vI.push_back(1);
     vI.push_back(2);
-    vector <ulint> vPS;
-    vPS.push_back(10);
-    vPS.push_back(50);
-    vPS.push_back(100);
-    vector <double> vMR;
-    vMR.push_back(0.1);
-    vMR.push_back(0.2);
-    vMR.push_back(0.3);
 
     set <ulint> sM;
 
@@ -249,45 +249,45 @@ int main () {
         }
     }
 
-    cout << "n,d,k,t,i,m,ps,mr,objVal,elapsedTime,nSolution,sumPenalty,sumEdgeCost,objVal*elapsedTime,nSolution/n,sumPenalty/objVal,sumEdgeCost/objVal" << endl;
+    cout << "ps,mr,n,d,k,t,i,m,objVal,elapsedTime,nSolution,sumPenalty,sumEdgeCost,objVal*elapsedTime,nSolution/n,sumPenalty/objVal,sumEdgeCost/objVal" << endl;
 
-    for (vector <ulint> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
-        ulint n = *itN;
-        stringstream ssN;
-        ssN << n;
-        string N = ssN.str();
-        for (vector <double> :: iterator itD = vD.begin(); itD != vD.end(); itD++) {
-            double d = *itD;
-            stringstream ssD;
-            ssD << fixed << setprecision(1) << d;
-            string D = ssD.str();
-            D.erase(remove(D.begin(), D.end(), '.'), D.end());
-            for (vector <ulint> :: iterator itK = vK.begin(); itK != vK.end(); itK++) {
-                ulint k = *itK;
-                stringstream ssK;
-                ssK << k;
-                string K = ssK.str();
-                for (vector <ulint> :: iterator itT = vT.begin(); itT != vT.end(); itT++) {
-                    ulint t = *itT;
-                    stringstream ssT;
-                    ssT << t;
-                    string T = ssT.str();
-                    for (vector <ulint> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
-                        ulint i = *itI;
-                        stringstream ssI;
-                        ssI << i;
-                        string I = ssI.str();
-                        for (vector <ulint> :: iterator itPS = vPS.begin(); itPS != vPS.end(); itPS++) {
-                            ulint ps = *itPS;
-                            stringstream ssPS;
-                            ssPS << ps;
-                            string PS = ssPS.str();
-                            for (vector <double> :: iterator itMR = vMR.begin(); itMR != vMR.end(); itMR++) {
-                                double mr = *itMR;
-                                stringstream ssMR;
-                                ssMR << fixed << setprecision(1) << mr;
-                                string MR = ssMR.str();
-                                MR.erase(remove(MR.begin(), MR.end(), '.'), MR.end());
+    for (vector <ulint> :: iterator itPS = vPS.begin(); itPS != vPS.end(); itPS++) {
+        ulint ps = *itPS;
+        stringstream ssPS;
+        ssPS << ps;
+        string PS = ssPS.str();
+        for (vector <double> :: iterator itMR = vMR.begin(); itMR != vMR.end(); itMR++) {
+            double mr = *itMR;
+            stringstream ssMR;
+            ssMR << fixed << setprecision(1) << mr;
+            string MR = ssMR.str();
+            MR.erase(remove(MR.begin(), MR.end(), '.'), MR.end());
+            for (vector <ulint> :: iterator itN = vN.begin(); itN != vN.end(); itN++) {
+                ulint n = *itN;
+                stringstream ssN;
+                ssN << n;
+                string N = ssN.str();
+                for (vector <double> :: iterator itD = vD.begin(); itD != vD.end(); itD++) {
+                    double d = *itD;
+                    stringstream ssD;
+                    ssD << fixed << setprecision(1) << d;
+                    string D = ssD.str();
+                    D.erase(remove(D.begin(), D.end(), '.'), D.end());
+                    for (vector <ulint> :: iterator itK = vK.begin(); itK != vK.end(); itK++) {
+                        ulint k = *itK;
+                        stringstream ssK;
+                        ssK << k;
+                        string K = ssK.str();
+                        for (vector <ulint> :: iterator itT = vT.begin(); itT != vT.end(); itT++) {
+                            ulint t = *itT;
+                            stringstream ssT;
+                            ssT << t;
+                            string T = ssT.str();
+                            for (vector <ulint> :: iterator itI = vI.begin(); itI != vI.end(); itI++) {
+                                ulint i = *itI;
+                                stringstream ssI;
+                                ssI << i;
+                                string I = ssI.str();
 
                                 ulint m = 0;
 
@@ -478,7 +478,7 @@ int main () {
                                 vSumPenaltyDividedByObjValPSMR[make_pair(ps, mr)].push_back((double) sumPenaltyDividedByObjVal);
                                 vSumEdgeCostDividedByObjValPSMR[make_pair(ps, mr)].push_back((double) sumEdgeCostDividedByObjVal);
 
-                                cout << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << ps << ',' << mr << ',' << objVal << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
+                                cout << ps << ',' << mr << ',' << n << ',' << d << ',' << k << ',' << t << ',' << i << ',' << m << ',' << objVal << ',' << elapsedTime << ',' << nSolution << ',' << sumPenalty << ',' << sumEdgeCost << ',' << objValTimesElapsedTime << ',' << nSolutionDividedByN << ',' << sumPenaltyDividedByObjVal << ',' << sumEdgeCostDividedByObjVal << endl;
                             }
                         }
                     }
