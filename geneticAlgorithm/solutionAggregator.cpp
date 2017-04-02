@@ -348,10 +348,13 @@ int main () {
                                     ulint mSolution, costSolution;
                                     resultFile >> nSolution >> mSolution >> costSolution;
 
+                                    vector <int> isInSolution (n, 0);
+
                                     vector <ulint> solutionVertices (nSolution, 0);
                                     // reading the solution's vertices
                                     for (ulint v = 0; v < nSolution; v++) {
                                         resultFile >> solutionVertices[v];
+                                        isInSolution[solutionVertices[v]] = 1;
                                     }
 
                                     vector < pair <ulint, ulint> > solutionEdges (mSolution, make_pair(0, 0));
@@ -361,17 +364,9 @@ int main () {
                                         resultFile >> solutionEdges[e].second;
                                     }
 
-                                    ulint allPenalties = 0;
                                     for (ulint v = 0; v < n; v++) {
-                                        allPenalties += vertices[v].second;
+                                        sumPenalty += (1 - isInSolution[v]) * vertices[v].second;
                                     }
-
-                                    ulint chosenPenalties = 0;
-                                    for (ulint v = 0; v < nSolution; v++) {
-                                        chosenPenalties += vertices[solutionVertices[v]].second;
-                                    }
-
-                                    sumPenalty = (allPenalties - chosenPenalties);
 
                                     for (ulint e = 0; e < mSolution; e++) {
                                         sumEdgeCost += weights[solutionEdges[e]];
